@@ -1,4 +1,65 @@
 package com.logimarui.core.api.config.db;
 
+import jakarta.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Configuration
+@EnableConfigurationProperties(WriteDbProperties.class)
 public class WriteDbConfig {
+
+    @Primary
+    @Bean(name = "writeDataSource")
+    public DataSource writeDataSource(WriteDbProperties props) {
+
+        DriverManagerDataSource ds = new DriverManagerDataSource();
+        ds.setUrl(props.getUrl());
+        ds.setUsername(props.getUsername());
+        ds.setPassword(props.getPassword());
+        ds.setDriverClassName(props.getDriverClassName());
+
+        return ds;
+    }
+
+    @Primary
+    @Bean(name = "writeEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean writeEntityManagerFactory(
+            @Qualifier("writeDataSource") DataSource dataSource) {
+
+        LocalContainerEntityManagerFactoryBean emf =
+                new LocalContainerEntityManagerFactoryBean();
+
+        emf.setDataSource(dataSource);
+        emf.setPackagesToScan("com.logimarui.core.api.domain"); // ENTIDADES WRITE
+        emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+
+        Map<String, Object> jpaProps = new HashMap<>();
+        jpaProps.put("hibernate.hbm2ddl.auto", "update");
+        jpaProps.put("hibernate.show_sql", true);
+        jpaProps.put("hibernate.format_sql", true);
+
+        emf.setJpaPropertyMap(jpaProps);
+
+        return emf;
+    }
+
+    @Primary
+    @Bean(name = "writeTransactionManager")
+    public JpaTransactionManager writeTransactionManager(
+            @Qualifier("writeEntityManagerFactory") EntityManagerFactory emf) {
+
+        return new JpaTransactionManager(emf);
+    }
 }
