@@ -10,10 +10,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Equipe {
-    public Mapa mapa;
-    public LocalDate dataEquipe;
-    public Motorista motorista;
-    public Ajudante ajudante1;
-    public Ajudante ajudante2;
-    public Supervisor supervisor;
+    private Mapa mapa;
+    private LocalDate dataEquipe;
+    private Motorista motorista;
+    private Ajudante ajudante1;
+    private Ajudante ajudante2;
+    private Supervisor supervisor;
 }

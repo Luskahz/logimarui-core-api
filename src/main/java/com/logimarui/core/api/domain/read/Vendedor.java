@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Vendedor {
     private Long codigo;
-    private String nomme;
+    private String nome;
     private Long area;
 }

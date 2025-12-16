@@ -10,12 +10,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WMS {
-    private Long mapa;
+    private Mapa mapa;
     private LocalDate dataEntrega;
-    private Long produto;
-    private String descricaoProduto;
+    private Produto produto;
     private String descricaoBaia;
-    private String tipoProduto;
     private Integer quantidade;
     private Integer sequenciaCarregamento;
     private String usuarioSeparador;

@@ -34,15 +34,15 @@ public class WriteDbConfig {
     }
 
     @Primary
-    @Bean(name = "writeEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean writeEntityManagerFactory(
+    @Bean(name = "entityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
             @Qualifier("writeDataSource") DataSource dataSource) {
 
         LocalContainerEntityManagerFactoryBean emf =
                 new LocalContainerEntityManagerFactoryBean();
 
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("com.logimarui.core.api.domain"); // ENTIDADES WRITE
+        emf.setPackagesToScan("com.logimarui.core.api.domain.write");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Map<String, Object> jpaProps = new HashMap<>();
@@ -56,9 +56,9 @@ public class WriteDbConfig {
     }
 
     @Primary
-    @Bean(name = "writeTransactionManager")
-    public JpaTransactionManager writeTransactionManager(
-            @Qualifier("writeEntityManagerFactory") EntityManagerFactory emf) {
+    @Bean(name = "transactionManager")
+    public JpaTransactionManager transactionManager(
+            @Qualifier("entityManagerFactory") EntityManagerFactory emf) {
 
         return new JpaTransactionManager(emf);
     }
