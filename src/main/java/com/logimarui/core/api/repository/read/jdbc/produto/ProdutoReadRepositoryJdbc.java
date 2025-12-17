@@ -5,6 +5,7 @@ import com.logimarui.core.api.repository.read.ProdutoReadRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,7 +16,21 @@ public class ProdutoReadRepositoryJdbc implements ProdutoReadRepository {
     @Override
     public Optional<Produto> buscar(Long codigo){
         String sql = """
-            Select
+            SELECT
+                codigo,
+                descricao,
+                embalagem,
+                peso_bruto_kg as peso
+            FROM `diretorio`.`01_11`
+            WHERE codigo = ?;
         """;
+        List<Produto> resultado = jdbcTemplate.query(
+                sql,
+                new ProdutoRowMapper(),
+                codigo
+        );
+        return resultado.stream().findFirst();
+
+
     }
 }

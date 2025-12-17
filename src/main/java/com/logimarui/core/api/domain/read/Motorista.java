@@ -11,7 +11,6 @@ public class Motorista {
     private Long codigo;
     private Long matricula;
     private String nome;
-    private String CPF;
-    private String CNH;
+    private String cpf;
     private String cluster;
 }

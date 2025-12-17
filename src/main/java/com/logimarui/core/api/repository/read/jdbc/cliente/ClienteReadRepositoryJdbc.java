@@ -40,12 +40,12 @@ public class ClienteReadRepositoryJdbc implements ClienteReadRepository {
                 cl.codigo_cliente = ?;       
         """;
 
-        List<Cliente> resultado = jdbcTemplate.query(
-                sql,
-                new ClienteRowMapper(),
-                codigo
-        );
-        return resultado.stream().findFirst();
+            List<Cliente> resultado = jdbcTemplate.query(
+                    sql,
+                    new ClienteRowMapper(),
+                    codigo
+            );
+            return resultado.stream().findFirst();
     }
 
 }

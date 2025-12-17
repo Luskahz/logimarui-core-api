@@ -4,6 +4,7 @@ import com.logimarui.core.api.domain.read.Cliente;
 import com.logimarui.core.api.dto.cliente.ClienteResponseDTO;
 import com.logimarui.core.api.mapper.cliente.ClienteMapper;
 import com.logimarui.core.api.service.ClienteService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,13 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/clientes/")
+@AllArgsConstructor
 public class ClienteController {
-
     private final ClienteService clienteService;
-
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
-    }
 
 
     @GetMapping("/{codigo}")
