@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class Vendedor {
     private Long codigo;
     private String nome;
-    private Long area;
+    private Integer area;
 }

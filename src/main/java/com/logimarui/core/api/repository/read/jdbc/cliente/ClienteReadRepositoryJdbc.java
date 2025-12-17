@@ -2,19 +2,16 @@ package com.logimarui.core.api.repository.read.jdbc.cliente;
 
 import com.logimarui.core.api.domain.read.Cliente;
 import com.logimarui.core.api.repository.read.ClienteReadRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 import java.util.Optional;
 
 @Repository
+@AllArgsConstructor
 public class ClienteReadRepositoryJdbc implements ClienteReadRepository {
-
     private final JdbcTemplate jdbcTemplate;
-    public ClienteReadRepositoryJdbc(JdbcTemplate jdbcTemplate){
-        this.jdbcTemplate = jdbcTemplate;
-    }
+
 
     @Override
     public Optional<Cliente> buscar(Long codigo){
@@ -40,12 +37,11 @@ public class ClienteReadRepositoryJdbc implements ClienteReadRepository {
                 cl.codigo_cliente = ?;       
         """;
 
-            List<Cliente> resultado = jdbcTemplate.query(
+            return jdbcTemplate.query(
                     sql,
                     new ClienteRowMapper(),
                     codigo
-            );
-            return resultado.stream().findFirst();
+            ).stream().findFirst();
     }
 
 }

@@ -2,6 +2,7 @@ package com.logimarui.core.api.repository.read.jdbc.produto;
 
 import com.logimarui.core.api.domain.read.Produto;
 import com.logimarui.core.api.repository.read.ProdutoReadRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -9,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@AllArgsConstructor
 public class ProdutoReadRepositoryJdbc implements ProdutoReadRepository {
     private final JdbcTemplate jdbcTemplate;
-    public ProdutoReadRepositoryJdbc(JdbcTemplate jdbcTemplate){this.jdbcTemplate = jdbcTemplate; }
 
     @Override
     public Optional<Produto> buscar(Long codigo){
@@ -24,13 +25,11 @@ public class ProdutoReadRepositoryJdbc implements ProdutoReadRepository {
             FROM `diretorio`.`01_11`
             WHERE codigo = ?;
         """;
-        List<Produto> resultado = jdbcTemplate.query(
+        return jdbcTemplate.query(
                 sql,
                 new ProdutoRowMapper(),
                 codigo
-        );
-        return resultado.stream().findFirst();
-
+        ).stream().findFirst();
 
     }
 }

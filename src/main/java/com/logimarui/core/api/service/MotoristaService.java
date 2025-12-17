@@ -13,7 +13,7 @@ public class MotoristaService {
 
     public Motorista buscar(Long codigo){
         return motoristaReadRepository.buscar(codigo).orElseThrow(()->
-                new MotoristaNaoEncontradoException("O código do motorista fornecido não retornou o motorista do banco diretório"));
+                new MotoristaNaoEncontradoException("Motorista não encontrado para o código: " + codigo));
     }
 
 }

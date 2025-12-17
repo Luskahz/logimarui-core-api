@@ -15,7 +15,6 @@ public class MotoristaRowMapper implements RowMapper<Motorista> {
                 rs.getLong("matricula"),
                 rs.getString("nome"),
                 rs.getString("cpf"),
-                rs.getString("cnh"),
                 rs.getString("cluster")
         );
     }

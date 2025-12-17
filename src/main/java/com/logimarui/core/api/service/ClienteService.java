@@ -14,7 +14,6 @@ public class ClienteService {
 
     public Cliente buscar(Long codigo){
         return clienteReadRepository.buscar(codigo).orElseThrow(()->
-                new ClienteNaoEncontradoException("O código PDV fornecido não retornou o cliente do banco diretório"));
-
+                new ClienteNaoEncontradoException("Cliente não encontrado para o código: " + codigo));
     }
 }

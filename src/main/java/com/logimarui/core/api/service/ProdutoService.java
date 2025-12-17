@@ -14,7 +14,7 @@ public class ProdutoService {
 
     public Produto buscar(Long codigo){
         return produtoReadRepository.buscar(codigo).orElseThrow(()->
-                new ProdutoNaoEncontradoException("O código produto fornecido não retornou o produto do banco diretório"));
+                new ProdutoNaoEncontradoException("Produto não encontrado para o código: " + codigo));
     }
 
 }
