@@ -3,6 +3,7 @@ package com.logimarui.core.api.exception;
 import com.logimarui.core.api.exception.cliente.ClienteNaoEncontradoException;
 import com.logimarui.core.api.exception.motorista.MotoristaNaoEncontradoException;
 import com.logimarui.core.api.exception.produto.ProdutoNaoEncontradoException;
+import com.logimarui.core.api.exception.supervisor.SupervisorNaoEncontradoException;
 import com.logimarui.core.api.exception.vendedor.VendedorNaoEncontradoException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,10 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(VendedorNaoEncontradoException.class)
     public ResponseEntity<Object> handlerVendedor(VendedorNaoEncontradoException ex){
+        return resposta(ex.getMessage(), 404);
+    }
+    @ExceptionHandler(SupervisorNaoEncontradoException.class)
+    public ResponseEntity<Object> handlerSupervisor(SupervisorNaoEncontradoException ex){
         return resposta(ex.getMessage(), 404);
     }
 

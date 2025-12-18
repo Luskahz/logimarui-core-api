@@ -1,5 +1,6 @@
 package com.logimarui.core.api.domain.read;
 
+import com.logimarui.core.api.domain.read.entrega.Mapa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

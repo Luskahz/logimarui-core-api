@@ -14,7 +14,7 @@ public class ProdutoRowMapper  implements RowMapper<Produto> {
                 rs.getLong("codigo"),
                 rs.getString("descricao"),
                 rs.getString("embalagem"),
-                rs.getFloat("peso")
+                rs.getBigDecimal("peso")
 
         );
     }

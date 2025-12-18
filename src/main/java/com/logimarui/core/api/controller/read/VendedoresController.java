@@ -1,4 +1,4 @@
-package com.logimarui.core.api.controller;
+package com.logimarui.core.api.controller.read;
 
 import com.logimarui.core.api.dto.vendedor.VendedorResponseDTO;
 import com.logimarui.core.api.mapper.vendedor.VendedorMapper;

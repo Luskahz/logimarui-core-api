@@ -1,7 +1,9 @@
 package com.logimarui.core.api.dto.produto;
 
+import java.math.BigDecimal;
+
 public record ProdutoFiltroDTO (
     String descricao,
     String embalagem,
-    Float peso
+    BigDecimal peso
 ){}

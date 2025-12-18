@@ -1,4 +1,9 @@
 package com.logimarui.core.api.dto.supervisor;
 
-public record SupervisorFiltroDTO() {
+import java.time.LocalTime;
+
+public record SupervisorFiltroDTO(
+        String nome,
+        LocalTime matinal
+) {
 }

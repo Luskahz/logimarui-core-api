@@ -1,4 +1,4 @@
-package com.logimarui.core.api.domain.read.pedido;
+package com.logimarui.core.api.domain.read.entrega;
 
 import com.logimarui.core.api.domain.read.Produto;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,5 @@ public class ItemPedido {
     private int quantidade;
     private BigDecimal volume;
     private BigDecimal peso;
-    private Double totalValor;
-
+    private BigDecimal totalValor;
 }

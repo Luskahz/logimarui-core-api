@@ -1,4 +1,4 @@
-package com.logimarui.core.api.controller;
+package com.logimarui.core.api.controller.read;
 
 
 import com.logimarui.core.api.dto.produto.ProdutoResponseDTO;

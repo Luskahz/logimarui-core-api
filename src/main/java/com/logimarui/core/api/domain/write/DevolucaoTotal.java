@@ -1,7 +1,7 @@
 package com.logimarui.core.api.domain.write;
 
 import com.logimarui.core.api.domain.read.Cliente;
-import com.logimarui.core.api.domain.read.Mapa;
+import com.logimarui.core.api.domain.read.entrega.Mapa;
 import com.logimarui.core.api.domain.read.Motorista;
 import com.logimarui.core.api.domain.read.Vendedor;
 import lombok.AllArgsConstructor;

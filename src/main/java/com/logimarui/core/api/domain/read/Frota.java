@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Frota {
-    private String placa;
     private Long codigo;
+    private String placa;
     private String tipo;
     private String carroceria;
     private String marca_mod;

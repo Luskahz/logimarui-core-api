@@ -1,8 +1,8 @@
-package com.logimarui.core.api.controller;
+package com.logimarui.core.api.controller.read;
 
-import com.logimarui.core.api.dto.cliente.ClienteResponseDTO;
-import com.logimarui.core.api.mapper.cliente.ClienteMapper;
-import com.logimarui.core.api.service.ClienteService;
+import com.logimarui.core.api.dto.motorista.MotoristaResponseDTO;
+import com.logimarui.core.api.mapper.motorista.MotoristaMapper;
+import com.logimarui.core.api.service.MotoristaService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,21 +10,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/clientes/")
 @AllArgsConstructor
-public class ClienteController {
-    private final ClienteService clienteService;
-
+@RestController
+@RequestMapping("/motoristas/")
+public class MotoristaController {
+    private final MotoristaService motoristaService;
 
     @GetMapping("/{codigo}")
-    public ClienteResponseDTO buscar(
+    public MotoristaResponseDTO buscar(
             @PathVariable Long codigo,
             Authentication authentication
-        ){
+    ){
         String usuario = authentication.getName();
-        return new ClienteMapper().toResponse(clienteService.buscar(codigo));
-
+        return new MotoristaMapper().toResponse(motoristaService.buscar(codigo));
     }
 
 
