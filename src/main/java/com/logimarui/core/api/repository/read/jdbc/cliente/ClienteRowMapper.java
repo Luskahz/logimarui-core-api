@@ -12,9 +12,9 @@ public class ClienteRowMapper implements RowMapper<Cliente> {
     public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Cliente(
                 rs.getLong("codigo"),
+                rs.getString("fantasia"),
                 rs.getString("cpf"),
                 rs.getString("cnpj"),
-                rs.getString("fantasia"),
                 rs.getString("razao_social"),
                 rs.getBigDecimal("latitude"),
                 rs.getBigDecimal("longitude"));
