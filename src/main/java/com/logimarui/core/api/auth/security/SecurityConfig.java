@@ -17,7 +17,6 @@ public class SecurityConfig {
     public SecurityConfig(JwtAuthenticationFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
-
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -27,7 +26,16 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
+                        // frontend estático
+                        .requestMatchers(
+                                "/",
+                                "/index.html"
+                        ).permitAll()
+
+                        // autenticação
                         .requestMatchers("/auth/**").permitAll()
+
+                        // resto protegido
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
