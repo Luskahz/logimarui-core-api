@@ -1,10 +1,17 @@
 package com.logimarui.reposicoes.core.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Mapa {
     private Long codigo;
     private Long codigoMotorista;
     private String placaVeiculo;
-    private List<Cliente> clientes;
+    private List<Long> clientes;
 }

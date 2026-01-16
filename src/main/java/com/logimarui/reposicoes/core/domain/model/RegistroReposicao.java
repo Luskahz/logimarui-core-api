@@ -1,11 +1,17 @@
 package com.logimarui.reposicoes.core.domain.model;
 
 import com.logimarui.reposicoes.core.domain.enums.StatusReposicao;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegistroReposicao {
     private Long codigoCliente;
     private Long codigoMapa;
