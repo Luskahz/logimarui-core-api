@@ -1,6 +1,6 @@
 package com.logimarui.reposicoes.core.domain.model;
 
-import com.logimarui.reposicoes.core.domain.enums.StatusEntrega;
+import com.logimarui.reposicoes.core.domain.enums.DeliveryStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +11,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NotaFiscal {
+public class Invoice {
     private Long codigoNotaFiscal;
     private int codigoSerieNotaFiscal;
     private LocalDate emissao;
     private Long codigoMapa;
     private List<Long> produtos;
-    private StatusEntrega statusEntrega;
+    private DeliveryStatus statusEntrega;
 }

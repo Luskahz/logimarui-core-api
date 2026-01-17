@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
-    private Long codigo;
-    private String fantasia;
-
+public class DamageRecord {
+    private String referencia;//depende dq tem aqui
 }

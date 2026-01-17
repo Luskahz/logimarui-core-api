@@ -1,6 +1,6 @@
 package com.logimarui.reposicoes.core.domain.enums;
 
-public enum StatusEntrega {
+public enum DeliveryStatus {
     DEVOLUCAO,
     ENTREGUE,
     EMITIDA,

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistroAvaria {
-    private String referencia;//depende dq tem aqui
+public class Driver {
+    private Long codigoMotorista;
+    private String nomeMotorista;
 }

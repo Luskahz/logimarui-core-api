@@ -1,6 +1,6 @@
 package com.logimarui.reposicoes.core.domain.enums;
 
-public enum UnidadeQuantidade {
+public enum UnitOfMeansure {
     UNIDADE,
     CAIXA,
     BARRIL,

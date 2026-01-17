@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Veiculo {
-    private String placaVeiculo;
-    private Long codigoVeiculo;
+public class PointOfSale {
+    private Long codigo;
+    private String fantasia;
+
 }

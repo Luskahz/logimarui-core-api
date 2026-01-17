@@ -1,6 +1,6 @@
 package com.logimarui.reposicoes.core.domain.model;
 
-import com.logimarui.reposicoes.core.domain.enums.UnidadeQuantidade;
+import com.logimarui.reposicoes.core.domain.enums.UnitOfMeansure;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto {
+public class Product {
     private Long codigoProduto;
     private String nomeProduto;
-    private UnidadeQuantidade unidade;
+    private UnitOfMeansure unidade;
     private Long maxUnidadesPPack;
 }

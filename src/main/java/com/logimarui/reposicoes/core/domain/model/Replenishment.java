@@ -1,6 +1,6 @@
 package com.logimarui.reposicoes.core.domain.model;
 
-import com.logimarui.reposicoes.core.domain.enums.StatusReposicao;
+import com.logimarui.reposicoes.core.domain.enums.ReplenishmentStatus;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -12,14 +12,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistroReposicao {
+public class Replenishment {
+    private Long codigoReposicao;
     private Long codigoCliente;
     private Long codigoMapa;
     private Long codigoNotaFiscal;
     private int codigoSerieNotaFiscal;
     private LocalDate dataOcorrencia;
     private LocalTime horarioOcorrencia;
-    private StatusReposicao statusReposicao;
-    private List<OcorrenciaReposicao> listaOcorrenciasReposicao;
+    private ReplenishmentStatus statusReposicao;
+    private List<ReplenishmentLine> listaOcorrenciasReposicao;
+
 
 }

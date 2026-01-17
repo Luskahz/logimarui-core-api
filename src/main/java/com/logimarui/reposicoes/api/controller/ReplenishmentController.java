@@ -1,9 +1,7 @@
 package com.logimarui.reposicoes.api.controller;
 
 
-import com.logimarui.reposicoes.core.domain.enums.MotivosReposicao;
-import com.logimarui.reposicoes.core.domain.enums.UnidadeQuantidade;
-import com.logimarui.reposicoes.core.domain.model.OcorrenciaReposicao;
+import com.logimarui.reposicoes.core.domain.model.ReplenishmentLine;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reposicoes/")
 @AllArgsConstructor
-public class ReposicaoController {
+public class ReplenishmentController {
     private final ReposicaoService reposicaoService;
 
 
@@ -56,7 +54,7 @@ public class ReposicaoController {
             @RequestParam Long codigoNotaFiscal,
             @RequestParam int codigoSerieNotaFiscal,
             @RequestParam Long codigoProduto,
-            @RequestParam List<OcorrenciaReposicao> ocorrencias
+            @RequestParam List<ReplenishmentLine> ocorrencias
 
             )
 }

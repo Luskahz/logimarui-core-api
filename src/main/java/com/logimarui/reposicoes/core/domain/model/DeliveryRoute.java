@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Mapa {
+public class DeliveryRoute {
     private Long codigo;
     private Long codigoMotorista;
     private String placaVeiculo;
