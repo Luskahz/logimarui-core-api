@@ -1,7 +1,7 @@
 # API - REPOSIÇÕES
 
 ## Base URL
-{provável domínio Imaruí}/logistica/logimarui/reposicoes/
+{provável domínio Imaruí}/logistica/logimarui/replenishment/
 
 ## Authenticação
 Ainda não implementado, porém o projeto
@@ -22,70 +22,113 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
  - não há rotas funcionais
 ### Rotas planejadas
 #### Tela login
-- ***POST*** → /auth/login/  
-- ***POST*** → /auth/refresh/  
-- ***POST*** → /auth/logout/
-- ***POST*** → /auth/register/
-- ***POST*** → /auth/change-password/
-- ***POST*** → /auth/forgot-password/
-- ***GET*** → /auth/me/
+- ***POST*** → **/auth/login/**  
+- ***POST*** → **/auth/refresh/**  
+- ***POST*** → **/auth/logout/**
+- ***POST*** → **/auth/register/**
+- ***POST*** → **/auth/change-password/**
+- ***POST*** → **/auth/forgot-password/**
+- ***GET*** → **/auth/me/**
 #### Tela Lançamentos
-- ***GET*** → /buscar/ 
-  - @Authentication AccessTokenMotorista 
-  - @Parametro codigoMotorista
-  - @Parametro codigoCliente
 
-- ***GET*** → /buscar/ 
-  - @Authentication AccessTokenMotorista 
-  - @Parametro codigoMotorista
-  - @Parametro **codigoCliente**
-  - @Parametro valorPaginacao
+- ***GET*** → **/search/** (busca de reposições, abaixo cabeçalhos e DTO corpo)
+  - @Authentication AccessTokenMotorista @obrigatorio
+  - @Valid codigoMotorista @obrigatorio
+  - @Valid **codigoCliente** @opcional
+  - @Valid **codigoMapa** @opcional
+  - @Valid **codigoReposicao** @opcional
+  - @Valid valorPaginacao
 
-- ***GET*** → /buscar/
-    - @Authentication AccessTokenMotorista 
-    - @Parametro codigoMotorista
-    - @Parametro **String**
-    - @Parametro valorPaginacao
-
-- ***GET*** → /buscar/
-    - @Authentication AccessTokenMotorista
-    - @Parametro codigoMotorista
-    - @Parametro **codigoMapa**
-    - @Parametro valorPaginacao
-
-- ***GET*** → /buscar/
-  - @Authentication AccessTokenMotorista
-  - @Parametro codigoMotorista
-  - @Parametro **codigoReposicao**
-  - @Parametro valorPaginacao
 #### Tela Lançamento Reposição
 
-- ***GET*** → /buscar/mapas/
+- ***GET*** → **/line-replenishment/deliver-route/** (encontra os mapas atrelados ao motorista)
   - @Authentication AccessTokenMotorista
   - @Parametro codigoMotorista
 
-- ***GET*** → /buscar/clientes/
+- ***GET*** → **/line-replenishment/pos/** (encontrar os clientes disponiveis na rota/rotas motorista com base nos filtros)
   - @Authentication AccessTokenMotorista
-  - @Parametro codigosMapa (todos os mapas para gerar uma lista completa dos clientes)
+  - @Valid codigosMapa @opcional
+  - @Valid codigoNotaFiscal @opcional
+  - @Valid codigoSerieNotaFiscal @opcional
 
-- ***GET*** → /buscar/clientes/
+- ***GET*** → **/line-replenishment/invoice/**
     - @Authentication AccessTokenMotorista
-    - @Parametro codigosMapa
-    - @Parametro codigoNotaFiscal (especificidade, list Reduzida)
+    - @Valid codigoMapa
+    - @Valid codigoCliente
 
-- ***GET*** → /buscar/produtos/
+- ***GET*** → **/line-replenishment/product/**
   - @Authentication AccessTokenMotorista
-  - @Parametro notaFiscal
-  - @Parametro serieNotaFiscal
+  - @Valid codigosMapa @opcional
+  - @Valid codigoCliente @opcional
+  - @Valid notaFiscal @opcional
+  - @Valid serieNotaFiscal @opcional
 
-- ***GET*** → /buscar/notas-fiscais/
+- ***GET*** → **/line-replenishment/uom/**
   - @Authentication AccessTokenMotorista
-  - @Parametro codigoMapa
-  - @Parametro codigoCliente
+  - @Valid notaFiscal
+  - @Valid serieNotaFiscal
+  - @Valid codigoProduto
 
-- ***GET*** → /buscar/motivos/
-- @Authentication AccessTokenMotorista
+- ***GET*** → **/line-replenishment/motivos/**
+  - @Authentication AccessTokenMotorista
 
-- ***POST*** → /registrar-reposicao/
-- @Authentication AccessTokenMotorista
-- @todos-atributos-classe-necessarios
+- ***POST*** → **/line-replenishment/**
+  - @Authentication AccessTokenMotorista
+  - @RequestBody codigosMapa @obrigatorio
+  - @RequestBody codigoCliente @obrigatorio
+  - @RequestBody codigoNotaFiscal @obrigatorio
+  - @RequestBody codigoSErieNotaFiscal @obrigatorio
+  - @RequestBody codigoProduto @obrigatorio
+  - @RequestBody motivo @obrigatorio
+  - @RequestBody quantidade @obrigatorio
+  - @RequestBody unidade-medida @obrigatorio
+  - @RequestBody imagem-avaria @obrigatorio 
+
+- ***PUT*** → **/line-replenishment/**
+    - @Authentication AccessTokenMotorista
+    - @RequestBody codigosMapa @obrigatorio
+    - @RequestBody codigoCliente @obrigatorio
+    - @RequestBody codigoNotaFiscal @obrigatorio
+    - @RequestBody codigoSErieNotaFiscal @obrigatorio
+    - @RequestBody codigoProduto @obrigatorio
+    - @RequestBody motivo @obrigatorio
+    - @RequestBody quantidade @obrigatorio
+    - @RequestBody unidade-medida @obrigatorio
+    - @RequestBody imagem-avaria @obrigatorio 
+
+- ***POST*** → **/replenishment/**
+- essa req é chamada quando o motorista manda um post com apenas 1 objeto de reposição, ele cria a reposição, e atualiza o status para escrevendo
+  - @Authentication AccessTokenMotorista
+  - @Valid finalizacao = 0
+  - @RequestBody codigoCliente
+  - @RequestBody codigoMapa
+  - @RequestBody codigoNotaFiscal
+  - @RequestBody codigoSerieNotaFiscal
+  - @RequestBody dataOcorrencia
+  - @RequestBody horarioOcorrencia
+  - @RequestBody statusReposicao = "MOTORISTA_ESCREVENDO"
+  - @RequestBody line-replenishment
+  - @ReturnBody codigoReposicao (codigo gerado ao iniciar o processo de reposição pelo motorista)
+
+- ***POST*** → **/replenishment/**
+- rec chamada para continuação da escrita do processo de reposição
+    - @Authentication AccessTokenMotorista
+    - @Valid finalizacao = false
+    - @RequestBody codigoReposicao
+    - @RequestBody codigoCliente
+    - @RequestBody codigoMapa
+    - @RequestBody codigoNotaFiscal
+    - @RequestBody codigoSerieNotaFiscal
+    - @RequestBody dataOcorrencia
+    - @RequestBody horarioOcorrencia
+    - @RequestBody statusReposicao = "MOTORISTA_ESCREVENDO"
+    - @RequestBody line-replenishment
+
+- ***PATCH*** → **/replenishment/**
+- rec chamada para finalização da escrita do processo
+    - @Authentication AccessTokenMotorista
+    - @RequestBody codigoReposicao
+    - @RequestBody dataOcorrenciaFinalizadaMotorista
+    - @RequestBody horarioOcorrenciaFinalizadoMotorista
+    - @RequestBody statusReposicao = "REGISTRADO"
+    - @ReturnBody Replenishment(objeto json completo com o List<line-replenishment>)
