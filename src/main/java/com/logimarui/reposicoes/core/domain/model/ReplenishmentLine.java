@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReplenishmentLine {
-    private Long codigoProduto;
-    private ReplenishmentReason motivoReposicao;
-    private UnitOfMeansure unidade;
-    private int quantidade;
-    private DamageRecord imagemAvaria;
+    private Long replenishmentId;
+    private Long productId;
+    private ReplenishmentReason replenishmentReason;
+    private UnitOfMeansure unitOfMeansure;
+    private int quantity;
+    private DamageRecord damageRecord;
 
 }
