@@ -1,7 +1,7 @@
 # API - REPOSIÇÕES
 
 ## Base URL
-{provável domínio Imaruí}/logistica/logimarui/replenishment/
+{provável domínio Imaruí}/logistics/logimarui/replenishments/
 
 ## Authenticação
 Ainda não implementado, porém o projeto
@@ -20,9 +20,13 @@ ambev***, a ideia é associar o motorista a seu código do promax já existente,
 Não há rotas implementadas definidademente, apenas chamadas na pasta controller
 gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas funcionais:
  - não há rotas funcionais
+
+
+
+
 ### Rotas planejadas
 
-#### Tela login
+#### [ Tela 1 ] - login
 - ***POST*** → **/auth/login/**  
 - ***POST*** → **/auth/refresh/**  
 - ***POST*** → **/auth/logout/**
@@ -31,32 +35,39 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
 - ***POST*** → **/auth/forgot-password/**
 - ***GET*** → **/auth/me/**
 
-#### Tela Lançamentos
-- ***GET*** → **/search/** (busca de reposições, abaixo cabeçalhos e DTO corpo)
-  - @Authentication AccessTokenMotorista @obrigatorio
-  - @Valid driverId @obrigatorio
-  - @Valid **posId** @opcional
-  - @Valid **routeId** @opcional
-  - @Valid **ReplenishmentId** @opcional
+#### [ Tela 2 ] Tela Lançamentos
+- ***GET*** → **/replenishments/** (busca de reposições, abaixo cabeçalhos e DTO corpo)
+  - @Authentication DriverAccessToken
+  - @Valid driver.id @obrigatorio
+  - @Valid **pos.id** @opcional
+  - @Valid **route.id** @opcional
+  - @Valid **replenishment.id** @opcional
   - @Valid pageValue
+  - 
+#### [ Tela 3 ] Ticket Retroativo
+- ***GET*** → **/replenishments/**
+- @Authentication DriverAccessToken
+- @Valid replenishment.id
+- @ReturnBody replenishment.body
 
-#### Tela Lançamento Reposição
+#### [ Tela 4 ] Tela Lançamento Reposição
 
-#### capturando dados
+##### capturando dados
 - ***GET*** → **/auth/me/**
   - Puxa a assinatura do motorista e os mapas atrelados a ele
   - @Authentication DriverAccessToken
   - @Parametro DriverId
 
-- ***GET*** → **/line-replenishment/lookup/**
+- ***GET*** → **/replenishments/line/lookup/**
+- traz um tabelão produtos por nota, notas por clientes clientes por mapa
   - @Authentication DriverAccessToken
   - @Valid RouteId @opcional
 
-- ***GET*** → **/line-replenishment/lookup/reason/**
+- ***GET*** → **/replenishments/line/lookup/reason/**
   - @Authentication DriverAccessToken
 
-#### registrando reposições
-- ***POST*** → **/replenishment/**
+##### registrando reposições
+- ***POST*** → **/replenishments/**
   - Cria a replenishment e a replenishmentLine espera o body de ambos
   - @Authentication DriverAccessToken
   -
@@ -79,7 +90,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @ReturnBody LineReplenishment.Id @oculto
 
 
-- ***POST*** → **/replenishment-line/**
+- ***POST*** → **/replenishments/line/**
 - insere linha de reposiçao no replenishment
   - @Authentication DriverAccessToken
   - 
@@ -92,7 +103,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @ReturnBody replenishment.body
 
 
-- ***PATCH*** → **/replenishment/**
+- ***PATCH*** → **/replenishments/**
 - rec chamada após a criação da replenishmentLine para registrar continuação da escrita do processo de reposição
   - @Authentication DriverAccessToken
   -
@@ -100,7 +111,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @RequestBody lastUpdateData
   - @RequestBody lastUpdateTime
 
-- ***PATCH*** → **/replenishment/**
+- ***PATCH*** → **/replenishments/**
 - rec chamada para finalização da escrita do processo
   - @Authentication DriverAccessToken
   - 
@@ -112,7 +123,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @ReturnBody replenishment.id
   - @ReturnBody replenishment.body (para criação do ticket)
 
-- ***PATCH*** → **/replenishment/**
+- ***PATCH*** → **/replenishments/**
 - deleta a linha de reposição,
   - @Authentication DriverAccessToken
   - 
@@ -121,7 +132,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @RequestBody canceledTime
   - @Service replenishmentStatus = "CANCELADO"
 
-- ***PATCH*** → **/line-replenishment/**
+- ***PATCH*** → **/replenishments/line/**
 - alteração da linha reposição, cancelamento apenas a reposição completa
   - @Authentication DriverAccessToken
   - @Valid replenishmentLine.id
@@ -129,28 +140,44 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @RequestBody lastUpdateDate
   - @RequestBody lastUpdateTime
 
+##### [ Tela 5 ] - Histórico reposições cliente
 
-##### Rotas improváveis (caso as rotas planejadas fiquem pesadas no mobile)
-- ***GET*** → **/line-replenishment/lookup/pos/** (encontrar os clientes disponiveis na rota/rotas motorista com base nos filtros)
-  - @Authentication AccessTokenMotorista
-  - @Valid codigosMapa @opcional
-  - @Valid codigoNotaFiscal @opcional
-  - @Valid codigoSerieNotaFiscal @opcional
+- ***GET*** → **/replenishments/history-pos/**
+- busca o historico de reposições do cliente ultimas 10
+- @Authentication DriverAccessToken
+- @Valid pos.id
 
-- ***GET*** → **/line-replenishment/lookup/invoice/**
-  - @Authentication AccessTokenMotorista
-  - @Valid codigoMapa
-  - @Valid codigoCliente
 
-- ***GET*** → **/line-replenishment/lookup/product/**
-  - @Authentication AccessTokenMotorista
-  - @Valid codigosMapa @opcional
-  - @Valid codigoCliente @opcional
-  - @Valid notaFiscal @opcional
-  - @Valid serieNotaFiscal @opcional
 
-- ***GET*** → **/line-replenishment/lookup/uom/**
-  - @Authentication AccessTokenMotorista
-  - @Valid notaFiscal
-  - @Valid serieNotaFiscal
-  - @Valid codigoProduto
+
+
+
+
+
+
+
+###### Rotas improváveis (caso as rotas planejadas fiquem pesadas no mobile)
+- ***GET*** → **/replenishments/line/lookup/pos/** (encontrar os clientes disponiveis na rota/rotas motorista com base nos filtros)
+  - @Authentication DriverAccessToken
+  - @Valid route.id @opcional
+  - @Valid invoice.number @opcional
+  - @Valid invoice.series @opcional
+
+- ***GET*** → **/replenishments/line/lookup/invoice/**
+  - @Authentication DriverAccessToken
+  - @Valid route.id
+  - @Valid pos.id
+
+- ***GET*** → **/replenishments/line/lookup/product/**
+  - @Authentication DriverAccessToken
+  - @Valid route.id @opcional
+  - @Valid pos.id @opcional
+  - @Valid invoice.number @opcional
+  - @Valid invoice.series @opcional
+
+- ***GET*** → **/replenishments/line/lookup/uom/**
+  - @Authentication DriverAccessToken
+  - @Valid invoice.number
+  - @Valid invoice.series
+  - @Valid product.id
+
