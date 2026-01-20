@@ -1,28 +1,13 @@
 package com.logimarui.auth.infra.persistence.jpa;
 
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.repository.SessionRepository;
+
+import com.logimarui.auth.infra.persistence.entity.SessionEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public class SessionJpaRepository implements SessionRepository {
-    @Override
-    public Optional<Session> findActiveByUserId(Long userId) {
-        return Optional.empty();
-    }
 
-    @Override
-    public Optional<Session> findById(Long sessionId) {
-        return Optional.empty();
-    }
+public interface SessionJpaRepository extends JpaRepository<SessionEntity, Long>{
+    Optional<SessionEntity> findByUserIdAndActiveTrue(Long userId);
 
-    @Override
-    public void save(Session session) {
-
-    }
-
-    @Override
-    public void deactivateAllByUserId(Long userId) {
-
-    }
 }

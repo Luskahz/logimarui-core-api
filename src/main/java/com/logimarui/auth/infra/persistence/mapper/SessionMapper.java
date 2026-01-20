@@ -7,23 +7,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SessionMapper {
     public static Session toDomain(SessionEntity entity) {
-        Session session = new Session(
+        return Session.reconstitute(
                 entity.getId(),
                 entity.getUserId(),
                 entity.getDevice(),
                 entity.getLastIpAddress(),
                 entity.getCreatedAt(),
-                entity.getExpiresAt()
+                entity.getExpiresAt(),
+                entity.isActive()
         );
-        if (!entity.isActive()) {
-            session.deactivate();
-        }
-        return session;
     }
 
-
     public static SessionEntity toEntity(Session session) {
-        SessionEntity entity = new SessionEntity(
+        return new SessionEntity(
                 session.getUserId(),
                 session.isValid(session.getCreatedAt()),
                 session.getDevice(),
@@ -31,8 +27,6 @@ public class SessionMapper {
                 session.getCreatedAt(),
                 session.getExpiresAt()
         );
-
-        return entity;
     }
 
     public static void copyState(Session session, SessionEntity entity) {

@@ -10,7 +10,6 @@ public interface SessionRepository {
 
     Optional<Session> findById(Long sessionId);
 
-    void save(Session session);
+    Session save(Session session);
 
-    void deactivateAllByUserId(Long userId);
 }

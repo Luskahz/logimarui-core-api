@@ -6,5 +6,6 @@ public enum Role {
     EDUCADOR,
     DISTRIBUICAO,
     LOGISTICA,
-    ADMINISTRADOR
+    ADMINISTRADOR,
+    INDEFINIDO
 }
