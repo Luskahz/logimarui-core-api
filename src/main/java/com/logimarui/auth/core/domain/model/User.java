@@ -1,44 +1,74 @@
 package com.logimarui.auth.core.domain.model;
 
 import com.logimarui.auth.core.domain.enums.Role;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class User {
 
-    private final Long id;
-    private final String username;
-    private final Instant createdAt;
-
+    private Long id;
+    private String username;
+    private Instant createdAt;
+    private Long matricula;
     private String passwordHash;
     private boolean active;
     private boolean locked;
-
     private Role role;
     private int failedLoginAttempts;
-
     private Instant passwordChangedAt;
     private Instant lastLoginAt;
 
-    public User(
-            Long id,
-            String username,
-            String passwordHash,
-            Role role,
-            Instant createdAt
-    ) {
-        this.id = id;
+    private User(String username, String passwordHash, Long matricula) {
         this.username = username;
         this.passwordHash = passwordHash;
-        this.role = role;
-        this.createdAt = createdAt;
+        this.matricula = matricula;
 
+        this.createdAt = Instant.now();
         this.active = true;
         this.locked = false;
+        this.role = Role.INDEFINIDO;
         this.failedLoginAttempts = 0;
     }
+
+    public static User create(String username, String passwordHash, Long matricula) {
+        return new User(username, passwordHash, matricula);
+    }
+
+
+    public static User reconstitute(
+            Long id,
+            String username,
+            Instant createdAt,
+            Long matricula,
+            String passwordHash,
+            boolean active,
+            boolean locked,
+            Role role,
+            int failedLoginAttempts,
+            Instant passwordChangedAt,
+            Instant lastLoginAt
+    ) {
+        User user = new User();
+        user.id = id;
+        user.username = username;
+        user.createdAt = createdAt;
+        user.matricula = matricula;
+        user.passwordHash = passwordHash;
+        user.active = active;
+        user.locked = locked;
+        user.role = role;
+        user.failedLoginAttempts = failedLoginAttempts;
+        user.passwordChangedAt = passwordChangedAt;
+        user.lastLoginAt = lastLoginAt;
+
+        return user;
+    }
+
 
     public void registerFailedLogin() {
         failedLoginAttempts++;
@@ -46,25 +76,20 @@ public class User {
             locked = true;
         }
     }
-
     public void changePassword(String newHash, Instant now) {
         this.passwordHash = newHash;
         this.passwordChangedAt = now;
         this.failedLoginAttempts = 0;
         this.locked = false;
     }
-
     public boolean isBlocked() {
         return !active || locked;
     }
-
     public void deactivate() {
         this.active = false;
     }
-
     public void recordSuccessfulLogin(Instant now) {
         this.lastLoginAt = now;
         this.failedLoginAttempts = 0;
     }
 }
-
