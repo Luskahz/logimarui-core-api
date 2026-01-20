@@ -27,13 +27,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
 ### Rotas planejadas
 
 #### [ Tela 1 ] - login
-- ***POST*** → **/auth/login/**  
-- ***POST*** → **/auth/refresh/**  
-- ***POST*** → **/auth/logout/**
-- ***POST*** → **/auth/register/**
-- ***POST*** → **/auth/change-password/**
-- ***POST*** → **/auth/forgot-password/**
-- ***GET*** → **/auth/me/**
+
 
 #### [ Tela 2 ] Tela Lançamentos
 - ***GET*** → **/replenishments/** (busca de reposições, abaixo cabeçalhos e DTO corpo)
