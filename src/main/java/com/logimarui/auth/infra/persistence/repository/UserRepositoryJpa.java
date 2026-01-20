@@ -7,18 +7,16 @@ import com.logimarui.auth.core.repository.UserRepository;
 import com.logimarui.auth.infra.persistence.entity.UserEntity;
 import com.logimarui.auth.infra.persistence.jpa.UserJpaRepository;
 import com.logimarui.auth.infra.persistence.mapper.UserMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
+@AllArgsConstructor
 public class UserRepositoryJpa implements UserRepository {
 
     private final UserJpaRepository jpa;
-
-    public UserRepositoryJpa(UserJpaRepository jpa) {
-        this.jpa = jpa;
-    }
 
     @Override
     public Optional<User> findByUsername(String username) {

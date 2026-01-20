@@ -7,10 +7,10 @@ import lombok.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "logimarui_user")
+@Table(name = "auth_user")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class UserEntity {
 
@@ -23,6 +23,9 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String passwordHash;
+
+    @Column(nullable = false)
+    private Long matricula;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)

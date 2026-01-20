@@ -9,12 +9,18 @@ import lombok.NoArgsConstructor;
 public class UserMapper {
 
     public static User toDomain(UserEntity entity) {
-        return new User(
+        return User.reconstitute(
                 entity.getId(),
                 entity.getUsername(),
+                entity.getCreatedAt(),
+                entity.getMatricula(),
                 entity.getPasswordHash(),
+                entity.isActive(),
+                entity.isLocked(),
                 entity.getRole(),
-                entity.getCreatedAt()
+                entity.getFailedLoginAttempts(),
+                entity.getPasswordChangedAt(),
+                entity.getLastLoginAt()
         );
     }
 
@@ -23,6 +29,7 @@ public class UserMapper {
                 u.getId(),
                 u.getUsername(),
                 u.getPasswordHash(),
+                u.getMatricula(),
                 u.getRole(),
                 u.isActive(),
                 u.isLocked(),
