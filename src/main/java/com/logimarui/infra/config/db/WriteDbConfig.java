@@ -1,4 +1,4 @@
-package com.logimarui.all.core.api.config.db;
+package com.logimarui.infra.config.db;
 
 import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;

@@ -1,7 +1,8 @@
-package com.logimarui.all.core.api.config.db;
+package com.logimarui.infra.config.db;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
 
 @ConfigurationProperties(prefix = "spring.datasource")
 public class WriteDbProperties {
