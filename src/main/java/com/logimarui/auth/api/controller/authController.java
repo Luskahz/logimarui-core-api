@@ -1,9 +1,10 @@
 package com.logimarui.auth.api.controller;
 
-
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.service.AuthService;
+import com.logimarui.auth.core.service.AuthTokens;
+import com.logimarui.auth.infra.security.jwt.JwtService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class AuthController {
     private AuthService authService;
+    private JwtService jwtService;
 
     @PostMapping("/register")
     public AuthTokenResponseDTO register(
@@ -23,7 +25,18 @@ public class AuthController {
     ){
         String ip = RequestContextUtils.resolveClientIp(httpRequest);
         String device = RequestContextUtils.resolveDevice(httpRequest);
-        return authService.register(request, ip, device);
+
+        AuthTokens tokens = authService.register(
+                request,
+                ip,
+                device
+        );
+
+        return new AuthTokenResponseDTO(
+                tokens.refreshToken(),
+                tokens.accessToken(),
+                tokens.expiresIn()
+        );
     }
 
     @PostMapping("/login")

@@ -2,6 +2,7 @@ package com.logimarui.auth.infra.persistence.repository;
 
 
 import com.logimarui.auth.core.domain.model.RefreshToken;
+import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.core.repository.RefreshTokenRepository;
 import com.logimarui.auth.infra.persistence.entity.RefreshTokenEntity;
 import com.logimarui.auth.infra.persistence.jpa.RefreshTokenJpaRepository;
@@ -22,9 +23,9 @@ public class RefreshTokenRepositoryJpa implements RefreshTokenRepository {
     }
 
     @Override
-    public void save(RefreshToken token) {
+    public RefreshToken save(RefreshToken token, Session session) {
         RefreshTokenEntity saved = jpa.save(RefreshTokenMapper.toEntity(token));
-        return RefreshTokenMapper.toDomain(saved);
+        return RefreshTokenMapper.toDomain(saved, session);
     }
 
     @Override

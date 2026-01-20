@@ -1,17 +1,16 @@
 package com.logimarui.auth.infra.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 
 @Entity
+@Table(name = "auth_refresh_token")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "logimarui_auth_refresh_token")
+@Setter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class RefreshTokenEntity {
 
     @Id
@@ -33,17 +32,4 @@ public class RefreshTokenEntity {
 
     @Column(nullable = false)
     private Instant expiresAt;
-
-    public RefreshTokenEntity(
-            Long sessionId,
-            String tokenHash,
-            Instant createdAt,
-            Instant expiresAt
-    ) {
-        this.sessionId = sessionId;
-        this.tokenHash = tokenHash;
-        this.createdAt = createdAt;
-        this.expiresAt = expiresAt;
-        this.revoked = false;
-    }
 }

@@ -6,41 +6,32 @@ import com.logimarui.auth.infra.persistence.entity.RefreshTokenEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RefreshTokenMapper {
-
 
     public static RefreshToken toDomain(
             RefreshTokenEntity entity,
             Session session
     ) {
-        RefreshToken token = new RefreshToken(
+        return RefreshToken.reconstitute(
+                entity.getId(),
                 session,
                 entity.getTokenHash(),
                 entity.getCreatedAt(),
-                entity.getExpiresAt()
+                entity.getExpiresAt(),
+                entity.isRevoked()
         );
-
-        if (entity.isRevoked()) {
-            token.revoke();
-        }
-
-        return token;
     }
 
     public static RefreshTokenEntity toEntity(RefreshToken token) {
         return new RefreshTokenEntity(
+                token.getId(),
                 token.getSession().getId(),
                 token.getTokenHash(),
+                token.isRevoked(),
                 token.getCreatedAt(),
                 token.getExpiresAt()
         );
     }
-
-    public static void copyState(
-            RefreshToken token,
-            RefreshTokenEntity entity
-    ) {
-        entity.setRevoked(token.isRevoked());
-    }
 }
+

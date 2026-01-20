@@ -20,17 +20,13 @@ public class SessionMapper {
 
     public static SessionEntity toEntity(Session session) {
         return new SessionEntity(
+                session.getId(),
                 session.getUserId(),
-                session.isValid(session.getCreatedAt()),
+                session.isActive(),
                 session.getDevice(),
                 session.getLastIpAddress(),
                 session.getCreatedAt(),
                 session.getExpiresAt()
         );
-    }
-
-    public static void copyState(Session session, SessionEntity entity) {
-        entity.setActive(session.isValid(session.getCreatedAt()));
-        entity.setLastIpAddress(session.getLastIpAddress());
     }
 }

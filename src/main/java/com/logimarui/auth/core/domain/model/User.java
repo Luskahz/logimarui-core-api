@@ -33,6 +33,7 @@ public class User {
         this.locked = false;
         this.role = Role.INDEFINIDO;
         this.failedLoginAttempts = 0;
+        this.lastLoginAt = Instant.now();
     }
 
     public static User create(String username, String passwordHash, Long matricula) {

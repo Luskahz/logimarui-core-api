@@ -1,17 +1,16 @@
 package com.logimarui.auth.infra.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 
 @Entity
+@Table(name = "auth_session")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "logimarui_auth_session")
+@Setter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class SessionEntity {
 
 
@@ -38,22 +37,5 @@ public class SessionEntity {
 
     @Column(nullable = false)
     private Instant expiresAt;
-
-
-    public SessionEntity(
-            Long userId,
-            boolean active,
-            String device,
-            String lastIpAddress,
-            Instant createdAt,
-            Instant expiresAt
-    ) {
-        this.userId = userId;
-        this.active = active;
-        this.device = device;
-        this.lastIpAddress = lastIpAddress;
-        this.createdAt = createdAt;
-        this.expiresAt = expiresAt;
-    }
 
 }
