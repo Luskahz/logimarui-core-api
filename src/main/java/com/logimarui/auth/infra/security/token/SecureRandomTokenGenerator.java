@@ -3,7 +3,7 @@ package com.logimarui.auth.infra.security.token;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-public class SEcureRandomTokenGenerator implements TokenGenerator{
+public class SecureRandomTokenGenerator implements TokenGenerator{
     private final SecureRandom random = new SecureRandom();
 
     @Override

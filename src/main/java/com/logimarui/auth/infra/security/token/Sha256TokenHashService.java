@@ -1,10 +1,10 @@
 package com.logimarui.auth.infra.security.token;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.DigestUtils;
 
 @Component
-public class Sha256TokenHashService implements TokenHashService{
+public class Sha256TokenHashService implements TokenHashService {
 
     @Override
     public String hash(String rawToken) {
