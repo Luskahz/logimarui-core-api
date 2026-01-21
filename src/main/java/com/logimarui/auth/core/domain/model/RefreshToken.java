@@ -1,5 +1,6 @@
 package com.logimarui.auth.core.domain.model;
 
+import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
@@ -16,14 +17,14 @@ public class RefreshToken {
     private String tokenHash;
     private Instant createdAt;
     private Instant expiresAt;
-    private boolean revoked;
+    private RefreshTokenStatus refreshTokenStatus;
 
     private RefreshToken(Session session, String tokenHash) {
         this.session = session;
         this.tokenHash = tokenHash;
         this.createdAt = Instant.now();
         this.expiresAt = this.createdAt.plus(Duration.ofDays(30));
-        this.revoked = false;
+        this.refreshTokenStatus = RefreshTokenStatus.ACTIVE;
     }
 
     public static RefreshToken create(Session session, String tokenHash) {
@@ -36,7 +37,7 @@ public class RefreshToken {
             String tokenHash,
             Instant createdAt,
             Instant expiresAt,
-            boolean revoked
+            RefreshTokenStatus refreshTokenStatus
     ) {
         if (expiresAt.isBefore(createdAt)) {
             throw new IllegalArgumentException("RefreshToken expiration must be after creation");
@@ -48,7 +49,7 @@ public class RefreshToken {
         token.tokenHash = tokenHash;
         token.createdAt = createdAt;
         token.expiresAt = expiresAt;
-        token.revoked = revoked;
+        token.refreshTokenStatus = refreshTokenStatus;
 
         return token;
     }
@@ -56,10 +57,16 @@ public class RefreshToken {
     public boolean isExpired(Instant now) {
         return expiresAt.isBefore(now);
     }
+    public boolean isActive(Instant now) {
+        return refreshTokenStatus == RefreshTokenStatus.ACTIVE && !isExpired(now);
+    }
+    public boolean isRevoked() {
+        return refreshTokenStatus == RefreshTokenStatus.REVOKED;
+    }
     public boolean isValid(Instant now) {
-        return !revoked && !isExpired(now) && session.isValid(now);
+        return isActive(now);
     }
     public void revoke() {
-        this.revoked = true;
+        this.refreshTokenStatus = RefreshTokenStatus.REVOKED;
     }
 }

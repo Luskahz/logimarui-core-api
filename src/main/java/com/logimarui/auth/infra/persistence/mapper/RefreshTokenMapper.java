@@ -19,7 +19,7 @@ public class RefreshTokenMapper {
                 entity.getTokenHash(),
                 entity.getCreatedAt(),
                 entity.getExpiresAt(),
-                entity.isRevoked()
+                entity.getRefreshTokenStatus()
         );
     }
 
@@ -28,9 +28,9 @@ public class RefreshTokenMapper {
                 token.getId(),
                 token.getSession().getId(),
                 token.getTokenHash(),
-                token.isRevoked(),
                 token.getCreatedAt(),
-                token.getExpiresAt()
+                token.getExpiresAt(),
+                token.getRefreshTokenStatus()
         );
     }
 }

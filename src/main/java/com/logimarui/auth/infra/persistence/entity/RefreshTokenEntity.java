@@ -1,5 +1,6 @@
 package com.logimarui.auth.infra.persistence.entity;
 
+import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,13 +24,13 @@ public class RefreshTokenEntity {
     @Column(name = "token_hash", nullable = false, unique = true, length = 255)
     private String tokenHash;
 
-    @Setter
-    @Column(nullable = false)
-    private boolean revoked;
-
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
 
     @Column(nullable = false)
     private Instant expiresAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private RefreshTokenStatus refreshTokenStatus;
 }
