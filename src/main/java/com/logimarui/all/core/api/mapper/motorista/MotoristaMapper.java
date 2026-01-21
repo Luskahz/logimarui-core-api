@@ -7,7 +7,7 @@ public class MotoristaMapper {
     public static MotoristaResponseDTO toResponse(Motorista motorista){
         return new MotoristaResponseDTO(
                 motorista.getCodigo(),
-                motorista.getMatricula(),
+                motorista.getEmployeeId(),
                 motorista.getNome(),
                 motorista.getCpf(),
                 motorista.getCluster()
