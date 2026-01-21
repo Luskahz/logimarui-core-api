@@ -37,7 +37,7 @@ public class AuthService {
     private final JwtService jwtService;
 
     @Transactional
-    public AuthTokenResponseDTO login(@NotNull LoginRequestDTO request, String ip, String deviceId) {
+    public AuthTokens login(@NotNull LoginRequestDTO request, String ip, String deviceId) {
         User user = userRepository.findByEmployeeId(request.employeeId())
                 .orElseThrow(() ->
                     new UserNotFoundException("User not found for provided employee number")
@@ -59,7 +59,7 @@ public class AuthService {
                 .ifPresent(RefreshToken::revoke);
         IssuedRefreshToken issuedRefreshToken = refreshTokenRegister(session);
 
-        return new AuthTokenResponseDTO(
+        return new AuthTokens(
                 issuedRefreshToken.rawToken(),
                 jwtService.generateAccessToken(user, session),
                 jwtService.getAccessTokenExpiresInSeconds()

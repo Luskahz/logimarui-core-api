@@ -41,14 +41,26 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login(
+    public AuthTokenResponseDTO login(
             @RequestBody @Valid LoginRequestDTO request,
             HttpServletRequest httpServletRequest
     ){
     String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
     String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
+    AuthTokens tokens = authService.login(request, ip, deviceId);
+    return new AuthTokenResponseDTO(
+            tokens.refreshToken(),
+            tokens.accessToken(),
+            tokens.expiresIn()
+    );
+
     }
+    @GetMapping("/me")
+    public void me(){
+
+    }
+
 
     @PostMapping("/refresh")
     public void refresh(){
@@ -60,8 +72,6 @@ public class AuthController {
 
     }
 
-
-
     @PostMapping("/change-password")
     public void changePassword(){
 
@@ -72,8 +82,5 @@ public class AuthController {
 
     }
 
-    @GetMapping("/me")
-    public void me(){
 
-    }
 }
