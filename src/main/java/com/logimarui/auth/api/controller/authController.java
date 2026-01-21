@@ -1,6 +1,7 @@
 package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
+import com.logimarui.auth.api.dto.login.LoginRequestDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.service.AuthService;
 import com.logimarui.auth.core.service.AuthTokens;
@@ -21,10 +22,10 @@ public class AuthController {
     @PostMapping("/register")
     public AuthTokenResponseDTO register(
             @RequestBody @Valid RegisterRequestDTO request,
-            HttpServletRequest httpRequest
+            HttpServletRequest httpServletRequest
     ){
-        String ip = RequestContextUtils.resolveClientIp(httpRequest);
-        String device = RequestContextUtils.resolveDevice(httpRequest);
+        String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
+        String device = RequestContextUtils.resolveDevice(httpServletRequest);
 
         AuthTokens tokens = authService.register(
                 request,
@@ -40,8 +41,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login(){
-
+    public void login(
+            @RequestBody @Valid LoginRequestDTO request,
+            HttpServletRequest httpServletRequest
+    ){
+    String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
+    String device = RequestContextUtils.resolveDevice(httpServletRequest);
 
     }
 

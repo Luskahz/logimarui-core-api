@@ -14,8 +14,11 @@ import com.logimarui.auth.infra.security.token.TokenGenerator;
 import com.logimarui.auth.infra.security.token.TokenHashService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,11 +32,16 @@ public class AuthService {
     private final JwtService jwtService;
 
 
-    public AuthTokenResponseDTO login(LoginRequestDTO request, String ip, String device) {
-        throw new UnsupportedOperationException("TODO");
+    public AuthTokenResponseDTO login(@NotNull LoginRequestDTO request, String ip, String device) {
+        Optional<User> user = userRepository.findByMatricula(request.matricula());
+
+
     }
 
-    public User userRegister(RegisterRequestDTO request, String ip){
+    public User userRegister(
+            @NotNull RegisterRequestDTO request,
+            String ip
+    ){
         return userRepository.save(
                 User.create(
                         request.username(),
@@ -42,7 +50,12 @@ public class AuthService {
                 )
         );
     }
-    public Session sessionRegister(User user, String device, String ip){
+    public Session sessionRegister(
+            @NotNull User user,
+            String device,
+            String ip
+    ){
+
         return sessionRepository.save(
                 Session.create(
                         user.getId(),
@@ -51,7 +64,7 @@ public class AuthService {
                 )
         );
     }
-    public String refreshTokenRegister(Session session) {
+    public String refreshTokenRegister(@NotNull Session session) {
         String rawRefreshToken = tokenGenerator.generate();
         String refreshTokenHash = tokenHashService.hash(rawRefreshToken);
 
@@ -62,7 +75,6 @@ public class AuthService {
 
         return rawRefreshToken;
     }
-
     @Transactional
     public AuthTokens register(
             RegisterRequestDTO request,
@@ -80,6 +92,8 @@ public class AuthService {
                 jwtService.getAccessTokenExpiresInSeconds()
         );
     }
+
+
 
     public AuthTokenResponseDTO refresh(String refreshToken) {
         throw new UnsupportedOperationException("TODO");
