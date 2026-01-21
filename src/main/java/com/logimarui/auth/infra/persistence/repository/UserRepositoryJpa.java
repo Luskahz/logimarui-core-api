@@ -39,8 +39,8 @@ public class UserRepositoryJpa implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByMatricula(Long matricula) {
-        return jpa.findByMatricula(matricula)
+    public Optional<User> findByEmployeeId(Long employeeId) {
+        return jpa.findByEmployeeId(employeeId)
                 .map(UserMapper::toDomain);
     }
 }

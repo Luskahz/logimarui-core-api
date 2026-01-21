@@ -10,7 +10,7 @@ public class SessionMapper {
         return Session.reconstitute(
                 entity.getId(),
                 entity.getUserId(),
-                entity.getDevice(),
+                entity.getDeviceId(),
                 entity.getLastIpAddress(),
                 entity.getCreatedAt(),
                 entity.getExpiresAt(),
@@ -22,7 +22,7 @@ public class SessionMapper {
         return new SessionEntity(
                 session.getId(),
                 session.getUserId(),
-                session.getDevice(),
+                session.getDeviceId(),
                 session.getLastIpAddress(),
                 session.getCreatedAt(),
                 session.getExpiresAt(),

@@ -13,7 +13,7 @@ import java.time.Instant;
 public class User {
 
     private Long id;
-    private Long matricula;
+    private Long employeeId;
     private String username;
     private String passwordHash;
     private Role role;
@@ -23,8 +23,8 @@ public class User {
     private Instant passwordChangedAt;
     private int failedLoginAttempts;
 
-    private User(String username, String passwordHash, Long matricula) {
-        this.matricula = matricula;
+    private User(String username, String passwordHash, Long employeeId) {
+        this.employeeId = employeeId;
         this.username = username;
         this.passwordHash = passwordHash;
         this.role = Role.INDEFINIDO;
@@ -34,14 +34,14 @@ public class User {
         this.failedLoginAttempts = 0;
     }
 
-    public static User create(String username, String passwordHash, Long matricula) {
-        return new User(username, passwordHash, matricula);
+    public static User create(String username, String passwordHash, Long employeeId) {
+        return new User(username, passwordHash, employeeId);
     }
 
 
     public static User reconstitute(
             Long id,
-            Long matricula,
+            Long employeeId,
             String username,
             String passwordHash,
             Role role,
@@ -53,7 +53,7 @@ public class User {
     ) {
         User user = new User();
         user.id = id;
-        user.matricula = matricula;
+        user.employeeId = employeeId;
         user.username = username;
         user.passwordHash = passwordHash;
         user.role = role;

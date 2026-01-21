@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Ajudante {
     private Long codigo;
-    private Long matricula;
+    private Long employeeId;
     private String nome;
     private String CPF;
 }

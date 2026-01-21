@@ -11,7 +11,7 @@ public class UserMapper {
     public static User toDomain(UserEntity entity) {
         return User.reconstitute(
                 entity.getId(),
-                entity.getMatricula(),
+                entity.getEmployeeId(),
                 entity.getUsername(),
                 entity.getPasswordHash(),
                 entity.getRole(),
@@ -26,7 +26,7 @@ public class UserMapper {
     public static UserEntity toEntity(User u) {
         return new UserEntity(
                 u.getId(),
-                u.getMatricula(),
+                u.getEmployeeId(),
                 u.getUsername(),
                 u.getPasswordHash(),
                 u.getRole(),

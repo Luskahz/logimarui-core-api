@@ -34,4 +34,11 @@ public class SessionRepositoryJpa implements SessionRepository {
         return SessionMapper.toDomain(saved);
     }
 
+    @Override
+    public Optional<Session> findByUserIdAndDeviceId(Long userId, String deviceId) {
+
+        return jpa.findByUserIdAndDeviceId(userId, deviceId)
+                .map(SessionMapper::toDomain);
+    }
+
 }

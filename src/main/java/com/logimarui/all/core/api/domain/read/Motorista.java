@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Motorista {
     private Long codigo;
-    private Long matricula;
+    private Long employeeId;
     private String nome;
     private String cpf;
     private String cluster;

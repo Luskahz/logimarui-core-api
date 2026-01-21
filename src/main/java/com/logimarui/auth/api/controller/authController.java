@@ -25,12 +25,12 @@ public class AuthController {
             HttpServletRequest httpServletRequest
     ){
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
-        String device = RequestContextUtils.resolveDevice(httpServletRequest);
+        String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
         AuthTokens tokens = authService.register(
                 request,
                 ip,
-                device
+                deviceId
         );
 
         return new AuthTokenResponseDTO(
@@ -46,7 +46,7 @@ public class AuthController {
             HttpServletRequest httpServletRequest
     ){
     String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
-    String device = RequestContextUtils.resolveDevice(httpServletRequest);
+    String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
     }
 

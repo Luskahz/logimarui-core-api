@@ -1,6 +1,7 @@
 package com.logimarui.auth.core.repository;
 
 import com.logimarui.auth.core.domain.model.Session;
+import com.logimarui.auth.core.domain.model.User;
 
 import java.util.Optional;
 
@@ -11,7 +12,6 @@ public interface SessionRepository {
     Optional<Session> findById(Long sessionId);
 
     Session save(Session session);
-    Optional<Session> findByDevice(String device);
-    Optional<Session> findByIp(String ip);
+    Optional<Session> findByUserIdAndDeviceId(Long userId, String deviceId);
 
 }

@@ -12,5 +12,5 @@ public interface UserRepository {
     Optional<User> findById(Long id);
 
     User save(User user);
-    Optional<User> findByMatricula(Long matricula);
+    Optional<User> findByEmployeeId(Long employeeId);
 }

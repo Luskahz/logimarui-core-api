@@ -22,7 +22,7 @@ public class SessionEntity {
     private Long userId;
 
     @Column(length = 50)
-    private String device;
+    private String deviceId;
 
     @Column(name = "last_ip_address", length = 45)
     private String lastIpAddress;

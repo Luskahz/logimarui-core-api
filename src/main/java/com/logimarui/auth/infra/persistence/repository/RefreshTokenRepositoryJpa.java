@@ -1,6 +1,7 @@
 package com.logimarui.auth.infra.persistence.repository;
 
 
+import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
 import com.logimarui.auth.core.domain.model.RefreshToken;
 import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.core.repository.RefreshTokenRepository;
@@ -10,6 +11,7 @@ import com.logimarui.auth.infra.persistence.mapper.RefreshTokenMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
 import java.util.Optional;
 
 @Repository
@@ -31,5 +33,13 @@ public class RefreshTokenRepositoryJpa implements RefreshTokenRepository {
     @Override
     public void revokeBySessionId(Long sessionId) {
 
+    }
+
+    @Override
+    public Optional<RefreshTokenEntity> findBySessionIdAndRefreshTokenStatus(Long sessionId, RefreshTokenStatus refreshTokenStatus) {
+        return jpa.findBySessionIdAndRefreshTokenStatus(
+                sessionId,
+                refreshTokenStatus
+        );
     }
 }

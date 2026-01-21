@@ -14,29 +14,29 @@ public class Session {
 
     private Long id;
     private Long userId;
-    private String device;
+    private String deviceId;
     private String lastIpAddress;
     private Instant createdAt;
     private Instant expiresAt;
     private SessionStatus sessionStatus;
 
-    private Session(Long userId, String ip, String device) {
+    private Session(Long userId, String ip, String deviceId) {
         this.userId = userId;
-        this.device = device;
+        this.deviceId = deviceId;
         this.lastIpAddress = ip;
         this.createdAt = Instant.now();
         this.expiresAt = this.createdAt.plus(Duration.ofDays(7));
         this.sessionStatus = SessionStatus.ACTIVE;
     }
 
-    public static Session create(Long userId, String ip, String device) {
-        return new Session(userId, ip, device);
+    public static Session create(Long userId, String ip, String deviceId) {
+        return new Session(userId, ip, deviceId);
     }
 
     public static Session reconstitute(
             Long id,
             Long userId,
-            String device,
+            String deviceId,
             String lastIpAddress,
             Instant createdAt,
             Instant expiresAt,
@@ -49,7 +49,7 @@ public class Session {
         Session session = new Session();
         session.id = id;
         session.userId = userId;
-        session.device = device;
+        session.deviceId = deviceId;
         session.lastIpAddress = lastIpAddress;
         session.createdAt = createdAt;
         session.expiresAt = expiresAt;

@@ -20,7 +20,7 @@ public class UserEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Long matricula;
+    private Long employeeId;
 
     @Column(nullable = false, unique = true, length = 100)
     private String username;
