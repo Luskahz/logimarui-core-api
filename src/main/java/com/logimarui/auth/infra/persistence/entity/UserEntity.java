@@ -1,6 +1,7 @@
 package com.logimarui.auth.infra.persistence.entity;
 
 import com.logimarui.auth.core.domain.enums.Role;
+import com.logimarui.auth.core.domain.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,32 +19,33 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private Long matricula;
+
     @Column(nullable = false, unique = true, length = 100)
     private String username;
 
     @Column(nullable = false)
     private String passwordHash;
 
-    @Column(nullable = false)
-    private Long matricula;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private Role role;
 
-    @Column(nullable = false)
-    private boolean active;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private UserStatus userStatus;
 
-    @Column(nullable = false)
-    private boolean locked;
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
+
+    private Instant lastLoginAt;
+
+    private Instant passwordChangedAt;
 
     @Column(nullable = false)
     private int failedLoginAttempts;
 
-    private Instant passwordChangedAt;
-    private Instant lastLoginAt;
 
-    @Column(nullable = false, updatable = false)
-    private Instant createdAt;
 }
 

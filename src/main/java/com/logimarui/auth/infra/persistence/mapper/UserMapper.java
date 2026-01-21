@@ -11,32 +11,30 @@ public class UserMapper {
     public static User toDomain(UserEntity entity) {
         return User.reconstitute(
                 entity.getId(),
-                entity.getUsername(),
-                entity.getCreatedAt(),
                 entity.getMatricula(),
+                entity.getUsername(),
                 entity.getPasswordHash(),
-                entity.isActive(),
-                entity.isLocked(),
                 entity.getRole(),
-                entity.getFailedLoginAttempts(),
+                entity.getUserStatus(),
+                entity.getCreatedAt(),
+                entity.getLastLoginAt(),
                 entity.getPasswordChangedAt(),
-                entity.getLastLoginAt()
+                entity.getFailedLoginAttempts()
         );
     }
 
     public static UserEntity toEntity(User u) {
         return new UserEntity(
                 u.getId(),
+                u.getMatricula(),
                 u.getUsername(),
                 u.getPasswordHash(),
-                u.getMatricula(),
                 u.getRole(),
-                u.isActive(),
-                u.isLocked(),
-                u.getFailedLoginAttempts(),
-                u.getPasswordChangedAt(),
+                u.getUserStatus(),
+                u.getCreatedAt(),
                 u.getLastLoginAt(),
-                u.getCreatedAt()
+                u.getPasswordChangedAt(),
+                u.getFailedLoginAttempts()
         );
     }
 }

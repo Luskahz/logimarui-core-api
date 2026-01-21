@@ -1,6 +1,7 @@
 package com.logimarui.auth.core.domain.model;
 
 import com.logimarui.auth.core.domain.enums.Role;
+import com.logimarui.auth.core.domain.enums.UserStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,28 +13,25 @@ import java.time.Instant;
 public class User {
 
     private Long id;
-    private String username;
-    private Instant createdAt;
     private Long matricula;
+    private String username;
     private String passwordHash;
-    private boolean active;
-    private boolean locked;
     private Role role;
-    private int failedLoginAttempts;
-    private Instant passwordChangedAt;
+    private UserStatus userStatus;
+    private Instant createdAt;
     private Instant lastLoginAt;
+    private Instant passwordChangedAt;
+    private int failedLoginAttempts;
 
     private User(String username, String passwordHash, Long matricula) {
+        this.matricula = matricula;
         this.username = username;
         this.passwordHash = passwordHash;
-        this.matricula = matricula;
-
-        this.createdAt = Instant.now();
-        this.active = true;
-        this.locked = false;
         this.role = Role.INDEFINIDO;
-        this.failedLoginAttempts = 0;
+        this.userStatus = UserStatus.ACTIVE;
+        this.createdAt = Instant.now();
         this.lastLoginAt = Instant.now();
+        this.failedLoginAttempts = 0;
     }
 
     public static User create(String username, String passwordHash, Long matricula) {
@@ -43,54 +41,64 @@ public class User {
 
     public static User reconstitute(
             Long id,
-            String username,
-            Instant createdAt,
             Long matricula,
+            String username,
             String passwordHash,
-            boolean active,
-            boolean locked,
             Role role,
-            int failedLoginAttempts,
+            UserStatus userStatus,
+            Instant createdAt,
+            Instant lastLoginAt,
             Instant passwordChangedAt,
-            Instant lastLoginAt
+            int failedLoginAttempts
     ) {
         User user = new User();
         user.id = id;
-        user.username = username;
-        user.createdAt = createdAt;
         user.matricula = matricula;
+        user.username = username;
         user.passwordHash = passwordHash;
-        user.active = active;
-        user.locked = locked;
         user.role = role;
-        user.failedLoginAttempts = failedLoginAttempts;
-        user.passwordChangedAt = passwordChangedAt;
+        user.userStatus = userStatus;
+        user.createdAt = createdAt;
         user.lastLoginAt = lastLoginAt;
-
+        user.passwordChangedAt = passwordChangedAt;
+        user.failedLoginAttempts = failedLoginAttempts;
         return user;
     }
 
 
+    public boolean canAuthenticate() {
+        return userStatus == UserStatus.ACTIVE;
+    }
+    public boolean isLocked() {
+        return userStatus == UserStatus.LOCKED;
+    }
+
+    public boolean isInactive() {
+        return userStatus == UserStatus.INACTIVE;
+    }
+
     public void registerFailedLogin() {
         failedLoginAttempts++;
+
         if (failedLoginAttempts >= 5) {
-            locked = true;
+            userStatus = UserStatus.LOCKED;
         }
-    }
-    public void changePassword(String newHash, Instant now) {
-        this.passwordHash = newHash;
-        this.passwordChangedAt = now;
-        this.failedLoginAttempts = 0;
-        this.locked = false;
-    }
-    public boolean isBlocked() {
-        return !active || locked;
-    }
-    public void deactivate() {
-        this.active = false;
     }
     public void recordSuccessfulLogin(Instant now) {
         this.lastLoginAt = now;
         this.failedLoginAttempts = 0;
+    }
+
+    public void changePassword(String newHash, Instant now) {
+        this.passwordHash = newHash;
+        this.passwordChangedAt = now;
+        this.failedLoginAttempts = 0;
+        this.userStatus = UserStatus.ACTIVE;
+    }
+    public void deactivate() {
+        this.userStatus = UserStatus.INACTIVE;
+    }
+    public boolean isBlocked() {
+        return isLocked() || isInactive();
     }
 }
