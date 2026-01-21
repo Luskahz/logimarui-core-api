@@ -11,5 +11,7 @@ public interface SessionRepository {
     Optional<Session> findById(Long sessionId);
 
     Session save(Session session);
+    Optional<Session> findByDevice(String device);
+    Optional<Session> findByIp(String ip);
 
 }

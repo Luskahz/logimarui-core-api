@@ -24,6 +24,7 @@ public class UserRepositoryJpa implements UserRepository {
                 .map(UserMapper::toDomain);
     }
 
+
     @Override
     public Optional<User> findById(Long id) {
         return jpa.findById(id)
@@ -35,6 +36,12 @@ public class UserRepositoryJpa implements UserRepository {
         UserEntity entity = UserMapper.toEntity(user);
         UserEntity saved = jpa.save(entity);
         return UserMapper.toDomain(saved);
+    }
+
+    @Override
+    public Optional<User> findByMatricula(Long matricula) {
+        return jpa.findByMatricula(matricula)
+                .map(UserMapper::toDomain);
     }
 }
 
