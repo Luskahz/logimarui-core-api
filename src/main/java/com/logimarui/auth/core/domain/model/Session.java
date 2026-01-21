@@ -1,5 +1,6 @@
 package com.logimarui.auth.core.domain.model;
 
+import com.logimarui.auth.core.domain.enums.SessionStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,19 +14,19 @@ public class Session {
 
     private Long id;
     private Long userId;
-    private boolean active;
     private String device;
     private String lastIpAddress;
     private Instant createdAt;
     private Instant expiresAt;
+    private SessionStatus sessionStatus;
 
     private Session(Long userId, String ip, String device) {
         this.userId = userId;
-        this.lastIpAddress = ip;
         this.device = device;
+        this.lastIpAddress = ip;
         this.createdAt = Instant.now();
         this.expiresAt = this.createdAt.plus(Duration.ofDays(7));
-        this.active = true;
+        this.sessionStatus = SessionStatus.ACTIVE;
     }
 
     public static Session create(Long userId, String ip, String device) {
@@ -39,7 +40,7 @@ public class Session {
             String lastIpAddress,
             Instant createdAt,
             Instant expiresAt,
-            boolean active
+            SessionStatus sessionStatus
     ) {
         if (expiresAt.isBefore(createdAt)) {
             throw new IllegalArgumentException("Session expiration must be after creation");
@@ -52,7 +53,7 @@ public class Session {
         session.lastIpAddress = lastIpAddress;
         session.createdAt = createdAt;
         session.expiresAt = expiresAt;
-        session.active = active;
+        session.sessionStatus = sessionStatus;
 
         return session;
     }
@@ -60,13 +61,28 @@ public class Session {
     public boolean isExpired(Instant now) {
         return expiresAt.isBefore(now);
     }
-    public boolean isValid(Instant now) {
-        return active && !isExpired(now);
+    public boolean isActive(Instant now) {
+        return sessionStatus == SessionStatus.ACTIVE && !isExpired(now);
     }
-    public void deactivate() {
-        this.active = false;
+    public boolean isRevoked() {
+        return sessionStatus == SessionStatus.REVOKED;
+    }
+    public boolean isLoggedOut() {
+        return sessionStatus == SessionStatus.LOGGED_OUT;
+    }
+    public boolean isInvalid(Instant now) {
+        return isExpired(now) || isRevoked() || isLoggedOut();
     }
     public void updateIpAddress(String ipAddress) {
+        if (sessionStatus != SessionStatus.ACTIVE) {
+            throw new IllegalStateException("Cannot update IP of inactive session");
+        }
         this.lastIpAddress = ipAddress;
+    }
+    public void revoke() {
+        this.sessionStatus = SessionStatus.REVOKED;
+    }
+    public void logout() {
+        this.sessionStatus = SessionStatus.LOGGED_OUT;
     }
 }

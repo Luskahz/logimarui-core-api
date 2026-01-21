@@ -1,5 +1,6 @@
 package com.logimarui.auth.infra.persistence.entity;
 
+import com.logimarui.auth.core.domain.enums.SessionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,6 @@ import java.time.Instant;
 @AllArgsConstructor
 public class SessionEntity {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,14 +21,9 @@ public class SessionEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Setter
-    @Column(nullable = false)
-    private boolean active;
-
     @Column(length = 50)
     private String device;
 
-    @Setter
     @Column(name = "last_ip_address", length = 45)
     private String lastIpAddress;
 
@@ -37,5 +32,15 @@ public class SessionEntity {
 
     @Column(nullable = false)
     private Instant expiresAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    SessionStatus sessionStatus;
+
+
+
+
+
+
 
 }

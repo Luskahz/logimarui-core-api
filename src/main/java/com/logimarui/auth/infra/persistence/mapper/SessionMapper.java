@@ -14,7 +14,7 @@ public class SessionMapper {
                 entity.getLastIpAddress(),
                 entity.getCreatedAt(),
                 entity.getExpiresAt(),
-                entity.isActive()
+                entity.getSessionStatus()
         );
     }
 
@@ -22,11 +22,11 @@ public class SessionMapper {
         return new SessionEntity(
                 session.getId(),
                 session.getUserId(),
-                session.isActive(),
                 session.getDevice(),
                 session.getLastIpAddress(),
                 session.getCreatedAt(),
-                session.getExpiresAt()
+                session.getExpiresAt(),
+                session.getSessionStatus()
         );
     }
 }
