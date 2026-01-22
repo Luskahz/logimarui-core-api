@@ -5,7 +5,7 @@ import com.logimarui.auth.core.domain.model.RefreshToken;
 import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.infra.persistence.entity.RefreshTokenEntity;
 
-import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 public interface RefreshTokenRepository {
@@ -16,5 +16,7 @@ public interface RefreshTokenRepository {
 
     void revokeBySessionId(Long sessionId);
 
-    Optional<RefreshTokenEntity> findBySessionIdAndRefreshTokenStatus(Long sessionId, RefreshTokenStatus refreshTokenStatus);
+    Optional<RefreshToken> findBySessionIdAndRefreshTokenStatus(Long sessionId, RefreshTokenStatus refreshTokenStatus);
+    Optional<RefreshToken> findByTokenHash(String tokenHash);
+    RefreshToken updateLastIpAdress(RefreshToken refreshToken, String ipAddress);
 }

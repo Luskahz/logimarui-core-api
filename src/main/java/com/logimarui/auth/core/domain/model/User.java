@@ -5,6 +5,8 @@ import com.logimarui.auth.core.domain.enums.UserStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 
@@ -34,12 +36,13 @@ public class User {
         this.failedLoginAttempts = 0;
     }
 
-    public static User create(String username, String passwordHash, Long employeeId) {
+    @Contract("_, _, _ -> new")
+    public static @NotNull User create(String username, String passwordHash, Long employeeId) {
         return new User(username, passwordHash, employeeId);
     }
 
 
-    public static User reconstitute(
+    public static @NotNull User reconstitute(
             Long id,
             Long employeeId,
             String username,

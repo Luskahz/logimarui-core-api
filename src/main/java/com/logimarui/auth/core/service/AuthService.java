@@ -2,6 +2,7 @@ package com.logimarui.auth.core.service;
 
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.login.LoginRequestDTO;
+import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
 import com.logimarui.auth.core.domain.exception.UserNotFoundException;
@@ -58,8 +59,6 @@ public class AuthService {
                 })
                 .orElseGet(() -> sessionRegister(user, deviceId, ip));
 
-        findActiveRefreshTokenBySession(session)
-                .ifPresent(RefreshToken::revoke);
         IssuedRefreshToken issuedRefreshToken = refreshTokenRegister(session);
 
         return new AuthTokens(
@@ -71,7 +70,6 @@ public class AuthService {
     @Transactional public AuthTokens register(RegisterRequestDTO request, String ip, String deviceid) {
         User user = userRegister(request, ip);
         Session session = sessionRegister(user, deviceid, ip);
-
         IssuedRefreshToken issued = refreshTokenRegister(session);
         String rawRefreshToken = issued.rawToken();
         String accessToken = jwtService.generateAccessToken(user, session);
@@ -82,12 +80,7 @@ public class AuthService {
                 jwtService.getAccessTokenExpiresInSeconds()
         );
     }
-
-
-
-
-
-    @Transactional public AuthContext me(Authentication authentication, String ip, String deviceId) {
+    @Transactional public AuthContext me(@NotNull Authentication authentication, String ip, String deviceId) {
         UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
         List<String> roles = principal.getAuthorities()
                 .stream()
@@ -110,11 +103,14 @@ public class AuthService {
         );
     }
 
-
-
-    public AuthTokenResponseDTO refresh(String refreshToken) {
-        throw new UnsupportedOperationException("TODO");
+    @Transactional public AuthTokenResponseDTO refresh(@NotNull RefreshRequestDTO request, String ip, String deviceIp){
+        RefreshToken refreshToken = findRefreshTokenByToken(request.refreshToken())
+                .orElseThrow(() -> new SecurityException("Invalid refresh token"));
+        if(refreshToken.getSession().getLastIpAddress()!= ip) {
+            ;
+        }
     }
+
     public void logout(String accessToken) {
         throw new UnsupportedOperationException("TODO");
     }
@@ -168,10 +164,22 @@ public class AuthService {
     public Optional<Session> findSessionByUserAndDeviceId(@NotNull User user, String deviceId){
         return sessionRepository.findByUserIdAndDeviceId(user.getId(), deviceId);
     }
-    public Optional<RefreshToken> findActiveRefreshTokenBySession(@NotNull Session session){
-        return refreshTokenRepository.findBySessionIdAndRefreshTokenStatus(session.getId(), RefreshTokenStatus.ACTIVE)
-                        .map(entity -> RefreshTokenMapper.toDomain(entity, session));
+    public Optional<RefreshToken> findRefreshTokenByToken(@NotNull String refreshToken){
+        String tokenHash = tokenHashService.hash(refreshToken);
+        return refreshTokenRepository.findByTokenHash(tokenHash);
+
+    }
+    public RefreshToken updateLastIpAddressFromRefreshToken(RefreshToken refreshToken, String ipAddress){
+        return refreshTokenRepository.updateLastIpAdress(refreshToken, ipAddress);
     }
 
+
+
+    public Optional<Session> findSessionById(Long sessionId){
+        return sessionRepository.findById(sessionId);
+    }
+    public Optional<RefreshToken> findActiveRefreshTokenBySession(@NotNull Session session){
+        return refreshTokenRepository.findBySessionIdAndRefreshTokenStatus(session.getId(), RefreshTokenStatus.ACTIVE);
+    }
 
 }

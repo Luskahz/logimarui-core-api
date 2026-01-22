@@ -4,6 +4,8 @@ import com.logimarui.auth.core.domain.enums.SessionStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -29,17 +31,18 @@ public class Session {
         this.sessionStatus = SessionStatus.ACTIVE;
     }
 
-    public static Session create(Long userId, String ip, String deviceId) {
+    @Contract("_, _, _ -> new")
+    public static @NotNull Session create(Long userId, String ip, String deviceId) {
         return new Session(userId, ip, deviceId);
     }
 
-    public static Session reconstitute(
+    public static @NotNull Session reconstitute(
             Long id,
             Long userId,
             String deviceId,
             String lastIpAddress,
             Instant createdAt,
-            Instant expiresAt,
+            @NotNull Instant expiresAt,
             SessionStatus sessionStatus
     ) {
         if (expiresAt.isBefore(createdAt)) {

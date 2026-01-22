@@ -18,7 +18,7 @@ public class RefreshTokenEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "session_id", nullable = false)
+    @Column(name = "session_id", nullable = false, unique = true)
     private Long sessionId;
 
     @Column(name = "token_hash", nullable = false, unique = true, length = 255)

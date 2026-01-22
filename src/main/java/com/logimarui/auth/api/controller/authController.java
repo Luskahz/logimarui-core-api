@@ -3,6 +3,7 @@ package com.logimarui.auth.api.controller;
 import com.logimarui.auth.api.dto.AuthMeResponseDTO;
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.login.LoginRequestDTO;
+import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.service.AuthContext;
 import com.logimarui.auth.core.service.AuthService;
@@ -77,7 +78,11 @@ public class AuthController {
 
 
     @PostMapping("/refresh")
-    public void refresh(){
+    public void refresh(
+            @Valid @RequestBody RefreshRequestDTO refreshRequestDTO
+    ){
+         authService.refresh()
+
 
     }
 

@@ -4,6 +4,8 @@ import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -27,16 +29,17 @@ public class RefreshToken {
         this.refreshTokenStatus = RefreshTokenStatus.ACTIVE;
     }
 
-    public static RefreshToken create(Session session, String tokenHash) {
+    @Contract("_, _ -> new")
+    public static @NotNull RefreshToken create(Session session, String tokenHash) {
         return new RefreshToken(session, tokenHash);
     }
 
-    public static RefreshToken reconstitute(
+    public static @NotNull RefreshToken reconstitute(
             Long id,
             Session session,
             String tokenHash,
             Instant createdAt,
-            Instant expiresAt,
+            @NotNull Instant expiresAt,
             RefreshTokenStatus refreshTokenStatus
     ) {
         if (expiresAt.isBefore(createdAt)) {
