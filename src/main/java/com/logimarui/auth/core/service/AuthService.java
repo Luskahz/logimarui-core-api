@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Ref;
 import java.time.Instant;
 import java.util.Optional;
 
@@ -36,8 +35,7 @@ public class AuthService {
     private final TokenHashService tokenHashService;
     private final JwtService jwtService;
 
-    @Transactional
-    public AuthTokens login(@NotNull LoginRequestDTO request, String ip, String deviceId) {
+    @Transactional public AuthTokens login(@NotNull LoginRequestDTO request, String ip, String deviceId) {
         User user = userRepository.findByEmployeeId(request.employeeId())
                 .orElseThrow(() ->
                     new UserNotFoundException("User not found for provided employee number")
@@ -65,9 +63,7 @@ public class AuthService {
                 jwtService.getAccessTokenExpiresInSeconds()
                 );
     }
-
-    @Transactional
-    public AuthTokens register(RegisterRequestDTO request, String ip, String deviceid) {
+    @Transactional public AuthTokens register(RegisterRequestDTO request, String ip, String deviceid) {
         User user = userRegister(request, ip);
         Session session = sessionRegister(user, deviceid, ip);
 
@@ -82,15 +78,20 @@ public class AuthService {
         );
     }
 
+
     public AuthTokenResponseDTO refresh(String refreshToken) {
         throw new UnsupportedOperationException("TODO");
     }
     public void logout(String accessToken) {
         throw new UnsupportedOperationException("TODO");
     }
+
+
+
     public void me(String accessToken) {
-        throw new UnsupportedOperationException("TODO");
+
     }
+
 
 
     public User userRegister(@NotNull RegisterRequestDTO request, String ip){
@@ -101,6 +102,23 @@ public class AuthService {
                         request.employeeId()
                 )
         );
+    }
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
+    public User getUserForAuthentication(Long userId) {
+        User user = getUserById(userId);
+
+        if (user.isBlocked()) {
+            throw new IllegalStateException("Blocked user");
+        }
+
+        if (!user.canAuthenticate()) {
+            throw new IllegalStateException("User cannot authenticate");
+        }
+
+        return user;
     }
     public Session sessionRegister(@NotNull User user, String deviceId, String ip){
 

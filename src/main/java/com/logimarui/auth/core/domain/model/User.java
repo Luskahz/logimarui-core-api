@@ -76,6 +76,9 @@ public class User {
     public boolean isInactive() {
         return userStatus == UserStatus.INACTIVE;
     }
+    public boolean isActive(){
+        return userStatus == UserStatus.ACTIVE;
+    }
 
     public void registerFailedLogin() {
         failedLoginAttempts++;
@@ -97,6 +100,15 @@ public class User {
     }
     public void deactivate() {
         this.userStatus = UserStatus.INACTIVE;
+    }
+    public void activate() {
+        if (isBlocked()) {
+            throw new IllegalStateException("Blocked user cannot be activated");
+        }
+        if (isActive()) {
+            throw new IllegalStateException("User already active");
+        }
+        this.userStatus = UserStatus.ACTIVE;
     }
     public boolean isBlocked() {
         return isLocked() || isInactive();
