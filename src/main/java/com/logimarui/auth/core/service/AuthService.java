@@ -13,15 +13,20 @@ import com.logimarui.auth.core.repository.SessionRepository;
 import com.logimarui.auth.core.repository.UserRepository;
 import com.logimarui.auth.infra.persistence.mapper.RefreshTokenMapper;
 import com.logimarui.auth.infra.security.jwt.JwtService;
+import com.logimarui.auth.infra.security.principal.UserPrincipal;
 import com.logimarui.auth.infra.security.token.TokenGenerator;
 import com.logimarui.auth.infra.security.token.TokenHashService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -79,20 +84,40 @@ public class AuthService {
     }
 
 
+
+
+
+    @Transactional public AuthContext me(Authentication authentication, String ip, String deviceId) {
+        UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
+        List<String> roles = principal.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+        User user = getUserForAuthentication(principal.getUserId());
+        Session session = findSessionByUserAndDeviceId(user,deviceId)
+                .orElseThrow(()-> new SecurityException("Session not found"));
+        long expiresInSeconds = Math.max(
+                Duration.between(Instant.now(), principal.getAccessTokenExpiresAt()).getSeconds(),
+                0
+        );
+
+        return new AuthContext (
+                principal.getUserId(),
+                roles,
+                principal.getSessionId(),
+                !session.isInvalid(Instant.now()),
+                expiresInSeconds
+        );
+    }
+
+
+
     public AuthTokenResponseDTO refresh(String refreshToken) {
         throw new UnsupportedOperationException("TODO");
     }
     public void logout(String accessToken) {
         throw new UnsupportedOperationException("TODO");
     }
-
-
-
-    public void me(String accessToken) {
-
-    }
-
-
 
     public User userRegister(@NotNull RegisterRequestDTO request, String ip){
         return userRepository.save(

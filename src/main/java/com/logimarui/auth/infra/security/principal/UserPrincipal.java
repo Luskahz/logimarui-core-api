@@ -19,13 +19,11 @@ public class UserPrincipal implements UserDetails {
     private final List<String> roles;
     @Getter private final Instant accessTokenExpiresAt;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    @Override public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
                 .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
                 .toList();
     }
-
     @Override public String getUsername() {
         return userId.toString();
     }
