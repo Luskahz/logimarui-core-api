@@ -18,5 +18,5 @@ public interface RefreshTokenRepository {
 
     Optional<RefreshToken> findBySessionIdAndRefreshTokenStatus(Long sessionId, RefreshTokenStatus refreshTokenStatus);
     Optional<RefreshToken> findByTokenHash(String tokenHash);
-    RefreshToken updateLastIpAdress(RefreshToken refreshToken, String ipAddress);
+
 }

@@ -1,9 +1,12 @@
 package com.logimarui.auth.core.domain.model;
 
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.auth.core.service.IssuedRefreshToken;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,22 +19,36 @@ public class RefreshToken {
 
     private Long id;
     private Session session;
-    private String tokenHash;
+    @Setter private String tokenHash;
     private Instant createdAt;
     private Instant expiresAt;
     private RefreshTokenStatus refreshTokenStatus;
 
-    private RefreshToken(Session session, String tokenHash) {
+    private RefreshToken(
+            Session session,
+            String tokenHash,
+            Duration ttl
+    ) {
+        Instant now = Instant.now();
+
         this.session = session;
         this.tokenHash = tokenHash;
-        this.createdAt = Instant.now();
-        this.expiresAt = this.createdAt.plus(Duration.ofDays(30));
+        this.createdAt = now;
+        this.expiresAt = now.plus(ttl);
         this.refreshTokenStatus = RefreshTokenStatus.ACTIVE;
     }
 
     @Contract("_, _ -> new")
-    public static @NotNull RefreshToken create(Session session, String tokenHash) {
-        return new RefreshToken(session, tokenHash);
+    public static @NotNull RefreshToken create(
+            Session session,
+            String tokenHash,
+            Duration ttl
+    ) {
+        return new RefreshToken(
+                session,
+                tokenHash,
+                ttl
+        );
     }
 
     public static @NotNull RefreshToken reconstitute(
@@ -63,13 +80,20 @@ public class RefreshToken {
     public boolean isActive(Instant now) {
         return refreshTokenStatus == RefreshTokenStatus.ACTIVE && !isExpired(now);
     }
-    public boolean isRevoked() {
-        return refreshTokenStatus == RefreshTokenStatus.REVOKED;
-    }
     public boolean isValid(Instant now) {
         return isActive(now);
     }
+    public boolean isRevoked() {
+        return refreshTokenStatus == RefreshTokenStatus.REVOKED;
+    }
     public void revoke() {
         this.refreshTokenStatus = RefreshTokenStatus.REVOKED;
+    }
+    public void rotate(
+            String newTokenHash,
+            Duration ttl
+    ) {
+        this.tokenHash = newTokenHash;
+        this.expiresAt = Instant.now().plus(ttl);
     }
 }

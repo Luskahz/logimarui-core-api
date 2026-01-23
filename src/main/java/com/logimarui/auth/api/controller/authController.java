@@ -78,16 +78,33 @@ public class AuthController {
 
 
     @PostMapping("/refresh")
-    public void refresh(
-            @Valid @RequestBody RefreshRequestDTO refreshRequestDTO
+    public AuthTokenResponseDTO refresh(
+            @Valid @RequestBody RefreshRequestDTO request,
+            HttpServletRequest httpServletRequest
     ){
-         authService.refresh()
+        String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
+        String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
+        AuthTokens tokens = authService.refresh(request, ip, deviceId);
 
+        return new AuthTokenResponseDTO(
+                tokens.refreshToken(),
+                tokens.accessToken(),
+                tokens.expiresIn()
+        );
     }
 
+
+
     @PostMapping("/logout")
-    public void logout(){
+    public void logout(
+            @NotNull Authentication authentication,
+            HttpServletRequest httpServletRequest
+    ){
+        String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
+        String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
+        authService.logout();
+
 
     }
 

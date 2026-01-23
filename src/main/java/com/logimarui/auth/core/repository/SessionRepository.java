@@ -1,5 +1,6 @@
 package com.logimarui.auth.core.repository;
 
+import com.logimarui.auth.core.domain.model.RefreshToken;
 import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.core.domain.model.User;
 

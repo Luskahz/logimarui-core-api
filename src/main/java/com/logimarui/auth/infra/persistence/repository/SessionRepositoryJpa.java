@@ -1,6 +1,7 @@
 package com.logimarui.auth.infra.persistence.repository;
 
 
+import com.logimarui.auth.core.domain.model.RefreshToken;
 import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.core.repository.SessionRepository;
 import com.logimarui.auth.infra.persistence.entity.SessionEntity;
@@ -40,5 +41,6 @@ public class SessionRepositoryJpa implements SessionRepository {
         return jpa.findByUserIdAndDeviceId(userId, deviceId)
                 .map(SessionMapper::toDomain);
     }
+
 
 }

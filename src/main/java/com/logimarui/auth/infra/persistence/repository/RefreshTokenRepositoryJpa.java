@@ -68,12 +68,6 @@ public class RefreshTokenRepositoryJpa implements RefreshTokenRepository {
                                         RefreshTokenMapper.toDomain(entity, session)));
     }
 
-    @Override
-    public RefreshToken updateLastIpAdress(RefreshToken refreshToken, String ipAddress) {
-        return jpa.
-    }
-
-
     private boolean isValid(RefreshTokenEntity entity) {
         return entity.getRefreshTokenStatus() == RefreshTokenStatus.ACTIVE
                 && entity.getExpiresAt().isAfter(Instant.now());
