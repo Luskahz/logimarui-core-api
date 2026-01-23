@@ -14,6 +14,7 @@ public class SessionMapper {
                 entity.getLastIpAddress(),
                 entity.getCreatedAt(),
                 entity.getExpiresAt(),
+                entity.getLoggedOutAt(),
                 entity.getSessionStatus()
         );
     }
@@ -26,6 +27,7 @@ public class SessionMapper {
                 session.getLastIpAddress(),
                 session.getCreatedAt(),
                 session.getExpiresAt(),
+                session.getLoggedOutAt(),
                 session.getSessionStatus()
         );
     }

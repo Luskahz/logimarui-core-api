@@ -2,6 +2,7 @@ package com.logimarui.auth.infra.security.principal;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,8 +15,8 @@ import java.util.List;
 
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
-    @Getter private final Long userId;
-    @Getter private final Long sessionId;
+    @Getter @NotNull private final Long userId;
+    @Getter @NotNull private final Long sessionId;
     private final List<String> roles;
     @Getter private final Instant accessTokenExpiresAt;
 

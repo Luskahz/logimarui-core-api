@@ -8,6 +8,7 @@ import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.service.AuthContext;
 import com.logimarui.auth.core.service.AuthService;
 import com.logimarui.auth.core.service.AuthTokens;
+import com.logimarui.auth.infra.security.principal.UserPrincipal;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -76,7 +77,6 @@ public class AuthController {
         );
     }
 
-
     @PostMapping("/refresh")
     public AuthTokenResponseDTO refresh(
             @Valid @RequestBody RefreshRequestDTO request,
@@ -94,18 +94,24 @@ public class AuthController {
         );
     }
 
-
-
     @PostMapping("/logout")
     public void logout(
             @NotNull Authentication authentication,
             HttpServletRequest httpServletRequest
     ){
+        if (!(authentication.getPrincipal() instanceof UserPrincipal principal)) {
+            throw new SecurityException("Invalid authentication principal");
+        }
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
-        authService.logout();
 
 
+        authService.logout(
+                principal.getUserId(),
+                principal.getSessionId(),
+                ip,
+                deviceId
+        );
     }
 
     @PostMapping("/change-password")

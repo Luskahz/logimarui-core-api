@@ -20,6 +20,7 @@ public class Session {
     private String lastIpAddress;
     private Instant createdAt;
     private Instant expiresAt;
+    private Instant loggedOutAt;
     private SessionStatus sessionStatus;
 
     private Session(Long userId, String ip, String deviceId) {
@@ -43,6 +44,7 @@ public class Session {
             String lastIpAddress,
             Instant createdAt,
             @NotNull Instant expiresAt,
+            Instant loggedOutAt,
             SessionStatus sessionStatus
     ) {
         if (expiresAt.isBefore(createdAt)) {
@@ -56,6 +58,7 @@ public class Session {
         session.lastIpAddress = lastIpAddress;
         session.createdAt = createdAt;
         session.expiresAt = expiresAt;
+        session.loggedOutAt = loggedOutAt;
         session.sessionStatus = sessionStatus;
 
         return session;
@@ -66,7 +69,7 @@ public class Session {
         return expiresAt.isBefore(now);
     }
     public boolean isActive(Instant now) {
-        return sessionStatus == SessionStatus.ACTIVE && !isExpired(now);
+        return sessionStatus == SessionStatus.ACTIVE && isExpired(now);
     }
     public boolean isRevoked() {
         return sessionStatus == SessionStatus.REVOKED;
@@ -74,9 +77,10 @@ public class Session {
     public boolean isLoggedOut() {
         return sessionStatus == SessionStatus.LOGGED_OUT;
     }
-    public boolean isInvalid(Instant now) {
-        return isExpired(now) || isRevoked() || isLoggedOut() || isExpired(now);
+    public boolean isLoggable(Instant now) {
+        return isExpired(now) && !isRevoked() && !isLoggedOut();
     }
+
     public void updateIpAddress(String ipAddress) {
         if (sessionStatus != SessionStatus.ACTIVE) {
             throw new IllegalStateException("Cannot update IP of inactive session");
@@ -86,7 +90,11 @@ public class Session {
     public void revoke() {
         this.sessionStatus = SessionStatus.REVOKED;
     }
-    public void logout() {
+    public void logout(Instant now) {
+        if (this.sessionStatus != SessionStatus.ACTIVE) {
+            return;
+        }
         this.sessionStatus = SessionStatus.LOGGED_OUT;
+        this.loggedOutAt = now;
     }
 }

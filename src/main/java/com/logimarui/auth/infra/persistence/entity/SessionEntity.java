@@ -33,6 +33,8 @@ public class SessionEntity {
     @Column(nullable = false)
     private Instant expiresAt;
 
+    private Instant loggedOutAt;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     SessionStatus sessionStatus;

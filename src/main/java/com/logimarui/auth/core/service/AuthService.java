@@ -18,7 +18,6 @@ import com.logimarui.auth.infra.security.token.TokenGenerator;
 import com.logimarui.auth.infra.security.token.TokenHashService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -51,7 +50,7 @@ public class AuthService {
 
         Session session = findSessionByUserAndDeviceId(user, deviceId)
                 .map(existingSession -> {
-                    if(existingSession.isActive(Instant.now())){
+                    if(existingSession.isLoggable(Instant.now())){
                         existingSession.updateIpAddress(ip);
                         return existingSession;
                     }
@@ -101,7 +100,7 @@ public class AuthService {
                 principal.getUserId(),
                 roles,
                 principal.getSessionId(),
-                !session.isInvalid(Instant.now()),
+                session.isLoggable(Instant.now()),
                 getAccessTokenRemainingSeconds(principal)
         );
     }
@@ -126,8 +125,28 @@ public class AuthService {
         );
     }
 
-    public void logout(Authentication authentication, String ip, String deviceId) {
+    @Transactional
+    public void logout(Long userId, Long sessionId, String ip, String deviceId) {
+        Instant now = Instant.now();
 
+        Optional<Session> sessionOpt =
+                sessionRepository.findByUserIdAndDeviceId(userId, deviceId);
+
+        if (sessionOpt.isEmpty()) {
+            return;
+        }
+
+        Session session = sessionOpt.get();
+
+        if (!session.isLoggedOut()) {
+            logoutSession(session, now);
+        }
+
+        findActiveRefreshTokenBySession(session)
+                .ifPresent(token -> {
+                    token.revoke();
+                    refreshTokenRepository.save(token, session);
+                });
     }
 
 
@@ -208,7 +227,12 @@ public class AuthService {
             sessionRepository.save(session);
         }
     }
-
+    private Session logoutSession(@NotNull Session session, Instant now) {
+        if (session.isLoggedOut()) {
+        }
+        session.logout(now);
+        return sessionRepository.save(session);
+    }
 
     public Optional<Session> findSessionById(Long sessionId){
         return sessionRepository.findById(sessionId);
