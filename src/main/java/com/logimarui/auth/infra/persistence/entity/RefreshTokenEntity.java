@@ -5,12 +5,16 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
-
 @Entity
-@Table(name = "auth_refresh_token")
+@Table(
+        name = "auth_refresh_token",
+        indexes = {
+                @Index(name = "idx_refresh_token_session", columnList = "session_id")
+        }
+)
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class RefreshTokenEntity {
 
@@ -24,13 +28,14 @@ public class RefreshTokenEntity {
     @Column(name = "token_hash", nullable = false, unique = true, length = 255)
     private String tokenHash;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "expires_at", nullable = false)
     private Instant expiresAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
+    @Column(name = "refresh_token_status", nullable = false, length = 30)
     private RefreshTokenStatus refreshTokenStatus;
 }
+

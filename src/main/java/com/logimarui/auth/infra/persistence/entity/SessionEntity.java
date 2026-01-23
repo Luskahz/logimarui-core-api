@@ -7,10 +7,24 @@ import lombok.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "auth_session")
+@Table(
+        name = "auth_session",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_auth_session_user_device",
+                        columnNames = {"user_id", "device_id"}
+                )
+        },
+        indexes = {
+                @Index(
+                        name = "idx_auth_session_user_device",
+                        columnList = "user_id, device_id"
+                )
+        }
+)
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class SessionEntity {
 
@@ -21,28 +35,22 @@ public class SessionEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(length = 50)
+    @Column(name = "device_id", nullable = false, length = 50)
     private String deviceId;
 
     @Column(name = "last_ip_address", length = 45)
     private String lastIpAddress;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "expires_at", nullable = false)
     private Instant expiresAt;
 
+    @Column(name = "logged_out_at")
     private Instant loggedOutAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
-    SessionStatus sessionStatus;
-
-
-
-
-
-
-
+    @Column(name = "session_status", nullable = false, length = 30)
+    private SessionStatus sessionStatus;
 }
