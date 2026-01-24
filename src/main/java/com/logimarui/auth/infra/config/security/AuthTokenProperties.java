@@ -7,5 +7,6 @@ import java.time.Duration;
 
 @ConfigurationProperties(prefix = "security.auth")
 public class AuthTokenProperties {
-    @Getter  private Duration refreshTokenTtl;
+    @Getter private Duration refreshTokenTtl;
+    @Getter private Duration passwordChangeRequestTtl;
 }

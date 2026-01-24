@@ -4,6 +4,5 @@ public enum PasswordChangeStatus {
     REQUESTED,
     AUTHORIZED,
     REJECTED,
-    EXPIRED,
     COMPLETED
 }

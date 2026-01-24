@@ -29,9 +29,15 @@ public class PasswordChangeRequestEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
+    @Column(name ="requested_ip", nullable = false)
+    private String requestedIp;
+
+    @Column(name = "requested_device_id", nullable = false)
+    private String requestedDeviceId;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 30)
-    private PasswordChangeStatus status;
+    private PasswordChangeStatus passwordChangeStatus;
 
     @Column(name = "requested_at", nullable = false, updatable = false)
     private Instant requestedAt;

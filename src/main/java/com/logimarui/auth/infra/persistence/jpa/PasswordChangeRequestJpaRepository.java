@@ -1,0 +1,31 @@
+package com.logimarui.auth.infra.persistence.jpa;
+
+import com.logimarui.auth.core.domain.enums.PasswordChangeStatus;
+import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
+import com.logimarui.auth.infra.persistence.entity.PasswordChangeRequestEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.time.Instant;
+import java.util.Collection;
+import java.util.Optional;
+
+public interface PasswordChangeRequestJpaRepository
+        extends JpaRepository<PasswordChangeRequestEntity, Long> {
+
+    @Query("""
+        select p
+        from PasswordChangeRequestEntity p
+        where p.userId = :userId
+          and p.status in (:activeStatuses)
+          and p.expiresAt > :now
+    """)
+    Optional<PasswordChangeRequestEntity> findActiveByUserId(
+            @Param("userId") Long userId,
+            @Param("activeStatuses") Collection<PasswordChangeStatus> activeStatuses,
+            @Param("now") Instant now
+    );
+
+    Optional<PasswordChangeRequestEntity> findById(Long id);
+}

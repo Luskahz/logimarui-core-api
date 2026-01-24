@@ -4,6 +4,7 @@ import com.logimarui.auth.core.domain.enums.PasswordChangeStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
@@ -16,30 +17,38 @@ public class PasswordChangeRequest {
 
     private Long id;
     private Long userId;
+    private String requestedIp;
+    private String requestedDeviceId;
     private PasswordChangeStatus passwordChangeStatus;
     private Instant requestedAt;
-    private Instant authorizedAt;
-    private Long authorizedBy;
+    @Setter private Instant authorizedAt;
+    @Setter private Long authorizedBy;
     private Instant expiresAt;
 
 
     private PasswordChangeRequest(
             Long userId,
+            String requestedIp,
+            String requestedDeviceId,
             PasswordChangeStatus passwordChangeStatus,
             Instant requestedAt,
             Instant expiresAt
     ) {
         this.userId = userId;
+        this.requestedIp = requestedIp;
+        this.requestedDeviceId = requestedDeviceId;
         this.passwordChangeStatus = passwordChangeStatus;
         this.requestedAt = requestedAt;
         this.expiresAt = expiresAt;
     }
 
-    public static @NotNull PasswordChangeRequest create(Long userId, Duration ttl) {
+    public static @NotNull PasswordChangeRequest create(Long userId, String requestedIp, String requestedDeviceId, Duration ttl) {
         Instant now = Instant.now();
 
         return new PasswordChangeRequest(
                 userId,
+                requestedIp,
+                requestedDeviceId,
                 PasswordChangeStatus.REQUESTED,
                 now,
                 now.plus(ttl)
@@ -49,6 +58,8 @@ public class PasswordChangeRequest {
     public static @NotNull PasswordChangeRequest reconstitute(
             Long id,
             Long userId,
+            String requestedIp,
+            String requestedDeviceId,
             PasswordChangeStatus passwordChangeStatus,
             Instant requestedAt,
             Instant authorizedAt,
@@ -58,6 +69,8 @@ public class PasswordChangeRequest {
         PasswordChangeRequest passwordChangeRequest = new PasswordChangeRequest();
         passwordChangeRequest.id = id;
         passwordChangeRequest.userId = userId;
+        passwordChangeRequest.requestedIp = requestedIp;
+        passwordChangeRequest.requestedDeviceId = requestedDeviceId;
         passwordChangeRequest.passwordChangeStatus = passwordChangeStatus;
         passwordChangeRequest.requestedAt = requestedAt;
         passwordChangeRequest.authorizedAt = authorizedAt;
@@ -103,5 +116,29 @@ public class PasswordChangeRequest {
     public boolean isExpired(Instant now) {
         return expiresAt.isBefore(now);
     }
+    public boolean canChangePassword(Instant now) {
+        return passwordChangeStatus == PasswordChangeStatus.AUTHORIZED
+                && !isExpired(now);
+    }
+    public boolean isRequestedFromDevice(String deviceId) {
+        return requestedDeviceId != null
+                && requestedDeviceId.equals(deviceId);
+    }
+    public boolean isRequested() {
+        return passwordChangeStatus == PasswordChangeStatus.REQUESTED;
+    }
+
+    public boolean isAuthorized() {
+        return passwordChangeStatus == PasswordChangeStatus.AUTHORIZED;
+    }
+
+    public boolean isCompleted() {
+        return passwordChangeStatus == PasswordChangeStatus.COMPLETED;
+    }
+
+    public boolean isRejected() {
+        return passwordChangeStatus == PasswordChangeStatus.REJECTED;
+    }
+
 
 }
