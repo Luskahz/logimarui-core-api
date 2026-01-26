@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor
-public class AuthController {
+public class authController {
     private AuthService authService;
 
     @PostMapping("/register") public AuthTokenResponseDTO register(
