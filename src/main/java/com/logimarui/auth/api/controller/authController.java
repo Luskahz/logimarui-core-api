@@ -19,6 +19,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -149,15 +150,16 @@ public class AuthController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'ADMINISTRATIVO')")
     @PostMapping("/change-password/{id}/authorize")
-    public void authorizeChangePassword(){
-        //valida authenticação
-        //valida role de authenticator (administrativo)
-        //muda status authorized/rejected
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void authorizeChangePassword(
+            @NotNull Authentication authentication,
+            @NotNull @PathVariable Long passwordChangeRequestId
+    ){
+        if (!(authentication.getPrincipal() instanceof UserPrincipal principal)) {
+            throw new SecurityException("Invalid authentication principal");
+        }
+        authService.authorizeChangePassword(principal.getUserId(), passwordChangeRequestId);
     }
-
-
-
-
 }

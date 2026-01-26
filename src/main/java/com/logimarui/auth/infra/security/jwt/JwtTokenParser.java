@@ -40,7 +40,10 @@ public class JwtTokenParser {
 
         Long userId = Long.valueOf(claims.getSubject());
         Long sessionId = claims.get("sid", Long.class);
-        List<String> roles = claims.get("roles", List.class);
+        List<String> roles = claims.get("roles", List.class)
+                .stream()
+                .map(Object::toString)
+                .toList();
         Instant expiresAt = claims.getExpiration().toInstant();
 
         return new JwtAuthenticatedUser(

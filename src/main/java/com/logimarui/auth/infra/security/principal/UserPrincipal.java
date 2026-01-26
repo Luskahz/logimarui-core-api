@@ -1,5 +1,6 @@
 package com.logimarui.auth.infra.security.principal;
 
+import com.logimarui.auth.core.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +43,28 @@ public class UserPrincipal implements UserDetails {
     }
     @Override public boolean isEnabled() {
         return UserDetails.super.isEnabled();
+    }
+    public boolean hasRole(String role) {
+        return roles.contains(role);
+    }
+    public boolean hasRole(Role role) {
+        return roles.contains(role.name());
+    }
+    public boolean hasAnyRole(Role... rolesToCheck) {
+        for (Role role : rolesToCheck) {
+            if (roles.contains(role.name())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasAnyRole(String... rolesToCheck) {
+        for (String role : rolesToCheck) {
+            if (roles.contains(role)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

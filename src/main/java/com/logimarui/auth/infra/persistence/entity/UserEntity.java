@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -34,9 +35,17 @@ public class UserEntity {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "auth_user_role",
+            joinColumns = @JoinColumn(
+                    name = "user_id",
+                    referencedColumnName = "id"
+            )
+    )
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, length = 30)
-    private Role role;
+    @Column(name = "role")
+    private Set<Role> roles;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_status", nullable = false, length = 30)

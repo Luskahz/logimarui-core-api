@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -18,7 +19,7 @@ public class User {
     private Long employeeId;
     private String username;
     private String passwordHash;
-    private Role role;
+    private Set<Role> roles;
     private UserStatus userStatus;
     private Instant createdAt;
     private Instant lastLoginAt;
@@ -29,7 +30,7 @@ public class User {
         this.employeeId = employeeId;
         this.username = username;
         this.passwordHash = passwordHash;
-        this.role = Role.INDEFINIDO;
+        this.roles = Set.of(Role.INDEFINIDO);
         this.userStatus = UserStatus.ACTIVE;
         this.createdAt = Instant.now();
         this.lastLoginAt = Instant.now();
@@ -47,7 +48,7 @@ public class User {
             Long employeeId,
             String username,
             String passwordHash,
-            Role role,
+            Set<Role> roles,
             UserStatus userStatus,
             Instant createdAt,
             Instant lastLoginAt,
@@ -59,7 +60,7 @@ public class User {
         user.employeeId = employeeId;
         user.username = username;
         user.passwordHash = passwordHash;
-        user.role = role;
+        user.roles = Set.copyOf(roles);
         user.userStatus = userStatus;
         user.createdAt = createdAt;
         user.lastLoginAt = lastLoginAt;

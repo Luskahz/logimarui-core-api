@@ -69,7 +69,7 @@ public class Session {
         return expiresAt.isBefore(now);
     }
     public boolean isActive(Instant now) {
-        return sessionStatus == SessionStatus.ACTIVE && isExpired(now);
+        return sessionStatus == SessionStatus.ACTIVE && !isExpired(now);
     }
     public boolean isRevoked() {
         return sessionStatus == SessionStatus.REVOKED;
@@ -77,8 +77,8 @@ public class Session {
     public boolean isLoggedOut() {
         return sessionStatus == SessionStatus.LOGGED_OUT;
     }
-    public boolean isLoggable(Instant now) {
-        return isExpired(now) && !isRevoked() && !isLoggedOut();
+    public boolean isValid(Instant now) {
+        return !isExpired(now) && !isRevoked() && !isLoggedOut();
     }
 
     public void updateIpAddress(String ipAddress) {
@@ -88,6 +88,9 @@ public class Session {
         this.lastIpAddress = ipAddress;
     }
     public void revoke() {
+        if (sessionStatus != SessionStatus.ACTIVE) {
+            throw new IllegalStateException("Only active sessions can be revoked");
+        }
         this.sessionStatus = SessionStatus.REVOKED;
     }
     public void logout(Instant now) {

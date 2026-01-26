@@ -1,5 +1,6 @@
 package com.logimarui.auth.infra.security.jwt;
 
+import com.logimarui.auth.core.domain.enums.Role;
 import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.core.domain.model.User;
 import io.jsonwebtoken.Jwts;
@@ -36,7 +37,7 @@ public class JwtServiceImpl implements JwtService  {
         return Jwts.builder()
                 .setSubject(user.getId().toString())
                 .claim("sid", session.getId())
-                .claim("roles", List.of(user.getRole().name()))
+                .claim("roles", user.getRoles().stream().map(Role::name).toList())
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(exp))
                 .signWith(signingKey)

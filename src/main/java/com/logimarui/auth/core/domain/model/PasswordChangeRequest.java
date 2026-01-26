@@ -80,11 +80,8 @@ public class PasswordChangeRequest {
     }
 
     public void authorize(Long authorizerId, Instant now) {
-        if (isExpired(now)) {
-            throw new IllegalStateException("Password change request expired");
-        }
-        if (passwordChangeStatus != PasswordChangeStatus.REQUESTED) {
-            throw new IllegalStateException("Password change request not in REQUESTED state");
+        if (!canBeAuthorized(now)) {
+            throw new IllegalStateException("Password change request cannot be authorized");
         }
         this.passwordChangeStatus = PasswordChangeStatus.AUTHORIZED;
         this.authorizedAt = now;
@@ -111,6 +108,10 @@ public class PasswordChangeRequest {
             throw new IllegalStateException("Password change request not AUTHORIZED");
         }
         this.passwordChangeStatus = PasswordChangeStatus.COMPLETED;
+    }
+    public boolean canBeAuthorized(Instant now) {
+        return passwordChangeStatus == PasswordChangeStatus.REQUESTED
+                && !isExpired(now);
     }
 
     public boolean isExpired(Instant now) {

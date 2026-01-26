@@ -4,6 +4,7 @@ import com.logimarui.auth.api.dto.login.LoginRequestDTO;
 import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.auth.core.domain.enums.Role;
 import com.logimarui.auth.core.domain.enums.SessionStatus;
 import com.logimarui.auth.core.domain.exception.UserNotFoundException;
 import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
@@ -22,6 +23,7 @@ import com.logimarui.auth.infra.security.token.TokenHashService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +34,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -54,7 +57,7 @@ public class AuthService {
 
         Session session = findSessionByUserAndDeviceId(user, deviceId)
                 .map(existingSession -> {
-                    if(existingSession.isLoggable(Instant.now())){
+                    if(existingSession.isValid(Instant.now())){
                         existingSession.updateIpAddress(ip);
                         return existingSession;
                     }
@@ -86,7 +89,9 @@ public class AuthService {
         );
     }
     @Transactional public AuthContext me(@NotNull Authentication authentication, String ip, String deviceId) {
-        UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
+        if (!(authentication.getPrincipal() instanceof UserPrincipal principal)) {
+            throw new SecurityException("Invalid authentication principal");
+        }
 
         List<String> roles = principal.getAuthorities()
                 .stream()
@@ -104,7 +109,7 @@ public class AuthService {
                 principal.getUserId(),
                 roles,
                 principal.getSessionId(),
-                session.isLoggable(Instant.now()),
+                session.isValid(Instant.now()),
                 getAccessTokenRemainingSeconds(principal)
         );
     }
@@ -151,9 +156,7 @@ public class AuthService {
                     refreshTokenRepository.save(token, session);
                 });
     }
-    @Transactional public PasswordChangeRequest forgotPassword(
-            Long employeeId, String ip, String deviceId
-    ){
+    @Transactional public PasswordChangeRequest forgotPassword(Long employeeId, String ip, String deviceId){
         Instant now = Instant.now();
         User user = userRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new UserNotFoundException("User do not exist"));
@@ -192,14 +195,7 @@ public class AuthService {
 
         return passwordChangeRequestRepository.save(newRequest);
     }
-
-    @Transactional
-    public void changePassword(
-            Long employeeId,
-            String deviceId,
-            Long passwordChangeRequestId,
-            String newPassword
-    ) {
+    @Transactional public void changePassword(Long employeeId, String deviceId, Long passwordChangeRequestId, String newPassword) {
         Instant now = Instant.now();
         PasswordChangeRequest request =
                 passwordChangeRequestRepository.findById(passwordChangeRequestId)
@@ -224,6 +220,29 @@ public class AuthService {
         request.complete(now);
         passwordChangeRequestRepository.save(request);
     }
+    @Transactional public void authorizeChangePassword(Long authorizerId, Long requestId) {
+        Instant now = Instant.now();
+
+        User authorizer = userRepository.findById(authorizerId)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        if (!authorizer.getRoles().contains(Role.ADMINISTRATIVO)
+                && !authorizer.getRoles().contains(Role.ADMINISTRADOR)) {
+            throw new AccessDeniedException("User not allowed to authorize password change");
+        }
+
+        PasswordChangeRequest request = passwordChangeRequestRepository.findById(requestId)
+                .orElseThrow(() -> new IllegalArgumentException("Request not found"));
+
+        if (!request.canBeAuthorized(now)) {
+            throw new IllegalStateException("Password change request cannot be authorized");
+        }
+
+        request.authorize(authorizerId, now);
+    }
+
+
+
 
     public User userRegister(@NotNull RegisterRequestDTO request, String ip){
         return userRepository.save(
