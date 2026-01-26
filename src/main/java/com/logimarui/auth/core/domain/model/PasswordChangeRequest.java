@@ -4,9 +4,7 @@ import com.logimarui.auth.core.domain.enums.PasswordChangeStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-
 import java.time.Duration;
 import java.time.Instant;
 
@@ -21,8 +19,8 @@ public class PasswordChangeRequest {
     private String requestedDeviceId;
     private PasswordChangeStatus passwordChangeStatus;
     private Instant requestedAt;
-    @Setter private Instant authorizedAt;
-    @Setter private Long authorizedBy;
+    private Instant decidedAt;
+    private Long decidedBy;
     private Instant expiresAt;
 
 
@@ -62,10 +60,24 @@ public class PasswordChangeRequest {
             String requestedDeviceId,
             PasswordChangeStatus passwordChangeStatus,
             Instant requestedAt,
-            Instant authorizedAt,
-            Long authorizedBy,
+            Instant decidedAt,
+            Long decidedBy,
             Instant expiresAt
     ) {
+        if (expiresAt.isBefore(requestedAt)) {
+            throw new IllegalStateException("expiresAt cannot be before requestedAt");
+        }
+        if (passwordChangeStatus == PasswordChangeStatus.REQUESTED) {
+            if (decidedAt != null || decidedBy != null) {
+                throw new IllegalStateException("REQUESTED cannot have decision data");
+            }
+        }
+        if (passwordChangeStatus == PasswordChangeStatus.AUTHORIZED
+                || passwordChangeStatus == PasswordChangeStatus.REJECTED) {
+            if (decidedAt == null || decidedBy == null) {
+                throw new IllegalStateException("DECIDED status requires decidedAt and decidedBy");
+            }
+        }
         PasswordChangeRequest passwordChangeRequest = new PasswordChangeRequest();
         passwordChangeRequest.id = id;
         passwordChangeRequest.userId = userId;
@@ -73,31 +85,28 @@ public class PasswordChangeRequest {
         passwordChangeRequest.requestedDeviceId = requestedDeviceId;
         passwordChangeRequest.passwordChangeStatus = passwordChangeStatus;
         passwordChangeRequest.requestedAt = requestedAt;
-        passwordChangeRequest.authorizedAt = authorizedAt;
-        passwordChangeRequest.authorizedBy = authorizedBy;
+        passwordChangeRequest.decidedAt = decidedAt;
+        passwordChangeRequest.decidedBy = decidedBy;
         passwordChangeRequest.expiresAt = expiresAt;
         return passwordChangeRequest;
     }
 
-    public void authorize(Long authorizerId, Instant now) {
-        if (!canBeAuthorized(now)) {
-            throw new IllegalStateException("Password change request cannot be authorized");
+    public void authorize(Long deciderId, Instant now) {
+        if (!canBeResolved(now)) {
+            throw new IllegalStateException("Password change request cannot be resolved");
         }
         this.passwordChangeStatus = PasswordChangeStatus.AUTHORIZED;
-        this.authorizedAt = now;
-        this.authorizedBy = authorizerId;
+        this.decidedAt = now;
+        this.decidedBy = deciderId;
     }
 
-    public void reject(Long authorizerId, Instant now) {
-        if (isExpired(now)) {
-            throw new IllegalStateException("Password change request expired");
-        }
-        if (passwordChangeStatus != PasswordChangeStatus.REQUESTED) {
-            throw new IllegalStateException("Password change request not in REQUESTED state");
+    public void reject(Long deciderId, Instant now) {
+        if (!canBeResolved(now)) {
+            throw new IllegalStateException("Password change request cannot be resolved");
         }
         this.passwordChangeStatus = PasswordChangeStatus.REJECTED;
-        this.authorizedAt = now;
-        this.authorizedBy = authorizerId;
+        this.decidedAt = now;
+        this.decidedBy = deciderId;
     }
 
     public void complete(Instant now) {
@@ -109,7 +118,7 @@ public class PasswordChangeRequest {
         }
         this.passwordChangeStatus = PasswordChangeStatus.COMPLETED;
     }
-    public boolean canBeAuthorized(Instant now) {
+    public boolean canBeResolved(Instant now) {
         return passwordChangeStatus == PasswordChangeStatus.REQUESTED
                 && !isExpired(now);
     }

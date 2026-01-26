@@ -32,8 +32,8 @@ public class PasswordChangeRequestMapper {
                 request.getRequestedDeviceId(),
                 request.getPasswordChangeStatus(),
                 request.getRequestedAt(),
-                request.getAuthorizedAt(),
-                request.getAuthorizedBy(),
+                request.getDecidedAt(),
+                request.getDecidedBy(),
                 request.getExpiresAt()
         );
     }

@@ -1,8 +1,5 @@
 package com.logimarui.auth.core.service;
 
-import com.logimarui.auth.api.dto.login.LoginRequestDTO;
-import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
-import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
 import com.logimarui.auth.core.domain.enums.Role;
 import com.logimarui.auth.core.domain.enums.SessionStatus;
@@ -49,16 +46,23 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthTokenProperties authTokenProperties;
 
-    @Transactional public AuthTokens login(@NotNull LoginRequestDTO request, String ip, String deviceId) {
-        User user = userRepository.findByEmployeeId(request.employeeId())
+    @Transactional public AuthTokens login(@NotNull Long employeeId, String password, String ip, String deviceId) {
+        Instant now = Instant.now();
+        User user = userRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() ->
                     new UserNotFoundException("User not found for provided employee number")
                 );
-
+        if (!passwordEncoder.matches(password, user.getPasswordHash())) {
+            user.registerFailedLogin();
+            userRepository.save(user);
+            throw new SecurityException("wrong password");
+        }
+        user.recordSuccessfulLogin(now);
+        userRepository.save(user);
         Session session = findSessionByUserAndDeviceId(user, deviceId)
                 .map(existingSession -> {
-                    if(existingSession.isValid(Instant.now())){
-                        existingSession.updateIpAddress(ip);
+                    if(existingSession.isValid(now)){
+                        existingSession.updateIpAddress(ip, now);
                         return existingSession;
                     }
                     return sessionRegister(
@@ -66,6 +70,7 @@ public class AuthService {
                     );
                 })
                 .orElseGet(() -> sessionRegister(user, deviceId, ip));
+
 
         IssuedRefreshToken issuedRefreshToken = refreshTokenRegister(session);
 
@@ -75,8 +80,8 @@ public class AuthService {
                 jwtService.getAccessTokenExpiresInSeconds()
                 );
     }
-    @Transactional public AuthTokens register(RegisterRequestDTO request, String ip, String deviceId) {
-        User user = userRegister(request, ip);
+    @Transactional public AuthTokens register(String username, Long employeeId, String password, String ip, String deviceId) {
+        User user = userRegister(username, employeeId, password, ip);
         Session session = sessionRegister(user, deviceId, ip);
         IssuedRefreshToken issued = refreshTokenRegister(session);
         String rawRefreshToken = issued.rawToken();
@@ -89,6 +94,7 @@ public class AuthService {
         );
     }
     @Transactional public AuthContext me(@NotNull Authentication authentication, String ip, String deviceId) {
+        Instant now = Instant.now();
         if (!(authentication.getPrincipal() instanceof UserPrincipal principal)) {
             throw new SecurityException("Invalid authentication principal");
         }
@@ -100,32 +106,40 @@ public class AuthService {
 
         User user = getUserForAuthentication(principal.getUserId());
 
-        Session session = findSessionByUserAndDeviceId(user,deviceId)
+        Session session = findSessionById(principal.getSessionId())
                 .orElseThrow(()-> new SecurityException("Session not found"));
+        if (!Objects.equals(session.getUserId(), principal.getUserId())
+                || !Objects.equals(session.getDeviceId(), deviceId)) {
+            throw new SecurityException("Session does not belong to this user/device");
+        }
 
-        updateSessionLastIpAddressIfChanged(session, ip);
+        updateSessionLastIpAddressIfChanged(session, ip, now);
 
         return new AuthContext (
                 principal.getUserId(),
                 roles,
                 principal.getSessionId(),
-                session.isValid(Instant.now()),
+                session.isValid(now),
                 getAccessTokenRemainingSeconds(principal)
         );
     }
-    @Transactional public AuthTokens refresh(@NotNull RefreshRequestDTO request, String ip, String deviceId){
-        RefreshToken refreshToken = findRefreshTokenByToken(request.refreshToken())
+    @Transactional public AuthTokens refresh(String refreshToken, String ip, String deviceId){
+        Instant now = Instant.now();
+        RefreshToken existingToken = findRefreshTokenByToken(refreshToken)
                 .orElseThrow(() -> new SecurityException("Invalid refresh token"));
+        if (!existingToken.isValid(now)) {
+            throw new SecurityException("Refresh token invalid");
+        }
 
-        User user = userRepository.findById(refreshToken.getSession().getUserId())
+        User user = userRepository.findById(existingToken.getSession().getUserId())
                 .orElseThrow(() -> new SecurityException("User not found in session"));
 
-        if (!Objects.equals(refreshToken.getSession().getDeviceId(), deviceId)) {
+        if (!Objects.equals(existingToken.getSession().getDeviceId(), deviceId)) {
             throw new SecurityException("Different deviceId during refresh");
         }
 
-        updateSessionLastIpAddressIfChanged(refreshToken.getSession(),ip);
-        IssuedRefreshToken issued = rotateRefreshTokenFromExisting(refreshToken);
+        updateSessionLastIpAddressIfChanged(existingToken.getSession(),ip, now);
+        IssuedRefreshToken issued = rotateRefreshTokenFromExisting(existingToken, now);
 
         return new AuthTokens(
                 issued.rawToken(),
@@ -146,7 +160,7 @@ public class AuthService {
         Session session = sessionOpt.get();
 
         if (!session.isLoggedOut()) {
-            session.updateIpAddress(ip);//ultimo ip usado
+            session.updateIpAddress(ip, now);
             logoutSession(session, now);
         }
 
@@ -160,7 +174,7 @@ public class AuthService {
         Instant now = Instant.now();
         User user = userRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new UserNotFoundException("User do not exist"));
-        if (!user.canAuthenticate()) {
+        if (!user.isActive()) {
             throw new IllegalStateException("User cannot request password change");
         }
         PasswordChangeRequest requestPending;
@@ -208,7 +222,10 @@ public class AuthService {
                 .orElseThrow(() ->
                         new UserNotFoundException("User not found for request")
                 );
-        if (!user.canAuthenticate()) {
+        if (!Objects.equals(request.getUserId(), user.getId())) {
+            throw new IllegalStateException("Request does not belong to this user");
+        }
+        if (!user.isActive()) {
             throw new IllegalStateException("User cannot authenticate");
         }
         user.changePassword(
@@ -234,22 +251,24 @@ public class AuthService {
         PasswordChangeRequest request = passwordChangeRequestRepository.findById(requestId)
                 .orElseThrow(() -> new IllegalArgumentException("Request not found"));
 
-        if (!request.canBeAuthorized(now)) {
+        if (!request.canBeResolved(now)) {
             throw new IllegalStateException("Password change request cannot be authorized");
         }
 
         request.authorize(authorizerId, now);
+        passwordChangeRequestRepository.save(request);
     }
 
 
 
 
-    public User userRegister(@NotNull RegisterRequestDTO request, String ip){
+    public User userRegister(@NotNull String username, Long employeeId, String password, String ip){
+        //validar se a matricula do usuario está disponivel no jdbc
         return userRepository.save(
                 User.create(
-                        request.username(),
-                        passwordEncoder.encode(request.password()),
-                        request.employeeId()
+                        username,
+                        passwordEncoder.encode(password),
+                        employeeId
                 )
         );
     }
@@ -260,11 +279,11 @@ public class AuthService {
     public User getUserForAuthentication(Long userId) {
         User user = getUserById(userId);
 
-        if (user.isBlocked()) {
+        if (user.isBlockedForLogin()) {
             throw new IllegalStateException("Blocked user");
         }
 
-        if (!user.canAuthenticate()) {
+        if (!user.isActive()) {
             throw new IllegalStateException("User cannot authenticate");
         }
 
@@ -276,7 +295,8 @@ public class AuthService {
                 Session.create(
                         user.getId(),
                         ip,
-                        deviceId
+                        deviceId,
+                        authTokenProperties.getSessionTtl()
                 )
         );
     }
@@ -298,10 +318,10 @@ public class AuthService {
         return refreshTokenRepository.findByTokenHash(tokenHash);
 
     }
-    private @NotNull IssuedRefreshToken rotateRefreshTokenFromExisting(@NotNull RefreshToken refreshToken){
+    private @NotNull IssuedRefreshToken rotateRefreshTokenFromExisting(@NotNull RefreshToken refreshToken, Instant now){
         String raw = tokenGenerator.generate();
         String hash = tokenHashService.hash(raw);
-        refreshToken.rotate(hash, authTokenProperties.getRefreshTokenTtl());
+        refreshToken.rotate(hash, authTokenProperties.getRefreshTokenTtl(), now);
         refreshTokenRepository.save(refreshToken, refreshToken.getSession());
 
         return new IssuedRefreshToken(
@@ -315,20 +335,19 @@ public class AuthService {
                 0
         );
     }
-    private void updateSessionLastIpAddressIfChanged(@NotNull Session session, String ip) {
+    private void updateSessionLastIpAddressIfChanged(@NotNull Session session, String ip, Instant now) {
         if (!Objects.equals(session.getLastIpAddress(), ip)) {
-            session.updateIpAddress(ip);
+            session.updateIpAddress(ip, now);
             sessionRepository.save(session);
         }
     }
-    private Session logoutSession(@NotNull Session session, Instant now) {
-        if (session.isLoggedOut()) {
-        }
+    private void logoutSession(@NotNull Session session, Instant now) {
+        if (session.isLoggedOut()) return;
         session.logout(now);
-        return sessionRepository.save(session);
+        sessionRepository.save(session);
     }
 
-    private void invalidateAllUserSessions(User user, Instant now) {
+    private void invalidateAllUserSessions(@NotNull User user, Instant now) {
         List<Session> sessions =
                 sessionRepository.findByUserIdAndSessionStatus(
                         user.getId(),

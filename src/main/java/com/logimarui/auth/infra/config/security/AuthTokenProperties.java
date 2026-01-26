@@ -9,4 +9,5 @@ import java.time.Duration;
 public class AuthTokenProperties {
     @Getter private Duration refreshTokenTtl;
     @Getter private Duration passwordChangeRequestTtl;
+    @Getter private Duration sessionTtl;
 }

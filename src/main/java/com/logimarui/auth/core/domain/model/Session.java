@@ -23,18 +23,36 @@ public class Session {
     private Instant loggedOutAt;
     private SessionStatus sessionStatus;
 
-    private Session(Long userId, String ip, String deviceId) {
+    private Session(
+            Long userId,
+            String ip,
+            String deviceId,
+            Duration ttl
+    ) {
+
+
         this.userId = userId;
         this.deviceId = deviceId;
         this.lastIpAddress = ip;
-        this.createdAt = Instant.now();
-        this.expiresAt = this.createdAt.plus(Duration.ofDays(7));
+        Instant now = Instant.now();
+        this.createdAt = now;
+        this.expiresAt = now.plus(ttl) ;
         this.sessionStatus = SessionStatus.ACTIVE;
     }
 
-    @Contract("_, _, _ -> new")
-    public static @NotNull Session create(Long userId, String ip, String deviceId) {
-        return new Session(userId, ip, deviceId);
+    @Contract("_, _, _, _ -> new")
+    public static @NotNull Session create(
+            Long userId,
+            String ip,
+            String deviceId,
+            Duration ttl
+    ) {
+        return new Session(
+                userId,
+                ip,
+                deviceId,
+                ttl
+        );
     }
 
     public static @NotNull Session reconstitute(
@@ -81,8 +99,8 @@ public class Session {
         return !isExpired(now) && !isRevoked() && !isLoggedOut();
     }
 
-    public void updateIpAddress(String ipAddress) {
-        if (sessionStatus != SessionStatus.ACTIVE) {
+    public void updateIpAddress(String ipAddress, Instant now) {
+        if (!isValid(now)) {
             throw new IllegalStateException("Cannot update IP of inactive session");
         }
         this.lastIpAddress = ipAddress;

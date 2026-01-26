@@ -30,14 +30,16 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register") public AuthTokenResponseDTO register(
-            @RequestBody @Valid RegisterRequestDTO request,
+            @RequestBody @Valid @NotNull RegisterRequestDTO request,
             HttpServletRequest httpServletRequest
     ){
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
         AuthTokens tokens = authService.register(
-                request,
+                request.username(),
+                request.employeeId(),
+                request.password(),
                 ip,
                 deviceId
         );
@@ -50,13 +52,13 @@ public class AuthController {
     }
 
     @PostMapping("/login") public AuthTokenResponseDTO login(
-            @RequestBody @Valid LoginRequestDTO request,
+            @RequestBody @Valid @NotNull LoginRequestDTO request,
             HttpServletRequest httpServletRequest
     ){
     String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
     String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
-    AuthTokens tokens = authService.login(request, ip, deviceId);
+    AuthTokens tokens = authService.login(request.employeeId(), request.password(), ip, deviceId);
     return new AuthTokenResponseDTO(
             tokens.refreshToken(),
             tokens.accessToken(),
@@ -85,13 +87,13 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public AuthTokenResponseDTO refresh(
-            @Valid @RequestBody RefreshRequestDTO request,
+            @Valid @RequestBody @NotNull RefreshRequestDTO request,
             HttpServletRequest httpServletRequest
     ){
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
-        AuthTokens tokens = authService.refresh(request, ip, deviceId);
+        AuthTokens tokens = authService.refresh(request.refreshToken(), ip, deviceId);
 
         return new AuthTokenResponseDTO(
                 tokens.refreshToken(),

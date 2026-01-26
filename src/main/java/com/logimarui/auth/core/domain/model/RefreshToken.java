@@ -1,12 +1,10 @@
 package com.logimarui.auth.core.domain.model;
 
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
-import com.logimarui.auth.core.service.IssuedRefreshToken;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
-import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +17,7 @@ public class RefreshToken {
 
     private Long id;
     private Session session;
-    @Setter private String tokenHash;
+    private String tokenHash;
     private Instant createdAt;
     private Instant expiresAt;
     private RefreshTokenStatus refreshTokenStatus;
@@ -38,7 +36,7 @@ public class RefreshToken {
         this.refreshTokenStatus = RefreshTokenStatus.ACTIVE;
     }
 
-    @Contract("_, _ -> new")
+    @Contract("_, _, _ -> new")
     public static @NotNull RefreshToken create(
             Session session,
             String tokenHash,
@@ -81,7 +79,7 @@ public class RefreshToken {
         return refreshTokenStatus == RefreshTokenStatus.ACTIVE && !isExpired(now);
     }
     public boolean isValid(Instant now) {
-        return isActive(now);
+        return isActive(now) && session.isValid(now);
     }
     public boolean isRevoked() {
         return refreshTokenStatus == RefreshTokenStatus.REVOKED;
@@ -89,11 +87,9 @@ public class RefreshToken {
     public void revoke() {
         this.refreshTokenStatus = RefreshTokenStatus.REVOKED;
     }
-    public void rotate(
-            String newTokenHash,
-            Duration ttl
-    ) {
+    public void rotate(String newTokenHash, Duration ttl, Instant now) {
+        if (!isValid(now)) throw new IllegalStateException("Cannot rotate invalid refresh token");
         this.tokenHash = newTokenHash;
-        this.expiresAt = Instant.now().plus(ttl);
+        this.expiresAt = now.plus(ttl);
     }
 }
