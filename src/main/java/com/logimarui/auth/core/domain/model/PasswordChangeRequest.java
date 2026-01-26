@@ -40,8 +40,23 @@ public class PasswordChangeRequest {
         this.expiresAt = expiresAt;
     }
 
-    public static @NotNull PasswordChangeRequest create(Long userId, String requestedIp, String requestedDeviceId, Duration ttl) {
+    public static @NotNull PasswordChangeRequest create(
+            Long userId,
+            String requestedIp,
+            String requestedDeviceId,
+            Duration ttl
+    ) {
+        if (userId == null) throw new IllegalStateException("userId is required");
+        if (requestedIp == null || requestedIp.isBlank()) throw new IllegalStateException("requestedIp is required");
+        if (requestedDeviceId == null || requestedDeviceId.isBlank()) throw new IllegalStateException("requestedDeviceId is required");
+        if (ttl == null || ttl.isZero() || ttl.isNegative()) throw new IllegalStateException("invalid ttl");
+
         Instant now = Instant.now();
+        Instant expiresAt = now.plus(ttl);
+
+        if (!expiresAt.isAfter(now)) {
+            throw new IllegalStateException("expiresAt must be after requestedAt");
+        }
 
         return new PasswordChangeRequest(
                 userId,
@@ -49,9 +64,11 @@ public class PasswordChangeRequest {
                 requestedDeviceId,
                 PasswordChangeStatus.REQUESTED,
                 now,
-                now.plus(ttl)
+                expiresAt
         );
     }
+
+
 
     public static @NotNull PasswordChangeRequest reconstitute(
             Long id,
@@ -62,34 +79,45 @@ public class PasswordChangeRequest {
             Instant requestedAt,
             Instant decidedAt,
             Long decidedBy,
-            Instant expiresAt
+            @NotNull Instant expiresAt
     ) {
-        if (expiresAt.isBefore(requestedAt)) {
-            throw new IllegalStateException("expiresAt cannot be before requestedAt");
+        if (userId == null) throw new IllegalStateException("userId is required");
+        if (requestedIp == null || requestedIp.isBlank()) throw new IllegalStateException("requestedIp is required");
+        if (requestedDeviceId == null || requestedDeviceId.isBlank()) throw new IllegalStateException("requestedDeviceId is required");
+        if (passwordChangeStatus == null) throw new IllegalStateException("passwordChangeStatus is required");
+        if (requestedAt == null) throw new IllegalStateException("requestedAt is required");
+        if (expiresAt == null) throw new IllegalStateException("expiresAt is required");
+
+        if (!expiresAt.isAfter(requestedAt)) {
+            throw new IllegalStateException("expiresAt must be after requestedAt");
         }
-        if (passwordChangeStatus == PasswordChangeStatus.REQUESTED) {
-            if (decidedAt != null || decidedBy != null) {
-                throw new IllegalStateException("REQUESTED cannot have decision data");
+
+        switch (passwordChangeStatus) {
+            case REQUESTED -> {
+                if (decidedAt != null || decidedBy != null)
+                    throw new IllegalStateException("REQUESTED cannot have decision data");
+            }
+            case AUTHORIZED, REJECTED, COMPLETED -> {
+                if (decidedAt == null || decidedBy == null)
+                    throw new IllegalStateException("Decision required");
+                if (decidedAt.isBefore(requestedAt))
+                    throw new IllegalStateException("decidedAt cannot be before requestedAt");
             }
         }
-        if (passwordChangeStatus == PasswordChangeStatus.AUTHORIZED
-                || passwordChangeStatus == PasswordChangeStatus.REJECTED) {
-            if (decidedAt == null || decidedBy == null) {
-                throw new IllegalStateException("DECIDED status requires decidedAt and decidedBy");
-            }
-        }
-        PasswordChangeRequest passwordChangeRequest = new PasswordChangeRequest();
-        passwordChangeRequest.id = id;
-        passwordChangeRequest.userId = userId;
-        passwordChangeRequest.requestedIp = requestedIp;
-        passwordChangeRequest.requestedDeviceId = requestedDeviceId;
-        passwordChangeRequest.passwordChangeStatus = passwordChangeStatus;
-        passwordChangeRequest.requestedAt = requestedAt;
-        passwordChangeRequest.decidedAt = decidedAt;
-        passwordChangeRequest.decidedBy = decidedBy;
-        passwordChangeRequest.expiresAt = expiresAt;
-        return passwordChangeRequest;
+
+        PasswordChangeRequest r = new PasswordChangeRequest();
+        r.id = id;
+        r.userId = userId;
+        r.requestedIp = requestedIp;
+        r.requestedDeviceId = requestedDeviceId;
+        r.passwordChangeStatus = passwordChangeStatus;
+        r.requestedAt = requestedAt;
+        r.decidedAt = decidedAt;
+        r.decidedBy = decidedBy;
+        r.expiresAt = expiresAt;
+        return r;
     }
+
 
     public void authorize(Long deciderId, Instant now) {
         if (!canBeResolved(now)) {
@@ -124,7 +152,7 @@ public class PasswordChangeRequest {
     }
 
     public boolean isExpired(Instant now) {
-        return expiresAt.isBefore(now);
+        return !expiresAt.isAfter(now);
     }
     public boolean canChangePassword(Instant now) {
         return passwordChangeStatus == PasswordChangeStatus.AUTHORIZED

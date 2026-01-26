@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import java.time.Duration;
 import java.time.Instant;
 
+import static com.logimarui.auth.core.domain.enums.SessionStatus.LOGGED_OUT;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Session {
@@ -47,6 +49,8 @@ public class Session {
             String deviceId,
             Duration ttl
     ) {
+        if (ttl == null || ttl.isZero() || ttl.isNegative())
+            throw new IllegalArgumentException("invalid ttl");
         return new Session(
                 userId,
                 ip,
@@ -65,8 +69,24 @@ public class Session {
             Instant loggedOutAt,
             SessionStatus sessionStatus
     ) {
-        if (expiresAt.isBefore(createdAt)) {
-            throw new IllegalArgumentException("Session expiration must be after creation");
+        if (createdAt == null) throw new IllegalArgumentException("createdAt is required");
+        if (expiresAt == null) throw new IllegalArgumentException("expiresAt is required");
+        if (!expiresAt.isAfter(createdAt)) {
+            throw new IllegalArgumentException("expiresAt must be after createdAt");
+        }
+        if (sessionStatus == null) throw new IllegalArgumentException("sessionStatus is required");
+
+        switch (sessionStatus) {
+            case ACTIVE -> {
+                if (loggedOutAt != null) throw new IllegalStateException("ACTIVE cannot have loggedOutAt");
+            }
+            case LOGGED_OUT -> {
+                if (loggedOutAt == null) throw new IllegalStateException("LOGGED_OUT must have loggedOutAt");
+                if (loggedOutAt.isBefore(createdAt)) throw new IllegalStateException("loggedOutAt cannot be before createdAt");
+            }
+            case REVOKED -> {//?
+                if (loggedOutAt != null) throw new IllegalStateException("REVOKED cannot have loggedOutAt");
+            }
         }
 
         Session session = new Session();
@@ -78,13 +98,12 @@ public class Session {
         session.expiresAt = expiresAt;
         session.loggedOutAt = loggedOutAt;
         session.sessionStatus = sessionStatus;
-
         return session;
     }
 
 
     public boolean isExpired(Instant now) {
-        return expiresAt.isBefore(now);
+        return !expiresAt.isAfter(now);
     }
     public boolean isActive(Instant now) {
         return sessionStatus == SessionStatus.ACTIVE && !isExpired(now);
@@ -93,7 +112,7 @@ public class Session {
         return sessionStatus == SessionStatus.REVOKED;
     }
     public boolean isLoggedOut() {
-        return sessionStatus == SessionStatus.LOGGED_OUT;
+        return sessionStatus == LOGGED_OUT;
     }
     public boolean isValid(Instant now) {
         return !isExpired(now) && !isRevoked() && !isLoggedOut();
@@ -115,7 +134,7 @@ public class Session {
         if (this.sessionStatus != SessionStatus.ACTIVE) {
             return;
         }
-        this.sessionStatus = SessionStatus.LOGGED_OUT;
+        this.sessionStatus = LOGGED_OUT;
         this.loggedOutAt = now;
     }
 }

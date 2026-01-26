@@ -1,4 +1,4 @@
-package com.logimarui.auth.infra.persistence.repository;
+package com.logimarui.auth.infra.persistence.repository.jpa;
 
 
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
@@ -13,7 +13,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 
 @Repository

@@ -1,4 +1,4 @@
-package com.logimarui.auth.infra.persistence.repository;
+package com.logimarui.auth.infra.persistence.repository.jpa;
 
 import com.logimarui.auth.core.domain.enums.PasswordChangeStatus;
 import com.logimarui.auth.core.domain.model.PasswordChangeRequest;

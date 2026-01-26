@@ -8,7 +8,9 @@ import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordResponseDTO;
 import com.logimarui.auth.api.dto.login.LoginRequestDTO;
 import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
+import com.logimarui.auth.core.domain.enums.Role;
 import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
+import com.logimarui.auth.core.domain.model.User;
 import com.logimarui.auth.core.service.AuthContext;
 import com.logimarui.auth.core.service.AuthService;
 import com.logimarui.auth.core.service.AuthTokens;
@@ -21,7 +23,12 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,16 +36,16 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private AuthService authService;
 
-    @PostMapping("/register") public AuthTokenResponseDTO register(
+    @PostMapping("/register")
+    public AuthTokenResponseDTO registerAndLogin(
             @RequestBody @Valid @NotNull RegisterRequestDTO request,
             HttpServletRequest httpServletRequest
     ){
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
-
-        AuthTokens tokens = authService.register(
-                request.username(),
-                request.employeeId(),
+        User user = authService.registerUser(request.username(), request.employeeId(), request.password(), ip);
+        AuthTokens tokens = authService.login(
+                user.getEmployeeId(),
                 request.password(),
                 ip,
                 deviceId
@@ -73,12 +80,27 @@ public class AuthController {
     ){
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
+        UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
+        Set<Role> roles = principal.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .map(Role::valueOf)
+                .collect(Collectors.toSet());
+        List<String> rolesStr = roles.stream()
+                .map(Role::name)
+                .toList();
 
-        AuthContext result = authService.me(authentication, ip, deviceId);
+
+        AuthContext result = authService.me(
+                principal.getUserId(),
+                principal.getSessionId(),
+                principal.getAccessTokenExpiresAt(),
+                ip,
+                deviceId
+        );
 
         return new AuthMeResponseDTO(
                 result.userId(),
-                result.roles(),
+                rolesStr,
                 result.sessionId(),
                 result.sessionActive(),
                 result.expiresInSeconds()

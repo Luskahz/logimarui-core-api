@@ -27,15 +27,15 @@ public class User {
      private Instant passwordChangedAt;
      private int failedLoginAttempts;
 
+    private static final int MAX_FAILED_LOGIN_ATTEMPTS = 5;
+
     private User(String username, String passwordHash, Long employeeId) {
         this.employeeId = employeeId;
         this.username = username;
         this.passwordHash = passwordHash;
         this.roles = EnumSet.of(Role.INDEFINIDO);
         this.userStatus = UserStatus.ACTIVE;
-        Instant now = Instant.now();
-        this.createdAt = now;
-        this.lastLoginAt = now;
+        this.createdAt = Instant.now();
         this.failedLoginAttempts = 0;
     }
 
@@ -61,6 +61,14 @@ public class User {
             Instant passwordChangedAt,
             int failedLoginAttempts
     ) {
+
+        if (userStatus == null) throw new IllegalArgumentException("userStatus is required");
+        if (createdAt == null) throw new IllegalArgumentException("createdAt is required");
+        if (failedLoginAttempts < 0) throw new IllegalArgumentException("failedLoginAttempts cannot be negative");
+        if (username == null || username.isBlank()) throw new IllegalArgumentException("username is required");
+        if (passwordHash == null || passwordHash.isBlank()) throw new IllegalArgumentException("passwordHash is required");
+        if (employeeId == null) throw new IllegalArgumentException("employeeId is required");
+
         User user = new User();
         user.id = id;
         user.employeeId = employeeId;
@@ -100,18 +108,21 @@ public class User {
         }
         failedLoginAttempts++;
 
-        if (failedLoginAttempts >= 5) {
+        if (failedLoginAttempts >= MAX_FAILED_LOGIN_ATTEMPTS) {
             userStatus = UserStatus.LOCKED;
         }
     }
     public void changePassword(String newHash, Instant now) {
+        if (newHash == null || newHash.isBlank()) throw new IllegalArgumentException("newHash is required");
+        if (now == null) throw new IllegalArgumentException("now is required");
+
         this.passwordHash = newHash;
         this.passwordChangedAt = now;
         this.failedLoginAttempts = 0;
     }
 
     public boolean isBlockedForLogin() {
-        return isLocked() || isInactive();
+        return isLocked() || isDisabled();
     }
     public boolean isActive() {
         return userStatus == UserStatus.ACTIVE;
@@ -119,8 +130,8 @@ public class User {
     public boolean isLocked() {
         return userStatus == UserStatus.LOCKED;
     }
-    public boolean isInactive() {
-        return userStatus == UserStatus.INACTIVE;
+    public boolean isDisabled() {
+        return userStatus == UserStatus.DISABLED;
     }
     public void unlock() {
         if (userStatus != UserStatus.LOCKED) throw new IllegalStateException("User is not locked");
@@ -128,7 +139,7 @@ public class User {
         this.failedLoginAttempts = 0;
     }
     public void reactivate() {
-        if (userStatus != UserStatus.INACTIVE) throw new IllegalStateException("User is not inactive");
+        if (userStatus != UserStatus.DISABLED) throw new IllegalStateException("User is not inactive");
         this.userStatus = UserStatus.ACTIVE;
     }
     public void recordSuccessfulLogin(Instant now) {
@@ -136,6 +147,17 @@ public class User {
         this.failedLoginAttempts = 0;
     }
 
+    public User assertCanAuthenticate() {
+        if (isBlockedForLogin()) {
+            throw new IllegalStateException("User can not authenticate");
+        }
+        return this;
+    }
+    public void assertCanRequestPasswordChange() {
+        if (userStatus == UserStatus.DISABLED) {
+            throw new IllegalStateException("User cannot request password change");
+        }
+    }
 
 
 }
