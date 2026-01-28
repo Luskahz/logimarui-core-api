@@ -22,7 +22,5 @@ public interface RefreshTokenJpaRepository
     );
 
     Optional<RefreshTokenEntity> findBySessionId(Long sessionId);
-//mudar, o ip não deveria estar no refreshToken
-    RefreshTokenEntity updateLastIpAddress(Long token, String ipAddress);
 
 }

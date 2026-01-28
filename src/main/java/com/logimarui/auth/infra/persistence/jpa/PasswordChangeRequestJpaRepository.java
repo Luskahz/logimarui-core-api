@@ -18,7 +18,7 @@ public interface PasswordChangeRequestJpaRepository
         select p
         from PasswordChangeRequestEntity p
         where p.userId = :userId
-          and p.status in (:activeStatuses)
+          and p.passwordChangeStatus in (:activeStatuses)
           and p.expiresAt > :now
     """)
     Optional<PasswordChangeRequestEntity> findActiveByUserId(

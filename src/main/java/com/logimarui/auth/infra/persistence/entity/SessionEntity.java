@@ -9,18 +9,17 @@ import java.time.Instant;
 @Entity
 @Table(
         name = "auth_session",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "uk_auth_session_user_device",
-                        columnNames = {"user_id", "device_id"}
-                )
-        },
         indexes = {
                 @Index(
                         name = "idx_auth_session_user_device",
                         columnList = "user_id, device_id"
+                ),
+                @Index(
+                        name = "idx_auth_session_user_device_status",
+                        columnList = "user_id, device_id, session_status"
                 )
         }
+        //necessario criar indice de unicidade de sessão ativa para cada userId + deviceId
 )
 @Getter
 @Setter
@@ -54,3 +53,4 @@ public class SessionEntity {
     @Column(name = "session_status", nullable = false, length = 30)
     private SessionStatus sessionStatus;
 }
+

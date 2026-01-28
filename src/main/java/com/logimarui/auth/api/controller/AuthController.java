@@ -19,11 +19,12 @@ import com.logimarui.auth.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.jetbrains.annotations.NotNull;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +34,17 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor
+@Validated
 public class AuthController {
     private AuthService authService;
+
+
+    @GetMapping("/employees/{employeeId}/name")
+    public String employeeName(
+            @PathVariable Long employeeId
+    ){
+        return authService.nameFromEmployee(employeeId);
+    }
 
     @PostMapping("/register")
     public AuthTokenResponseDTO registerAndLogin(
@@ -81,12 +91,8 @@ public class AuthController {
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
         UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
-        Set<Role> roles = principal.getAuthorities().stream()
+        List<String> roles = principal.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .map(Role::valueOf)
-                .collect(Collectors.toSet());
-        List<String> rolesStr = roles.stream()
-                .map(Role::name)
                 .toList();
 
 
@@ -100,7 +106,7 @@ public class AuthController {
 
         return new AuthMeResponseDTO(
                 result.userId(),
-                rolesStr,
+                roles,
                 result.sessionId(),
                 result.sessionActive(),
                 result.expiresInSeconds()
@@ -159,7 +165,7 @@ public class AuthController {
     @PostMapping("/change-password")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void changePassword(
-            @NotNull ChangePasswordRequestDTO changePasswordRequestDTO,
+            @NotNull @RequestBody ChangePasswordRequestDTO changePasswordRequestDTO,
             HttpServletRequest httpServletRequest
     ){
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);

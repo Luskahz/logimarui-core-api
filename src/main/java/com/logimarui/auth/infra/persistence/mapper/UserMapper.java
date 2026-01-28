@@ -5,6 +5,7 @@ import com.logimarui.auth.infra.persistence.entity.UserEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.EnumSet;
 import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,7 +32,7 @@ public class UserMapper {
                 u.getEmployeeId(),
                 u.getUsername(),
                 u.getPasswordHash(),
-                Set.copyOf(u.getRoles()),
+                EnumSet.copyOf(u.getRoles()),
                 u.getUserStatus(),
                 u.getCreatedAt(),
                 u.getLastLoginAt(),

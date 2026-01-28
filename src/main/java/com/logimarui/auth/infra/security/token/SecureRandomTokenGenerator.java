@@ -1,10 +1,12 @@
 package com.logimarui.auth.infra.security.token;
 
 import com.logimarui.auth.core.port.TokenGenerator;
+import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
 import java.util.Base64;
 
+@Component
 public class SecureRandomTokenGenerator implements TokenGenerator {
     private final SecureRandom random = new SecureRandom();
 

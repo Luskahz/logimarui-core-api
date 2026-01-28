@@ -12,7 +12,7 @@ import java.util.Set;
 @Table(
         name = "auth_user",
         indexes = {
-                @Index(name = "idxAuthUserEmployeeId", columnList = "employeeId"),
+                @Index(name = "idxAuthUserEmployeeId", columnList = "employee_id"),
                 @Index(name = "idxAuthUserUsername", columnList = "username")
         }
 )

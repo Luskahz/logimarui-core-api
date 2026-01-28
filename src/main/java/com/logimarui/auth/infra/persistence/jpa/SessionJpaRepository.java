@@ -11,6 +11,6 @@ import java.util.Optional;
 
 public interface SessionJpaRepository extends JpaRepository<SessionEntity, Long>{
     List<SessionEntity> findByUserIdAndSessionStatus(Long userId, SessionStatus sessionStatus);
-    Optional<SessionEntity> findByUserIdAndDeviceId(Long userId, String deviceId);
+    Optional<SessionEntity> findByUserIdAndDeviceIdAndSessionStatus(Long userId, String deviceId, SessionStatus sessionStatus);
 
 }

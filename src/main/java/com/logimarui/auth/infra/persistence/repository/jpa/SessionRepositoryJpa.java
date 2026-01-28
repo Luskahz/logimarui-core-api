@@ -39,9 +39,9 @@ public class SessionRepositoryJpa implements SessionRepository {
     }
 
     @Override
-    public Optional<Session> findByUserIdAndDeviceId(Long userId, String deviceId) {
+    public Optional<Session> findByUserIdAndDeviceIdAndSessionStatus(Long userId, String deviceId, SessionStatus sessionStatus) {
 
-        return jpa.findByUserIdAndDeviceId(userId, deviceId)
+        return jpa.findByUserIdAndDeviceIdAndSessionStatus(userId, deviceId, sessionStatus)
                 .map(SessionMapper::toDomain);
     }
 

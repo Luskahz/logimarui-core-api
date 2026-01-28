@@ -12,6 +12,6 @@ public interface SessionRepository {
     List<Session> findByUserIdAndSessionStatus(Long userId, SessionStatus sessionStatus);
     Optional<Session> findById(Long sessionId);
     Session save(Session session);
-    Optional<Session> findByUserIdAndDeviceId(Long userId, String deviceId);
+    Optional<Session> findByUserIdAndDeviceIdAndSessionStatus(Long userId, String deviceId, SessionStatus sessionStatus);
 
 }

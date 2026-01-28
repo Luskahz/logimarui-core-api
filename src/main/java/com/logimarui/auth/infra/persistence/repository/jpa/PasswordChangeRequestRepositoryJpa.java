@@ -29,7 +29,8 @@ public class PasswordChangeRequestRepositoryJpa implements PasswordChangeRequest
 
     @Override
     public Optional<PasswordChangeRequest> findById(Long id) {
-        return Optional.empty();
+        return jpa.findById(id)
+                .map(PasswordChangeRequestMapper::toDomain);
     }
 
     @Override

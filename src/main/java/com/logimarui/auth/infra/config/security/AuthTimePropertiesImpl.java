@@ -1,12 +1,16 @@
 package com.logimarui.auth.infra.config.security;
 
 import com.logimarui.auth.core.port.AuthTimeProperties;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
 @Component
+@Setter
+@Getter
 @ConfigurationProperties(prefix = "security.auth")
 public class AuthTimePropertiesImpl implements AuthTimeProperties {
     private Duration refreshTokenTtl;

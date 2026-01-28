@@ -37,6 +37,7 @@ public class JwtServiceImpl implements JwtService {
                 now.plusSeconds(jwtProperties.getAccessTokenExpirationSeconds());
 
         String token = Jwts.builder()
+                .setIssuer(jwtProperties.getIssuer())
                 .setSubject(user.getId().toString())
                 .claim("sid", session.getId())
                 .claim(

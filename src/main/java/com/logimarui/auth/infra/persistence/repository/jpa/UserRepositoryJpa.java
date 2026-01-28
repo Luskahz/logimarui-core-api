@@ -5,7 +5,6 @@ import com.logimarui.auth.core.domain.model.User;
 import com.logimarui.auth.core.repository.UserRepository;
 
 import com.logimarui.auth.infra.persistence.entity.UserEntity;
-import com.logimarui.auth.infra.persistence.jdbc.EmployeeJdbcRepository;
 import com.logimarui.auth.infra.persistence.jpa.UserJpaRepository;
 import com.logimarui.auth.infra.persistence.mapper.UserMapper;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,6 @@ import java.util.Optional;
 public class UserRepositoryJpa implements UserRepository {
 
     private final UserJpaRepository jpa;
-    private final EmployeeJdbcRepository jdbc;
 
     @Override
     public Optional<User> findByUsername(String username) {

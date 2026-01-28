@@ -42,7 +42,7 @@ public class WriteDbConfig {
                 new LocalContainerEntityManagerFactoryBean();
 
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("com.logimarui.core.api.domain.write");
+        emf.setPackagesToScan("com.logimarui");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Map<String, Object> jpaProps = new HashMap<>();
