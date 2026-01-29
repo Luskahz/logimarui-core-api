@@ -5,6 +5,8 @@ import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.core.domain.model.User;
 import com.logimarui.auth.core.domain.model.IssuedAccessToken;
 import com.logimarui.auth.core.port.JwtService;
+import com.logimarui.infra.security.jwt.JwtProperties;
+import com.logimarui.infra.security.jwt.JwtSigningKeyProvider;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -22,14 +24,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
     private final JwtProperties jwtProperties;
-    private Key signingKey;
+    private final JwtSigningKeyProvider keyProvider;
 
-    @PostConstruct
-    void init() {
-        this.signingKey = Keys.hmacShaKeyFor(
-                jwtProperties.getSecret().getBytes(StandardCharsets.UTF_8)
-        );
-    }
     @Override
     public IssuedAccessToken generateAccessToken(@NotNull User user, @NotNull Session session) {
         Instant now = Instant.now();
@@ -46,7 +42,7 @@ public class JwtServiceImpl implements JwtService {
                 )
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(expiresAt))
-                .signWith(signingKey, SignatureAlgorithm.HS256)
+                .signWith(keyProvider.getKey(), SignatureAlgorithm.HS256)
                 .compact();
 
         return new IssuedAccessToken(token, expiresAt);

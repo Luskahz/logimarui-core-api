@@ -8,13 +8,12 @@ import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordResponseDTO;
 import com.logimarui.auth.api.dto.login.LoginRequestDTO;
 import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
-import com.logimarui.auth.core.domain.enums.Role;
 import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
 import com.logimarui.auth.core.domain.model.User;
 import com.logimarui.auth.core.service.AuthContext;
 import com.logimarui.auth.core.service.AuthService;
 import com.logimarui.auth.core.service.AuthTokens;
-import com.logimarui.auth.infra.security.principal.UserPrincipal;
+import com.logimarui.infra.security.principal.UserPrincipal;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -28,8 +27,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -64,7 +61,7 @@ public class AuthController {
         return new AuthTokenResponseDTO(
                 tokens.refreshToken(),
                 tokens.accessToken(),
-                tokens.expiresIn()
+                tokens.expiresInSeconds()
         );
     }
 
@@ -79,7 +76,7 @@ public class AuthController {
     return new AuthTokenResponseDTO(
             tokens.refreshToken(),
             tokens.accessToken(),
-            tokens.expiresIn()
+            tokens.expiresInSeconds()
     );
 
     }
@@ -126,7 +123,7 @@ public class AuthController {
         return new AuthTokenResponseDTO(
                 tokens.refreshToken(),
                 tokens.accessToken(),
-                tokens.expiresIn()
+                tokens.expiresInSeconds()
         );
     }
 

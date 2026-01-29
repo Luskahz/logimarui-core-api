@@ -66,13 +66,14 @@ public class AuthService {
 
         IssuedRefreshToken issuedRefreshToken = refreshTokenRegister(session);
         IssuedAccessToken issuedAccessToken = jwtService.generateAccessToken(user, session);
+        long expiresInSeconds = Math.max(Duration.between(now, issuedAccessToken.expiresAt()).getSeconds(), 0);
 
         user.recordSuccessfulLogin(now);
         userRepository.save(user);
         return new AuthTokens(
                 issuedRefreshToken.rawToken(),
                 issuedAccessToken.token(),
-                issuedAccessToken.expiresAt()
+                expiresInSeconds
         );
     }
     public User registerUser(String username, Long employeeId, String password, String ip){
@@ -127,11 +128,11 @@ public class AuthService {
         updateSessionLastIpAddressIfChanged(existingToken.getSession(),ip, now);
         IssuedRefreshToken issuedRefreshToken = rotateRefreshTokenFromExisting(existingToken, now);
         IssuedAccessToken issuedAccessToken = jwtService.generateAccessToken(user, issuedRefreshToken.refreshToken().getSession());
-
+        long expiresInSeconds = Math.max(Duration.between(now, issuedAccessToken.expiresAt()).getSeconds(), 0);
         return new AuthTokens(
                 issuedRefreshToken.rawToken(),
                 issuedAccessToken.token(),
-                issuedAccessToken.expiresAt()
+                expiresInSeconds
         );
     }
     @Transactional public void logout(Long userId, String ip, String deviceId) {

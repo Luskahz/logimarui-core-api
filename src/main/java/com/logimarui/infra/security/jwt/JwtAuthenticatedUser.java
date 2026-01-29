@@ -1,4 +1,4 @@
-package com.logimarui.auth.infra.security.jwt;
+package com.logimarui.infra.security.jwt;
 
 import java.time.Instant;
 import java.util.List;

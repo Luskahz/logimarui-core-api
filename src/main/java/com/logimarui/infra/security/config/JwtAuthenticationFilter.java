@@ -1,6 +1,8 @@
-package com.logimarui.auth.infra.security.jwt;
+package com.logimarui.infra.security.config;
 
-import com.logimarui.auth.infra.security.principal.UserPrincipal;
+import com.logimarui.infra.security.jwt.JwtAuthenticatedUser;
+import com.logimarui.infra.security.jwt.JwtTokenParser;
+import com.logimarui.infra.security.principal.UserPrincipal;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

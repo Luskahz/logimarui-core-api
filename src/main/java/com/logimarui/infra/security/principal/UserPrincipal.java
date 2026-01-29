@@ -1,4 +1,4 @@
-package com.logimarui.auth.infra.security.principal;
+package com.logimarui.infra.security.principal;
 
 import com.logimarui.auth.core.domain.enums.Role;
 import lombok.AllArgsConstructor;

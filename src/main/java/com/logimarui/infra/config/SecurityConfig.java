@@ -1,7 +1,7 @@
-package com.logimarui.auth.infra.security.config;
+package com.logimarui.infra.config;
 
-import com.logimarui.auth.infra.security.jwt.JwtAuthenticationFilter;
-import com.logimarui.auth.infra.security.jwt.JwtProperties;
+import com.logimarui.infra.security.config.JwtAuthenticationFilter;
+import com.logimarui.infra.security.jwt.JwtProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
