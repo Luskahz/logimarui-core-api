@@ -1,60 +1,74 @@
 package com.logimarui.replenishment.api.controller;
 
 
-import com.logimarui.replenishment.core.domain.model.ReplenishmentLine;
 import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/reposicoes/")
+@RequestMapping("/replenishments")
 @AllArgsConstructor
+@Validated
 public class ReplenishmentController {
-//    private final ReposicaoService reposicaoService;
-//
-//
-//    @GetMapping("/mapa/buscar/{codigoMapa}")
-//    public MapaResponseDTO buscarMapa(@PathVariable long codigoMapa){
-//        return new MapaMapper().toResponse(reposicaoService.buscarMapa(codigoMapa));
-//    }// a busca do mapa vai ser chamada no login, apos identificar a frota do motorista
-//    // ou tambem pode ser puxado quando ele solicitar a troca de mapa no campo do forms
-//    // o mapa só podera ser trocado caso o veiculo do motorista esteja associado a ele
-//    // ou seja, raramente, porem possivel em caso de recarga ou alguma anomaria 03.02.37
-//
-//    @GetMapping("/notaFiscal/buscar/")
-//    public NotaFiscalResponseDTO buscarNotaFiscalByCodigo(
-//            @RequestParam Long codigoNotaFiscal,
-//            @RequestParam int codigoSerieNotaFiscal
-//    ){
-//        return new NotaFiscalMapper().toResponse(reposicaoService.buscarNotaFiscalByCodigo(codigoNotaFiscal,codigoSerieNotaFiscal));
-//    }
-//
-//    @GetMapping("/produto/buscar/{codigoProduto}")
-//    public ProdutoResponseDTO buscarProdutoDaNotaByCodigo(
-//            @PathVariable Long codigoProduto,
-//            @RequestParam Long codigoNotaFiscal,
-//            @RequestParam int codigoSerieNotaFiscal
-//    ){
-//        return new produtoMapper().toResponse(reposicaoService.buscarProdutoDaNotaByCodigo(codigoProduto, codigoNotaFiscal, codigoSerieNotaFiscal));
-//    }
-//
-//    GetMapping("/ocorrenciaReposicao/")
-//    public ocorrenciaReposicaoResponseDTO buscarDadosParaOcorrencia(
-//            @RequestParam Long codigoNotaFiscal,
-//            @RequestParam int codigoSerieNotaFiscal
-//    ){
-//     return new OcorrenciaReposicaoMapper().toResponse(reposicaoService.buscar)
-//    }
-//
-//    PostMapping("/ocorrenciaReposicao/")
-//    public ocorrenciaResponseDTO registrarReposicao(
-//            @RequestParam Long codigoMapa,
-//            @RequestParam Long codigoCliente,
-//            @RequestParam Long codigoNotaFiscal,
-//            @RequestParam int codigoSerieNotaFiscal,
-//            @RequestParam Long codigoProduto,
-//            @RequestParam List<ReplenishmentLine> ocorrencias
-//
-//            )
+
+    @GetMapping
+    public void findReplenishmentsByFilter(
+            @NotNull Authentication authentication
+    ){}
+
+    @GetMapping("/{id}/ticket")
+    public void findReplenishmentTicket(
+            @NotNull Authentication authentication
+    ){}
+
+    @GetMapping("/me")
+    public void findActorData(
+            @NotNull Authentication authentication
+    ){}
+
+    @GetMapping("/line/{deliver-router-id}/lookup")
+    public void loockupDeliverRouterData(
+            @NotNull Authentication authentication
+    ){}
+
+    @PostMapping
+    public void initReplenishment(//recebe os dados iniciais da replenishment e 1 linha de produto
+            @NotNull Authentication authentication
+    ){}
+
+    @PostMapping("/line")
+    public void commitLineReplenishment(
+            // Commita uma nova linha na reposição criada
+            // Anteriormente vai requerir o ID pela DTO
+            // atualiza atributos de updatedAt
+            @NotNull Authentication authentication
+    ){}
+    @PostMapping("/{id}/conclude")//esse conclude n ficou legal
+    public void finishLineReplenishment(
+            @NotNull Authentication authentication
+    ){}
+
+    @PatchMapping
+    public void cancelReplenishment(
+            @NotNull Authentication authentication
+    ){}
+
+
+    @PatchMapping("/line")
+    public void updateReplenishmentLine(
+            @NotNull Authentication authentication
+    ){}
+
+    @GetMapping("/history-pos")
+    public void getHistporyReplenishmentFromPos(
+            @NotNull Authentication authentication
+    ){}
+
+
+
+
+
+
 }
