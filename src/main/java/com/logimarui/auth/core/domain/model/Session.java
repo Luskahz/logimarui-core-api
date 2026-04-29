@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import java.time.Duration;
 import java.time.Instant;
 
-import static com.logimarui.auth.core.domain.enums.SessionStatus.LOGGED_OUT;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -112,7 +111,7 @@ public class Session {
         return sessionStatus == SessionStatus.REVOKED;
     }
     public boolean isLoggedOut() {
-        return sessionStatus == LOGGED_OUT;
+        return sessionStatus == SessionStatus.LOGGED_OUT;
     }
     public boolean isValid(Instant now) {
         return !isExpired(now) && !isRevoked() && !isLoggedOut();
@@ -134,7 +133,7 @@ public class Session {
         if (this.sessionStatus != SessionStatus.ACTIVE) {
             return;
         }
-        this.sessionStatus = LOGGED_OUT;
+        this.sessionStatus = SessionStatus.LOGGED_OUT;
         this.loggedOutAt = now;
     }
 }

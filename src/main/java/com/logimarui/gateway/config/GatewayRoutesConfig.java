@@ -1,0 +1,945 @@
+package com.logimarui.gateway.config;
+
+import com.logimarui.gateway.core.application.ServiceRegistry;
+import com.logimarui.gateway.core.domain.model.ServiceRoute;
+import jakarta.servlet.ServletException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.servlet.function.RouterFunction;
+import org.springframework.web.servlet.function.ServerRequest;
+import org.springframework.web.servlet.function.ServerResponse;
+
+import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.springframework.web.servlet.function.RequestPredicates.path;
+import static org.springframework.web.servlet.function.RouterFunctions.route;
+
+@Configuration
+public class GatewayRoutesConfig {
+
+    private static final String N8N_SERVICE_ID = "n8n";
+    private static final String N8N_PUBLIC_PREFIX = "/n8n";
+    private static final String N8N_REST_PREFIX = "/rest/n8n";
+    private static final List<String> FRONTEND_RESERVED_PATH_PREFIXES = List.of(
+            "/admin",
+            "/api",
+            "/auth",
+            "/error",
+            "/evolution",
+            "/form",
+            "/form-test",
+            "/n8n",
+            "/replenishments",
+            "/rest",
+            "/webhook",
+            "/webhook-test"
+    );
+
+    private static final Set<String> HOP_BY_HOP_HEADERS = Set.of(
+            "connection",
+            "keep-alive",
+            "proxy-authenticate",
+            "proxy-authorization",
+            "te",
+            "trailer",
+            "transfer-encoding",
+            "upgrade",
+            "host",
+            "content-length",
+            "accept-encoding"
+    );
+
+    private static final List<String> FRONTEND_ABSOLUTE_PATH_PREFIXES = List.of(
+            "/api",
+            "/assets",
+            "/auth",
+            "/call",
+            "/chat",
+            "/chatwoot",
+            "/credentials",
+            "/css",
+            "/e",
+            "/event",
+            "/executions",
+            "/favicon",
+            "/fonts",
+            "/form",
+            "/form-test",
+            "/group",
+            "/healthz",
+            "/icons",
+            "/instance",
+            "/js",
+            "/label",
+            "/locales",
+            "/manager",
+            "/message",
+            "/metrics",
+            "/mfa",
+            "/oauth2",
+            "/profile",
+            "/projects",
+            "/proxy",
+            "/rabbitmq",
+            "/rest",
+            "/saml",
+            "/send",
+            "/settings",
+            "/signin",
+            "/signup",
+            "/socket.io",
+            "/sqs",
+            "/static",
+            "/template",
+            "/templates",
+            "/typebot",
+            "/types",
+            "/users",
+            "/variables",
+            "/wa",
+            "/webhook",
+            "/webhook-test",
+            "/websocket",
+            "/workflow",
+            "/workflows"
+    );
+
+    private final RestClient restClient = RestClient.builder()
+            .requestFactory(clientHttpRequestFactory())
+            .build();
+    private final String frontendTargetUri;
+
+    public GatewayRoutesConfig(
+            @Value("${app.frontend.url:http://127.0.0.1:3000}") String frontendTargetUri
+    ) {
+        this.frontendTargetUri = normalizeBaseUri(frontendTargetUri);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> gatewayRoutes(ServiceRegistry serviceRegistry) {
+        return route()
+                .route(path("/api/**"), request -> proxy(request, serviceRegistry))
+                .route(path("/rest"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/rest/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/webhook"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/webhook/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/webhook-test"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/webhook-test/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/form"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/form/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/form-test"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/form-test/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path("/evolution"), request -> proxyToEvolutionManager(request, serviceRegistry))
+                .route(path("/evolution/**"), request -> proxyToEvolutionManager(request, serviceRegistry))
+                .route(path("/n8n"), request -> proxyToN8n(request, serviceRegistry))
+                .route(path("/n8n/**"), request -> proxyToN8n(request, serviceRegistry))
+                .route(this::isFrontendRequest, this::proxyToFrontend)
+                .build();
+    }
+
+    private ServerResponse proxy(ServerRequest request, ServiceRegistry serviceRegistry) {
+        ServiceRoute serviceRoute = findMatchingRoute(request, serviceRegistry);
+
+        if (serviceRoute == null) {
+            return ServerResponse.notFound().build();
+        }
+
+        URI targetUri = buildTargetUri(serviceRoute, request);
+
+        try {
+            GatewayProxyResponse response = rewriteHtmlBodyIfNeeded(
+                    forwardRequest(request, targetUri),
+                    serviceRoute
+            );
+
+            ServerResponse.BodyBuilder responseBuilder =
+                    ServerResponse.status(response.statusCode());
+
+            copyResponseHeaders(response.headers(), responseBuilder, serviceRoute);
+
+            if (request.method() == HttpMethod.HEAD) {
+                return responseBuilder.build();
+            }
+
+            return responseBuilder.body(response.body());
+
+        } catch (RestClientException exception) {
+            return ServerResponse
+                    .status(502)
+                    .body("Erro ao encaminhar requisicao para servico: " + serviceRoute.getId());
+        } catch (IOException | ServletException exception) {
+            return ServerResponse
+                    .status(400)
+                    .body("Erro ao ler corpo da requisicao.");
+        }
+    }
+
+    private ServerResponse proxyToEvolutionManager(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        String requestPath = request.path();
+
+        if (requestPath.equals("/evolution") || requestPath.equals("/evolution/")) {
+            return ServerResponse
+                    .status(302)
+                    .header(HttpHeaders.LOCATION, "/evolution/manager/")
+                    .build();
+        }
+
+        return proxyToPrefixedFrontend(
+                request,
+                serviceRegistry,
+                "evolution-api",
+                "/evolution",
+                "Evolution Manager",
+                true
+        );
+    }
+
+    private ServerResponse proxyToN8n(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        if (request.path().equals("/n8n")) {
+            return ServerResponse
+                    .status(302)
+                    .header(HttpHeaders.LOCATION, "/n8n/")
+                    .build();
+        }
+
+        return proxyToPrefixedFrontend(
+                request,
+                serviceRegistry,
+                N8N_SERVICE_ID,
+                N8N_PUBLIC_PREFIX,
+                "n8n",
+                true
+        );
+    }
+
+    private ServerResponse proxyToN8nRootEndpoint(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        ServiceRoute serviceRoute = findRouteById(serviceRegistry, N8N_SERVICE_ID);
+
+        if (serviceRoute == null) {
+            return ServerResponse.notFound().build();
+        }
+
+        URI targetUri = appendPathAndQuery(
+                serviceRoute.getTargetUri(),
+                normalizeN8nUpstreamPath(N8N_SERVICE_ID, request.path()),
+                request.uri().getRawQuery()
+        );
+
+        try {
+            GatewayProxyResponse response = rewritePrefixedFrontendBodyIfNeeded(
+                    forwardRequest(request, targetUri, N8N_PUBLIC_PREFIX),
+                    N8N_PUBLIC_PREFIX
+            );
+
+            ServerResponse.BodyBuilder responseBuilder =
+                    ServerResponse.status(response.statusCode());
+
+            copyPrefixedFrontendResponseHeaders(
+                    response.headers(),
+                    responseBuilder,
+                    serviceRoute,
+                    N8N_PUBLIC_PREFIX
+            );
+
+            if (request.method() == HttpMethod.HEAD) {
+                return responseBuilder.build();
+            }
+
+            return responseBuilder.body(response.body());
+
+        } catch (RestClientException exception) {
+            return ServerResponse
+                    .status(502)
+                    .body("Erro ao encaminhar requisicao para n8n.");
+        } catch (IOException | ServletException exception) {
+            return ServerResponse
+                    .status(400)
+                    .body("Erro ao ler corpo da requisicao.");
+        }
+    }
+
+    private ServerResponse proxyToFrontend(ServerRequest request) {
+        URI targetUri = appendPathAndQuery(
+                frontendTargetUri,
+                request.path(),
+                request.uri().getRawQuery()
+        );
+
+        try {
+            GatewayProxyResponse response = forwardRequest(request, targetUri);
+            ServerResponse.BodyBuilder responseBuilder =
+                    ServerResponse.status(response.statusCode());
+
+            copyFrontendResponseHeaders(response.headers(), responseBuilder);
+
+            if (request.method() == HttpMethod.HEAD) {
+                return responseBuilder.build();
+            }
+
+            return responseBuilder.body(response.body());
+        } catch (RestClientException exception) {
+            return ServerResponse
+                    .status(502)
+                    .body("Erro ao encaminhar requisicao para logimarui-frontend.");
+        } catch (IOException | ServletException exception) {
+            return ServerResponse
+                    .status(400)
+                    .body("Erro ao ler corpo da requisicao.");
+        }
+    }
+
+    private ServerResponse proxyToPrefixedFrontend(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry,
+            String serviceId,
+            String publicPrefix,
+            String displayName,
+            boolean stripPublicPrefix
+    ) {
+        ServiceRoute serviceRoute = findRouteById(serviceRegistry, serviceId);
+
+        if (serviceRoute == null) {
+            return ServerResponse.notFound().build();
+        }
+
+        URI targetUri = buildPrefixedFrontendTargetUri(
+                serviceRoute,
+                request,
+                publicPrefix,
+                stripPublicPrefix
+        );
+
+        try {
+            GatewayProxyResponse response = rewritePrefixedFrontendBodyIfNeeded(
+                    forwardRequest(request, targetUri, publicPrefix),
+                    publicPrefix
+            );
+
+            ServerResponse.BodyBuilder responseBuilder =
+                    ServerResponse.status(response.statusCode());
+
+            copyPrefixedFrontendResponseHeaders(
+                    response.headers(),
+                    responseBuilder,
+                    serviceRoute,
+                    publicPrefix
+            );
+
+            if (request.method() == HttpMethod.HEAD) {
+                return responseBuilder.build();
+            }
+
+            return responseBuilder.body(response.body());
+
+        } catch (RestClientException exception) {
+            return ServerResponse
+                    .status(502)
+                    .body("Erro ao encaminhar requisicao para " + displayName + ".");
+        } catch (IOException | ServletException exception) {
+            return ServerResponse
+                    .status(400)
+                    .body("Erro ao ler corpo da requisicao.");
+        }
+    }
+
+    private ServiceRoute findRouteById(ServiceRegistry serviceRegistry, String serviceId) {
+        return serviceRegistry.findAll()
+                .stream()
+                .filter(route -> route.getId().equals(serviceId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private ServiceRoute findMatchingRoute(ServerRequest request, ServiceRegistry serviceRegistry) {
+        String requestPath = request.path();
+
+        return serviceRegistry.findAll()
+                .stream()
+                .filter(route -> matchesPath(requestPath, route.getPathPrefix()))
+                .max(Comparator.comparingInt(route -> route.getPathPrefix().length()))
+                .orElse(null);
+    }
+
+    private boolean matchesPath(String requestPath, String pathPrefix) {
+        return requestPath.equals(pathPrefix)
+                || requestPath.startsWith(pathPrefix + "/");
+    }
+
+    private boolean isFrontendRequest(ServerRequest request) {
+        HttpMethod method = request.method();
+
+        if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.OPTIONS) {
+            return false;
+        }
+
+        String requestPath = request.path();
+
+        return FRONTEND_RESERVED_PATH_PREFIXES.stream()
+                .noneMatch(prefix -> matchesPath(requestPath, prefix));
+    }
+
+    private URI buildTargetUri(ServiceRoute serviceRoute, ServerRequest request) {
+        String pathPrefix = serviceRoute.getPathPrefix();
+        String requestPath = request.path();
+
+        String remainingPath = requestPath.equals(pathPrefix)
+                ? "/"
+                : requestPath.substring(pathPrefix.length());
+
+        return appendPathAndQuery(
+                serviceRoute.getTargetUri(),
+                remainingPath,
+                request.uri().getRawQuery()
+        );
+    }
+
+    private URI buildPrefixedFrontendTargetUri(
+            ServiceRoute serviceRoute,
+            ServerRequest request,
+            String publicPrefix,
+            boolean stripPublicPrefix
+    ) {
+        String requestPath = request.path();
+
+        String upstreamPath;
+
+        if (stripPublicPrefix) {
+            upstreamPath = requestPath.equals(publicPrefix)
+                    ? "/"
+                    : requestPath.substring(publicPrefix.length());
+        } else {
+            upstreamPath = requestPath;
+        }
+
+        upstreamPath = normalizeN8nUpstreamPath(serviceRoute.getId(), upstreamPath);
+
+        if (upstreamPath.isBlank()) {
+            upstreamPath = "/";
+        }
+
+        return appendPathAndQuery(
+                serviceRoute.getTargetUri(),
+                upstreamPath,
+                request.uri().getRawQuery()
+        );
+    }
+
+    private URI appendPathAndQuery(
+            String targetUri,
+            String remainingPath,
+            String rawQuery
+    ) {
+        if (remainingPath == null || remainingPath.isBlank()) {
+            remainingPath = "/";
+        }
+
+        if (!remainingPath.startsWith("/")) {
+            remainingPath = "/" + remainingPath;
+        }
+
+        if (targetUri.endsWith("/") && remainingPath.startsWith("/")) {
+            targetUri = targetUri.substring(0, targetUri.length() - 1);
+        }
+
+        if (rawQuery != null && !rawQuery.isBlank()) {
+            return URI.create(targetUri + remainingPath + "?" + rawQuery);
+        }
+
+        return URI.create(targetUri + remainingPath);
+    }
+
+    private GatewayProxyResponse forwardRequest(ServerRequest request, URI targetUri)
+            throws IOException, ServletException {
+        return forwardRequest(request, targetUri, null);
+    }
+
+    private GatewayProxyResponse forwardRequest(
+            ServerRequest request,
+            URI targetUri,
+            String forwardedPrefix
+    ) throws IOException, ServletException {
+
+        RestClient.RequestBodySpec requestSpec = restClient
+                .method(request.method())
+                .uri(targetUri)
+                .headers(headers -> {
+                    copyRequestHeaders(request.headers().asHttpHeaders(), headers);
+                    addForwardedHeaders(request, headers, forwardedPrefix);
+                });
+
+        RestClient.RequestHeadersSpec<?> headersSpec;
+
+        if (methodCanHaveBody(request.method())) {
+            byte[] requestBody = request.body(byte[].class);
+            headersSpec = requestSpec.body(requestBody);
+        } else {
+            headersSpec = requestSpec;
+        }
+
+        try {
+            if (request.method() == HttpMethod.HEAD) {
+                ResponseEntity<Void> responseEntity = headersSpec
+                        .retrieve()
+                        .toBodilessEntity();
+
+                return new GatewayProxyResponse(
+                        responseEntity.getStatusCode(),
+                        responseEntity.getHeaders(),
+                        new byte[0]
+                );
+            }
+
+            ResponseEntity<byte[]> responseEntity = headersSpec
+                    .retrieve()
+                    .toEntity(byte[].class);
+
+            byte[] responseBody = responseEntity.getBody() == null
+                    ? new byte[0]
+                    : responseEntity.getBody();
+
+            return new GatewayProxyResponse(
+                    responseEntity.getStatusCode(),
+                    responseEntity.getHeaders(),
+                    responseBody
+            );
+        } catch (RestClientResponseException exception) {
+            HttpHeaders headers = new HttpHeaders();
+
+            if (exception.getResponseHeaders() != null) {
+                headers.putAll(exception.getResponseHeaders());
+            }
+
+            byte[] responseBody = exception.getResponseBodyAsByteArray();
+
+            if (responseBody == null) {
+                responseBody = new byte[0];
+            }
+
+            return new GatewayProxyResponse(
+                    exception.getStatusCode(),
+                    headers,
+                    responseBody
+            );
+        }
+    }
+
+    private boolean methodCanHaveBody(HttpMethod method) {
+        return method == HttpMethod.POST
+                || method == HttpMethod.PUT
+                || method == HttpMethod.PATCH
+                || method == HttpMethod.DELETE;
+    }
+
+    private void copyRequestHeaders(HttpHeaders source, HttpHeaders target) {
+        source.forEach((name, values) -> {
+            if (!isHopByHopHeader(name)) {
+                target.put(name, values);
+            }
+        });
+    }
+
+    private void addForwardedHeaders(
+            ServerRequest request,
+            HttpHeaders target,
+            String forwardedPrefix
+    ) {
+        String host = request.headers().asHttpHeaders().getFirst(HttpHeaders.HOST);
+
+        if (host != null && !host.isBlank()) {
+            target.set("X-Forwarded-Host", host);
+        }
+
+        String scheme = request.uri().getScheme();
+
+        if (scheme != null && !scheme.isBlank()) {
+            target.set("X-Forwarded-Proto", scheme);
+        }
+
+        if (forwardedPrefix != null && !forwardedPrefix.isBlank()) {
+            target.set("X-Forwarded-Prefix", forwardedPrefix);
+        }
+
+        String forwardedFor = request.headers().asHttpHeaders().getFirst("X-Forwarded-For");
+
+        if (forwardedFor == null || forwardedFor.isBlank()) {
+            forwardedFor = request.servletRequest().getRemoteAddr();
+        }
+
+        if (forwardedFor != null && !forwardedFor.isBlank()) {
+            target.set("X-Forwarded-For", forwardedFor);
+        }
+    }
+
+    private void copyResponseHeaders(
+            HttpHeaders source,
+            ServerResponse.BodyBuilder target,
+            ServiceRoute serviceRoute
+    ) {
+        source.forEach((name, values) -> {
+            if (isHopByHopHeader(name)) {
+                return;
+            }
+
+            if ("location".equalsIgnoreCase(name)) {
+                values.stream()
+                        .map(location -> rewriteLocationHeader(location, serviceRoute))
+                        .forEach(location -> target.header(name, location));
+                return;
+            }
+
+            target.header(name, values.toArray(String[]::new));
+        });
+    }
+
+    private void copyFrontendResponseHeaders(
+            HttpHeaders source,
+            ServerResponse.BodyBuilder target
+    ) {
+        source.forEach((name, values) -> {
+            if (isHopByHopHeader(name)) {
+                return;
+            }
+
+            if ("location".equalsIgnoreCase(name)) {
+                values.stream()
+                        .map(this::rewriteFrontendLocationHeader)
+                        .forEach(location -> target.header(name, location));
+                return;
+            }
+
+            target.header(name, values.toArray(String[]::new));
+        });
+    }
+
+    private String rewriteLocationHeader(String location, ServiceRoute serviceRoute) {
+        if (location == null || location.isBlank()) {
+            return location;
+        }
+
+        String targetUri = serviceRoute.getTargetUri();
+        String pathPrefix = serviceRoute.getPathPrefix();
+
+        if (location.startsWith(targetUri)) {
+            return pathPrefix + location.substring(targetUri.length());
+        }
+
+        if (location.startsWith("/")) {
+            return pathPrefix + location;
+        }
+
+        return location;
+    }
+
+    private String rewriteFrontendLocationHeader(String location) {
+        if (location == null || location.isBlank()) {
+            return location;
+        }
+
+        if (location.startsWith(frontendTargetUri)) {
+            String rewrittenLocation = location.substring(frontendTargetUri.length());
+            return rewrittenLocation.isBlank() ? "/" : rewrittenLocation;
+        }
+
+        return location;
+    }
+
+    private void copyPrefixedFrontendResponseHeaders(
+            HttpHeaders source,
+            ServerResponse.BodyBuilder target,
+            ServiceRoute serviceRoute,
+            String publicPrefix
+    ) {
+        source.forEach((name, values) -> {
+            if (isHopByHopHeader(name)) {
+                return;
+            }
+
+            if ("location".equalsIgnoreCase(name)) {
+                values.stream()
+                        .map(location -> rewritePrefixedFrontendLocationHeader(
+                                location,
+                                serviceRoute,
+                                publicPrefix
+                        ))
+                        .forEach(location -> target.header(name, location));
+                return;
+            }
+
+            if ("set-cookie".equalsIgnoreCase(name)) {
+                values.stream()
+                        .map(cookie -> rewriteSetCookiePath(cookie, publicPrefix))
+                        .forEach(cookie -> target.header(name, cookie));
+                return;
+            }
+
+            target.header(name, values.toArray(String[]::new));
+        });
+    }
+
+    private String rewritePrefixedFrontendLocationHeader(
+            String location,
+            ServiceRoute serviceRoute,
+            String publicPrefix
+    ) {
+        if (location == null || location.isBlank()) {
+            return location;
+        }
+
+        if (location.equals(publicPrefix) || location.startsWith(publicPrefix + "/")) {
+            return location;
+        }
+
+        String targetUri = serviceRoute.getTargetUri();
+
+        if (location.startsWith(targetUri)) {
+            return prependPublicPrefix(
+                    publicPrefix,
+                    location.substring(targetUri.length())
+            );
+        }
+
+        if (location.startsWith("/")) {
+            return prependPublicPrefix(publicPrefix, location);
+        }
+
+        return location;
+    }
+
+    private String rewriteSetCookiePath(String setCookie, String publicPrefix) {
+        if (setCookie == null || setCookie.isBlank()) {
+            return setCookie;
+        }
+
+        Pattern pattern = Pattern.compile("(?i)(;\\s*Path=)([^;]*)");
+        Matcher matcher = pattern.matcher(setCookie);
+
+        if (!matcher.find()) {
+            return setCookie;
+        }
+
+        String cookiePath = matcher.group(2);
+
+        if (cookiePath.equals(publicPrefix) || cookiePath.startsWith(publicPrefix + "/")) {
+            return setCookie;
+        }
+
+        return matcher.replaceFirst(
+                Matcher.quoteReplacement(matcher.group(1) + prependPublicPrefix(publicPrefix, cookiePath))
+        );
+    }
+
+    private String prependPublicPrefix(String publicPrefix, String path) {
+        if (path == null || path.isBlank()) {
+            return publicPrefix + "/";
+        }
+
+        if (path.equals(publicPrefix) || path.startsWith(publicPrefix + "/")) {
+            return path;
+        }
+
+        if (!path.startsWith("/")) {
+            path = "/" + path;
+        }
+
+        if (path.equals("/")) {
+            return publicPrefix + "/";
+        }
+
+        return publicPrefix + path;
+    }
+
+    private String normalizeN8nUpstreamPath(String serviceId, String upstreamPath) {
+        if (!N8N_SERVICE_ID.equals(serviceId) || upstreamPath == null || upstreamPath.isBlank()) {
+            return upstreamPath;
+        }
+
+        if (upstreamPath.equals(N8N_REST_PREFIX)) {
+            return "/rest";
+        }
+
+        if (upstreamPath.startsWith(N8N_REST_PREFIX + "/")) {
+            return "/rest" + upstreamPath.substring(N8N_REST_PREFIX.length());
+        }
+
+        return upstreamPath;
+    }
+
+    private boolean isHopByHopHeader(String headerName) {
+        return HOP_BY_HOP_HEADERS.contains(headerName.toLowerCase());
+    }
+
+    private SimpleClientHttpRequestFactory clientHttpRequestFactory() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+
+        factory.setConnectTimeout(Duration.ofSeconds(5));
+        factory.setReadTimeout(Duration.ofSeconds(30));
+
+        return factory;
+    }
+
+    private String normalizeBaseUri(String uri) {
+        if (uri == null || uri.isBlank()) {
+            throw new IllegalArgumentException("app.frontend.url nao pode ser vazio.");
+        }
+
+        if (uri.endsWith("/")) {
+            return uri.substring(0, uri.length() - 1);
+        }
+
+        return uri;
+    }
+
+    private record GatewayProxyResponse(
+            HttpStatusCode statusCode,
+            HttpHeaders headers,
+            byte[] body
+    ) {
+    }
+
+    private GatewayProxyResponse rewriteHtmlBodyIfNeeded(
+            GatewayProxyResponse response,
+            ServiceRoute serviceRoute
+    ) {
+        String contentType = response.headers().getFirst(HttpHeaders.CONTENT_TYPE);
+
+        if (contentType == null || !contentType.toLowerCase().contains("text/html")) {
+            return response;
+        }
+
+        if (response.body() == null || response.body().length == 0) {
+            return response;
+        }
+
+        String html = new String(response.body(), StandardCharsets.UTF_8);
+        String pathPrefix = serviceRoute.getPathPrefix();
+
+        html = html
+                .replace("src=\"/assets/", "src=\"" + pathPrefix + "/assets/")
+                .replace("href=\"/assets/", "href=\"" + pathPrefix + "/assets/")
+                .replace("src='/assets/", "src='" + pathPrefix + "/assets/")
+                .replace("href='/assets/", "href='" + pathPrefix + "/assets/");
+
+        return new GatewayProxyResponse(
+                response.statusCode(),
+                rewrittenBodyHeaders(response.headers()),
+                html.getBytes(StandardCharsets.UTF_8)
+        );
+    }
+
+    private GatewayProxyResponse rewritePrefixedFrontendBodyIfNeeded(
+            GatewayProxyResponse response,
+            String publicPrefix
+    ) {
+        String contentType = response.headers().getFirst(HttpHeaders.CONTENT_TYPE);
+
+        if (!shouldRewriteFrontendBody(contentType)) {
+            return response;
+        }
+
+        if (response.body() == null || response.body().length == 0) {
+            return response;
+        }
+
+        String body = new String(response.body(), StandardCharsets.UTF_8);
+
+        body = rewriteHtmlAbsoluteAttributes(body, publicPrefix);
+        body = rewriteCssAbsoluteUrls(body, publicPrefix);
+        body = rewriteQuotedAbsolutePathPrefixes(body, publicPrefix);
+
+        return new GatewayProxyResponse(
+                response.statusCode(),
+                rewrittenBodyHeaders(response.headers()),
+                body.getBytes(StandardCharsets.UTF_8)
+        );
+    }
+
+    private boolean shouldRewriteFrontendBody(String contentType) {
+        if (contentType == null) {
+            return false;
+        }
+
+        String normalizedContentType = contentType.toLowerCase();
+
+        return normalizedContentType.contains("text/html")
+                || normalizedContentType.contains("application/javascript")
+                || normalizedContentType.contains("text/javascript")
+                || normalizedContentType.contains("text/css")
+                || normalizedContentType.contains("application/json")
+                || normalizedContentType.contains("application/manifest+json")
+                || normalizedContentType.contains("image/svg+xml");
+    }
+
+    private HttpHeaders rewrittenBodyHeaders(HttpHeaders source) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.putAll(source);
+        headers.remove(HttpHeaders.CONTENT_LENGTH);
+        headers.remove(HttpHeaders.CONTENT_ENCODING);
+        headers.remove(HttpHeaders.ETAG);
+        return headers;
+    }
+
+    private String rewriteHtmlAbsoluteAttributes(String body, String publicPrefix) {
+        String publicSegment = Pattern.quote(publicPrefix.substring(1));
+        Pattern pattern = Pattern.compile(
+                "(?i)(\\b(?:src|href|action|poster|data-src|data-href|content)=([\"']))/" +
+                        "(?!/|" + publicSegment + "(?:/|\\?|#|[\"']))"
+        );
+
+        return pattern
+                .matcher(body)
+                .replaceAll("$1" + Matcher.quoteReplacement(publicPrefix + "/"));
+    }
+
+    private String rewriteCssAbsoluteUrls(String body, String publicPrefix) {
+        String publicSegment = Pattern.quote(publicPrefix.substring(1));
+        Pattern pattern = Pattern.compile(
+                "(?i)(url\\(\\s*(?:[\"'])?)/(?!/|" + publicSegment + "(?:/|\\?|#|[\"']))"
+        );
+
+        return pattern
+                .matcher(body)
+                .replaceAll("$1" + Matcher.quoteReplacement(publicPrefix + "/"));
+    }
+
+    private String rewriteQuotedAbsolutePathPrefixes(String body, String publicPrefix) {
+        String rewrittenBody = body;
+
+        for (String pathPrefix : FRONTEND_ABSOLUTE_PATH_PREFIXES) {
+            Pattern pattern = Pattern.compile(
+                    "([\"'`])" + Pattern.quote(pathPrefix) + "(?=[/?#\"'`])"
+            );
+
+            rewrittenBody = pattern
+                    .matcher(rewrittenBody)
+                    .replaceAll("$1" + Matcher.quoteReplacement(publicPrefix + pathPrefix));
+        }
+
+        return rewrittenBody;
+    }
+}

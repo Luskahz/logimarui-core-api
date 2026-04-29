@@ -1,8 +1,8 @@
 package com.logimarui.infra.security.jwt;
 
 import io.jsonwebtoken.security.Keys;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
