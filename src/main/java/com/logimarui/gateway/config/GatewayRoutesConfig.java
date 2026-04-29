@@ -48,6 +48,9 @@ public class GatewayRoutesConfig {
             "/n8n",
             "/replenishments",
             "/rest",
+            "/swagger-ui",
+            "/swagger-ui.html",
+            "/v3/api-docs",
             "/webhook",
             "/webhook-test"
     );

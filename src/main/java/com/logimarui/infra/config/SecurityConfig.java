@@ -28,6 +28,9 @@ public class SecurityConfig {
             "/n8n",
             "/replenishments",
             "/rest",
+            "/swagger-ui",
+            "/swagger-ui.html",
+            "/v3/api-docs",
             "/webhook",
             "/webhook-test"
     );
@@ -66,6 +69,12 @@ public class SecurityConfig {
                                 "/auth/forgot-password",
                                 "/auth/change-password",
                                 "/auth/employees/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**"
                         ).permitAll()
                         .requestMatchers("/admin/services/**").permitAll()
                         .requestMatchers(
