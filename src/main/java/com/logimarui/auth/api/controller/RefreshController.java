@@ -4,6 +4,7 @@ import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
 import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.core.application.results.AuthTokens;
+import com.logimarui.auth.core.application.services.RefreshService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 public class RefreshController {
-    AuthService authService;
+    RefreshService refreshService;
 
     @PostMapping("/refresh")
     public AuthTokenResponseDTO refresh(
@@ -31,7 +32,7 @@ public class RefreshController {
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
 
-        AuthTokens tokens = authService.refresh(request.refreshToken(), ip, deviceId);
+        AuthTokens tokens = refreshService.refresh(request.refreshToken(), ip, deviceId);
 
         return new AuthTokenResponseDTO(
                 tokens.refreshToken(),

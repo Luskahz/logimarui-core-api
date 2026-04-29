@@ -1,31 +1,22 @@
 package com.logimarui.auth.core.application.services;
 
-import com.logimarui.auth.core.application.results.AuthContext;
-import com.logimarui.auth.core.application.results.AuthTokens;
-import com.logimarui.auth.core.application.results.IssuedRefreshToken;
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
-import com.logimarui.auth.core.domain.enums.Role;
-import com.logimarui.auth.core.domain.enums.SessionStatus;
-import com.logimarui.auth.core.domain.exception.UserNotFoundException;
-import com.logimarui.auth.core.domain.model.*;
+import com.logimarui.auth.core.domain.model.RefreshToken;
+import com.logimarui.auth.core.domain.model.Session;
 import com.logimarui.auth.core.port.*;
 import com.logimarui.auth.core.repository.*;
-import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-
-@Service
 @RequiredArgsConstructor
-public class AuthService {
+@Service
+public class UtilsServices {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
     private final RefreshTokenRepository refreshTokenRepository;
@@ -36,30 +27,20 @@ public class AuthService {
     private final TokenHashService tokenHashService;
     private final JwtService jwtService;
     private final EmployeeRepository employeeRepository;
-    private final UtilsServices utilsServices;
 
+    protected void updateSessionLastIpAddressIfChanged(@NotNull Session session, String ip, Instant now) {
+        if (!Objects.equals(session.getLastIpAddress(), ip)) {
+            session.updateIpAddress(ip, now);
+            sessionRepository.save(session);
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    protected void logoutSession(@NotNull Session session, Instant now) {
+        if (session.isLoggedOut()) return;
+        session.logout(now);
+        sessionRepository.save(session);
+    }
+    protected Optional<RefreshToken> findActiveRefreshTokenBySession(@NotNull Session session) {
+        return refreshTokenRepository.findBySessionIdAndRefreshTokenStatus(session.getId(), RefreshTokenStatus.ACTIVE);
+    }
 }

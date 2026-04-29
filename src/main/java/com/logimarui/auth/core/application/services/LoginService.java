@@ -25,13 +25,11 @@ public class LoginService {
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
     private final RefreshTokenRepository refreshTokenRepository;
-    private final PasswordChangeRequestRepository passwordChangeRequestRepository;
     private final AuthTimeProperties authTokenProperties;
     private final PasswordHasher passwordHasher;
     private final TokenGenerator tokenGenerator;
     private final TokenHashService tokenHashService;
     private final JwtService jwtService;
-    private final EmployeeRepository employeeRepository;
 
 
     @Transactional public AuthTokens login(@NotNull Long employeeId, String password, String ip, String deviceId) {

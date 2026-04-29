@@ -3,8 +3,8 @@ package com.logimarui.auth.api.controller;
 import com.logimarui.auth.api.dto.changePassword.ChangePasswordRequestDTO;
 import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordRequestDTO;
 import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordResponseDTO;
+import com.logimarui.auth.core.application.services.RecoverPasswordService;
 import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
-import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class RecoverPasswordController {
-    AuthService authService;
+    RecoverPasswordService recoverPasswordService;
 
     @PostMapping("/forgot-password")
     public ForgotPasswordResponseDTO forgotPassword(
@@ -28,7 +28,7 @@ public class RecoverPasswordController {
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
-        PasswordChangeRequest passwordChangeRequest = authService.forgotPassword(forgotPasswordRequestDTO.employeeId(), ip, deviceId);
+        PasswordChangeRequest passwordChangeRequest = recoverPasswordService.forgotPassword(forgotPasswordRequestDTO.employeeId(), ip, deviceId);
         return new ForgotPasswordResponseDTO(
                 passwordChangeRequest.getId(),
                 passwordChangeRequest.getPasswordChangeStatus().name()
@@ -43,7 +43,7 @@ public class RecoverPasswordController {
     ){
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
-        authService.changePassword(
+        recoverPasswordService.changePassword(
                 changePasswordRequestDTO.employeeId(),
                 deviceId,
                 changePasswordRequestDTO.passwordChangeRequestId(),
@@ -63,7 +63,7 @@ public class RecoverPasswordController {
         if (!(authentication.getPrincipal() instanceof UserPrincipal principal)) {
             throw new SecurityException("Invalid authentication principal");
         }
-        authService.authorizeChangePassword(principal.getUserId(), passwordChangeRequestId);
+        recoverPasswordService.authorizeChangePassword(principal.getUserId(), passwordChangeRequestId);
     }
 
 }

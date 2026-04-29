@@ -2,6 +2,7 @@ package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.response.EmployeeNameResponseDTO;
 import com.logimarui.auth.core.application.services.AuthService;
+import com.logimarui.auth.core.application.services.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 )
 public class EmployeeController {
 
-    private final AuthService authService;
+    private final EmployeeService employeeService;
 
     @GetMapping("/employees/{employeeId}/name")
     @Operation(
@@ -34,7 +35,7 @@ public class EmployeeController {
             )
             @PathVariable Long employeeId
     ) {
-        String name = authService.nameFromEmployee(employeeId);
+        String name = employeeService.nameFromEmployee(employeeId);
 
         return new EmployeeNameResponseDTO(employeeId, name);
     }

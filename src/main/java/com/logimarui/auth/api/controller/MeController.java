@@ -2,7 +2,7 @@ package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.AuthMeResponseDTO;
 import com.logimarui.auth.core.application.results.AuthContext;
-import com.logimarui.auth.core.application.services.AuthService;
+import com.logimarui.auth.core.application.services.MeService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Validated
 public class MeController {
-    AuthService authService;
+    MeService meService;
 
 
     @GetMapping("/me") public AuthMeResponseDTO me(
@@ -42,7 +42,7 @@ public class MeController {
 
 
 
-        AuthContext result = authService.me(
+        AuthContext result = meService.me(
                 principal.getUserId(),
                 principal.getSessionId(),
                 principal.getAccessTokenExpiresAt(),

@@ -1,6 +1,7 @@
 package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.core.application.services.AuthService;
+import com.logimarui.auth.core.application.services.LogoutService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 
 public class LogoutController {
-    AuthService authService;
+    LogoutService logoutService;
 
 
     @PostMapping("/logout")
@@ -24,7 +25,7 @@ public class LogoutController {
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
 
-        authService.logout(
+        logoutService.logout(
                 principal.getUserId(),
                 ip,
                 deviceId

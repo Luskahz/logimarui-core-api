@@ -4,6 +4,7 @@ package com.logimarui.auth.api.controller;
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.application.services.LoginService;
+import com.logimarui.auth.core.application.services.RegisterService;
 import com.logimarui.auth.core.domain.model.User;
 import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.core.application.results.AuthTokens;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class RegisterController {
     AuthService authService;
+    RegisterService registerService;
     LoginService loginService;
 
     @PostMapping("/register")
@@ -33,7 +35,7 @@ public class RegisterController {
     ){
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
-        User user = authService.registerUser(request.username(), request.employeeId(), request.password(), ip);
+        User user = registerService.registerUser(request.username(), request.employeeId(), request.password(), ip);
         AuthTokens tokens = loginService.login(
                 user.getEmployeeId(),
                 request.password(),
