@@ -1,5 +1,8 @@
-package com.logimarui.auth.core.service;
+package com.logimarui.auth.core.application.services;
 
+import com.logimarui.auth.core.application.results.AuthContext;
+import com.logimarui.auth.core.application.results.AuthTokens;
+import com.logimarui.auth.core.application.results.IssuedRefreshToken;
 import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
 import com.logimarui.auth.core.domain.enums.Role;
 import com.logimarui.auth.core.domain.enums.SessionStatus;
@@ -35,47 +38,7 @@ public class AuthService {
     private final EmployeeRepository employeeRepository;
 
 
-    @Transactional public AuthTokens login(@NotNull Long employeeId, String password, String ip, String deviceId) {
-        Instant now = Instant.now();
-        User user = userRepository.findByEmployeeId(employeeId)
-                .orElseThrow(() ->
-                    new UserNotFoundException("User not found for provided employee number")
-                );
-        user.assertCanAuthenticate();
 
-        if (!passwordHasher.matches(password, user.getPasswordHash())) {
-            user.registerFailedLogin();
-            userRepository.save(user);
-            throw new SecurityException("wrong password");
-        }
-
-        Session session = findSessionByUserAndDeviceIdAndSessionStatus(user, deviceId, SessionStatus.ACTIVE)
-                .map(existingSession -> {
-                    if(existingSession.isValid(now)){
-                        existingSession.updateIpAddress(ip, now);
-                        sessionRepository.save(existingSession);
-                        return existingSession;
-                    }
-                    return sessionRegister(
-                            user, deviceId, ip
-                    );
-                })
-                .orElseGet(() -> sessionRegister(user, deviceId, ip));
-
-
-
-        IssuedRefreshToken issuedRefreshToken = refreshTokenRegister(session);
-        IssuedAccessToken issuedAccessToken = jwtService.generateAccessToken(user, session);
-        long expiresInSeconds = Math.max(Duration.between(now, issuedAccessToken.expiresAt()).getSeconds(), 0);
-
-        user.recordSuccessfulLogin(now);
-        userRepository.save(user);
-        return new AuthTokens(
-                issuedRefreshToken.rawToken(),
-                issuedAccessToken.token(),
-                expiresInSeconds
-        );
-    }
     public User registerUser(String username, Long employeeId, String password, String ip){
         if(!userCanBeCreated(employeeId)) throw new IllegalStateException("the Employee is not available to an new user");
         return userRegister(username, employeeId, password, ip);
@@ -254,29 +217,9 @@ public class AuthService {
                 )
         );
     }
-    public Session sessionRegister(@NotNull User user, String deviceId, String ip){
-        return sessionRepository.save(
-                Session.create(
-                        user.getId(),
-                        ip,
-                        deviceId,
-                        authTokenProperties.sessionTtl()
-                )
-        );
-    }
-    public IssuedRefreshToken refreshTokenRegister(@NotNull Session session) {
-        String raw= tokenGenerator.generate();
-        String hash = tokenHashService.hash(raw);
 
-        RefreshToken token = RefreshToken.create(session, hash,authTokenProperties.refreshTokenTtl());
-        RefreshToken saved = refreshTokenRepository.save(token, session);
 
-        return new IssuedRefreshToken(saved, raw);
 
-    }
-    public Optional<Session> findSessionByUserAndDeviceIdAndSessionStatus(@NotNull User user, String deviceId, SessionStatus sessionStatus){
-        return sessionRepository.findByUserIdAndDeviceIdAndSessionStatus(user.getId(), deviceId, sessionStatus);
-    }
     public Optional<RefreshToken> findRefreshTokenByToken(@NotNull String refreshToken){
         String tokenHash = tokenHashService.hash(refreshToken);
         return refreshTokenRepository.findByTokenHash(tokenHash);

@@ -3,9 +3,10 @@ package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
+import com.logimarui.auth.core.application.services.LoginService;
 import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.core.service.AuthService;
-import com.logimarui.auth.core.service.AuthTokens;
+import com.logimarui.auth.core.application.services.AuthService;
+import com.logimarui.auth.core.application.results.AuthTokens;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class RegisterController {
     AuthService authService;
+    LoginService loginService;
 
     @PostMapping("/register")
     public AuthTokenResponseDTO registerAndLogin(
@@ -32,7 +34,7 @@ public class RegisterController {
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
         User user = authService.registerUser(request.username(), request.employeeId(), request.password(), ip);
-        AuthTokens tokens = authService.login(
+        AuthTokens tokens = loginService.login(
                 user.getEmployeeId(),
                 request.password(),
                 ip,

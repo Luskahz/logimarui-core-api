@@ -1,11 +1,10 @@
 package com.logimarui.auth.api.controller;
 
-import com.logimarui.auth.core.service.AuthService;
+import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.security.authentication.jaas.SecurityContextLoginModule;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 

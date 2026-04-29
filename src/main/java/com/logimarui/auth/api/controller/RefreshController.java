@@ -2,10 +2,9 @@ package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
-import com.logimarui.auth.core.service.AuthService;
-import com.logimarui.auth.core.service.AuthTokens;
+import com.logimarui.auth.core.application.services.AuthService;
+import com.logimarui.auth.core.application.results.AuthTokens;
 import com.logimarui.auth.infra.web.RequestContextUtils;
-import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -1,8 +1,8 @@
 package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.AuthMeResponseDTO;
-import com.logimarui.auth.core.service.AuthContext;
-import com.logimarui.auth.core.service.AuthService;
+import com.logimarui.auth.core.application.results.AuthContext;
+import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
