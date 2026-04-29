@@ -8,8 +8,8 @@ import com.logimarui.auth.core.domain.model.*;
 import com.logimarui.auth.core.port.*;
 import com.logimarui.auth.core.repository.*;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -255,7 +255,6 @@ public class AuthService {
         );
     }
     public Session sessionRegister(@NotNull User user, String deviceId, String ip){
-
         return sessionRepository.save(
                 Session.create(
                         user.getId(),
