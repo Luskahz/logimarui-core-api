@@ -1,7 +1,6 @@
 package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.response.EmployeeNameResponseDTO;
-import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.core.application.services.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

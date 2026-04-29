@@ -31,12 +31,7 @@ public class RecoverPasswordService {
     private final PasswordChangeRequestRepository passwordChangeRequestRepository;
     private final AuthTimeProperties authTokenProperties;
     private final PasswordHasher passwordHasher;
-    private final TokenGenerator tokenGenerator;
-    private final TokenHashService tokenHashService;
-    private final JwtService jwtService;
-    private final EmployeeRepository employeeRepository;
     private final UtilsServices utilsServices;
-
 
     @Transactional
     public PasswordChangeRequest forgotPassword(Long employeeId, String ip, String deviceId){

@@ -20,18 +20,14 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class RefreshService {
+
     private final UserRepository userRepository;
-    private final SessionRepository sessionRepository;
     private final RefreshTokenRepository refreshTokenRepository;
-    private final PasswordChangeRequestRepository passwordChangeRequestRepository;
     private final AuthTimeProperties authTokenProperties;
-    private final PasswordHasher passwordHasher;
     private final TokenGenerator tokenGenerator;
     private final TokenHashService tokenHashService;
     private final JwtService jwtService;
-    private final EmployeeRepository employeeRepository;
     private final UtilsServices utilsServices;
-
 
     @Transactional
     public AuthTokens refresh(String refreshToken, String ip, String deviceId){

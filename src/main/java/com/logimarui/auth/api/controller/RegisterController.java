@@ -6,7 +6,6 @@ import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
 import com.logimarui.auth.core.application.services.LoginService;
 import com.logimarui.auth.core.application.services.RegisterService;
 import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.core.application.results.AuthTokens;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 public class RegisterController {
-    AuthService authService;
     RegisterService registerService;
     LoginService loginService;
 

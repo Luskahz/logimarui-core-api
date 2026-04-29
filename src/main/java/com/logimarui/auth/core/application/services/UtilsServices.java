@@ -17,16 +17,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class UtilsServices {
-    private final UserRepository userRepository;
+
     private final SessionRepository sessionRepository;
     private final RefreshTokenRepository refreshTokenRepository;
-    private final PasswordChangeRequestRepository passwordChangeRequestRepository;
-    private final AuthTimeProperties authTokenProperties;
-    private final PasswordHasher passwordHasher;
-    private final TokenGenerator tokenGenerator;
-    private final TokenHashService tokenHashService;
-    private final JwtService jwtService;
-    private final EmployeeRepository employeeRepository;
 
     protected void updateSessionLastIpAddressIfChanged(@NotNull Session session, String ip, Instant now) {
         if (!Objects.equals(session.getLastIpAddress(), ip)) {

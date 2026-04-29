@@ -25,14 +25,7 @@ public class MeService {
 
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
-    private final AuthTimeProperties authTokenProperties;
-    private final PasswordHasher passwordHasher;
-    private final TokenGenerator tokenGenerator;
-    private final TokenHashService tokenHashService;
-    private final JwtService jwtService;
     private final UtilsServices utilsServices;
-
 
     @Transactional
     public AuthContext me(

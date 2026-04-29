@@ -2,7 +2,6 @@ package com.logimarui.auth.api.controller;
 
 import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
 import com.logimarui.auth.api.dto.refresh.RefreshRequestDTO;
-import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.core.application.results.AuthTokens;
 import com.logimarui.auth.core.application.services.RefreshService;
 import com.logimarui.auth.infra.web.RequestContextUtils;

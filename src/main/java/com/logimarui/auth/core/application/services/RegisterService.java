@@ -13,14 +13,7 @@ import org.springframework.stereotype.Service;
 public class RegisterService {
 
     private final UserRepository userRepository;
-    private final SessionRepository sessionRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
-    private final PasswordChangeRequestRepository passwordChangeRequestRepository;
-    private final AuthTimeProperties authTokenProperties;
     private final PasswordHasher passwordHasher;
-    private final TokenGenerator tokenGenerator;
-    private final TokenHashService tokenHashService;
-    private final JwtService jwtService;
     private final EmployeeRepository employeeRepository;
 
     public User registerUser(String username, Long employeeId, String password, String ip){
