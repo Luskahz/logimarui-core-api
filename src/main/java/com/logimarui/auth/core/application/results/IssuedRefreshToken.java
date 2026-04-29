@@ -1,4 +1,4 @@
-package com.logimarui.auth.core.service;
+package com.logimarui.auth.core.application.results;
 
 import com.logimarui.auth.core.domain.model.RefreshToken;
 

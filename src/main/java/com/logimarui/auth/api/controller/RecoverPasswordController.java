@@ -4,7 +4,7 @@ import com.logimarui.auth.api.dto.changePassword.ChangePasswordRequestDTO;
 import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordRequestDTO;
 import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordResponseDTO;
 import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
-import com.logimarui.auth.core.service.AuthService;
+import com.logimarui.auth.core.application.services.AuthService;
 import com.logimarui.auth.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
