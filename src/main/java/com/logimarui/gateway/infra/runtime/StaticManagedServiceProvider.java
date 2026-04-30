@@ -13,7 +13,7 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
 
     private final List<ManagedService> services = List.of(
             new ManagedService(
-                    "extrator-manager",
+                    "gerenciador-extracao",
                     "/api/extrator",
                     ServiceType.PYTHON,
                     "C:\\Users\\lucas.l\\Documents\\LogImarui\\logimarui_services\\extrator-manager",
@@ -22,7 +22,7 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
                     true
             ),
             new ManagedService(
-                    "database-monitoring",
+                    "gerenciador-database-monitoring",
                     "/api/monitoring",
                     ServiceType.NODE,
                     "C:\\Users\\lucas.l\\Documents\\LogImarui\\logimarui_services\\database-monitoring",
@@ -31,7 +31,7 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
                     true
             ),
             new ManagedService(
-                    "backup-manager",
+                    "gerenciador-database-backup",
                     "/api/backup",
                     ServiceType.NODE,
                     "C:\\Users\\lucas.l\\Documents\\LogImarui\\logimarui_services\\banco-de-dados\\backup-runner",
@@ -40,7 +40,7 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
                     true
             ),
             new ManagedService(
-                    "n8n",
+                    "n8n-interno",
                     "/api/n8n",
                     ServiceType.DOCKER,
                     "C:\\Users\\lucas.l\\Documents\\LogImarui\\logimarui_services\\n8n",
@@ -51,7 +51,7 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
                     "N8N_LOCAL_PORT"
             ),
             new ManagedService(
-                    "evolution-api",
+                    "evolution-interno",
                     "/api/evolution-api",
                     ServiceType.DOCKER,
                     "C:\\Users\\lucas.l\\Documents\\LogImarui\\logimarui_services\\evolution",
@@ -82,8 +82,10 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
 
     @Override
     public Optional<ManagedService> findById(String id) {
+        String canonicalId = ManagedServiceIds.toCanonical(id);
+
         return services.stream()
-                .filter(service -> service.getId().equals(id))
+                .filter(service -> service.getId().equals(canonicalId))
                 .findFirst();
     }
 }

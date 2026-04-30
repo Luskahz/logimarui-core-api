@@ -5,12 +5,14 @@ import com.logimarui.gateway.core.domain.model.ServiceRuntime;
 import com.logimarui.gateway.core.port.ManagedServiceProvider;
 import com.logimarui.gateway.core.port.ServiceProcessRunner;
 import com.logimarui.gateway.core.port.ServiceRuntimeRepository;
+import com.logimarui.gateway.infra.runtime.ManagedServiceIds;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,12 +24,13 @@ public class ServiceLifecycleManager {
     private final List<ServiceProcessRunner> processRunners;
 
     public ServiceRuntime startById(String serviceId) {
-        ManagedService service = findManagedService(serviceId);
+        String canonicalServiceId = ManagedServiceIds.toCanonical(serviceId);
+        ManagedService service = findManagedService(canonicalServiceId);
 
-        serviceRuntimeRepository.findByServiceId(serviceId)
+        findRuntimeByAnyAlias(canonicalServiceId)
                 .ifPresent(existingRuntime -> {
                     throw new IllegalStateException(
-                            "Serviço já possui runtime registrado: " + serviceId +
+                            "Servico ja possui runtime registrado: " + existingRuntime.getServiceId() +
                                     " rootPid=" + existingRuntime.getRootPid() +
                                     " listenerPid=" + existingRuntime.getListenerPid()
                     );
@@ -42,11 +45,12 @@ public class ServiceLifecycleManager {
     }
 
     public void stopById(String serviceId) {
-        ManagedService service = findManagedService(serviceId);
+        String canonicalServiceId = ManagedServiceIds.toCanonical(serviceId);
+        ManagedService service = findManagedService(canonicalServiceId);
 
-        ServiceRuntime runtime = serviceRuntimeRepository.findByServiceId(serviceId)
+        ServiceRuntime runtime = findRuntimeByAnyAlias(canonicalServiceId)
                 .orElseThrow(() -> new IllegalStateException(
-                        "Serviço não possui runtime registrado: " + serviceId
+                        "Servico nao possui runtime registrado: " + canonicalServiceId
                 ));
 
         ServiceProcessRunner runner = findRunner(service);
@@ -54,12 +58,12 @@ public class ServiceLifecycleManager {
         try {
             runner.stop(service, runtime);
         } finally {
-            serviceRuntimeRepository.deleteByServiceId(serviceId);
+            deleteRuntimeByAnyAlias(canonicalServiceId);
         }
     }
 
     public ServiceRuntime restartById(String serviceId) {
-        serviceRuntimeRepository.findByServiceId(serviceId)
+        findRuntimeByAnyAlias(serviceId)
                 .ifPresent(runtime -> stopById(serviceId));
 
         return startById(serviceId);
@@ -80,7 +84,7 @@ public class ServiceLifecycleManager {
         for (ServiceRuntime runtime : runtimes) {
             try {
                 log.info(
-                        "[Supervisor] Parando serviço {} rootPid={} listenerPid={} port={}",
+                        "[Supervisor] Parando servico {} rootPid={} listenerPid={} port={}",
                         runtime.getServiceId(),
                         runtime.getRootPid(),
                         runtime.getListenerPid(),
@@ -89,9 +93,9 @@ public class ServiceLifecycleManager {
 
                 stopById(runtime.getServiceId());
 
-                log.info("[Supervisor] Serviço {} parado.", runtime.getServiceId());
+                log.info("[Supervisor] Servico {} parado.", runtime.getServiceId());
             } catch (Exception exception) {
-                log.error("[Supervisor] Erro ao parar serviço {}.", runtime.getServiceId(), exception);
+                log.error("[Supervisor] Erro ao parar servico {}.", runtime.getServiceId(), exception);
                 serviceRuntimeRepository.deleteByServiceId(runtime.getServiceId());
             }
         }
@@ -108,20 +112,20 @@ public class ServiceLifecycleManager {
 
     @PreDestroy
     public void shutdown() {
-        log.info("[Supervisor] Shutdown iniciado. Parando serviços gerenciados.");
+        log.info("[Supervisor] Shutdown iniciado. Parando servicos gerenciados.");
 
         try {
             stopAll();
-            log.info("[Supervisor] Shutdown finalizado. Serviços gerenciados foram parados.");
+            log.info("[Supervisor] Shutdown finalizado. Servicos gerenciados foram parados.");
         } catch (Exception exception) {
-            log.error("[Supervisor] Erro durante shutdown dos serviços gerenciados.", exception);
+            log.error("[Supervisor] Erro durante shutdown dos servicos gerenciados.", exception);
         }
     }
 
     private ManagedService findManagedService(String serviceId) {
         return managedServiceProvider.findById(serviceId)
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Serviço não encontrado: " + serviceId
+                        "Servico nao encontrado: " + serviceId
                 ));
     }
 
@@ -130,7 +134,26 @@ public class ServiceLifecycleManager {
                 .filter(candidate -> candidate.supports(service))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException(
-                        "Nenhum runner encontrado para o serviço: " + service.getId()
+                        "Nenhum runner encontrado para o servico: " + service.getId()
                 ));
+    }
+
+    private Optional<ServiceRuntime> findRuntimeByAnyAlias(String serviceId) {
+        for (String candidateServiceId : ManagedServiceIds.aliasesFor(serviceId)) {
+            Optional<ServiceRuntime> runtime =
+                    serviceRuntimeRepository.findByServiceId(candidateServiceId);
+
+            if (runtime.isPresent()) {
+                return runtime;
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    private void deleteRuntimeByAnyAlias(String serviceId) {
+        for (String candidateServiceId : ManagedServiceIds.aliasesFor(serviceId)) {
+            serviceRuntimeRepository.deleteByServiceId(candidateServiceId);
+        }
     }
 }

@@ -23,11 +23,24 @@ public class RuntimeAwareServiceRouteProvider implements ServiceRouteProvider {
         return managedServiceProvider.findAll()
                 .stream()
                 .flatMap(service ->
-                        serviceRuntimeRepository.findByServiceId(service.getId())
+                        findRuntimeByAnyAlias(service)
                                 .map(runtime -> toServiceRoute(service, runtime))
                                 .stream()
                 )
                 .toList();
+    }
+
+    private java.util.Optional<ServiceRuntime> findRuntimeByAnyAlias(ManagedService service) {
+        for (String serviceId : ManagedServiceIds.aliasesFor(service.getId())) {
+            java.util.Optional<ServiceRuntime> runtime =
+                    serviceRuntimeRepository.findByServiceId(serviceId);
+
+            if (runtime.isPresent()) {
+                return runtime;
+            }
+        }
+
+        return java.util.Optional.empty();
     }
 
     private ServiceRoute toServiceRoute(ManagedService service, ServiceRuntime runtime) {

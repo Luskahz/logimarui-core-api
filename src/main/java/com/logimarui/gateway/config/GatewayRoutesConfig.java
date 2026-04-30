@@ -34,7 +34,16 @@ import static org.springframework.web.servlet.function.RouterFunctions.route;
 @Configuration
 public class GatewayRoutesConfig {
 
-    private static final String N8N_SERVICE_ID = "n8n";
+    private static final String EXTRACTION_SERVICE_ID = "gerenciador-extracao";
+    private static final String EXTRACTION_PUBLIC_PREFIX = "/gerenciador-extracao";
+    private static final String DATABASE_MONITORING_SERVICE_ID = "gerenciador-database-monitoring";
+    private static final String DATABASE_BACKUP_SERVICE_ID = "gerenciador-database-backup";
+    private static final String DATABASE_PUBLIC_PREFIX = "/gerenciador-database";
+    private static final String DATABASE_MONITORING_PUBLIC_PREFIX = DATABASE_PUBLIC_PREFIX + "/monitoring";
+    private static final String DATABASE_BACKUP_PUBLIC_PREFIX = DATABASE_PUBLIC_PREFIX + "/backup";
+    private static final String EVOLUTION_SERVICE_ID = "evolution-interno";
+    private static final String EVOLUTION_PUBLIC_PREFIX = "/evolution";
+    private static final String N8N_SERVICE_ID = "n8n-interno";
     private static final String N8N_PUBLIC_PREFIX = "/n8n";
     private static final String N8N_REST_PREFIX = "/rest/n8n";
     private static final List<String> FRONTEND_RESERVED_PATH_PREFIXES = List.of(
@@ -45,6 +54,8 @@ public class GatewayRoutesConfig {
             "/evolution",
             "/form",
             "/form-test",
+            "/gerenciador-database",
+            "/gerenciador-extracao",
             "/n8n",
             "/replenishments",
             "/rest",
@@ -76,8 +87,10 @@ public class GatewayRoutesConfig {
             "/call",
             "/chat",
             "/chatwoot",
+            "/console",
             "/credentials",
             "/css",
+            "/dashboard",
             "/e",
             "/event",
             "/executions",
@@ -91,6 +104,7 @@ public class GatewayRoutesConfig {
             "/instance",
             "/js",
             "/label",
+            "/legacy-dashboard",
             "/locales",
             "/manager",
             "/message",
@@ -149,6 +163,14 @@ public class GatewayRoutesConfig {
                 .route(path("/form/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
                 .route(path("/form-test"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
                 .route(path("/form-test/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
+                .route(path(EXTRACTION_PUBLIC_PREFIX), request -> proxyToExtractionManager(request, serviceRegistry))
+                .route(path(EXTRACTION_PUBLIC_PREFIX + "/**"), request -> proxyToExtractionManager(request, serviceRegistry))
+                .route(path(DATABASE_PUBLIC_PREFIX), request -> redirectTo(DATABASE_MONITORING_PUBLIC_PREFIX + "/"))
+                .route(path(DATABASE_PUBLIC_PREFIX + "/"), request -> redirectTo(DATABASE_MONITORING_PUBLIC_PREFIX + "/"))
+                .route(path(DATABASE_MONITORING_PUBLIC_PREFIX), request -> proxyToDatabaseMonitoring(request, serviceRegistry))
+                .route(path(DATABASE_MONITORING_PUBLIC_PREFIX + "/**"), request -> proxyToDatabaseMonitoring(request, serviceRegistry))
+                .route(path(DATABASE_BACKUP_PUBLIC_PREFIX), request -> proxyToDatabaseBackup(request, serviceRegistry))
+                .route(path(DATABASE_BACKUP_PUBLIC_PREFIX + "/**"), request -> proxyToDatabaseBackup(request, serviceRegistry))
                 .route(path("/evolution"), request -> proxyToEvolutionManager(request, serviceRegistry))
                 .route(path("/evolution/**"), request -> proxyToEvolutionManager(request, serviceRegistry))
                 .route(path("/n8n"), request -> proxyToN8n(request, serviceRegistry))
@@ -200,19 +222,70 @@ public class GatewayRoutesConfig {
     ) {
         String requestPath = request.path();
 
-        if (requestPath.equals("/evolution") || requestPath.equals("/evolution/")) {
-            return ServerResponse
-                    .status(302)
-                    .header(HttpHeaders.LOCATION, "/evolution/manager/")
-                    .build();
+        if (requestPath.equals(EVOLUTION_PUBLIC_PREFIX) || requestPath.equals(EVOLUTION_PUBLIC_PREFIX + "/")) {
+            return redirectTo(EVOLUTION_PUBLIC_PREFIX + "/manager/");
         }
 
         return proxyToPrefixedFrontend(
                 request,
                 serviceRegistry,
-                "evolution-api",
-                "/evolution",
+                EVOLUTION_SERVICE_ID,
+                EVOLUTION_PUBLIC_PREFIX,
                 "Evolution Manager",
+                true
+        );
+    }
+
+    private ServerResponse proxyToExtractionManager(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        if (request.path().equals(EXTRACTION_PUBLIC_PREFIX)) {
+            return redirectTo(EXTRACTION_PUBLIC_PREFIX + "/");
+        }
+
+        return proxyToPrefixedFrontend(
+                request,
+                serviceRegistry,
+                EXTRACTION_SERVICE_ID,
+                EXTRACTION_PUBLIC_PREFIX,
+                "Gerenciador Extracao",
+                true
+        );
+    }
+
+    private ServerResponse proxyToDatabaseMonitoring(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        if (request.path().equals(DATABASE_MONITORING_PUBLIC_PREFIX)) {
+            return redirectTo(DATABASE_MONITORING_PUBLIC_PREFIX + "/");
+        }
+
+        return proxyToPrefixedFrontend(
+                request,
+                serviceRegistry,
+                DATABASE_MONITORING_SERVICE_ID,
+                DATABASE_MONITORING_PUBLIC_PREFIX,
+                "Gerenciador Database Monitoring",
+                true
+        );
+    }
+
+    private ServerResponse proxyToDatabaseBackup(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        if (request.path().equals(DATABASE_BACKUP_PUBLIC_PREFIX)) {
+            return redirectTo(DATABASE_BACKUP_PUBLIC_PREFIX + "/");
+        }
+
+        return proxyToPrefixedFrontend(
+                request,
+                serviceRegistry,
+                DATABASE_BACKUP_SERVICE_ID,
+                DATABASE_BACKUP_PUBLIC_PREFIX,
+                "Gerenciador Database Backup",
                 true
         );
     }
@@ -222,10 +295,7 @@ public class GatewayRoutesConfig {
             ServiceRegistry serviceRegistry
     ) {
         if (request.path().equals("/n8n")) {
-            return ServerResponse
-                    .status(302)
-                    .header(HttpHeaders.LOCATION, "/n8n/")
-                    .build();
+            return redirectTo("/n8n/");
         }
 
         return proxyToPrefixedFrontend(
@@ -236,6 +306,13 @@ public class GatewayRoutesConfig {
                 "n8n",
                 true
         );
+    }
+
+    private ServerResponse redirectTo(String location) {
+        return ServerResponse
+                .status(302)
+                .header(HttpHeaders.LOCATION, location)
+                .build();
     }
 
     private ServerResponse proxyToN8nRootEndpoint(

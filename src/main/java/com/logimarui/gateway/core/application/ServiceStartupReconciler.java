@@ -4,6 +4,7 @@ import com.logimarui.gateway.core.domain.model.ManagedService;
 import com.logimarui.gateway.core.domain.model.ServiceRuntime;
 import com.logimarui.gateway.core.port.ManagedServiceProvider;
 import com.logimarui.gateway.core.port.ServiceRuntimeRepository;
+import com.logimarui.gateway.infra.runtime.ManagedServiceIds;
 import com.logimarui.gateway.infra.process.ProcessTreeTerminator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -50,8 +52,7 @@ public class ServiceStartupReconciler {
     }
 
     private void stopPersistedRuntimeIfExists(ManagedService service) {
-        Optional<ServiceRuntime> runtime =
-                serviceRuntimeRepository.findByServiceId(service.getId());
+        Optional<ServiceRuntime> runtime = findPersistedRuntime(service);
 
         if (runtime.isEmpty()) {
             log.info("[Supervisor] Nenhum runtime persistido para {}", service.getId());
@@ -70,7 +71,7 @@ public class ServiceStartupReconciler {
         processTreeTerminator.terminate(persistedRuntime.getListenerPid());
         processTreeTerminator.terminate(persistedRuntime.getRootPid());
 
-        serviceRuntimeRepository.deleteByServiceId(service.getId());
+        deletePersistedRuntime(service);
     }
 
     private void startFresh(ManagedService service) {
@@ -85,5 +86,27 @@ public class ServiceStartupReconciler {
                 runtime.getListenerPid(),
                 runtime.getPort()
         );
+    }
+
+    private Optional<ServiceRuntime> findPersistedRuntime(ManagedService service) {
+        for (String serviceId : resolveServiceAliases(service)) {
+            Optional<ServiceRuntime> runtime = serviceRuntimeRepository.findByServiceId(serviceId);
+
+            if (runtime.isPresent()) {
+                return runtime;
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    private void deletePersistedRuntime(ManagedService service) {
+        for (String serviceId : resolveServiceAliases(service)) {
+            serviceRuntimeRepository.deleteByServiceId(serviceId);
+        }
+    }
+
+    private List<String> resolveServiceAliases(ManagedService service) {
+        return ManagedServiceIds.aliasesFor(service.getId());
     }
 }
