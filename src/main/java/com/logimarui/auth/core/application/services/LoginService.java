@@ -33,11 +33,11 @@ public class LoginService {
     private final JwtService jwtService;
 
 
-    @Transactional public AuthTokens login(@NotNull Long employeeId, String password, String ip, String deviceId) {
+    @Transactional public AuthTokens login(@NotNull String cpf, String password, String ip, String deviceId) {
         Instant now = Instant.now();
-        User user = userRepository.findByEmployeeId(employeeId)
+        User user = userRepository.findByCpf(cpf)
                 .orElseThrow(() ->
-                        new UserNotFoundException("User not found for provided employee number")
+                        new UserNotFoundException("User not found for provided cpf number")
                 );
         user.assertCanAuthenticate();
 

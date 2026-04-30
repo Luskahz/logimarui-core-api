@@ -17,7 +17,7 @@ import java.util.Set;
 public class User {
 
      private Long id;
-     private Long employeeId;
+     private String cpf;
      private String username;
      private String passwordHash;
      private Set<Role> roles;
@@ -29,8 +29,8 @@ public class User {
 
     private static final int MAX_FAILED_LOGIN_ATTEMPTS = 5;
 
-    private User(String username, String passwordHash, Long employeeId) {
-        this.employeeId = employeeId;
+    private User(String username, String passwordHash, String cpf) {
+        this.cpf = cpf;
         this.username = username;
         this.passwordHash = passwordHash;
         this.roles = EnumSet.of(Role.INDEFINIDO);
@@ -44,14 +44,14 @@ public class User {
     }
 
 
-    @Contract("_, _, _ -> new") public static @NotNull User create(String username, String passwordHash, Long employeeId) {
-        return new User(username, passwordHash, employeeId);
+    @Contract("_, _, _ -> new") public static @NotNull User create(String username, String passwordHash, String cpf) {
+        return new User(username, passwordHash, cpf);
     }
 
 
     public static @NotNull User reconstitute(
             Long id,
-            Long employeeId,
+            String cpf,
             String username,
             String passwordHash,
             Set<Role> roles,
@@ -67,11 +67,11 @@ public class User {
         if (failedLoginAttempts < 0) throw new IllegalArgumentException("failedLoginAttempts cannot be negative");
         if (username == null || username.isBlank()) throw new IllegalArgumentException("username is required");
         if (passwordHash == null || passwordHash.isBlank()) throw new IllegalArgumentException("passwordHash is required");
-        if (employeeId == null) throw new IllegalArgumentException("employeeId is required");
+        if (cpf == null) throw new IllegalArgumentException("cpf is required");
 
         User user = new User();
         user.id = id;
-        user.employeeId = employeeId;
+        user.cpf = cpf;
         user.username = username;
         user.passwordHash = passwordHash;
         if (roles == null || roles.isEmpty()) user.roles = EnumSet.of(Role.INDEFINIDO);

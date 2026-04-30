@@ -34,9 +34,9 @@ public class RecoverPasswordService {
     private final UtilsServices utilsServices;
 
     @Transactional
-    public PasswordChangeRequest forgotPassword(Long employeeId, String ip, String deviceId){
+    public PasswordChangeRequest forgotPassword(String cpf, String ip, String deviceId){
         Instant now = Instant.now();
-        User user = userRepository.findByEmployeeId(employeeId)
+        User user = userRepository.findByCpf(cpf)
                 .orElseThrow(() -> new UserNotFoundException("User do not exist"));
 
         user.assertCanRequestPasswordChange();
@@ -72,7 +72,7 @@ public class RecoverPasswordService {
     }
 
 
-    @Transactional public void changePassword(Long employeeId, String deviceId, Long passwordChangeRequestId, String newPassword) {
+    @Transactional public void changePassword(String cpf, String deviceId, Long passwordChangeRequestId, String newPassword) {
         Instant now = Instant.now();
         PasswordChangeRequest request =
                 passwordChangeRequestRepository.findById(passwordChangeRequestId)
@@ -81,7 +81,7 @@ public class RecoverPasswordService {
                         );
 
         validatePasswordChangeRequest(request, deviceId, now);
-        User user = userRepository.findByEmployeeId(employeeId)
+        User user = userRepository.findByCpf(cpf)
                 .orElseThrow(() ->
                         new UserNotFoundException("User not found for request")
                 );

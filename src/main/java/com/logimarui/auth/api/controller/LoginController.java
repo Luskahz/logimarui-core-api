@@ -31,7 +31,7 @@ public class LoginController {
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
-        AuthTokens tokens = loginService.login(request.employeeId(), request.password(), ip, deviceId);
+        AuthTokens tokens = loginService.login(request.cpf(), request.password(), ip, deviceId);
         return new AuthTokenResponseDTO(
                 tokens.refreshToken(),
                 tokens.accessToken(),

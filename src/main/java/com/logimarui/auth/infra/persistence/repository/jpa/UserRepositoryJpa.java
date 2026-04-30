@@ -39,8 +39,8 @@ public class UserRepositoryJpa implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByEmployeeId(Long employeeId) {
-        return jpa.findByEmployeeId(employeeId)
+    public Optional<User> findByCpf(String cpf) {
+        return jpa.findByCpf(cpf)
                 .map(UserMapper::toDomain);
     }
 }

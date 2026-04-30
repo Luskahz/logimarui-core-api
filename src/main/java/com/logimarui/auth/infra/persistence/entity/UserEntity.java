@@ -12,7 +12,7 @@ import java.util.Set;
 @Table(
         name = "auth_user",
         indexes = {
-                @Index(name = "idxAuthUserEmployeeId", columnList = "employee_id"),
+                @Index(name = "idxAuthUserCpf", columnList = "cpf"),
                 @Index(name = "idxAuthUserUsername", columnList = "username")
         }
 )
@@ -26,8 +26,8 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "employee_id", nullable = false)
-    private Long employeeId;
+    @Column(name = "cpf", nullable = false, unique = true)
+    private String cpf;
 
     @Column(name = "username", nullable = false, unique = true, length = 100)
     private String username;

@@ -1,9 +1,9 @@
 package com.logimarui.auth.api.dto.login;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
 
 public record LoginRequestDTO(
-        @NotNull Long employeeId,
+        @CPF String cpf,
         @NotBlank String password
 ){}

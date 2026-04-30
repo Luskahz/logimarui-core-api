@@ -14,7 +14,7 @@ public class UserMapper {
     public static User toDomain(UserEntity entity) {
         return User.reconstitute(
                 entity.getId(),
-                entity.getEmployeeId(),
+                entity.getCpf(),
                 entity.getUsername(),
                 entity.getPasswordHash(),
                 entity.getRoles(),
@@ -29,7 +29,7 @@ public class UserMapper {
     public static UserEntity toEntity(User u) {
         return new UserEntity(
                 u.getId(),
-                u.getEmployeeId(),
+                u.getCpf(),
                 u.getUsername(),
                 u.getPasswordHash(),
                 EnumSet.copyOf(u.getRoles()),

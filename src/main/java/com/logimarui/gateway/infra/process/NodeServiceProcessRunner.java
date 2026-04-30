@@ -40,8 +40,7 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
                     .redirectOutput(ProcessBuilder.Redirect.appendTo(logFile))
                     .redirectError(ProcessBuilder.Redirect.appendTo(logFile));
 
-            processBuilder.environment().put("PORT", String.valueOf(allocatedPort));
-            processBuilder.environment().put("SERVICE_HOST", "0.0.0.0");
+            injectPortEnvironment(service, allocatedPort, processBuilder);
 
             process = processBuilder.start();
 
@@ -104,6 +103,22 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
         }
 
         return new File(logsDirectory, service.getId() + ".log");
+    }
+
+    private void injectPortEnvironment(
+            ManagedService service,
+            int allocatedPort,
+            ProcessBuilder processBuilder
+    ) {
+        String portEnvName = service.getPortEnvironmentVariable();
+
+        if (portEnvName == null || portEnvName.isBlank()) {
+            portEnvName = "PORT";
+        }
+
+        processBuilder.environment().put(portEnvName, String.valueOf(allocatedPort));
+        processBuilder.environment().put("PORT", String.valueOf(allocatedPort));
+        processBuilder.environment().put("SERVICE_HOST", "0.0.0.0");
     }
 
     private void sleep(long millis) {

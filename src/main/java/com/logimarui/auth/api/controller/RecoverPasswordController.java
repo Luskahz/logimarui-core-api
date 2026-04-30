@@ -28,7 +28,7 @@ public class RecoverPasswordController {
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
-        PasswordChangeRequest passwordChangeRequest = recoverPasswordService.forgotPassword(forgotPasswordRequestDTO.employeeId(), ip, deviceId);
+        PasswordChangeRequest passwordChangeRequest = recoverPasswordService.forgotPassword(forgotPasswordRequestDTO.cpf(), ip, deviceId);
         return new ForgotPasswordResponseDTO(
                 passwordChangeRequest.getId(),
                 passwordChangeRequest.getPasswordChangeStatus().name()
@@ -44,7 +44,7 @@ public class RecoverPasswordController {
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
 
         recoverPasswordService.changePassword(
-                changePasswordRequestDTO.employeeId(),
+                changePasswordRequestDTO.cpf(),
                 deviceId,
                 changePasswordRequestDTO.passwordChangeRequestId(),
                 changePasswordRequestDTO.newPassword()

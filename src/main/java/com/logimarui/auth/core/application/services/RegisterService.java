@@ -14,24 +14,17 @@ public class RegisterService {
 
     private final UserRepository userRepository;
     private final PasswordHasher passwordHasher;
-    private final EmployeeRepository employeeRepository;
 
-    public User registerUser(String username, Long employeeId, String password, String ip){
-        if(!userCanBeCreated(employeeId)) throw new IllegalStateException("the Employee is not available to an new user");
-        return userRegister(username, employeeId, password, ip);
+    public User registerUser(String username, String cpf, String password, String ip){
+        return userRegister(username, cpf, password, ip);
     }
 
-    public boolean userCanBeCreated(Long employeeId){
-        return employeeRepository.isAuthorizedForUserCreation(employeeId);
-    }
-
-    public User userRegister(@NotNull String username, Long employeeId, String password, String ip){
-        //validar se a matricula do usuario está disponivel no jdbc
+    public User userRegister(@NotNull String username, String cpf, String password, String ip){
         return userRepository.save(
                 User.create(
                         username,
                         passwordHasher.hash(password),
-                        employeeId
+                        cpf
                 )
         );
     }

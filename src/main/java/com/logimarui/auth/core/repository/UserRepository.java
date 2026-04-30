@@ -12,6 +12,6 @@ public interface UserRepository {
     Optional<User> findById(Long id);
 
     User save(User user);
-    Optional<User> findByEmployeeId(Long employeeId);
+    Optional<User> findByCpf(String cpf);
 
 }

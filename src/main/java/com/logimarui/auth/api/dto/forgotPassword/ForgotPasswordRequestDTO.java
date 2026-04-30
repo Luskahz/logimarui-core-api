@@ -1,7 +1,9 @@
 package com.logimarui.auth.api.dto.forgotPassword;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 public record ForgotPasswordRequestDTO(
-        Long employeeId
+        @CPF String cpf
 ){
 
 }

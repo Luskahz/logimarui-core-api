@@ -33,9 +33,9 @@ public class RegisterController {
     ){
         String ip = RequestContextUtils.resolveClientIp(httpServletRequest);
         String deviceId = RequestContextUtils.resolveDeviceId(httpServletRequest);
-        User user = registerService.registerUser(request.username(), request.employeeId(), request.password(), ip);
+        User user = registerService.registerUser(request.username(), request.cpf(), request.password(), ip);
         AuthTokens tokens = loginService.login(
-                user.getEmployeeId(),
+                user.getCpf(),
                 request.password(),
                 ip,
                 deviceId
