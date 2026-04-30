@@ -1,7 +1,7 @@
-package com.logimarui.auth.core.domain.model;
+package com.logimarui.authentication.core.domain.model;
 
-import com.logimarui.auth.core.domain.enums.Role;
-import com.logimarui.auth.core.domain.enums.UserStatus;
+import com.logimarui.authentication.core.domain.enums.Role;
+import com.logimarui.authentication.core.domain.enums.UserStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

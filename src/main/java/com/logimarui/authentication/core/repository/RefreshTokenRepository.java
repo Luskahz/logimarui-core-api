@@ -1,11 +1,8 @@
-package com.logimarui.auth.core.repository;
+package com.logimarui.authentication.core.repository;
 
-import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
-import com.logimarui.auth.core.domain.model.RefreshToken;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.infra.persistence.entity.RefreshTokenEntity;
-
-import java.util.List;
+import com.logimarui.authentication.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.authentication.core.domain.model.RefreshToken;
+import com.logimarui.authentication.core.domain.model.Session;
 import java.util.Optional;
 
 public interface RefreshTokenRepository {

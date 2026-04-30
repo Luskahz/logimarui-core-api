@@ -1,6 +1,6 @@
-package com.logimarui.auth.infra.config.security;
+package com.logimarui.authentication.infra.config.security;
 
-import com.logimarui.auth.core.port.AuthTimeProperties;
+import com.logimarui.authentication.core.port.AuthTimeProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

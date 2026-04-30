@@ -1,4 +1,4 @@
-package com.logimarui.auth.api.dto;
+package com.logimarui.authentication.api.dto;
 
 public record AuthTokenResponseDTO(
    String refreshToken,

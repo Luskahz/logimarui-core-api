@@ -1,15 +1,15 @@
-package com.logimarui.auth.core.application.services;
+package com.logimarui.authentication.core.application.services;
 
-import com.logimarui.auth.core.application.results.AuthTokens;
-import com.logimarui.auth.core.application.results.IssuedRefreshToken;
-import com.logimarui.auth.core.domain.enums.SessionStatus;
-import com.logimarui.auth.core.domain.exception.UserNotFoundException;
-import com.logimarui.auth.core.domain.model.IssuedAccessToken;
-import com.logimarui.auth.core.domain.model.RefreshToken;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.core.port.*;
-import com.logimarui.auth.core.repository.*;
+import com.logimarui.authentication.core.application.results.AuthTokens;
+import com.logimarui.authentication.core.application.results.IssuedRefreshToken;
+import com.logimarui.authentication.core.domain.enums.SessionStatus;
+import com.logimarui.authentication.core.domain.exception.UserNotFoundException;
+import com.logimarui.authentication.core.domain.model.IssuedAccessToken;
+import com.logimarui.authentication.core.domain.model.RefreshToken;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.core.domain.model.User;
+import com.logimarui.authentication.core.port.*;
+import com.logimarui.authentication.core.repository.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

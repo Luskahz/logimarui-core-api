@@ -1,6 +1,6 @@
-package com.logimarui.auth.infra.security.password;
+package com.logimarui.authentication.infra.security.password;
 
-import com.logimarui.auth.core.port.PasswordHasher;
+import com.logimarui.authentication.core.port.PasswordHasher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

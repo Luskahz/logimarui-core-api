@@ -1,6 +1,6 @@
-package com.logimarui.auth.infra.security.token;
+package com.logimarui.authentication.infra.security.token;
 
-import com.logimarui.auth.core.port.TokenGenerator;
+import com.logimarui.authentication.core.port.TokenGenerator;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;

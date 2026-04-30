@@ -1,6 +1,6 @@
-package com.logimarui.auth.infra.persistence.entity;
+package com.logimarui.authentication.infra.persistence.entity;
 
-import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.authentication.core.domain.enums.RefreshTokenStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

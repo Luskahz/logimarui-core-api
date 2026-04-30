@@ -1,8 +1,8 @@
-package com.logimarui.auth.infra.persistence.jpa;
+package com.logimarui.authentication.infra.persistence.jpa;
 
 
-import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
-import com.logimarui.auth.infra.persistence.entity.RefreshTokenEntity;
+import com.logimarui.authentication.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.authentication.infra.persistence.entity.RefreshTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

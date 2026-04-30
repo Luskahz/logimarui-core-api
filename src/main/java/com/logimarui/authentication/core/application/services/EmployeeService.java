@@ -1,6 +1,6 @@
-package com.logimarui.auth.core.application.services;
+package com.logimarui.authentication.core.application.services;
 
-import com.logimarui.auth.core.repository.EmployeeRepository;
+import com.logimarui.authentication.core.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,11 @@
-package com.logimarui.auth.api.controller;
+package com.logimarui.authentication.api.controller;
 
-import com.logimarui.auth.api.dto.changePassword.ChangePasswordRequestDTO;
-import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordRequestDTO;
-import com.logimarui.auth.api.dto.forgotPassword.ForgotPasswordResponseDTO;
-import com.logimarui.auth.core.application.services.RecoverPasswordService;
-import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
-import com.logimarui.auth.infra.web.RequestContextUtils;
+import com.logimarui.authentication.api.dto.changePassword.ChangePasswordRequestDTO;
+import com.logimarui.authentication.api.dto.forgotPassword.ForgotPasswordRequestDTO;
+import com.logimarui.authentication.api.dto.forgotPassword.ForgotPasswordResponseDTO;
+import com.logimarui.authentication.core.application.services.RecoverPasswordService;
+import com.logimarui.authentication.core.domain.model.PasswordChangeRequest;
+import com.logimarui.authentication.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;

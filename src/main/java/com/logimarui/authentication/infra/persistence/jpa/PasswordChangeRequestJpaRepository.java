@@ -1,8 +1,7 @@
-package com.logimarui.auth.infra.persistence.jpa;
+package com.logimarui.authentication.infra.persistence.jpa;
 
-import com.logimarui.auth.core.domain.enums.PasswordChangeStatus;
-import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
-import com.logimarui.auth.infra.persistence.entity.PasswordChangeRequestEntity;
+import com.logimarui.authentication.core.domain.enums.PasswordChangeStatus;
+import com.logimarui.authentication.infra.persistence.entity.PasswordChangeRequestEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

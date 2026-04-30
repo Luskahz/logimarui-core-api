@@ -1,7 +1,7 @@
-package com.logimarui.auth.infra.persistence.repository.jpa;
+package com.logimarui.authentication.infra.persistence.repository.jpa;
 
-import com.logimarui.auth.core.repository.EmployeeRepository;
-import com.logimarui.auth.infra.persistence.jpa.EmployeeJpaRepository;
+import com.logimarui.authentication.core.repository.EmployeeRepository;
+import com.logimarui.authentication.infra.persistence.jpa.EmployeeJpaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

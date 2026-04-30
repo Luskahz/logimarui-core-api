@@ -1,13 +1,13 @@
-package com.logimarui.auth.api.controller;
+package com.logimarui.authentication.api.controller;
 
 
-import com.logimarui.auth.api.dto.AuthTokenResponseDTO;
-import com.logimarui.auth.api.dto.register.RegisterRequestDTO;
-import com.logimarui.auth.core.application.services.LoginService;
-import com.logimarui.auth.core.application.services.RegisterService;
-import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.core.application.results.AuthTokens;
-import com.logimarui.auth.infra.web.RequestContextUtils;
+import com.logimarui.authentication.api.dto.AuthTokenResponseDTO;
+import com.logimarui.authentication.api.dto.register.RegisterRequestDTO;
+import com.logimarui.authentication.core.application.services.LoginService;
+import com.logimarui.authentication.core.application.services.RegisterService;
+import com.logimarui.authentication.core.domain.model.User;
+import com.logimarui.authentication.core.application.results.AuthTokens;
+import com.logimarui.authentication.infra.web.RequestContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

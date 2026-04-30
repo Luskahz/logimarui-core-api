@@ -1,4 +1,4 @@
-package com.logimarui.auth.api.dto.register;
+package com.logimarui.authentication.api.dto.register;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

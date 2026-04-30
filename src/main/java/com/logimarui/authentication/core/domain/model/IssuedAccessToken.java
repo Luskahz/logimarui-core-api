@@ -1,4 +1,4 @@
-package com.logimarui.auth.core.domain.model;
+package com.logimarui.authentication.core.domain.model;
 
 import java.time.Instant;
 

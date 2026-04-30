@@ -1,4 +1,4 @@
-package com.logimarui.auth.infra.web;
+package com.logimarui.authentication.infra.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NoArgsConstructor;

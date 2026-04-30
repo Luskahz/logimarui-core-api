@@ -1,6 +1,6 @@
-package com.logimarui.auth.infra.security.token;
+package com.logimarui.authentication.infra.security.token;
 
-import com.logimarui.auth.core.port.TokenHashService;
+import com.logimarui.authentication.core.port.TokenHashService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 

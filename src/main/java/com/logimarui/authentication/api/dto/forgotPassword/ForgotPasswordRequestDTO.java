@@ -1,4 +1,4 @@
-package com.logimarui.auth.api.dto.forgotPassword;
+package com.logimarui.authentication.api.dto.forgotPassword;
 
 import org.hibernate.validator.constraints.br.CPF;
 

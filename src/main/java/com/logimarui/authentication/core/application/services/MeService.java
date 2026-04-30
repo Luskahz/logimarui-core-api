@@ -1,13 +1,12 @@
-package com.logimarui.auth.core.application.services;
+package com.logimarui.authentication.core.application.services;
 
-import com.logimarui.auth.core.application.results.AuthContext;
-import com.logimarui.auth.core.domain.exception.UserNotFoundException;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.core.port.*;
-import com.logimarui.auth.core.repository.RefreshTokenRepository;
-import com.logimarui.auth.core.repository.SessionRepository;
-import com.logimarui.auth.core.repository.UserRepository;
+import com.logimarui.authentication.core.application.results.AuthContext;
+import com.logimarui.authentication.core.domain.exception.UserNotFoundException;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.core.domain.model.User;
+import com.logimarui.authentication.core.port.*;
+import com.logimarui.authentication.core.repository.SessionRepository;
+import com.logimarui.authentication.core.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

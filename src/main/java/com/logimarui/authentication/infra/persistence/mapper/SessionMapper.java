@@ -1,7 +1,7 @@
-package com.logimarui.auth.infra.persistence.mapper;
+package com.logimarui.authentication.infra.persistence.mapper;
 
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.infra.persistence.entity.SessionEntity;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.infra.persistence.entity.SessionEntity;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

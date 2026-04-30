@@ -1,8 +1,8 @@
-package com.logimarui.auth.core.port;
+package com.logimarui.authentication.core.port;
 
-import com.logimarui.auth.core.domain.model.IssuedAccessToken;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.domain.model.User;
+import com.logimarui.authentication.core.domain.model.IssuedAccessToken;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.core.domain.model.User;
 
 public interface JwtService {
     IssuedAccessToken generateAccessToken(User user, Session session);

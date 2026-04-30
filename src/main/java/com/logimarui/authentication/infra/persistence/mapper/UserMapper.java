@@ -1,12 +1,11 @@
-package com.logimarui.auth.infra.persistence.mapper;
+package com.logimarui.authentication.infra.persistence.mapper;
 
-import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.infra.persistence.entity.UserEntity;
+import com.logimarui.authentication.core.domain.model.User;
+import com.logimarui.authentication.infra.persistence.entity.UserEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.util.EnumSet;
-import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserMapper {

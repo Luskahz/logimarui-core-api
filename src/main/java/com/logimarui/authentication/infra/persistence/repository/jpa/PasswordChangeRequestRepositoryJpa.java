@@ -1,11 +1,11 @@
-package com.logimarui.auth.infra.persistence.repository.jpa;
+package com.logimarui.authentication.infra.persistence.repository.jpa;
 
-import com.logimarui.auth.core.domain.enums.PasswordChangeStatus;
-import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
-import com.logimarui.auth.core.repository.PasswordChangeRequestRepository;
-import com.logimarui.auth.infra.persistence.entity.PasswordChangeRequestEntity;
-import com.logimarui.auth.infra.persistence.jpa.PasswordChangeRequestJpaRepository;
-import com.logimarui.auth.infra.persistence.mapper.PasswordChangeRequestMapper;
+import com.logimarui.authentication.core.domain.enums.PasswordChangeStatus;
+import com.logimarui.authentication.core.domain.model.PasswordChangeRequest;
+import com.logimarui.authentication.core.repository.PasswordChangeRequestRepository;
+import com.logimarui.authentication.infra.persistence.entity.PasswordChangeRequestEntity;
+import com.logimarui.authentication.infra.persistence.jpa.PasswordChangeRequestJpaRepository;
+import com.logimarui.authentication.infra.persistence.mapper.PasswordChangeRequestMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

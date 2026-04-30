@@ -1,12 +1,12 @@
-package com.logimarui.auth.infra.persistence.repository.jpa;
+package com.logimarui.authentication.infra.persistence.repository.jpa;
 
 
-import com.logimarui.auth.core.domain.enums.SessionStatus;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.repository.SessionRepository;
-import com.logimarui.auth.infra.persistence.entity.SessionEntity;
-import com.logimarui.auth.infra.persistence.jpa.SessionJpaRepository;
-import com.logimarui.auth.infra.persistence.mapper.SessionMapper;
+import com.logimarui.authentication.core.domain.enums.SessionStatus;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.core.repository.SessionRepository;
+import com.logimarui.authentication.infra.persistence.entity.SessionEntity;
+import com.logimarui.authentication.infra.persistence.jpa.SessionJpaRepository;
+import com.logimarui.authentication.infra.persistence.mapper.SessionMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

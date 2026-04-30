@@ -1,8 +1,8 @@
-package com.logimarui.auth.infra.persistence.mapper;
+package com.logimarui.authentication.infra.persistence.mapper;
 
 
-import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
-import com.logimarui.auth.infra.persistence.entity.PasswordChangeRequestEntity;
+import com.logimarui.authentication.core.domain.model.PasswordChangeRequest;
+import com.logimarui.authentication.infra.persistence.entity.PasswordChangeRequestEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

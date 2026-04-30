@@ -1,4 +1,4 @@
-package com.logimarui.auth.core.domain.exception;
+package com.logimarui.authentication.core.domain.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

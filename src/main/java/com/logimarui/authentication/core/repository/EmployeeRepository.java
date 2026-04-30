@@ -1,4 +1,4 @@
-package com.logimarui.auth.core.repository;
+package com.logimarui.authentication.core.repository;
 
 import java.util.Optional;
 

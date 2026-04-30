@@ -1,22 +1,18 @@
-package com.logimarui.auth.infra.security.jwt;
+package com.logimarui.authentication.infra.security.jwt;
 
-import com.logimarui.auth.core.domain.enums.Role;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.core.domain.model.IssuedAccessToken;
-import com.logimarui.auth.core.port.JwtService;
+import com.logimarui.authentication.core.domain.enums.Role;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.core.domain.model.User;
+import com.logimarui.authentication.core.domain.model.IssuedAccessToken;
+import com.logimarui.authentication.core.port.JwtService;
 import com.logimarui.infra.security.jwt.JwtProperties;
 import com.logimarui.infra.security.jwt.JwtSigningKeyProvider;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
 

@@ -1,7 +1,7 @@
-package com.logimarui.auth.api.controller;
+package com.logimarui.authentication.api.controller;
 
-import com.logimarui.auth.core.application.services.LogoutService;
-import com.logimarui.auth.infra.web.RequestContextUtils;
+import com.logimarui.authentication.core.application.services.LogoutService;
+import com.logimarui.authentication.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;

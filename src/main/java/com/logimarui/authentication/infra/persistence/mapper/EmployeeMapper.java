@@ -1,4 +1,4 @@
-package com.logimarui.auth.infra.persistence.mapper;
+package com.logimarui.authentication.infra.persistence.mapper;
 
 public class EmployeeMapper {
 }

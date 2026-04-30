@@ -1,14 +1,14 @@
-package com.logimarui.auth.infra.persistence.repository.jpa;
+package com.logimarui.authentication.infra.persistence.repository.jpa;
 
 
-import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
-import com.logimarui.auth.core.domain.model.RefreshToken;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.repository.RefreshTokenRepository;
-import com.logimarui.auth.core.repository.SessionRepository;
-import com.logimarui.auth.infra.persistence.entity.RefreshTokenEntity;
-import com.logimarui.auth.infra.persistence.jpa.RefreshTokenJpaRepository;
-import com.logimarui.auth.infra.persistence.mapper.RefreshTokenMapper;
+import com.logimarui.authentication.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.authentication.core.domain.model.RefreshToken;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.core.repository.RefreshTokenRepository;
+import com.logimarui.authentication.core.repository.SessionRepository;
+import com.logimarui.authentication.infra.persistence.entity.RefreshTokenEntity;
+import com.logimarui.authentication.infra.persistence.jpa.RefreshTokenJpaRepository;
+import com.logimarui.authentication.infra.persistence.mapper.RefreshTokenMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
-package com.logimarui.auth.core.application.services;
+package com.logimarui.authentication.core.application.services;
 
-import com.logimarui.auth.core.domain.model.User;
-import com.logimarui.auth.core.port.*;
-import com.logimarui.auth.core.repository.*;
+import com.logimarui.authentication.core.domain.model.User;
+import com.logimarui.authentication.core.port.*;
+import com.logimarui.authentication.core.repository.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package com.logimarui.auth.infra.persistence.jpa;
+package com.logimarui.authentication.infra.persistence.jpa;
 
-import com.logimarui.auth.infra.persistence.entity.UserEntity;
+import com.logimarui.authentication.infra.persistence.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

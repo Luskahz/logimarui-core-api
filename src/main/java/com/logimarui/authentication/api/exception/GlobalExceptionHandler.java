@@ -1,7 +1,7 @@
-package com.logimarui.auth.api.exception;
+package com.logimarui.authentication.api.exception;
 
 
-import com.logimarui.auth.core.domain.exception.UserNotFoundException;
+import com.logimarui.authentication.core.domain.exception.UserNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

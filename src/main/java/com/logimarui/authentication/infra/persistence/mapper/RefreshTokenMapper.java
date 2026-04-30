@@ -1,8 +1,8 @@
-package com.logimarui.auth.infra.persistence.mapper;
+package com.logimarui.authentication.infra.persistence.mapper;
 
-import com.logimarui.auth.core.domain.model.RefreshToken;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.infra.persistence.entity.RefreshTokenEntity;
+import com.logimarui.authentication.core.domain.model.RefreshToken;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.infra.persistence.entity.RefreshTokenEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

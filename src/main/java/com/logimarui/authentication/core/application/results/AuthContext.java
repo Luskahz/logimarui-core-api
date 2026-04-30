@@ -1,4 +1,4 @@
-package com.logimarui.auth.core.application.results;
+package com.logimarui.authentication.core.application.results;
 
 public record AuthContext(
         Long userId,

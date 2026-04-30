@@ -1,4 +1,4 @@
-package com.logimarui.auth.core.domain.exception;
+package com.logimarui.authentication.core.domain.exception;
 
 public class SessionExpiredException extends RuntimeException {
     public SessionExpiredException(String message) {

@@ -1,6 +1,6 @@
-package com.logimarui.auth.core.repository;
+package com.logimarui.authentication.core.repository;
 
-import com.logimarui.auth.core.domain.model.PasswordChangeRequest;
+import com.logimarui.authentication.core.domain.model.PasswordChangeRequest;
 
 import java.util.Optional;
 

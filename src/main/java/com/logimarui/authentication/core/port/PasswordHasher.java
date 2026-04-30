@@ -1,4 +1,4 @@
-package com.logimarui.auth.core.port;
+package com.logimarui.authentication.core.port;
 
 public interface PasswordHasher {
     String hash(String raw);

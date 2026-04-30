@@ -1,6 +1,5 @@
-package com.logimarui.auth.api.dto;
+package com.logimarui.authentication.api.dto;
 
-import java.time.Instant;
 import java.util.List;
 
 public record AuthMeResponseDTO(

@@ -1,14 +1,13 @@
-package com.logimarui.auth.core.application.services;
+package com.logimarui.authentication.core.application.services;
 
-import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
-import com.logimarui.auth.core.domain.model.RefreshToken;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.port.*;
-import com.logimarui.auth.core.repository.*;
+import com.logimarui.authentication.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.authentication.core.domain.model.RefreshToken;
+import com.logimarui.authentication.core.domain.model.Session;
+import com.logimarui.authentication.core.port.*;
+import com.logimarui.authentication.core.repository.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 import java.util.Objects;

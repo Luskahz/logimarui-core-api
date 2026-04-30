@@ -1,9 +1,9 @@
-package com.logimarui.auth.api.controller;
+package com.logimarui.authentication.api.controller;
 
-import com.logimarui.auth.api.dto.AuthMeResponseDTO;
-import com.logimarui.auth.core.application.results.AuthContext;
-import com.logimarui.auth.core.application.services.MeService;
-import com.logimarui.auth.infra.web.RequestContextUtils;
+import com.logimarui.authentication.api.dto.AuthMeResponseDTO;
+import com.logimarui.authentication.core.application.results.AuthContext;
+import com.logimarui.authentication.core.application.services.MeService;
+import com.logimarui.authentication.infra.web.RequestContextUtils;
 import com.logimarui.infra.security.principal.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;

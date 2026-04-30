@@ -1,6 +1,6 @@
-package com.logimarui.auth.core.domain.model;
+package com.logimarui.authentication.core.domain.model;
 
-import com.logimarui.auth.core.domain.enums.RefreshTokenStatus;
+import com.logimarui.authentication.core.domain.enums.RefreshTokenStatus;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

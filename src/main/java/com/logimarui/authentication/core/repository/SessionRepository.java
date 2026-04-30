@@ -1,9 +1,7 @@
-package com.logimarui.auth.core.repository;
+package com.logimarui.authentication.core.repository;
 
-import com.logimarui.auth.core.domain.enums.SessionStatus;
-import com.logimarui.auth.core.domain.model.RefreshToken;
-import com.logimarui.auth.core.domain.model.Session;
-import com.logimarui.auth.core.domain.model.User;
+import com.logimarui.authentication.core.domain.enums.SessionStatus;
+import com.logimarui.authentication.core.domain.model.Session;
 
 import java.util.List;
 import java.util.Optional;

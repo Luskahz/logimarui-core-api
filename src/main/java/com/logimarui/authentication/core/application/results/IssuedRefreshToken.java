@@ -1,6 +1,6 @@
-package com.logimarui.auth.core.application.results;
+package com.logimarui.authentication.core.application.results;
 
-import com.logimarui.auth.core.domain.model.RefreshToken;
+import com.logimarui.authentication.core.domain.model.RefreshToken;
 
 public record IssuedRefreshToken(
         RefreshToken refreshToken,

@@ -1,4 +1,4 @@
-package com.logimarui.auth.infra.config.security;
+package com.logimarui.authentication.infra.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

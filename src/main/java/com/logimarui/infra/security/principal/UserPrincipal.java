@@ -1,6 +1,6 @@
 package com.logimarui.infra.security.principal;
 
-import com.logimarui.auth.core.domain.enums.Role;
+import com.logimarui.authentication.core.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
