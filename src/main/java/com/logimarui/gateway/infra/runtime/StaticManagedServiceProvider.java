@@ -66,9 +66,9 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
                     "/",
                     ServiceType.NODE,
                     "C:\\Users\\lucas.l\\Documents\\LogImarui\\logImarui-frontend",
-                    "npm start",
+                    "npm run build-start",
                     null,
-                    3000,
+                    8091,
                     false,
                     "FRONTEND_PORT",
                     false

@@ -130,7 +130,7 @@ public class GatewayRoutesConfig {
     private final String frontendTargetUri;
 
     public GatewayRoutesConfig(
-            @Value("${app.frontend.url:http://127.0.0.1:3000}") String frontendTargetUri
+            @Value("${app.frontend.url:http://127.0.0.1:8091}") String frontendTargetUri
     ) {
         this.frontendTargetUri = normalizeBaseUri(frontendTargetUri);
     }
