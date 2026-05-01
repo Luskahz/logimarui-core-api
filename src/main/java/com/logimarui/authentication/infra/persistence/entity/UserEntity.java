@@ -17,7 +17,6 @@ import java.util.Set;
         }
 )
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class UserEntity {

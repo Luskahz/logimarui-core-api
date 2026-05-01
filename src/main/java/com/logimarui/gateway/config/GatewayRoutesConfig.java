@@ -510,9 +510,7 @@ public class GatewayRoutesConfig {
         String upstreamPath;
 
         if (stripPublicPrefix) {
-            upstreamPath = requestPath.equals(publicPrefix)
-                    ? "/"
-                    : requestPath.substring(publicPrefix.length());
+            upstreamPath = stripRepeatedPublicPrefix(requestPath, publicPrefix);
         } else {
             upstreamPath = requestPath;
         }
@@ -528,6 +526,23 @@ public class GatewayRoutesConfig {
                 upstreamPath,
                 request.uri().getRawQuery()
         );
+    }
+
+    private String stripRepeatedPublicPrefix(String requestPath, String publicPrefix) {
+        if (requestPath == null || requestPath.isBlank()) {
+            return "/";
+        }
+
+        String normalizedPath = requestPath;
+        String prefixedPath = publicPrefix + "/";
+
+        while (normalizedPath.equals(publicPrefix) || normalizedPath.startsWith(prefixedPath)) {
+            normalizedPath = normalizedPath.equals(publicPrefix)
+                    ? "/"
+                    : normalizedPath.substring(publicPrefix.length());
+        }
+
+        return normalizedPath.isBlank() ? "/" : normalizedPath;
     }
 
     private URI appendPathAndQuery(
