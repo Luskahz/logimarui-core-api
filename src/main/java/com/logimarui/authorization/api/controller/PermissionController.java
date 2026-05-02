@@ -25,8 +25,8 @@ public class PermissionController {
 
 
 
-        List<PermissionResponseDTO> response = result;
 
+return null;
 
     }
 
