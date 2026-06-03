@@ -2,27 +2,29 @@ package com.logimarui.authentication.infra.persistence.entity;
 
 import com.logimarui.authentication.core.domain.enums.RefreshTokenStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(
-        name = "auth_refresh_token",
+        name = "authentication_refresh_tokens",
         indexes = {
                 @Index(name = "idx_refresh_token_session", columnList = "session_id")
         }
 )
-@Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class RefreshTokenEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "session_id", nullable = false, unique = true)
+    @Column(name = "session_id", nullable = false)
     private Long sessionId;
 
     @Column(name = "token_hash", nullable = false, unique = true, length = 255)
@@ -35,7 +37,9 @@ public class RefreshTokenEntity {
     private Instant expiresAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "refresh_token_status", nullable = false, length = 30)
-    private RefreshTokenStatus refreshTokenStatus;
-}
+    @Column(name = "status", nullable = false, length = 30)
+    private RefreshTokenStatus status;
 
+    @Column(name = "replaced_by_token_id")
+    private Long replacedByTokenId;
+}

@@ -37,17 +37,21 @@ public class RolePermissionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(
             name = "role_id",
-            nullable = false
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_authorization_role_permissions_role")
     )
-    private Long roleId;
+    private RoleEntity role;
 
-    @Column(
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(
             name = "permission_id",
-            nullable = false
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_authorization_role_permissions_permission")
     )
-    private Long permissionId;
+    private PermissionEntity permission;
 
     @Column(
             name = "created_at",
@@ -55,10 +59,4 @@ public class RolePermissionEntity {
             updatable = false
     )
     private Instant createdAt;
-
-    @Column(
-            name = "updated_at",
-            nullable = false
-    )
-    private Instant updatedAt;
 }

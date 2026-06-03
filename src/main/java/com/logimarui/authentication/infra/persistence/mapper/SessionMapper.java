@@ -2,33 +2,32 @@ package com.logimarui.authentication.infra.persistence.mapper;
 
 import com.logimarui.authentication.core.domain.model.Session;
 import com.logimarui.authentication.infra.persistence.entity.SessionEntity;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 public class SessionMapper {
+
+    private SessionMapper() {}
+
     public static Session toDomain(SessionEntity entity) {
+        if (entity == null) return null;
         return Session.reconstitute(
                 entity.getId(),
                 entity.getUserId(),
-                entity.getDeviceId(),
-                entity.getLastIpAddress(),
                 entity.getCreatedAt(),
                 entity.getExpiresAt(),
                 entity.getLoggedOutAt(),
-                entity.getSessionStatus()
+                entity.getStatus()
         );
     }
 
-    public static SessionEntity toEntity(Session session) {
-        return new SessionEntity(
-                session.getId(),
-                session.getUserId(),
-                session.getDeviceId(),
-                session.getLastIpAddress(),
-                session.getCreatedAt(),
-                session.getExpiresAt(),
-                session.getLoggedOutAt(),
-                session.getSessionStatus()
-        );
+    public static SessionEntity toEntity(Session domain) {
+        if (domain == null) return null;
+        SessionEntity entity = new SessionEntity();
+        entity.setId(domain.getId());
+        entity.setUserId(domain.getUserId());
+        entity.setCreatedAt(domain.getCreatedAt());
+        entity.setExpiresAt(domain.getExpiresAt());
+        entity.setLoggedOutAt(domain.getLoggedOutAt());
+        entity.setStatus(domain.getStatus());
+        return entity;
     }
 }

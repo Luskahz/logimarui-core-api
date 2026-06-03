@@ -1,7 +1,12 @@
 package com.logimarui.gateway.api;
 
+import com.logimarui.gateway.api.dto.ManagedServicesOverviewResponseDTO;
+import com.logimarui.gateway.api.dto.ManagedServiceStatusResponseDTO;
 import com.logimarui.gateway.core.application.ServiceLifecycleManager;
+import com.logimarui.gateway.core.application.ServiceStartupReconciler;
+import com.logimarui.gateway.core.domain.model.ManagedServiceStatusSnapshot;
 import com.logimarui.gateway.core.domain.model.ServiceRuntime;
+import com.logimarui.gateway.core.domain.model.StartupReconciliationSnapshot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +19,7 @@ import java.util.List;
 public class GatewayServiceAdminController {
 
     private final ServiceLifecycleManager serviceLifecycleManager;
+    private final ServiceStartupReconciler serviceStartupReconciler;
 
     @PostMapping("/{serviceId}/start")
     public ResponseEntity<ServiceRuntime> start(@PathVariable String serviceId) {
@@ -50,5 +56,35 @@ public class GatewayServiceAdminController {
     @GetMapping("/runtime")
     public ResponseEntity<List<ServiceRuntime>> findAllRuntimes() {
         return ResponseEntity.ok(serviceLifecycleManager.findAllRuntimes());
+    }
+
+    @GetMapping("/startup")
+    public ResponseEntity<StartupReconciliationSnapshot> findStartupStatus() {
+        return ResponseEntity.ok(serviceStartupReconciler.getSnapshot());
+    }
+
+    @GetMapping("/overview")
+    public ResponseEntity<ManagedServicesOverviewResponseDTO> findOverview() {
+        return ResponseEntity.ok(new ManagedServicesOverviewResponseDTO(
+                serviceStartupReconciler.getSnapshot(),
+                serviceLifecycleManager.findAllManagedServiceStatuses()
+                        .stream()
+                        .map(this::toStatusResponse)
+                        .toList()
+        ));
+    }
+
+    private ManagedServiceStatusResponseDTO toStatusResponse(ManagedServiceStatusSnapshot snapshot) {
+        return new ManagedServiceStatusResponseDTO(
+                snapshot.service().getId(),
+                snapshot.service().getPathPrefix(),
+                snapshot.service().getType(),
+                snapshot.service().getPort(),
+                snapshot.service().isRequiresAuthentication(),
+                snapshot.service().getPortEnvironmentVariable(),
+                snapshot.service().isStartOnBoot(),
+                snapshot.running(),
+                snapshot.runtime()
+        );
     }
 }

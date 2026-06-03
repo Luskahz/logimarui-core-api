@@ -1,7 +1,7 @@
 package com.logimarui;
 
-import com.logimarui.infra.config.db.ReadDbProperties;
-import com.logimarui.infra.config.db.WriteDbProperties;
+import com.logimarui.platform.db.ReadDbProperties;
+import com.logimarui.platform.db.WriteDbProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -1,14 +1,28 @@
 package com.logimarui.authentication.infra.security.token;
 
-import com.logimarui.authentication.core.port.TokenHashService;
-import org.apache.commons.codec.digest.DigestUtils;
+import com.logimarui.authentication.core.port.RefreshTokenHashService;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
+
 @Component
-public class Sha256TokenHashService implements TokenHashService {
+public class Sha256TokenHashService implements RefreshTokenHashService {
 
     @Override
     public String hash(String rawToken) {
-        return DigestUtils.sha256Hex(rawToken);
+        if (rawToken == null || rawToken.isBlank()) {
+            throw new IllegalArgumentException("Refresh token is required.");
+        }
+
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(rawToken.getBytes(StandardCharsets.UTF_8));
+            return HexFormat.of().formatHex(hashBytes);
+        } catch (NoSuchAlgorithmException exception) {
+            throw new IllegalStateException("SHA-256 não disponível", exception);
+        }
     }
 }

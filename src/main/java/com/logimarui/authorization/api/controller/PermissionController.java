@@ -1,14 +1,23 @@
 package com.logimarui.authorization.api.controller;
 
 import com.logimarui.authorization.api.dto.PermissionResponseDTO;
-import com.logimarui.authorization.core.application.result.FindAllPermissionsResult;
+import com.logimarui.authorization.core.application.result.PermissionResult;
+import com.logimarui.authorization.core.application.result.PermissionsResult;
 import com.logimarui.authorization.core.application.service.PermissionService;
-import jakarta.validation.Valid;
+import com.logimarui.platform.openapi.security.RequiredPermission;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -16,25 +25,70 @@ import java.util.List;
 @RequestMapping("/authorization/permissions")
 @RequiredArgsConstructor
 @Validated
+@PreAuthorize("hasAuthority('AUTHORIZATION_PERMISSION_READ')")
+@RequiredPermission("AUTHORIZATION_PERMISSION_READ")
+@Tag(
+        name = "Authorization - Permissions",
+        description = "Consulta de permissões disponíveis no módulo de autorização."
+)
 public class PermissionController {
-    PermissionService permissionService;
+
+    private final PermissionService permissionService;
 
     @GetMapping
+    @Operation(
+            summary = "Listar permissões",
+            description = "Retorna todas as permissões cadastradas e sincronizadas pelo sistema."
+    )
     public ResponseEntity<List<PermissionResponseDTO>> findAllPermissions() {
-        FindAllPermissionsResult result = permissionService.findAllPermissions();
+        PermissionsResult result = permissionService.findAllPermissions();
 
-
-
-
-return null;
-
+        return ResponseEntity.ok(
+                PermissionResponseDTO.from(result.permissions())
+        );
     }
 
     @GetMapping("/{permissionId}")
+    @Operation(
+            summary = "Buscar permissão por ID",
+            description = "Retorna os dados de uma permissão a partir do seu identificador."
+    )
     public ResponseEntity<PermissionResponseDTO> findPermissionById(
-            @PathVariable @Positive Long permissionId
+            @Parameter(
+                    description = "ID da permissão.",
+                    example = "1",
+                    required = true
+            )
+            @PathVariable
+            @Positive(message = "ID da permissão deve ser positivo.")
+            Long permissionId
     ) {
-        return null;
+        PermissionResult result = permissionService.findPermissionById(permissionId);
+
+        return ResponseEntity.ok(
+                PermissionResponseDTO.from(result.permission())
+        );
     }
 
+    @GetMapping("/code/{permissionCode}")
+    @Operation(
+            summary = "Buscar permissão por código",
+            description = "Retorna os dados de uma permissão a partir do seu código técnico."
+    )
+    public ResponseEntity<PermissionResponseDTO> findPermissionByCode(
+            @Parameter(
+                    description = "Código técnico da permissão.",
+                    example = "AUTHORIZATION_ROLE_CREATE",
+                    required = true
+            )
+            @PathVariable
+            @NotBlank(message = "Código da permissão é obrigatório.")
+            String permissionCode
+    ) {
+        PermissionResult result = permissionService.findPermissionByCode(permissionCode);
+
+        return ResponseEntity.ok(
+                PermissionResponseDTO.from(result.permission())
+        );
+    }
 }

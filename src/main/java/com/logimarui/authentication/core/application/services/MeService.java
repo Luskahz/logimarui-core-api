@@ -1,22 +1,21 @@
 package com.logimarui.authentication.core.application.services;
 
-import com.logimarui.authentication.core.application.results.AuthContext;
-import com.logimarui.authentication.core.domain.exception.UserNotFoundException;
+import com.logimarui.authentication.core.application.exceptions.session.SessionNotFoundException;
+import com.logimarui.authentication.core.application.exceptions.session.SessionUserMismatchException;
+import com.logimarui.authentication.core.application.exceptions.user.UserIdNotFoundException;
+import com.logimarui.authentication.core.application.results.MeResult;
 import com.logimarui.authentication.core.domain.model.Session;
 import com.logimarui.authentication.core.domain.model.User;
-import com.logimarui.authentication.core.port.*;
 import com.logimarui.authentication.core.repository.SessionRepository;
 import com.logimarui.authentication.core.repository.UserRepository;
-import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
-import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -24,43 +23,42 @@ public class MeService {
 
     private final UserRepository userRepository;
     private final SessionRepository sessionRepository;
-    private final UtilsServices utilsServices;
+    private final Clock clock;
 
-    @Transactional
-    public AuthContext me(
-            @NotNull Long userId,
-            @NotNull Long sessionId,
-            Instant accessTokenExpiresAt,
-            String ip,
-            String deviceId
+    @Transactional(readOnly = true)
+    public MeResult me(
+            Long userId,
+            Long sessionId,
+            Instant accessTokenExpiresAt
     ) {
-        Instant now = Instant.now();
+        Objects.requireNonNull(userId, "userId cannot be null");
+        Objects.requireNonNull(sessionId, "sessionId cannot be null");
+        Objects.requireNonNull(accessTokenExpiresAt, "accessTokenExpiresAt cannot be null");
 
-        userRepository.findById(userId)
-                .map(User::assertCanAuthenticate)
-                .orElseThrow(() -> new UserNotFoundException("user not found"));
+        Instant now = Instant.now(clock);
 
-        Session session = findSessionById(sessionId)
-                .orElseThrow(()-> new SecurityException("Session not found"));
-        if (!Objects.equals(session.getUserId(), userId)
-                || !Objects.equals(session.getDeviceId(), deviceId)) {
-            throw new SecurityException("Session does not belong to this user/device");
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserIdNotFoundException("User not found"));
+
+        Session session = sessionRepository.findById(sessionId)
+                .orElseThrow(() -> new SessionNotFoundException("Session not found"));
+
+        if (!session.getUserId().equals(user.getId())) {
+            throw new SessionUserMismatchException("Session does not belong to this user");
         }
 
-        utilsServices.updateSessionLastIpAddressIfChanged(session, ip, now);
-
-        return new AuthContext (
-                userId,
-                sessionId,
+        return new MeResult(
+                user.getId(),
+                session.getId(),
                 session.isValid(now),
                 getAccessTokenRemainingSeconds(now, accessTokenExpiresAt)
         );
     }
 
-    public Optional<Session> findSessionById(Long sessionId){
-        return sessionRepository.findById(sessionId);
-    }
-    private long getAccessTokenRemainingSeconds(Instant now, Instant accessTokenExpiresAt) {
+    private long getAccessTokenRemainingSeconds(
+            Instant now,
+            Instant accessTokenExpiresAt
+    ) {
         return Math.max(
                 Duration.between(now, accessTokenExpiresAt).getSeconds(),
                 0

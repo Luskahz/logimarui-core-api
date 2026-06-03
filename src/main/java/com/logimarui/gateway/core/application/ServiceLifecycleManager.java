@@ -1,6 +1,7 @@
 package com.logimarui.gateway.core.application;
 
 import com.logimarui.gateway.core.domain.model.ManagedService;
+import com.logimarui.gateway.core.domain.model.ManagedServiceStatusSnapshot;
 import com.logimarui.gateway.core.domain.model.ServiceRuntime;
 import com.logimarui.gateway.core.port.ManagedServiceProvider;
 import com.logimarui.gateway.core.port.ServiceProcessRunner;
@@ -108,6 +109,21 @@ public class ServiceLifecycleManager {
 
     public List<ServiceRuntime> findAllRuntimes() {
         return serviceRuntimeRepository.findAll();
+    }
+
+    public List<ManagedServiceStatusSnapshot> findAllManagedServiceStatuses() {
+        return managedServiceProvider.findAll()
+                .stream()
+                .map(service -> {
+                    Optional<ServiceRuntime> runtime = findRuntimeByAnyAlias(service.getId());
+
+                    return new ManagedServiceStatusSnapshot(
+                            service,
+                            runtime.isPresent(),
+                            runtime.orElse(null)
+                    );
+                })
+                .toList();
     }
 
     @PreDestroy

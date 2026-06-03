@@ -2,16 +2,22 @@ package com.logimarui.authentication.core.repository;
 
 import com.logimarui.authentication.core.domain.model.User;
 
+import java.util.List;
 import java.util.Optional;
-
 
 public interface UserRepository {
 
-    Optional<User> findByUsername(String username);
+    User save(User user);
 
     Optional<User> findById(Long id);
 
-    User save(User user);
     Optional<User> findByCpf(String cpf);
 
+    boolean existsByCpf(String cpf);
+
+    boolean existsById(Long id);
+
+    List<Long> findActiveUserIds();
+
+    boolean existsActiveById(Long id);
 }

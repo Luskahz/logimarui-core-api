@@ -1,163 +1,226 @@
 package com.logimarui.authentication.core.domain.model;
 
-import com.logimarui.authentication.core.domain.enums.Role;
 import com.logimarui.authentication.core.domain.enums.UserStatus;
+import com.logimarui.authentication.core.domain.exception.user.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.time.Instant;
-import java.util.EnumSet;
-import java.util.Set;
+import java.time.LocalDate;
 
+/**
+ * Entidade de Domínio Puro (Hexagonal Architecture).
+ */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class User {
 
-     private Long id;
-     private String cpf;
-     private String username;
-     private String passwordHash;
-     private Set<Role> roles;
-     private UserStatus userStatus;
-     private Instant createdAt;
-     private Instant lastLoginAt;
-     private Instant passwordChangedAt;
-     private int failedLoginAttempts;
+    private Long id;
+    private String name;
+    private LocalDate birthData;
+    private String email;
+    private String cpf;
+    private String rg;
+    private String passwordHash;
+    private String phoneNumber;
+    private String profilePhotoUrl;
+    private UserStatus status;
+    private Instant lastLoginAt;
+    private Instant createdAt;
+    private Instant disabledAt;
+    private Instant updatedAt;
+    private Instant passwordChangedAt;
+    private int failedLoginAttempts;
 
     private static final int MAX_FAILED_LOGIN_ATTEMPTS = 5;
 
-    private User(String username, String passwordHash, String cpf) {
+
+    private User(String name, LocalDate birthData, String email, String cpf, String rg, String passwordHash, String phoneNumber, Instant now){
+        this.name = name;
+        this.birthData = birthData;
+        this.email = email;
         this.cpf = cpf;
-        this.username = username;
+        this.rg = rg;
         this.passwordHash = passwordHash;
-        this.roles = EnumSet.of(Role.INDEFINIDO);
-        this.userStatus = UserStatus.ACTIVE;
-        this.createdAt = Instant.now();
+        this.phoneNumber = phoneNumber;
+        this.status = UserStatus.ACTIVE;
+        this.createdAt = now;
         this.failedLoginAttempts = 0;
     }
 
-    public Set<Role> getRoles() {
-        return Set.copyOf(roles);
-    }
-
-
-    @Contract("_, _, _ -> new") public static @NotNull User create(String username, String passwordHash, String cpf) {
-        return new User(username, passwordHash, cpf);
-    }
-
-
-    public static @NotNull User reconstitute(
-            Long id,
+    public static @NotNull User create(
+            String name,
+            LocalDate birthData,
+            String email,
             String cpf,
-            String username,
+            String rg,
             String passwordHash,
-            Set<Role> roles,
-            UserStatus userStatus,
-            Instant createdAt,
+            String phoneNumber,
+            Instant now
+    ) {
+        return new User(
+                name,
+                birthData,
+                email,
+                cpf,
+                rg,
+                passwordHash,
+                phoneNumber,
+                now
+        );
+    }
+
+    /**
+     * Factory method para RECONSTITUIR um usuário existente através da
+     * infraestrutura (banco de dados)
+     */
+    public static @NonNull User reconstitute(
+            Long id,
+            String name,
+            LocalDate birthData,
+            String email,
+            String cpf,
+            String rg,
+            String passwordHash,
+            String phoneNumber,
+            String profilePhotoUrl,
+            UserStatus status,
             Instant lastLoginAt,
+            Instant createdAt,
+            Instant disabledAt,
+            Instant updatedAt,
             Instant passwordChangedAt,
             int failedLoginAttempts
     ) {
-
-        if (userStatus == null) throw new IllegalArgumentException("userStatus is required");
-        if (createdAt == null) throw new IllegalArgumentException("createdAt is required");
-        if (failedLoginAttempts < 0) throw new IllegalArgumentException("failedLoginAttempts cannot be negative");
-        if (username == null || username.isBlank()) throw new IllegalArgumentException("username is required");
-        if (passwordHash == null || passwordHash.isBlank()) throw new IllegalArgumentException("passwordHash is required");
-        if (cpf == null) throw new IllegalArgumentException("cpf is required");
-
         User user = new User();
         user.id = id;
+        user.name = name;
+        user.birthData = birthData;
+        user.email = email;
         user.cpf = cpf;
-        user.username = username;
+        user.rg = rg;
         user.passwordHash = passwordHash;
-        if (roles == null || roles.isEmpty()) user.roles = EnumSet.of(Role.INDEFINIDO);
-        else user.roles = EnumSet.copyOf(roles);
-        user.userStatus = userStatus;
-        user.createdAt = createdAt;
+        user.phoneNumber = phoneNumber;
+        user.profilePhotoUrl = profilePhotoUrl;
+        user.status = status;
         user.lastLoginAt = lastLoginAt;
+        user.createdAt = createdAt;
+        user.disabledAt = disabledAt;
+        user.updatedAt = updatedAt;
         user.passwordChangedAt = passwordChangedAt;
         user.failedLoginAttempts = failedLoginAttempts;
         return user;
     }
 
-
-    public void addRole(Role role) {
-        if (role == null) throw new IllegalArgumentException("role must not be null");
-        if (isLocked()) throw new IllegalStateException("user is locked, roles cannot be added");
-
-        roles.add(role);
-        roles.remove(Role.INDEFINIDO);
-    }
-
-    public void removeRole(Role role) {
-        if (role == null) throw new IllegalArgumentException("role must not be null");
-        if (isLocked()) throw new IllegalStateException("user is locked, roles cannot be removed");
-
-        boolean removed = roles.remove(role);
-        if (!removed) throw new IllegalStateException("user does not have this role");
-
-        if (roles.isEmpty()) roles.add(Role.INDEFINIDO);
-    }
     public void registerFailedLogin() {
         if(isBlockedForLogin()){
-            throw new IllegalStateException("User is not Available to login");
+            throw new UserLockoutException("Account temporarily locked due to multiple failed login attempts. Please try again later.");
         }
         failedLoginAttempts++;
 
         if (failedLoginAttempts >= MAX_FAILED_LOGIN_ATTEMPTS) {
-            userStatus = UserStatus.LOCKED;
+            status = UserStatus.LOCKED;
         }
     }
-    public void changePassword(String newHash, Instant now) {
-        if (newHash == null || newHash.isBlank()) throw new IllegalArgumentException("newHash is required");
-        if (now == null) throw new IllegalArgumentException("now is required");
 
-        this.passwordHash = newHash;
-        this.passwordChangedAt = now;
-        this.failedLoginAttempts = 0;
+    public User assertCanAttemptLogin() {
+        if (isDisabled()) {
+            throw new UserBlockedForLoginException("User can not authenticate, user is disabled.");
+        }
+
+        if (isLocked()) {
+            throw new UserBlockedForLoginException("User can not authenticate, user is locked.");
+        }
+
+        return this;
     }
 
     public boolean isBlockedForLogin() {
         return isLocked() || isDisabled();
     }
+
     public boolean isActive() {
-        return userStatus == UserStatus.ACTIVE;
+        return status == UserStatus.ACTIVE;
     }
+
     public boolean isLocked() {
-        return userStatus == UserStatus.LOCKED;
+        return status == UserStatus.LOCKED;
     }
+
     public boolean isDisabled() {
-        return userStatus == UserStatus.DISABLED;
+        return status == UserStatus.DISABLED;
     }
+
     public void unlock() {
-        if (userStatus != UserStatus.LOCKED) throw new IllegalStateException("User is not locked");
-        this.userStatus = UserStatus.ACTIVE;
+        if (status != UserStatus.LOCKED) throw new UserNotLockoutException("User is not locked.");
+        this.status = UserStatus.ACTIVE;
         this.failedLoginAttempts = 0;
     }
+
     public void reactivate() {
-        if (userStatus != UserStatus.DISABLED) throw new IllegalStateException("User is not inactive");
-        this.userStatus = UserStatus.ACTIVE;
+        if (status != UserStatus.DISABLED) throw new UserNotDisableException("User is not disable.");
+        this.status = UserStatus.ACTIVE;
     }
+
+
     public void recordSuccessfulLogin(Instant now) {
         this.lastLoginAt = now;
         this.failedLoginAttempts = 0;
+        this.updatedAt = now;
     }
 
     public User assertCanAuthenticate() {
-        if (isBlockedForLogin()) {
-            throw new IllegalStateException("User can not authenticate");
+        assertCanAttemptLogin();
+
+        if (isChangePasswordRequired()) {
+            throw new UserPasswordChangeRequiredException("Password change is required before login.");
         }
+
         return this;
     }
-    public void assertCanRequestPasswordChange() {
-        if (userStatus == UserStatus.DISABLED) {
-            throw new IllegalStateException("User cannot request password change");
+
+    public void changePassword(String newHash, Instant now) {
+        if (newHash == null || newHash.isBlank()) {
+            throw new UserNewHashRequiredException("newHash is required");
         }
+
+        if (now == null) {
+            throw new UserNowInstantRequiredException("now is required");
+        }
+
+        this.passwordHash = newHash;
+        this.passwordChangedAt = now;
+        this.failedLoginAttempts = 0;
+        this.status = UserStatus.ACTIVE;
+        this.updatedAt = now;
+    }
+
+    public void changeToTemporaryPassword(String temporaryPasswordHash, Instant now) {
+        if (temporaryPasswordHash == null || temporaryPasswordHash.isBlank()) {
+            throw new UserNewHashRequiredException("temporaryPasswordHash is required");
+        }
+
+        if (now == null) {
+            throw new UserNowInstantRequiredException("now is required");
+        }
+
+        this.passwordHash = temporaryPasswordHash;
+        this.passwordChangedAt = now;
+        this.failedLoginAttempts = 0;
+        this.status = UserStatus.CHANGE_PASSWORD_REQUIRED;
+        this.updatedAt = now;
     }
 
 
+    public void assertCanRequestPasswordChange() {
+        if (status == UserStatus.DISABLED) {
+            throw new UserCannotChangePasswordException("User cannot request password change, user is disabled.");
+        }
+    }
+    public boolean isChangePasswordRequired() {
+        return status == UserStatus.CHANGE_PASSWORD_REQUIRED;
+    }
 }

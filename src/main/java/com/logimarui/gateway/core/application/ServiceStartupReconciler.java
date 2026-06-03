@@ -2,6 +2,8 @@ package com.logimarui.gateway.core.application;
 
 import com.logimarui.gateway.core.domain.model.ManagedService;
 import com.logimarui.gateway.core.domain.model.ServiceRuntime;
+import com.logimarui.gateway.core.domain.model.StartupReconciliationSnapshot;
+import com.logimarui.gateway.core.domain.model.StartupReconciliationStatus;
 import com.logimarui.gateway.core.port.ManagedServiceProvider;
 import com.logimarui.gateway.core.port.ServiceRuntimeRepository;
 import com.logimarui.gateway.infra.runtime.ManagedServiceIds;
@@ -12,6 +14,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,30 +28,70 @@ public class ServiceStartupReconciler {
     private final ServiceLifecycleManager serviceLifecycleManager;
     private final ProcessTreeTerminator processTreeTerminator;
 
+    private volatile StartupReconciliationStatus status = StartupReconciliationStatus.NOT_STARTED;
+    private volatile String currentServiceId;
+    private volatile String errorMessage;
+    private volatile Instant startedAt;
+    private volatile Instant finishedAt;
+
+    public StartupReconciliationSnapshot getSnapshot() {
+        return new StartupReconciliationSnapshot(
+                status,
+                currentServiceId,
+                errorMessage,
+                startedAt,
+                finishedAt
+        );
+    }
+
     @EventListener(ApplicationReadyEvent.class)
     public void reconcileOnStartup() {
+        status = StartupReconciliationStatus.RUNNING;
+        currentServiceId = null;
+        errorMessage = null;
+        startedAt = Instant.now();
+        finishedAt = null;
+
         log.info("[Supervisor] Reconcile iniciado.");
 
-        for (ManagedService service : managedServiceProvider.findAll()) {
-            if (!service.isStartOnBoot()) {
+        try {
+            for (ManagedService service : managedServiceProvider.findAll()) {
+                currentServiceId = service.getId();
+
+                if (!service.isStartOnBoot()) {
+                    log.info(
+                            "[Supervisor] Servico {} configurado com startOnBoot=false. Boot automatico ignorado.",
+                            service.getId()
+                    );
+                    continue;
+                }
+
                 log.info(
-                        "[Supervisor] Servico {} configurado com startOnBoot=false. Boot automatico ignorado.",
-                        service.getId()
+                        "[Supervisor] Reconciliando servico: {} porta preferida {}",
+                        service.getId(),
+                        service.getPort()
                 );
-                continue;
+
+                stopPersistedRuntimeIfExists(service);
+                startFresh(service);
             }
 
-            log.info(
-                    "[Supervisor] Reconciliando servico: {} porta preferida {}",
-                    service.getId(),
-                    service.getPort()
-            );
+            currentServiceId = null;
+            status = StartupReconciliationStatus.COMPLETED;
+            finishedAt = Instant.now();
 
-            stopPersistedRuntimeIfExists(service);
-            startFresh(service);
+            log.info("[Supervisor] Reconcile finalizado.");
+        } catch (RuntimeException exception) {
+            status = StartupReconciliationStatus.FAILED;
+            errorMessage = exception.getMessage();
+            finishedAt = Instant.now();
+            throw exception;
+        } catch (Error error) {
+            status = StartupReconciliationStatus.FAILED;
+            errorMessage = error.getMessage();
+            finishedAt = Instant.now();
+            throw error;
         }
-
-        log.info("[Supervisor] Reconcile finalizado.");
     }
 
     private void stopPersistedRuntimeIfExists(ManagedService service) {

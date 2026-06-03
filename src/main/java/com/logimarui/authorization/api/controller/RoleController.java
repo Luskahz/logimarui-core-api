@@ -1,16 +1,21 @@
 package com.logimarui.authorization.api.controller;
 
-
-import com.logimarui.authorization.api.dto.CreateRoleRequestDTO;
-import com.logimarui.authorization.api.dto.RoleDetailsResponseDTO;
-import com.logimarui.authorization.api.dto.UpdateRoleRequestDTO;
+import com.logimarui.authorization.api.dto.RoleResponseDTO;
+import com.logimarui.authorization.api.dto.role.CreateRoleRequestDTO;
+import com.logimarui.authorization.api.dto.role.UpdateRoleRequestDTO;
+import com.logimarui.authorization.core.application.result.RoleResult;
+import com.logimarui.authorization.core.application.result.RolesResult;
+import com.logimarui.authorization.core.application.service.RoleService;
+import com.logimarui.platform.openapi.security.RequiredPermission;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,62 +25,169 @@ import java.util.List;
 @RequestMapping("/authorization/roles")
 @RequiredArgsConstructor
 @Validated
+@Tag(
+        name = "Authorization - Roles",
+        description = "Gerenciamento de roles de autorização."
+)
 public class RoleController {
 
+    private final RoleService roleService;
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('AUTHORIZATION_ROLE_CREATE')")
+    @RequiredPermission("AUTHORIZATION_ROLE_CREATE")
     @Operation(
             summary = "Criar role",
-            description = "Cria uma nova role de autorização, opcionalmente já vinculada a um conjunto de permissões."
+            description = "Cria uma nova role de autorização."
     )
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Role criada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos"),
-            @ApiResponse(responseCode = "409", description = "Role já cadastrada")
-    })
-    @PostMapping
-    public ResponseEntity<RoleDetailsResponseDTO> createRole(
+    public ResponseEntity<RoleResponseDTO> createRole(
             @RequestBody @Valid CreateRoleRequestDTO request
     ) {
-        return null;
+        RoleResult result = roleService.createRole(
+                request.name(),
+                request.description()
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(RoleResponseDTO.from(result.role()));
     }
 
     @GetMapping
-    public ResponseEntity<List<RoleDetailsResponseDTO>> findAllRoles() {
-        return null;
+    @PreAuthorize("hasAuthority('AUTHORIZATION_ROLE_READ')")
+    @RequiredPermission("AUTHORIZATION_ROLE_READ")
+    @Operation(
+            summary = "Listar roles",
+            description = "Retorna todas as roles de autorização cadastradas."
+    )
+    public ResponseEntity<List<RoleResponseDTO>> findAllRoles() {
+        RolesResult result = roleService.findAllRoles();
+
+        return ResponseEntity.ok(
+                RoleResponseDTO.from(result.roles())
+        );
     }
 
     @GetMapping("/{roleId}")
-    public ResponseEntity<RoleDetailsResponseDTO> findRoleById(
-            @PathVariable @Positive Long roleId
+    @PreAuthorize("hasAuthority('AUTHORIZATION_ROLE_READ')")
+    @RequiredPermission("AUTHORIZATION_ROLE_READ")
+    @Operation(
+            summary = "Buscar role por ID",
+            description = "Retorna os dados de uma role a partir do seu identificador."
+    )
+    public ResponseEntity<RoleResponseDTO> findRoleById(
+            @Parameter(
+                    description = "ID da role.",
+                    example = "1",
+                    required = true
+            )
+            @PathVariable
+            @Positive(message = "ID da role deve ser positivo.")
+            Long roleId
     ) {
-        return null;
+        RoleResult result = roleService.findRoleById(roleId);
+
+        return ResponseEntity.ok(
+                RoleResponseDTO.from(result.role())
+        );
     }
 
-    @PatchMapping("/{roleId}")
-    public ResponseEntity<RoleDetailsResponseDTO> updateRole(
-            @PathVariable @Positive Long roleId,
+    @PutMapping("/{roleId}")
+    @PreAuthorize("hasAuthority('AUTHORIZATION_ROLE_UPDATE')")
+    @RequiredPermission("AUTHORIZATION_ROLE_UPDATE")
+    @Operation(
+            summary = "Atualizar role",
+            description = "Atualiza nome e descrição de uma role de autorização."
+    )
+    public ResponseEntity<RoleResponseDTO> updateRole(
+            @Parameter(
+                    description = "ID da role.",
+                    example = "1",
+                    required = true
+            )
+            @PathVariable
+            @Positive(message = "ID da role deve ser positivo.")
+            Long roleId,
+
             @RequestBody @Valid UpdateRoleRequestDTO request
     ) {
-        return null;
+        RoleResult result = roleService.updateRole(
+                roleId,
+                request.name(),
+                request.description()
+        );
+
+        return ResponseEntity.ok(
+                RoleResponseDTO.from(result.role())
+        );
     }
 
-    @PatchMapping("/{roleId}/disable")
-    public ResponseEntity<Void> disableRole(
-            @PathVariable @Positive Long roleId
+    @PatchMapping("/{roleId}/deactivate")
+    @PreAuthorize("hasAuthority('AUTHORIZATION_ROLE_DISABLE')")
+    @RequiredPermission("AUTHORIZATION_ROLE_DISABLE")
+    @Operation(
+            summary = "Desativar role",
+            description = "Marca uma role ativa como inativa."
+    )
+    public ResponseEntity<RoleResponseDTO> deactivateRole(
+            @Parameter(
+                    description = "ID da role.",
+                    example = "1",
+                    required = true
+            )
+            @PathVariable
+            @Positive(message = "ID da role deve ser positivo.")
+            Long roleId
     ) {
-        return null;
+        RoleResult result = roleService.deactivateRole(roleId);
+
+        return ResponseEntity.ok(
+                RoleResponseDTO.from(result.role())
+        );
     }
 
-    @PatchMapping("/{roleId}/enable")
-    public ResponseEntity<Void> enableRole(
-            @PathVariable @Positive Long roleId
+    @PatchMapping("/{roleId}/activate")
+    @PreAuthorize("hasAuthority('AUTHORIZATION_ROLE_ENABLE')")
+    @RequiredPermission("AUTHORIZATION_ROLE_ENABLE")
+    @Operation(
+            summary = "Ativar role",
+            description = "Marca uma role inativa como ativa."
+    )
+    public ResponseEntity<RoleResponseDTO> activateRole(
+            @Parameter(
+                    description = "ID da role.",
+                    example = "1",
+                    required = true
+            )
+            @PathVariable
+            @Positive(message = "ID da role deve ser positivo.")
+            Long roleId
     ) {
-        return null;
+        RoleResult result = roleService.activateRole(roleId);
+
+        return ResponseEntity.ok(
+                RoleResponseDTO.from(result.role())
+        );
     }
 
     @DeleteMapping("/{roleId}")
+    @PreAuthorize("hasAuthority('AUTHORIZATION_ROLE_DELETE')")
+    @RequiredPermission("AUTHORIZATION_ROLE_DELETE")
+    @Operation(
+            summary = "Excluir role",
+            description = "Realiza exclusão lógica de uma role de autorização."
+    )
     public ResponseEntity<Void> deleteRole(
-            @PathVariable @Positive Long roleId
+            @Parameter(
+                    description = "ID da role.",
+                    example = "1",
+                    required = true
+            )
+            @PathVariable
+            @Positive(message = "ID da role deve ser positivo.")
+            Long roleId
     ) {
-        return null;
+        roleService.deleteRole(roleId);
+
+        return ResponseEntity.noContent().build();
     }
 }

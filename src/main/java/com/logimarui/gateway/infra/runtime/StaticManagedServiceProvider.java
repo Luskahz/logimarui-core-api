@@ -26,7 +26,7 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
                     "/api/monitoring",
                     ServiceType.NODE,
                     "C:\\Users\\lucas.l\\Documents\\LogImarui\\logimarui_services\\database-monitoring",
-                    "npm run dev",
+                    "npm start",
                     4001,
                     true
             ),
@@ -71,7 +71,7 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
                     8091,
                     false,
                     "FRONTEND_PORT",
-                    false
+                    true
             )
     );
 

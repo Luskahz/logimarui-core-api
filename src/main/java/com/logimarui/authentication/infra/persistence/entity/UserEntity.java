@@ -1,64 +1,71 @@
 package com.logimarui.authentication.infra.persistence.entity;
 
-import com.logimarui.authentication.core.domain.enums.Role;
 import com.logimarui.authentication.core.domain.enums.UserStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
-import java.util.Set;
+import java.time.LocalDate;
 
-@Entity
-@Table(
-        name = "auth_user",
-        indexes = {
-                @Index(name = "idxAuthUserCpf", columnList = "cpf"),
-                @Index(name = "idxAuthUserUsername", columnList = "username")
-        }
-)
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "authentication_users")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cpf", nullable = false, unique = true)
+    @Column(nullable = false)
+    private String name;
+
+    @Column(name = "birth_data")
+    private LocalDate birthData;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(nullable = false, unique = true)
     private String cpf;
 
-    @Column(name = "username", nullable = false, unique = true, length = 100)
-    private String username;
+    @Column(unique = true)
+    private String rg;
 
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-            name = "auth_user_role",
-            joinColumns = @JoinColumn(
-                    name = "user_id",
-                    referencedColumnName = "id"
-            )
-    )
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Set<Role> roles;
+    @Column(name = "phone_number", length = 50)
+    private String phoneNumber;
+
+    @Column(name = "profile_photo_url")
+    private String profilePhotoUrl;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_status", nullable = false, length = 30)
-    private UserStatus userStatus;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Instant createdAt;
+    @Column(nullable = false)
+    private UserStatus status;
 
     @Column(name = "last_login_at")
     private Instant lastLoginAt;
 
-    @Column(name = "password_changed_at")
-    private Instant passwordChangedAt;
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant createdAt;
 
-    @Column(name = "failed_login_attempts", nullable = false)
+    @Column(name = "disabled_at")
+    private Instant disabledAt;
+
+    @Column(name = "updated_at")
+    private Instant updatedAt;
+
+    @Column(name = "password_change_at")
+    private Instant passwordChangeAt;
+
+    @Column(name = "failed_login_attempts")
     private int failedLoginAttempts;
+
 }

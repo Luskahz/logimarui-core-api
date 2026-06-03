@@ -1,48 +1,36 @@
 package com.logimarui.authentication.core.application.services;
 
-import com.logimarui.authentication.core.domain.enums.SessionStatus;
+import com.logimarui.authentication.core.application.exceptions.session.SessionNotFoundException;
+import com.logimarui.authentication.core.application.exceptions.user.UserIdNotFoundException;
+import com.logimarui.authentication.core.application.results.LogoutResult;
 import com.logimarui.authentication.core.domain.model.Session;
-import com.logimarui.authentication.core.port.*;
-import com.logimarui.authentication.core.repository.*;
+import com.logimarui.authentication.core.repository.SessionRepository;
+import com.logimarui.authentication.core.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
 public class LogoutService {
 
     private final SessionRepository sessionRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
-    private final UtilsServices utilsServices;
+    private final UserRepository userRepository;
 
     @Transactional
-    public void logout(Long userId, String ip, String deviceId) {
+    public LogoutResult logout(Long userId) {
         Instant now = Instant.now();
+        Session session = sessionRepository.findActiveByUserId(userId)
+                .orElseThrow(() -> new SessionNotFoundException("Session not found."));
 
-        Optional<Session> sessionOpt =
-                sessionRepository.findByUserIdAndDeviceIdAndSessionStatus(userId, deviceId, SessionStatus.ACTIVE);
+        userRepository.findById(session.getUserId())
+                .orElseThrow(() -> new UserIdNotFoundException("User not found."));
 
-        if (sessionOpt.isEmpty()) {
-            return;
-        }
+        session.logout(now);
+        sessionRepository.save(session);
 
-        Session session = sessionOpt.get();
-
-        if (!session.isLoggedOut()) {
-            session.updateIpAddress(ip, now);
-            utilsServices.logoutSession(session, now);
-        }
-
-        utilsServices.findActiveRefreshTokenBySession(session)
-                .ifPresent(token -> {
-                    token.revoke();
-                    refreshTokenRepository.save(token, session);
-                });
+        return new LogoutResult("Logout successful!");
     }
-
 }

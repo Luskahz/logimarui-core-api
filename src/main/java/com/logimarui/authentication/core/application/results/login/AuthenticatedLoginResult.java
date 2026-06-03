@@ -1,0 +1,13 @@
+package com.logimarui.authentication.core.application.results.login;
+import com.logimarui.authentication.core.application.results.AuthTokens;
+
+import java.util.Objects;
+
+public record AuthenticatedLoginResult(
+        AuthTokens tokens
+) implements LoginResult {
+
+    public AuthenticatedLoginResult {
+        Objects.requireNonNull(tokens, "tokens cannot be null");
+    }
+}

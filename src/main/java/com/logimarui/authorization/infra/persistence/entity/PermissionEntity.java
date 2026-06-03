@@ -1,7 +1,7 @@
 package com.logimarui.authorization.infra.persistence.entity;
 
-import com.logimarui.authorization.core.domain.enums.ModuleCode;
-import com.logimarui.authorization.core.domain.enums.PermissionCode;
+import com.logimarui.shared.authorization.ModuleCode;
+import com.logimarui.shared.authorization.PermissionCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,7 +39,7 @@ public class PermissionEntity {
     @Column(
             name = "code",
             nullable = false,
-            length = 255
+            length = 100
     )
     private PermissionCode code;
 
@@ -65,9 +65,6 @@ public class PermissionEntity {
     )
     private Instant createdAt;
 
-    @Column(
-            name = "updated_at",
-            nullable = false
-    )
+    @Column(name = "updated_at")
     private Instant updatedAt;
 }
