@@ -1,8 +1,8 @@
 {
   "serviceId" : "gerenciador-database-backup",
   "port" : 4002,
-  "rootPid" : 25428,
-  "listenerPid" : 24476,
+  "rootPid" : 18848,
+  "listenerPid" : 20384,
   "status" : "RUNNING",
-  "startedAt" : 1780495555.577736500
+  "startedAt" : 1780496619.249820400
 }

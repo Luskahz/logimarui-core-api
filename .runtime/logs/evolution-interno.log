@@ -586,3 +586,48 @@
  Container evolution_redis  Started
  Container evolution_api  Starting
  Container evolution_api  Started
+ Container evolution_api  Stopping
+ Container evolution_api  Stopped
+ Container evolution_api  Removing
+ Container evolution_api  Removed
+ Container evolution_redis  Stopping
+ Container evolution_postgres  Stopping
+ Container evolution_postgres  Stopped
+ Container evolution_postgres  Removing
+ Container evolution_postgres  Removed
+ Container evolution_redis  Stopped
+ Container evolution_redis  Removing
+ Container evolution_redis  Removed
+ Network evolution-net  Removing
+ Network evolution-net  Removed
+ Container evolution_postgres  Creating
+ Container evolution_postgres  Error response from daemon: Conflict. The container name "/evolution_postgres" is already in use by container "b36622f63d34b70e40836e02623a1fbdb7b2f8ea0ce0c5fc00859706aa290577". You have to remove (or rename) that container to be able to reuse that name.
+Error response from daemon: Conflict. The container name "/evolution_postgres" is already in use by container "b36622f63d34b70e40836e02623a1fbdb7b2f8ea0ce0c5fc00859706aa290577". You have to remove (or rename) that container to be able to reuse that name.
+ Container evolution_api  Stopping
+ Container evolution_api  Stopped
+ Container evolution_api  Removing
+ Container evolution_api  Removed
+ Container evolution_postgres  Stopping
+ Container evolution_redis  Stopping
+ Container evolution_redis  Stopped
+ Container evolution_redis  Removing
+ Container evolution_redis  Removed
+ Container evolution_postgres  Stopped
+ Container evolution_postgres  Removing
+ Container evolution_postgres  Removed
+ Network evolution-net  Removing
+ Network evolution-net  Removed
+ Network evolution-net  Creating
+ Network evolution-net  Created
+ Container evolution_redis  Creating
+ Container evolution_postgres  Creating
+ Container evolution_redis  Created
+ Container evolution_postgres  Created
+ Container evolution_api  Creating
+ Container evolution_api  Created
+ Container evolution_postgres  Starting
+ Container evolution_redis  Starting
+ Container evolution_postgres  Started
+ Container evolution_redis  Started
+ Container evolution_api  Starting
+ Container evolution_api  Started

@@ -20,7 +20,8 @@ public class SecurityConfig {
     private static final List<String> FRONTEND_RESERVED_PATH_PREFIXES = List.of(
             "/admin",
             "/api",
-            "/auth",
+            "/authentication",
+            "/authorization",
             "/error",
             "/evolution",
             "/form",

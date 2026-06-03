@@ -32546,3 +32546,149 @@ Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
 [03.csv - 2026] -> 60% | [60/100 bees_deliver_dia] Montando lote (326/326)
 [03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
 [03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\junho.csv
+[junho.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟠 DUPLICADO] [junho.csv] não sera inserido na tabela [03_11_40]
+[junho.csv - 2026] -> 0% | [0/100 03_11_40]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\junho.csv
+[junho.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟠 DUPLICADO] [junho.csv] não sera inserido na tabela [03_11_40]
+[junho.csv - 2026] -> 0% | [0/100 03_11_40]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\bees_deliver_dia\2026\junho\03.csv
+[03.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+[🟡 MODIFICADO] [03.csv] sera inserido na tabela [bees_deliver_dia], validar lógica de atualização para o tipo do arquivo
+[03.csv - 2026] -> 60% | [60/100 bees_deliver_dia] Enviando lote...
+[03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
+[03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\junho.csv
+[junho.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [junho.csv] não sera inserido na tabela [03_18_05]
+[junho.csv - 2026] -> 0% | [0/100 03_18_05]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\bees_deliver_dia\2026\junho\03.csv
+[03.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+[🟡 MODIFICADO] [03.csv] sera inserido na tabela [bees_deliver_dia], validar lógica de atualização para o tipo do arquivo
+[03.csv - 2026] -> 60% | [60/100 bees_deliver_dia] Enviando lote...
+[03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
+[03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
+
+> database_monitoring@1.0.0 start
+> cross-env UV_THREADPOOL_SIZE=64 node --max-old-space-size=8192 src/server.js
+
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+===== CONFIGURAÇÃO CARREGADA =====
+{
+  "schema": "diretorio",
+  "pipeline": {
+    "PIPELINE_FAST_PATH": false
+  },
+  "pool": {
+    "DB_POOL_MAX": 372
+  },
+  "batch": {
+    "BATCH_SIZE": 5000,
+    "MAX_BATCH_BYTES_DEFAULT": 50331648,
+    "MAX_BATCH_BYTES_WHEN_HIGH": 16777216
+  },
+  "ram": {
+    "ADAPTIVE_RAM_GUARD": true,
+    "RAM_HIGH_MB": 4048,
+    "RAM_LOW_MB": 10,
+    "RAM_GUARD_INTERVAL_MS": 1000
+  },
+  "concorrencia": {
+    "MAX_CONCURRENT_INSERTS_DEFAULT": 12,
+    "FILES_MAX_CONCURRENT": 31
+  },
+  "fila": {
+    "HIGH_WATERMARK_DEFAULT": 4,
+    "LOW_WATERMARK_DEFAULT": 2
+  },
+  "staging": {
+    "STAGING_DIR": "./staging",
+    "STAGING_REUSE": true,
+    "STAGING_VERIFY": true,
+    "STAGING_CLEANUP_ON_SUCCESS": true,
+    "STAGING_CLEANUP_TTL_MIN": 60
+  }
+}
+==================================
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[Inserts] concurrency=12 | files=31 | pool=10
+[BOOT] UV_THREADPOOL_SIZE=64 | CPUs=16
+Servidor rodando na porta 4001
+Dashboard disponivel em http://localhost:4001/
+Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
+[DB] MySQL version: 9.6.0 | max_allowed_packet: 67108864
+[DB] Pool => limit=n/a idleMax=n/a
+✅ Pronto! Monitorando alterações em: S:\Logistica\0.DPO\Diretórios_SQL
+
+> database_monitoring@1.0.0 start
+> cross-env UV_THREADPOOL_SIZE=64 node --max-old-space-size=8192 src/server.js
+
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 📡 version env with Radar: https://dotenvx.com/radar
+===== CONFIGURAÇÃO CARREGADA =====
+{
+  "schema": "diretorio",
+  "pipeline": {
+    "PIPELINE_FAST_PATH": false
+  },
+  "pool": {
+    "DB_POOL_MAX": 372
+  },
+  "batch": {
+    "BATCH_SIZE": 5000,
+    "MAX_BATCH_BYTES_DEFAULT": 50331648,
+    "MAX_BATCH_BYTES_WHEN_HIGH": 16777216
+  },
+  "ram": {
+    "ADAPTIVE_RAM_GUARD": true,
+    "RAM_HIGH_MB": 4048,
+    "RAM_LOW_MB": 10,
+    "RAM_GUARD_INTERVAL_MS": 1000
+  },
+  "concorrencia": {
+    "MAX_CONCURRENT_INSERTS_DEFAULT": 12,
+    "FILES_MAX_CONCURRENT": 31
+  },
+  "fila": {
+    "HIGH_WATERMARK_DEFAULT": 4,
+    "LOW_WATERMARK_DEFAULT": 2
+  },
+  "staging": {
+    "STAGING_DIR": "./staging",
+    "STAGING_REUSE": true,
+    "STAGING_VERIFY": true,
+    "STAGING_CLEANUP_ON_SUCCESS": true,
+    "STAGING_CLEANUP_TTL_MIN": 60
+  }
+}
+==================================
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[Inserts] concurrency=12 | files=31 | pool=10
+[BOOT] UV_THREADPOOL_SIZE=64 | CPUs=16
+Servidor rodando na porta 4001
+Dashboard disponivel em http://localhost:4001/
+Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
+[DB] MySQL version: 9.6.0 | max_allowed_packet: 67108864
+[DB] Pool => limit=n/a idleMax=n/a
+✅ Pronto! Monitorando alterações em: S:\Logistica\0.DPO\Diretórios_SQL
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\junho.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\bees_deliver_dia\2026\junho\03.csv
+[junho.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [junho.csv] não sera inserido na tabela [03_18_05]
+[junho.csv - 2026] -> 0% | [0/100 03_18_05]
+[03.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+[🟡 MODIFICADO] [03.csv] sera inserido na tabela [bees_deliver_dia], validar lógica de atualização para o tipo do arquivo
+[03.csv - 2026] -> 60% | [60/100 bees_deliver_dia] Enviando lote...
+[03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
+[03.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 326/326
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\junho.csv
+[junho.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟠 DUPLICADO] [junho.csv] não sera inserido na tabela [03_11_40]
+[junho.csv - 2026] -> 0% | [0/100 03_11_40]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\junho.csv
+[junho.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟡 MODIFICADO] [junho.csv] sera inserido na tabela [03_18_05], validar lógica de atualização para o tipo do arquivo
+[junho.csv - 2026] -> 15% | [15/100 03_18_05] Preparação concluída
+[junho.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 27/27
+[junho.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 27/27
