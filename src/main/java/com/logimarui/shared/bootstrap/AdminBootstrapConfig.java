@@ -14,8 +14,6 @@ public interface AdminBootstrapConfig {
 
     String cpf();
 
-    String rg();
-
     String password();
 
     String phoneNumber();

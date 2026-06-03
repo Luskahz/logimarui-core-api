@@ -12,7 +12,6 @@ public record AdminBootstrapProperties(
         LocalDate birthDate,
         String email,
         String cpf,
-        String rg,
         String password,
         String phoneNumber,
         String roleName

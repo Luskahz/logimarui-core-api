@@ -12,7 +12,7 @@ import com.logimarui.authentication.core.application.results.login.LoginResult;
 import com.logimarui.authentication.core.application.services.LoginService;
 import com.logimarui.authentication.core.application.services.LogoutService;
 import com.logimarui.authentication.core.application.services.MeService;
-import com.logimarui.infra.security.principal.UserPrincipal;
+import com.logimarui.platform.security.principal.UserPrincipal;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

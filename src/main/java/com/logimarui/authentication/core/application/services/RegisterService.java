@@ -22,7 +22,6 @@ public class RegisterService {
             LocalDate birthData,
             String email,
             String cpf,
-            String rg,
             String passwordRaw,
             String phoneNumber
 
@@ -35,7 +34,7 @@ public class RegisterService {
 
         String passwordHash = passwordHasher.hash(passwordRaw);
 
-        User newUser = User.create(name, birthData, email, cpf, rg, passwordHash, phoneNumber, now);
+        User newUser = User.create(name, birthData, email, cpf, passwordHash, phoneNumber, now);
 
         return userRepository.save(newUser);
     }

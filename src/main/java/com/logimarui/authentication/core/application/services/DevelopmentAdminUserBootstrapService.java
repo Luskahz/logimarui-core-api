@@ -39,7 +39,6 @@ public class DevelopmentAdminUserBootstrapService {
                 adminBootstrapConfig.birthDate(),
                 adminBootstrapConfig.email(),
                 adminBootstrapConfig.cpf(),
-                adminBootstrapConfig.rg(),
                 passwordHash,
                 adminBootstrapConfig.phoneNumber(),
                 now

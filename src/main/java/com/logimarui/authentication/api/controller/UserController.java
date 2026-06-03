@@ -44,7 +44,6 @@ public class UserController {
                 request.birthData(),
                 request.email(),
                 request.cpf(),
-                request.rg(),
                 request.password(),
                 request.phoneNumber()
         );

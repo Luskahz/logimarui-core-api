@@ -33,9 +33,6 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String cpf;
 
-    @Column(unique = true)
-    private String rg;
-
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 

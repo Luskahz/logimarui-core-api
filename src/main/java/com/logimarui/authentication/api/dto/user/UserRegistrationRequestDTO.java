@@ -50,15 +50,6 @@ public record UserRegistrationRequestDTO(
         String cpf,
 
         @Schema(
-                description = "RG do usuário.",
-                example = "12.345.678-9",
-                maxLength = 20,
-                nullable = true
-        )
-        @Size(max = 20, message = "RG deve ter no máximo 20 caracteres.")
-        String rg,
-
-        @Schema(
                 description = "Senha do usuário.",
                 example = "Senha@123",
                 minLength = 8,

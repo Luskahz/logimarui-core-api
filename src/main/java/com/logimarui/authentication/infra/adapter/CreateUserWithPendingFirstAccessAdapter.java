@@ -35,7 +35,6 @@ public class CreateUserWithPendingFirstAccessAdapter implements CreateUserWithPe
                 null,
                 email,
                 cpf,
-                null,
                 passwordHash,
                 phoneNumber,
                 null,

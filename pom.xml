@@ -22,7 +22,7 @@
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2025.1.0</spring-cloud.version>
-        <jjwt.version>0.11.5</jjwt.version>
+        <jjwt.version>0.12.5</jjwt.version>
         <commons-codec.version>1.16.0</commons-codec.version>
     </properties>
 

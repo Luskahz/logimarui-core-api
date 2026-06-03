@@ -68,9 +68,9 @@ public class SecurityConfig {
                                 "/authentication/login",
                                 "/authentication/register",
                                 "/authentication/refresh",
-                                "/membership/request",
-                                "/membership/activate",
                                 "/authentication/login/password-change",
+                                "/authentication/password-recovery/requests/",
+                                "/authentication/password-recovery/requests/email-token",
 
                                 "/error"
                         ).permitAll()

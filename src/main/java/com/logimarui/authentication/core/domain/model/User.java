@@ -23,7 +23,6 @@ public class User {
     private LocalDate birthData;
     private String email;
     private String cpf;
-    private String rg;
     private String passwordHash;
     private String phoneNumber;
     private String profilePhotoUrl;
@@ -38,12 +37,11 @@ public class User {
     private static final int MAX_FAILED_LOGIN_ATTEMPTS = 5;
 
 
-    private User(String name, LocalDate birthData, String email, String cpf, String rg, String passwordHash, String phoneNumber, Instant now){
+    private User(String name, LocalDate birthData, String email, String cpf, String passwordHash, String phoneNumber, Instant now){
         this.name = name;
         this.birthData = birthData;
         this.email = email;
         this.cpf = cpf;
-        this.rg = rg;
         this.passwordHash = passwordHash;
         this.phoneNumber = phoneNumber;
         this.status = UserStatus.ACTIVE;
@@ -56,7 +54,6 @@ public class User {
             LocalDate birthData,
             String email,
             String cpf,
-            String rg,
             String passwordHash,
             String phoneNumber,
             Instant now
@@ -66,7 +63,6 @@ public class User {
                 birthData,
                 email,
                 cpf,
-                rg,
                 passwordHash,
                 phoneNumber,
                 now
@@ -83,7 +79,6 @@ public class User {
             LocalDate birthData,
             String email,
             String cpf,
-            String rg,
             String passwordHash,
             String phoneNumber,
             String profilePhotoUrl,
@@ -101,7 +96,6 @@ public class User {
         user.birthData = birthData;
         user.email = email;
         user.cpf = cpf;
-        user.rg = rg;
         user.passwordHash = passwordHash;
         user.phoneNumber = phoneNumber;
         user.profilePhotoUrl = profilePhotoUrl;
