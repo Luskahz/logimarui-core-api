@@ -1,8 +1,0 @@
-{
-  "serviceId" : "evolution-interno",
-  "port" : 4080,
-  "rootPid" : null,
-  "listenerPid" : 13348,
-  "status" : "RUNNING",
-  "startedAt" : 1780496637.543256500
-}

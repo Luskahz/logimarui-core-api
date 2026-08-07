@@ -44,6 +44,13 @@ public class PythonServiceProcessRunner implements ServiceProcessRunner {
                     .redirectError(ProcessBuilder.Redirect.appendTo(logFile));
 
             processBuilder.environment().put("PORT", String.valueOf(allocatedPort));
+            String portEnvironmentVariable = service.getPortEnvironmentVariable();
+            if (portEnvironmentVariable != null && !portEnvironmentVariable.isBlank()) {
+                processBuilder.environment().put(
+                        portEnvironmentVariable,
+                        String.valueOf(allocatedPort)
+                );
+            }
             processBuilder.environment().put("SERVICE_HOST", "0.0.0.0");
             if (EXTRACTION_SERVICE_ID.equals(service.getId())) {
                 processBuilder.environment().put("EXTRATOR_FORCE_UNC_DRIVE_FALLBACKS", "1");

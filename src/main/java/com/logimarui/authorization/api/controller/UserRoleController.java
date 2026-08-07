@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/authorization/users")
+@RequestMapping("/api/v1/authorization/users")
 @RequiredArgsConstructor
 @Validated
 @Tag(

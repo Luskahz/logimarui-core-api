@@ -15,6 +15,7 @@ public class ManagedService {
     private final boolean requiresAuthentication;
     private final String portEnvironmentVariable;
     private final boolean startOnBoot;
+    private final boolean enabled;
 
     public ManagedService(
             String id,
@@ -35,6 +36,7 @@ public class ManagedService {
                 port,
                 requiresAuthentication,
                 "PORT",
+                true,
                 true
             );
     }
@@ -60,6 +62,7 @@ public class ManagedService {
                 port,
                 requiresAuthentication,
                 portEnvironmentVariable,
+                true,
                 true
         );
     }
@@ -84,7 +87,8 @@ public class ManagedService {
                 port,
                 requiresAuthentication,
                 "PORT",
-                startOnBoot
+                startOnBoot,
+                true
         );
     }
 
@@ -100,6 +104,34 @@ public class ManagedService {
             String portEnvironmentVariable,
             boolean startOnBoot
     ) {
+        this(
+                id,
+                pathPrefix,
+                type,
+                workingDirectory,
+                startCommand,
+                stopCommand,
+                port,
+                requiresAuthentication,
+                portEnvironmentVariable,
+                startOnBoot,
+                true
+        );
+    }
+
+    public ManagedService(
+            String id,
+            String pathPrefix,
+            ServiceType type,
+            String workingDirectory,
+            String startCommand,
+            String stopCommand,
+            int port,
+            boolean requiresAuthentication,
+            String portEnvironmentVariable,
+            boolean startOnBoot,
+            boolean enabled
+    ) {
         this.id = id;
         this.pathPrefix = pathPrefix;
         this.type = type;
@@ -110,5 +142,6 @@ public class ManagedService {
         this.requiresAuthentication = requiresAuthentication;
         this.portEnvironmentVariable = portEnvironmentVariable;
         this.startOnBoot = startOnBoot;
+        this.enabled = enabled;
     }
 }

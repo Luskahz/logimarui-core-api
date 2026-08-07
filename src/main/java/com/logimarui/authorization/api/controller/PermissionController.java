@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/authorization/permissions")
+@RequestMapping("/api/v1/authorization/permissions")
 @RequiredArgsConstructor
 @Validated
 @PreAuthorize("hasAuthority('AUTHORIZATION_PERMISSION_READ')")

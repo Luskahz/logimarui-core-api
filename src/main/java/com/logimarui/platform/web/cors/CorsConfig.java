@@ -14,7 +14,7 @@ public class CorsConfig {
     private final String[] allowedOrigins;
 
     public CorsConfig(
-            @Value("${app.cors.allowed-origins:http://localhost,http://127.0.0.1,http://localhost:3000,http://127.0.0.1:3000,http://localhost:8081,http://127.0.0.1:8081,http://localhost:19006,http://127.0.0.1:19006}") String allowedOrigins
+            @Value("${app.cors.allowed-origins:http://localhost,http://127.0.0.1,http://localhost:80,http://127.0.0.1:80,http://localhost:81,http://127.0.0.1:81,http://localhost:3000,http://127.0.0.1:3000,http://localhost:8091,http://127.0.0.1:8091,http://localhost:8191,http://127.0.0.1:8191,http://localhost:19006,http://127.0.0.1:19006}") String allowedOrigins
     ) {
         this.allowedOrigins = Arrays.stream(allowedOrigins.split(","))
                 .map(String::trim)

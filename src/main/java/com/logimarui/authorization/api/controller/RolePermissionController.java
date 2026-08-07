@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/authorization/roles/{roleId}/permissions")
+@RequestMapping("/api/v1/authorization/roles/{roleId}/permissions")
 @RequiredArgsConstructor
 @Validated
 @Tag(

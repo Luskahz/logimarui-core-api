@@ -34,8 +34,9 @@ import static org.springframework.web.servlet.function.RouterFunctions.route;
 @Configuration
 public class GatewayRoutesConfig {
 
-    private static final String EXTRACTION_SERVICE_ID = "gerenciador-extracao";
-    private static final String EXTRACTION_PUBLIC_PREFIX = "/gerenciador-extracao";
+    private static final String BACKEND_API_PREFIX = "/api";
+    private static final String CORE_API_PREFIX = "/api/v1";
+    private static final String FRONTEND_SERVICE_ID = "frontend";
     private static final String DATABASE_MONITORING_SERVICE_ID = "gerenciador-database-monitoring";
     private static final String DATABASE_BACKUP_SERVICE_ID = "gerenciador-database-backup";
     private static final String DATABASE_PUBLIC_PREFIX = "/gerenciador-database";
@@ -43,27 +44,29 @@ public class GatewayRoutesConfig {
     private static final String DATABASE_BACKUP_PUBLIC_PREFIX = DATABASE_PUBLIC_PREFIX + "/backup";
     private static final String EVOLUTION_SERVICE_ID = "evolution-interno";
     private static final String EVOLUTION_PUBLIC_PREFIX = "/evolution";
+    private static final String EVOLUTION_API_PUBLIC_PREFIX = "/evolution-api";
     private static final String N8N_SERVICE_ID = "n8n-interno";
     private static final String N8N_PUBLIC_PREFIX = "/n8n";
     private static final String N8N_REST_PREFIX = "/rest/n8n";
-    private static final List<String> FRONTEND_RESERVED_PATH_PREFIXES = List.of(
-            "/admin",
-            "/api",
-            "/auth",
+    private static final List<String> SPRING_OWNED_PATH_PREFIXES = List.of(
+            "/actuator",
+            BACKEND_API_PREFIX,
+            "/docs",
             "/error",
-            "/evolution",
-            "/form",
-            "/form-test",
-            "/gerenciador-database",
-            "/gerenciador-extracao",
-            "/n8n",
-            "/replenishments",
-            "/rest",
+            "/openapi-custom",
             "/swagger-ui",
             "/swagger-ui.html",
-            "/v3/api-docs",
-            "/webhook",
-            "/webhook-test"
+            "/v3/api-docs"
+    );
+
+    private static final Set<HttpMethod> FRONTEND_FALLBACK_METHODS = Set.of(
+            HttpMethod.GET,
+            HttpMethod.HEAD,
+            HttpMethod.OPTIONS,
+            HttpMethod.POST,
+            HttpMethod.PUT,
+            HttpMethod.PATCH,
+            HttpMethod.DELETE
     );
 
     private static final Set<String> HOP_BY_HOP_HEADERS = Set.of(
@@ -80,7 +83,7 @@ public class GatewayRoutesConfig {
             "accept-encoding"
     );
 
-    private static final List<String> FRONTEND_ABSOLUTE_PATH_PREFIXES = List.of(
+    private static final List<String> PROXIED_WEB_APP_ABSOLUTE_PATH_PREFIXES = List.of(
             "/api",
             "/assets",
             "/auth",
@@ -152,7 +155,10 @@ public class GatewayRoutesConfig {
     @Bean
     public RouterFunction<ServerResponse> gatewayRoutes(ServiceRegistry serviceRegistry) {
         return route()
-                .route(path("/api/**"), request -> proxy(request, serviceRegistry))
+                .route(
+                        request -> isExternalServiceApiRequest(request, serviceRegistry),
+                        request -> proxyToExternalService(request, serviceRegistry)
+                )
                 .route(path("/rest"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
                 .route(path("/rest/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
                 .route(path("/webhook"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
@@ -163,8 +169,6 @@ public class GatewayRoutesConfig {
                 .route(path("/form/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
                 .route(path("/form-test"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
                 .route(path("/form-test/**"), request -> proxyToN8nRootEndpoint(request, serviceRegistry))
-                .route(path(EXTRACTION_PUBLIC_PREFIX), request -> proxyToExtractionManager(request, serviceRegistry))
-                .route(path(EXTRACTION_PUBLIC_PREFIX + "/**"), request -> proxyToExtractionManager(request, serviceRegistry))
                 .route(path(DATABASE_PUBLIC_PREFIX), request -> redirectTo(DATABASE_MONITORING_PUBLIC_PREFIX + "/"))
                 .route(path(DATABASE_PUBLIC_PREFIX + "/"), request -> redirectTo(DATABASE_MONITORING_PUBLIC_PREFIX + "/"))
                 .route(path(DATABASE_MONITORING_PUBLIC_PREFIX), request -> proxyToDatabaseMonitoring(request, serviceRegistry))
@@ -173,14 +177,16 @@ public class GatewayRoutesConfig {
                 .route(path(DATABASE_BACKUP_PUBLIC_PREFIX + "/**"), request -> proxyToDatabaseBackup(request, serviceRegistry))
                 .route(path("/evolution"), request -> proxyToEvolutionManager(request, serviceRegistry))
                 .route(path("/evolution/**"), request -> proxyToEvolutionManager(request, serviceRegistry))
+                .route(path("/evolution-api"), request -> proxyToEvolutionApi(request, serviceRegistry))
+                .route(path("/evolution-api/**"), request -> proxyToEvolutionApi(request, serviceRegistry))
                 .route(path("/n8n"), request -> proxyToN8n(request, serviceRegistry))
                 .route(path("/n8n/**"), request -> proxyToN8n(request, serviceRegistry))
-                .route(this::isFrontendRequest, this::proxyToFrontend)
+                .route(this::isFrontendRequest, request -> proxyToFrontend(request, serviceRegistry))
                 .build();
     }
 
-    private ServerResponse proxy(ServerRequest request, ServiceRegistry serviceRegistry) {
-        ServiceRoute serviceRoute = findMatchingRoute(request, serviceRegistry);
+    private ServerResponse proxyToExternalService(ServerRequest request, ServiceRegistry serviceRegistry) {
+        ServiceRoute serviceRoute = findMatchingExternalServiceApiRoute(request, serviceRegistry);
 
         if (serviceRoute == null) {
             return ServerResponse.notFound().build();
@@ -226,7 +232,7 @@ public class GatewayRoutesConfig {
             return redirectTo(EVOLUTION_PUBLIC_PREFIX + "/manager/");
         }
 
-        return proxyToPrefixedFrontend(
+        return proxyToPrefixedWebApp(
                 request,
                 serviceRegistry,
                 EVOLUTION_SERVICE_ID,
@@ -236,22 +242,54 @@ public class GatewayRoutesConfig {
         );
     }
 
-    private ServerResponse proxyToExtractionManager(
+    private ServerResponse proxyToEvolutionApi(
             ServerRequest request,
             ServiceRegistry serviceRegistry
     ) {
-        if (request.path().equals(EXTRACTION_PUBLIC_PREFIX)) {
-            return redirectTo(EXTRACTION_PUBLIC_PREFIX + "/");
+        ServiceRoute serviceRoute = findRouteById(serviceRegistry, EVOLUTION_SERVICE_ID);
+
+        if (serviceRoute == null) {
+            return ServerResponse.notFound().build();
         }
 
-        return proxyToPrefixedFrontend(
-                request,
-                serviceRegistry,
-                EXTRACTION_SERVICE_ID,
-                EXTRACTION_PUBLIC_PREFIX,
-                "Gerenciador Extracao",
-                true
+        URI targetUri = appendPathAndQuery(
+                serviceRoute.getTargetUri(),
+                normalizeEvolutionApiUpstreamPath(request.path()),
+                request.uri().getRawQuery()
         );
+
+        try {
+            GatewayProxyResponse response = forwardRequest(
+                    request,
+                    targetUri,
+                    EVOLUTION_API_PUBLIC_PREFIX
+            );
+
+            ServerResponse.BodyBuilder responseBuilder =
+                    ServerResponse.status(response.statusCode());
+
+            copyPrefixedWebAppResponseHeaders(
+                    response.headers(),
+                    responseBuilder,
+                    serviceRoute,
+                    EVOLUTION_API_PUBLIC_PREFIX
+            );
+
+            if (request.method() == HttpMethod.HEAD) {
+                return responseBuilder.build();
+            }
+
+            return responseBuilder.body(response.body());
+
+        } catch (RestClientException exception) {
+            return ServerResponse
+                    .status(502)
+                    .body("Erro ao encaminhar requisicao para Evolution API.");
+        } catch (IOException | ServletException exception) {
+            return ServerResponse
+                    .status(400)
+                    .body("Erro ao ler corpo da requisicao.");
+        }
     }
 
     private ServerResponse proxyToDatabaseMonitoring(
@@ -262,7 +300,7 @@ public class GatewayRoutesConfig {
             return redirectTo(DATABASE_MONITORING_PUBLIC_PREFIX + "/");
         }
 
-        return proxyToPrefixedFrontend(
+        return proxyToPrefixedWebApp(
                 request,
                 serviceRegistry,
                 DATABASE_MONITORING_SERVICE_ID,
@@ -280,7 +318,7 @@ public class GatewayRoutesConfig {
             return redirectTo(DATABASE_BACKUP_PUBLIC_PREFIX + "/");
         }
 
-        return proxyToPrefixedFrontend(
+        return proxyToPrefixedWebApp(
                 request,
                 serviceRegistry,
                 DATABASE_BACKUP_SERVICE_ID,
@@ -298,7 +336,7 @@ public class GatewayRoutesConfig {
             return redirectTo("/n8n/");
         }
 
-        return proxyToPrefixedFrontend(
+        return proxyToPrefixedWebApp(
                 request,
                 serviceRegistry,
                 N8N_SERVICE_ID,
@@ -332,7 +370,7 @@ public class GatewayRoutesConfig {
         );
 
         try {
-            GatewayProxyResponse response = rewritePrefixedFrontendBodyIfNeeded(
+            GatewayProxyResponse response = rewritePrefixedWebAppBodyIfNeeded(
                     forwardRequest(request, targetUri, N8N_PUBLIC_PREFIX),
                     N8N_PUBLIC_PREFIX
             );
@@ -340,7 +378,7 @@ public class GatewayRoutesConfig {
             ServerResponse.BodyBuilder responseBuilder =
                     ServerResponse.status(response.statusCode());
 
-            copyPrefixedFrontendResponseHeaders(
+            copyPrefixedWebAppResponseHeaders(
                     response.headers(),
                     responseBuilder,
                     serviceRoute,
@@ -364,9 +402,18 @@ public class GatewayRoutesConfig {
         }
     }
 
-    private ServerResponse proxyToFrontend(ServerRequest request) {
+    private ServerResponse proxyToFrontend(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        String frontendTarget = frontendTargetUri;
+        ServiceRoute frontendRuntimeRoute = findRouteById(serviceRegistry, FRONTEND_SERVICE_ID);
+        if (frontendRuntimeRoute != null) {
+            frontendTarget = normalizeBaseUri(frontendRuntimeRoute.getTargetUri());
+        }
+
         URI targetUri = appendPathAndQuery(
-                frontendTargetUri,
+                frontendTarget,
                 request.path(),
                 request.uri().getRawQuery()
         );
@@ -376,7 +423,7 @@ public class GatewayRoutesConfig {
             ServerResponse.BodyBuilder responseBuilder =
                     ServerResponse.status(response.statusCode());
 
-            copyFrontendResponseHeaders(response.headers(), responseBuilder);
+            copyFrontendResponseHeaders(response.headers(), responseBuilder, frontendTarget);
 
             if (request.method() == HttpMethod.HEAD) {
                 return responseBuilder.build();
@@ -394,7 +441,7 @@ public class GatewayRoutesConfig {
         }
     }
 
-    private ServerResponse proxyToPrefixedFrontend(
+    private ServerResponse proxyToPrefixedWebApp(
             ServerRequest request,
             ServiceRegistry serviceRegistry,
             String serviceId,
@@ -408,7 +455,7 @@ public class GatewayRoutesConfig {
             return ServerResponse.notFound().build();
         }
 
-        URI targetUri = buildPrefixedFrontendTargetUri(
+        URI targetUri = buildPrefixedWebAppTargetUri(
                 serviceRoute,
                 request,
                 publicPrefix,
@@ -416,7 +463,7 @@ public class GatewayRoutesConfig {
         );
 
         try {
-            GatewayProxyResponse response = rewritePrefixedFrontendBodyIfNeeded(
+            GatewayProxyResponse response = rewritePrefixedWebAppBodyIfNeeded(
                     forwardRequest(request, targetUri, publicPrefix),
                     publicPrefix
             );
@@ -424,7 +471,7 @@ public class GatewayRoutesConfig {
             ServerResponse.BodyBuilder responseBuilder =
                     ServerResponse.status(response.statusCode());
 
-            copyPrefixedFrontendResponseHeaders(
+            copyPrefixedWebAppResponseHeaders(
                     response.headers(),
                     responseBuilder,
                     serviceRoute,
@@ -456,14 +503,38 @@ public class GatewayRoutesConfig {
                 .orElse(null);
     }
 
-    private ServiceRoute findMatchingRoute(ServerRequest request, ServiceRegistry serviceRegistry) {
+    private boolean isExternalServiceApiRequest(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
+        if (matchesPath(request.path(), CORE_API_PREFIX)) {
+            return false;
+        }
+
+        return findMatchingExternalServiceApiRoute(request, serviceRegistry) != null;
+    }
+
+    private ServiceRoute findMatchingExternalServiceApiRoute(
+            ServerRequest request,
+            ServiceRegistry serviceRegistry
+    ) {
         String requestPath = request.path();
 
         return serviceRegistry.findAll()
                 .stream()
+                .filter(this::isExternalServiceApiRoute)
                 .filter(route -> matchesPath(requestPath, route.getPathPrefix()))
                 .max(Comparator.comparingInt(route -> route.getPathPrefix().length()))
                 .orElse(null);
+    }
+
+    private boolean isExternalServiceApiRoute(ServiceRoute route) {
+        String pathPrefix = route.getPathPrefix();
+
+        return !FRONTEND_SERVICE_ID.equals(route.getId())
+                && pathPrefix != null
+                && pathPrefix.startsWith(BACKEND_API_PREFIX + "/")
+                && !matchesPath(pathPrefix, CORE_API_PREFIX);
     }
 
     private boolean matchesPath(String requestPath, String pathPrefix) {
@@ -474,13 +545,13 @@ public class GatewayRoutesConfig {
     private boolean isFrontendRequest(ServerRequest request) {
         HttpMethod method = request.method();
 
-        if (method != HttpMethod.GET && method != HttpMethod.HEAD && method != HttpMethod.OPTIONS) {
+        if (!FRONTEND_FALLBACK_METHODS.contains(method)) {
             return false;
         }
 
         String requestPath = request.path();
 
-        return FRONTEND_RESERVED_PATH_PREFIXES.stream()
+        return SPRING_OWNED_PATH_PREFIXES.stream()
                 .noneMatch(prefix -> matchesPath(requestPath, prefix));
     }
 
@@ -499,7 +570,7 @@ public class GatewayRoutesConfig {
         );
     }
 
-    private URI buildPrefixedFrontendTargetUri(
+    private URI buildPrefixedWebAppTargetUri(
             ServiceRoute serviceRoute,
             ServerRequest request,
             String publicPrefix,
@@ -714,7 +785,8 @@ public class GatewayRoutesConfig {
 
     private void copyFrontendResponseHeaders(
             HttpHeaders source,
-            ServerResponse.BodyBuilder target
+            ServerResponse.BodyBuilder target,
+            String frontendTarget
     ) {
         source.forEach((name, values) -> {
             if (isHopByHopHeader(name)) {
@@ -723,7 +795,7 @@ public class GatewayRoutesConfig {
 
             if ("location".equalsIgnoreCase(name)) {
                 values.stream()
-                        .map(this::rewriteFrontendLocationHeader)
+                        .map(location -> rewriteFrontendLocationHeader(location, frontendTarget))
                         .forEach(location -> target.header(name, location));
                 return;
             }
@@ -751,20 +823,20 @@ public class GatewayRoutesConfig {
         return location;
     }
 
-    private String rewriteFrontendLocationHeader(String location) {
+    private String rewriteFrontendLocationHeader(String location, String frontendTarget) {
         if (location == null || location.isBlank()) {
             return location;
         }
 
-        if (location.startsWith(frontendTargetUri)) {
-            String rewrittenLocation = location.substring(frontendTargetUri.length());
+        if (location.startsWith(frontendTarget)) {
+            String rewrittenLocation = location.substring(frontendTarget.length());
             return rewrittenLocation.isBlank() ? "/" : rewrittenLocation;
         }
 
         return location;
     }
 
-    private void copyPrefixedFrontendResponseHeaders(
+    private void copyPrefixedWebAppResponseHeaders(
             HttpHeaders source,
             ServerResponse.BodyBuilder target,
             ServiceRoute serviceRoute,
@@ -777,7 +849,7 @@ public class GatewayRoutesConfig {
 
             if ("location".equalsIgnoreCase(name)) {
                 values.stream()
-                        .map(location -> rewritePrefixedFrontendLocationHeader(
+                        .map(location -> rewritePrefixedWebAppLocationHeader(
                                 location,
                                 serviceRoute,
                                 publicPrefix
@@ -797,7 +869,7 @@ public class GatewayRoutesConfig {
         });
     }
 
-    private String rewritePrefixedFrontendLocationHeader(
+    private String rewritePrefixedWebAppLocationHeader(
             String location,
             ServiceRoute serviceRoute,
             String publicPrefix
@@ -885,6 +957,23 @@ public class GatewayRoutesConfig {
         return upstreamPath;
     }
 
+    private String normalizeEvolutionApiUpstreamPath(String requestPath) {
+        String upstreamPath = stripRepeatedPublicPrefix(
+                requestPath,
+                EVOLUTION_API_PUBLIC_PREFIX
+        );
+
+        if (upstreamPath.equals("/evolution")) {
+            return "/";
+        }
+
+        if (upstreamPath.startsWith("/evolution/")) {
+            return upstreamPath.substring("/evolution".length());
+        }
+
+        return upstreamPath;
+    }
+
     private boolean isHopByHopHeader(String headerName) {
         return HOP_BY_HOP_HEADERS.contains(headerName.toLowerCase());
     }
@@ -947,13 +1036,13 @@ public class GatewayRoutesConfig {
         );
     }
 
-    private GatewayProxyResponse rewritePrefixedFrontendBodyIfNeeded(
+    private GatewayProxyResponse rewritePrefixedWebAppBodyIfNeeded(
             GatewayProxyResponse response,
             String publicPrefix
     ) {
         String contentType = response.headers().getFirst(HttpHeaders.CONTENT_TYPE);
 
-        if (!shouldRewriteFrontendBody(contentType)) {
+        if (!shouldRewriteWebAppBody(contentType)) {
             return response;
         }
 
@@ -974,7 +1063,7 @@ public class GatewayRoutesConfig {
         );
     }
 
-    private boolean shouldRewriteFrontendBody(String contentType) {
+    private boolean shouldRewriteWebAppBody(String contentType) {
         if (contentType == null) {
             return false;
         }
@@ -1025,7 +1114,7 @@ public class GatewayRoutesConfig {
     private String rewriteQuotedAbsolutePathPrefixes(String body, String publicPrefix) {
         String rewrittenBody = body;
 
-        for (String pathPrefix : FRONTEND_ABSOLUTE_PATH_PREFIXES) {
+        for (String pathPrefix : PROXIED_WEB_APP_ABSOLUTE_PATH_PREFIXES) {
             Pattern pattern = Pattern.compile(
                     "([\"'`])" + Pattern.quote(pathPrefix) + "(?=[/?#\"'`])"
             );

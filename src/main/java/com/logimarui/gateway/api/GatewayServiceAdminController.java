@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/services")
+@RequestMapping("/api/v1/admin/services")
 @RequiredArgsConstructor
 public class GatewayServiceAdminController {
 
@@ -82,6 +82,7 @@ public class GatewayServiceAdminController {
                 snapshot.service().getPort(),
                 snapshot.service().isRequiresAuthentication(),
                 snapshot.service().getPortEnvironmentVariable(),
+                snapshot.service().isEnabled(),
                 snapshot.service().isStartOnBoot(),
                 snapshot.running(),
                 snapshot.runtime()

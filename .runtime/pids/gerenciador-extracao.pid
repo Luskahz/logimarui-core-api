@@ -1,8 +1,0 @@
-{
-  "serviceId" : "gerenciador-extracao",
-  "port" : 4000,
-  "rootPid" : 18624,
-  "listenerPid" : 18228,
-  "status" : "RUNNING",
-  "startedAt" : 1780496616.413115300
-}

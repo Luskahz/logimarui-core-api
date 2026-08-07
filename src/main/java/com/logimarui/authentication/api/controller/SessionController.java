@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/authentication")
+@RequestMapping("/api/v1/authentication")
 @RequiredArgsConstructor
 @Validated
 @Tag(
@@ -98,7 +98,9 @@ public class SessionController {
             summary = "Consultar sessão autenticada",
             description = "Retorna os dados da sessão do usuário autenticado e suas permissões atuais."
     )
-    public ResponseEntity<MeResponseDTO> getMe(Authentication authentication) {
+    public ResponseEntity<MeResponseDTO> getMe(
+            Authentication authentication
+    ) {
         UserPrincipal principal = getAuthenticatedPrincipal(authentication);
 
         MeResult result = meService.me(

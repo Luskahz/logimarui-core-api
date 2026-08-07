@@ -58,6 +58,15 @@ public class ServiceStartupReconciler {
             for (ManagedService service : managedServiceProvider.findAll()) {
                 currentServiceId = service.getId();
 
+                if (!service.isEnabled()) {
+                    log.info(
+                            "[Supervisor] Servico {} configurado com enabled=false. Runtime local sera limpo e o boot automatico sera ignorado.",
+                            service.getId()
+                    );
+                    stopPersistedRuntimeIfExists(service);
+                    continue;
+                }
+
                 if (!service.isStartOnBoot()) {
                     log.info(
                             "[Supervisor] Servico {} configurado com startOnBoot=false. Boot automatico ignorado.",

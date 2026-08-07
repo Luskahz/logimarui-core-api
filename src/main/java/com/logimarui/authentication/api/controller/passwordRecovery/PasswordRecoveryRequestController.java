@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(
-        value = "/authentication/password-recovery/requests",
+        value = "/api/v1/authentication/password-recovery/requests",
         produces = MediaType.APPLICATION_JSON_VALUE
 )
 @RequiredArgsConstructor

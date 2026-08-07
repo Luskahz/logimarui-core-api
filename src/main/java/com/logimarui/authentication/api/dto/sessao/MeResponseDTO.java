@@ -18,6 +18,13 @@ public record MeResponseDTO(
         Long userId,
 
         @Schema(
+                description = "nome fornecido pelo usuário autenticado.",
+                example = "Lucas Alves",
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
+        String userName,
+
+        @Schema(
                 description = "Identificador único da sessão autenticada.",
                 example = "15",
                 requiredMode = Schema.RequiredMode.REQUIRED
@@ -66,6 +73,7 @@ public record MeResponseDTO(
 
         return new MeResponseDTO(
                 result.userId(),
+                result.userName(),
                 result.sessionId(),
                 result.sessionActive(),
                 result.expiresInSeconds(),

@@ -73,6 +73,7 @@ public class ServiceLifecycleManager {
     public List<ServiceRuntime> startAll() {
         return managedServiceProvider.findAll()
                 .stream()
+                .filter(ManagedService::isEnabled)
                 .map(service -> startById(service.getId()))
                 .toList();
     }

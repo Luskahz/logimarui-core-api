@@ -1,8 +1,0 @@
-{
-  "serviceId" : "gerenciador-database-monitoring",
-  "port" : 4001,
-  "rootPid" : 19644,
-  "listenerPid" : 14096,
-  "status" : "RUNNING",
-  "startedAt" : 1780496617.997743500
-}

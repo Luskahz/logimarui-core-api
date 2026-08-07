@@ -1,8 +1,0 @@
-{
-  "serviceId" : "n8n-interno",
-  "port" : 5678,
-  "rootPid" : null,
-  "listenerPid" : 13348,
-  "status" : "RUNNING",
-  "startedAt" : 1780496632.310573100
-}

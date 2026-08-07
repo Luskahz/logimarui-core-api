@@ -1,7 +1,7 @@
 # API - REPOSIÇÕES
 
 ## Base URL
-{provável domínio Imaruí}/logistics/logimarui/replenishments/
+{origem pública do Logimarui}/api/v1/replenishments
 
 ## Authenticação
 implementado, reponsábilidade do módulo Auth
@@ -15,7 +15,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
 ### Rotas planejadas
     
 #### [ Tela 1 ] Tela histórico reposições do motorista
-- ***GET*** → **/replenishments/** (busca de reposições, abaixo cabeçalhos e DTO corpo)
+- ***GET*** → **/api/v1/replenishments** (busca de reposições, abaixo cabeçalhos e DTO corpo)
   - @Authentication Authentication
   - @Valid driver.id @obrigatorio
   - @Valid **pos.id** @opcional
@@ -24,7 +24,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @Valid pageValue
   - 
 #### [ Tela 2 ] Ticket Reposição (retroativo e atual)
-- ***GET*** → **/{id}/ticket**
+- ***GET*** → **/api/v1/replenishments/{id}/ticket**
 - @Authentication Authentication
 - @Valid replenishment.id
 - @ReturnBody replenishment.body
@@ -32,18 +32,18 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
 #### [ Tela 3 ] Tela Lançamento Reposição
 
 ##### capturando dados
-- ***GET*** → **/me**
+- ***GET*** → **/api/v1/replenishments/me**
   - Puxa a assinatura do motorista e os mapas atrelados a ele
   - @Authentication Authentication
   - @Parametro DriverId
 
-- ***GET*** → **line/{deliver-router-id}/lookup**
+- ***GET*** → **/api/v1/replenishments/line/{deliver-router-id}/lookup**
 - traz um tabelão produtos por nota, notas por clientes clientes por mapa
   - @Authentication Authentication
   - @Valid RouteId @opcional
 
 ##### registrando reposições
-- ***POST*** → **/replenishments/**
+- ***POST*** → **/api/v1/replenishments**
   - Cria a replenishment e a replenishmentLine espera o body de ambos
   - @Authentication Authentication
   -
@@ -66,7 +66,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @ReturnBody LineReplenishment.Id @oculto
 
 
-- ***POST*** → **/replenishments/line/**
+- ***POST*** → **/api/v1/replenishments/line**
 - insere linha de reposiçao no replenishment
   - @Authentication Authentication
   - 
@@ -79,7 +79,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @ReturnBody replenishment.body
 
 
-- ***PATCH*** → **/{id}/conclude**
+- ***POST*** → **/api/v1/replenishments/{id}/conclude**
 - rec chamada para finalização da escrita do processo
   - @Authentication Authentication
   - 
@@ -92,7 +92,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @ReturnBody replenishment.body (para criação do ticket)
 
 
-- ***DELETE*** → **/replenishments/**
+- ***PATCH*** → **/api/v1/replenishments**
 - cancela a reposição e todas as suas linhas incluídas,
   - @Authentication Authentication
   - 
@@ -101,7 +101,7 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
   - @RequestBody canceledTime
   - @Service replenishmentStatus = "CANCELADO"
 
-- ***PATCH*** → **/replenishments/line/**
+- ***PATCH*** → **/api/v1/replenishments/line**
 - alteração da linha reposição, cancelamento apenas a reposição completa
   - @Authentication Authentication
   - @Valid replenishmentLine.id
@@ -111,32 +111,32 @@ gerenciando o service para deixar as rotas funcionais, abaixo segue as rotas fun
 
 ##### [ Tela 4 ] - Histórico reposições cliente
 
-- ***GET*** → **/replenishments/history-pos/**
+- ***GET*** → **/api/v1/replenishments/history-pos**
 - busca o historico de reposições do cliente ultimas 10
 - @Authentication Authentication
 - @Valid pos.id
 
 
 ###### Rotas improváveis (caso as rotas planejadas fiquem pesadas no mobile)
-- ***GET*** → **/replenishments/line/lookup/pos/** (encontrar os clientes disponiveis na rota/rotas motorista com base nos filtros)
+- ***GET*** → **/api/v1/replenishments/line/lookup/pos** (encontrar os clientes disponiveis na rota/rotas motorista com base nos filtros)
   - @Authentication Authentication
   - @Valid route.id @opcional
   - @Valid invoice.number @opcional
   - @Valid invoice.series @opcional
 
-- ***GET*** → **/replenishments/line/lookup/invoice/**
+- ***GET*** → **/api/v1/replenishments/line/lookup/invoice**
   - @Authentication Authentication
   - @Valid route.id
   - @Valid pos.id
 
-- ***GET*** → **/replenishments/line/lookup/product/**
+- ***GET*** → **/api/v1/replenishments/line/lookup/product**
   - @Authentication Authentication
   - @Valid route.id @opcional
   - @Valid pos.id @opcional
   - @Valid invoice.number @opcional
   - @Valid invoice.series @opcional
 
-- ***GET*** → **/replenishments/line/lookup/uom/**
+- ***GET*** → **/api/v1/replenishments/line/lookup/uom**
   - @Authentication Authentication
   - @Valid invoice.number
   - @Valid invoice.series

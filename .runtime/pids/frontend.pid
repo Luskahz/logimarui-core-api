@@ -1,8 +1,0 @@
-{
-  "serviceId" : "frontend",
-  "port" : 8091,
-  "rootPid" : 13900,
-  "listenerPid" : 14056,
-  "status" : "RUNNING",
-  "startedAt" : 1780496646.496780300
-}

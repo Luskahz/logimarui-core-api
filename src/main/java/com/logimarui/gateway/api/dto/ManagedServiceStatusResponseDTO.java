@@ -10,6 +10,7 @@ public record ManagedServiceStatusResponseDTO(
         int preferredPort,
         boolean requiresAuthentication,
         String portEnvironmentVariable,
+        boolean enabled,
         boolean startOnBoot,
         boolean running,
         ServiceRuntime runtime

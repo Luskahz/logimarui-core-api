@@ -2,8 +2,10 @@ package com.logimarui.platform.security.config;
 
 import com.logimarui.platform.security.filter.JwtAuthenticationFilter;
 import com.logimarui.platform.security.jwt.JwtProperties;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpMethod;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.security.config.Customizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,19 +19,18 @@ import java.util.List;
 @Configuration
 @EnableConfigurationProperties(JwtProperties.class)
 public class SecurityConfig {
-    private static final List<String> FRONTEND_RESERVED_PATH_PREFIXES = List.of(
-            "/admin",
+    private static final List<String> NON_FRONTEND_PATH_PREFIXES = List.of(
+            "/actuator",
             "/api",
-            "/authentication",
-            "/authorization",
+            "/docs",
             "/error",
             "/evolution",
+            "/evolution-api",
             "/form",
             "/form-test",
             "/gerenciador-database",
-            "/gerenciador-extracao",
             "/n8n",
-            "/replenishments",
+            "/openapi-custom",
             "/rest",
             "/swagger-ui",
             "/swagger-ui.html",
@@ -49,6 +50,7 @@ public class SecurityConfig {
             throws Exception {
 
         http
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm ->
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -66,12 +68,13 @@ public class SecurityConfig {
                         ).permitAll()
 
                         .requestMatchers(
-                                "/authentication/login",
-                                "/authentication/register",
-                                "/authentication/refresh",
-                                "/authentication/login/password-change",
-                                "/authentication/password-recovery/requests/",
-                                "/authentication/password-recovery/requests/email-token",
+                                "/api/v1/authentication/login",
+                                "/api/v1/authentication/register",
+                                "/api/v1/authentication/refresh",
+                                "/api/v1/authentication/login/password-change",
+                                "/api/v1/authentication/password-recovery/requests",
+                                "/api/v1/authentication/password-recovery/requests/email-token",
+                                "/api/v1/authentication/password-recovery/requests/token/reset",
 
                                 "/error"
                         ).permitAll()
@@ -82,7 +85,7 @@ public class SecurityConfig {
                                 "/openapi-custom/**",
                                 "/docs/**"
                         ).permitAll()
-                        .requestMatchers("/admin/services/**").permitAll()
+                        .requestMatchers("/api/v1/admin/services/**").permitAll()
                         .requestMatchers(
                                 "/api/extrator/**",
                                 "/api/backup/**",
@@ -99,12 +102,12 @@ public class SecurityConfig {
                                 "/form/**",
                                 "/form-test",
                                 "/form-test/**",
-                                "/gerenciador-extracao",
-                                "/gerenciador-extracao/**",
                                 "/gerenciador-database",
                                 "/gerenciador-database/**",
                                 "/evolution",
                                 "/evolution/**",
+                                "/evolution-api",
+                                "/evolution-api/**",
                                 "/n8n",
                                 "/n8n/**"
                         ).permitAll()
@@ -121,20 +124,22 @@ public class SecurityConfig {
     }
 
     private RequestMatcher frontendRequestMatcher() {
-        return request -> {
-            String method = request.getMethod();
+        return this::isFrontendRequest;
+    }
 
-            if (!HttpMethod.GET.matches(method)
-                    && !HttpMethod.HEAD.matches(method)
-                    && !HttpMethod.OPTIONS.matches(method)) {
-                return false;
-            }
+    boolean isFrontendRequest(HttpServletRequest request) {
+        String method = request.getMethod();
 
-            String requestUri = request.getRequestURI();
+        if (!HttpMethod.GET.matches(method)
+                && !HttpMethod.HEAD.matches(method)
+                && !HttpMethod.OPTIONS.matches(method)) {
+            return false;
+        }
 
-            return FRONTEND_RESERVED_PATH_PREFIXES.stream()
-                    .noneMatch(prefix -> matchesPath(requestUri, prefix));
-        };
+        String requestUri = request.getRequestURI();
+
+        return NON_FRONTEND_PATH_PREFIXES.stream()
+                .noneMatch(prefix -> matchesPath(requestUri, prefix));
     }
 
     private boolean matchesPath(String requestUri, String prefix) {
@@ -142,4 +147,3 @@ public class SecurityConfig {
                 || requestUri.startsWith(prefix + "/");
     }
 }
-
