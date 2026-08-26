@@ -13,6 +13,5 @@ public class ReadDbProperties {
     private String username;
     private String password;
     private String driverClassName;
-
-
+    private int maximumPoolSize = 5;
 }

@@ -57,6 +57,8 @@ class GatewayRoutesConfigTest {
                 .isFalse();
         assertThat(hasGatewayHandler(HttpMethod.GET, "/api/v1/admin/services/overview"))
                 .isFalse();
+        assertThat(hasGatewayHandler(HttpMethod.GET, "/api/v2/occurrences"))
+                .isFalse();
     }
 
     @Test

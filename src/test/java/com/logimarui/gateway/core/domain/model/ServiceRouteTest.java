@@ -16,7 +16,10 @@ class ServiceRouteTest {
                 "/api/",
                 "/api/v1",
                 "/api/v1/",
-                "/api/v1/authentication"
+                "/api/v1/authentication",
+                "/api/v2",
+                "/api/v2/",
+                "/api/v2/occurrences"
         )) {
             assertThatThrownBy(() -> serviceRoute(pathPrefix))
                     .isInstanceOf(IllegalArgumentException.class)

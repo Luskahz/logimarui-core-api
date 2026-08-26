@@ -95045,3 +95045,664 @@ Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
 [agosto.csv - 2026] -> 0% | [0/100 03_11_40]
 [🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_11_40]
 [agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+
+> database_monitoring@1.0.0 start
+> cross-env UV_THREADPOOL_SIZE=64 node --max-old-space-size=8192 src/server.js
+
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+===== CONFIGURAÇÃO CARREGADA =====
+{
+  "schema": "diretorio",
+  "pipeline": {
+    "PIPELINE_FAST_PATH": false
+  },
+  "pool": {
+    "DB_POOL_MAX": 372
+  },
+  "batch": {
+    "BATCH_SIZE": 5000,
+    "MAX_BATCH_BYTES_DEFAULT": 50331648,
+    "MAX_BATCH_BYTES_WHEN_HIGH": 16777216
+  },
+  "ram": {
+    "ADAPTIVE_RAM_GUARD": true,
+    "RAM_HIGH_MB": 4048,
+    "RAM_LOW_MB": 10,
+    "RAM_GUARD_INTERVAL_MS": 1000
+  },
+  "concorrencia": {
+    "MAX_CONCURRENT_INSERTS_DEFAULT": 12,
+    "FILES_MAX_CONCURRENT": 31
+  },
+  "fila": {
+    "HIGH_WATERMARK_DEFAULT": 4,
+    "LOW_WATERMARK_DEFAULT": 2
+  },
+  "staging": {
+    "STAGING_DIR": "./staging",
+    "STAGING_REUSE": true,
+    "STAGING_VERIFY": true,
+    "STAGING_CLEANUP_ON_SUCCESS": true,
+    "STAGING_CLEANUP_TTL_MIN": 60
+  }
+}
+==================================
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[Inserts] concurrency=12 | files=31 | pool=10
+[BOOT] UV_THREADPOOL_SIZE=64 | CPUs=16
+Servidor rodando na porta 4001
+Dashboard disponivel em http://localhost:4001/
+Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
+✅ Pronto! Monitorando alterações em: S:\Logistica\0.DPO\Diretórios_SQL
+[DB] MySQL version: 9.6.0 | max_allowed_packet: 67108864
+[DB] Pool => limit=n/a idleMax=n/a
+npm notice
+npm notice New major version of npm available! 10.9.3 -> 12.0.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+npm notice To update run: npm install -g npm@12.0.2
+npm notice
+
+> database_monitoring@1.0.0 start
+> cross-env UV_THREADPOOL_SIZE=64 node --max-old-space-size=8192 src/server.js
+
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+===== CONFIGURAÇÃO CARREGADA =====
+{
+  "schema": "diretorio",
+  "pipeline": {
+    "PIPELINE_FAST_PATH": false
+  },
+  "pool": {
+    "DB_POOL_MAX": 372
+  },
+  "batch": {
+    "BATCH_SIZE": 5000,
+    "MAX_BATCH_BYTES_DEFAULT": 50331648,
+    "MAX_BATCH_BYTES_WHEN_HIGH": 16777216
+  },
+  "ram": {
+    "ADAPTIVE_RAM_GUARD": true,
+    "RAM_HIGH_MB": 4048,
+    "RAM_LOW_MB": 10,
+    "RAM_GUARD_INTERVAL_MS": 1000
+  },
+  "concorrencia": {
+    "MAX_CONCURRENT_INSERTS_DEFAULT": 12,
+    "FILES_MAX_CONCURRENT": 31
+  },
+  "fila": {
+    "HIGH_WATERMARK_DEFAULT": 4,
+    "LOW_WATERMARK_DEFAULT": 2
+  },
+  "staging": {
+    "STAGING_DIR": "./staging",
+    "STAGING_REUSE": true,
+    "STAGING_VERIFY": true,
+    "STAGING_CLEANUP_ON_SUCCESS": true,
+    "STAGING_CLEANUP_TTL_MIN": 60
+  }
+}
+==================================
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+[Inserts] concurrency=12 | files=31 | pool=10
+[BOOT] UV_THREADPOOL_SIZE=64 | CPUs=16
+Servidor rodando na porta 4001
+Dashboard disponivel em http://localhost:4001/
+Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
+[DB] MySQL version: 9.6.0 | max_allowed_packet: 67108864
+[DB] Pool => limit=n/a idleMax=n/a
+✅ Pronto! Monitorando alterações em: S:\Logistica\0.DPO\Diretórios_SQL
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_18_05], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_18_05] Preparação concluída
+[agosto.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 92/92
+[agosto.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 92/92
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_mapa\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_24\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_02_24]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_02_24], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 100% | [100/100 03_02_24] Inseridos: 42/42
+[agosto.csv - 2026] -> 100% | [100/100 03_02_24] Inseridos: 42/42
+[agosto.csv - 2026] -> 0% | [0/100 03_02_37_mapa]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_02_37_mapa], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_02_37_mapa] Preparação concluída
+[agosto.csv - 2026] -> 28% | [28/100 03_02_37_mapa] Montando lote (617/2026)
+[agosto.csv - 2026] -> 42% | [42/100 03_02_37_mapa] Montando lote (1235/2026)
+[agosto.csv - 2026] -> 56% | [56/100 03_02_37_mapa] Montando lote (1854/2026)
+[agosto.csv - 2026] -> 60% | [60/100 03_02_37_mapa] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_mapa] Inseridos: 2026/2026
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_mapa] Inseridos: 2026/2026
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[agosto.csv - 2026] -> 0% | [0/100 03_11_29]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_29], validar lógica de atualização para o tipo do arquivo
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_40], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_11_29] Preparação concluída
+[agosto.csv - 2026] -> 15% | [15/100 03_11_40] Preparação concluída
+[agosto.csv - 2026] -> 100% | [100/100 03_11_29] Inseridos: 232/232
+[agosto.csv - 2026] -> 100% | [100/100 03_11_29] Inseridos: 232/232
+[agosto.csv - 2026] -> 60% | [60/100 03_11_40] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cliente\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_mapa\2026\agosto.csv
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+[agosto.csv - 2026] -> 0% | [0/100 03_05_30_cliente]
+[agosto.csv - 2026] -> 0% | [0/100 03_05_30_mapa]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_05_30_mapa], validar lógica de atualização para o tipo do arquivo
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_05_30_cliente], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_05_30_mapa] Preparação concluída
+[agosto.csv - 2026] -> 15% | [15/100 03_05_30_cliente] Preparação concluída
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_mapa] Inseridos: 166/166
+[agosto.csv - 2026] -> 60% | [60/100 03_05_30_cliente] Montando lote (1663/1663)
+[agosto.csv - 2026] -> 60% | [60/100 03_05_30_cliente] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_cliente] Inseridos: 1663/1663
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_mapa] Inseridos: 166/166
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_cliente] Inseridos: 1663/1663
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Frota\03_11_42\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_operacao_veiculo_mapa\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_42]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_42], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 100% | [100/100 03_11_42] Inseridos: 189/189
+[agosto.csv - 2026] -> 100% | [100/100 03_11_42] Inseridos: 189/189
+[agosto.csv - 2026] -> 0% | [0/100 03_02_37_operacao_veiculo_mapa]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_02_37_operacao_veiculo_mapa], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_02_37_operacao_veiculo_mapa] Preparação concluída
+[agosto.csv - 2026] -> 16% | [16/100 03_02_37_operacao_veiculo_mapa] Montando lote (617/18401)
+[agosto.csv - 2026] -> 18% | [18/100 03_02_37_operacao_veiculo_mapa] Montando lote (1235/18401)
+[agosto.csv - 2026] -> 19% | [19/100 03_02_37_operacao_veiculo_mapa] Montando lote (1854/18401)
+[agosto.csv - 2026] -> 21% | [21/100 03_02_37_operacao_veiculo_mapa] Montando lote (2473/18401)
+[agosto.csv - 2026] -> 22% | [22/100 03_02_37_operacao_veiculo_mapa] Montando lote (3091/18401)
+[agosto.csv - 2026] -> 24% | [24/100 03_02_37_operacao_veiculo_mapa] Montando lote (3710/18401)
+[agosto.csv - 2026] -> 25% | [25/100 03_02_37_operacao_veiculo_mapa] Montando lote (4329/18401)
+[agosto.csv - 2026] -> 27% | [27/100 03_02_37_operacao_veiculo_mapa] Montando lote (4947/18401)
+[agosto.csv - 2026] -> 72% | [72/100 03_02_37_operacao_veiculo_mapa] Montando lote (5566/18401)
+[agosto.csv - 2026] -> 73% | [73/100 03_02_37_operacao_veiculo_mapa] Montando lote (6184/18401)
+[agosto.csv - 2026] -> 73% | [73/100 03_02_37_operacao_veiculo_mapa] Inseridos: 5000/18401
+[agosto.csv - 2026] -> 74% | [74/100 03_02_37_operacao_veiculo_mapa] Montando lote (6803/18401)
+[agosto.csv - 2026] -> 76% | [76/100 03_02_37_operacao_veiculo_mapa] Montando lote (7422/18401)
+[agosto.csv - 2026] -> 77% | [77/100 03_02_37_operacao_veiculo_mapa] Montando lote (8040/18401)
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\roteirizador\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Geral\01_20_11\global\01_20_11.csv
+[agosto.csv - 2026] -> 78% | [78/100 03_02_37_operacao_veiculo_mapa] Montando lote (8659/18401)
+[agosto.csv - 2026] -> 80% | [80/100 03_02_37_operacao_veiculo_mapa] Montando lote (9278/18401)
+[agosto.csv - 2026] -> 81% | [81/100 03_02_37_operacao_veiculo_mapa] Montando lote (9896/18401)
+[agosto.csv - 2026] -> 82% | [82/100 03_02_37_operacao_veiculo_mapa] Montando lote (10515/18401)
+[agosto.csv - 2026] -> 84% | [84/100 03_02_37_operacao_veiculo_mapa] Montando lote (11133/18401)
+[agosto.csv - 2026] -> 85% | [85/100 03_02_37_operacao_veiculo_mapa] Montando lote (11752/18401)
+[agosto.csv - 2026] -> 86% | [86/100 03_02_37_operacao_veiculo_mapa] Montando lote (12371/18401)
+[agosto.csv - 2026] -> 88% | [88/100 03_02_37_operacao_veiculo_mapa] Montando lote (12989/18401)
+[agosto.csv - 2026] -> 89% | [89/100 03_02_37_operacao_veiculo_mapa] Montando lote (13608/18401)
+[agosto.csv - 2026] -> 90% | [90/100 03_02_37_operacao_veiculo_mapa] Inseridos: 10000/18401
+[agosto.csv - 2026] -> 92% | [92/100 03_02_37_operacao_veiculo_mapa] Montando lote (14845/18401)
+[agosto.csv - 2026] -> 93% | [93/100 03_02_37_operacao_veiculo_mapa] Montando lote (15464/18401)
+[agosto.csv - 2026] -> 94% | [94/100 03_02_37_operacao_veiculo_mapa] Montando lote (16083/18401)
+[agosto.csv - 2026] -> 96% | [96/100 03_02_37_operacao_veiculo_mapa] Inseridos: 15000/18401
+[agosto.csv - 2026] -> 97% | [97/100 03_02_37_operacao_veiculo_mapa] Montando lote (17320/18401)
+[agosto.csv - 2026] -> 98% | [98/100 03_02_37_operacao_veiculo_mapa] Montando lote (17938/18401)
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_operacao_veiculo_mapa] Montando lote (18401/18401)
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_operacao_veiculo_mapa] Enviando lote...
+[agosto.csv - 2026] -> 0% | [0/100 roteirizador]
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_operacao_veiculo_mapa] Inseridos: 18401/18401
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [roteirizador], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 6% | [6/100 roteirizador] Encoding: utf8 | Delimitador: ;
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_operacao_veiculo_mapa] Inseridos: 18401/18401
+[01_20_11.csv - global] -> 0% | [0/100 01_20_11]
+[🟡 MODIFICADO] [01_20_11.csv] sera inserido na tabela [01_20_11], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 100% | [100/100 roteirizador] Inseridos: 133/133
+[agosto.csv - 2026] -> 100% | [100/100 roteirizador] Inseridos: 133/133
+[01_20_11.csv - global] -> 15% | [15/100 01_20_11] Preparação concluída
+[01_20_11.csv - global] -> 21% | [21/100 01_20_11] Montando lote (1842/13182)
+[01_20_11.csv - global] -> 27% | [27/100 01_20_11] Montando lote (3684/13182)
+[01_20_11.csv - global] -> 76% | [76/100 01_20_11] Montando lote (5527/13182)
+[01_20_11.csv - global] -> 82% | [82/100 01_20_11] Montando lote (7370/13182)
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\romaneio_roteirizador\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_01_47_01\2026\agosto.csv
+[01_20_11.csv - global] -> 87% | [87/100 01_20_11] Montando lote (9213/13182)
+[01_20_11.csv - global] -> 93% | [93/100 01_20_11] Montando lote (11056/13182)
+[01_20_11.csv - global] -> 99% | [99/100 01_20_11] Montando lote (12899/13182)
+[01_20_11.csv - global] -> 100% | [100/100 01_20_11] Enviando lote...
+[01_20_11.csv - global] -> 100% | [100/100 01_20_11] Inseridos: 13182/13182
+[01_20_11.csv - global] -> 100% | [100/100 01_20_11] Inseridos: 13182/13182
+[agosto.csv - 2026] -> 0% | [0/100 03_05_30_cod_motorista]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 romaneio_roteirizador]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_05_30_cod_motorista], validar lógica de atualização para o tipo do arquivo
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_18_05]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [romaneio_roteirizador], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_05_30_cod_motorista] Preparação concluída
+[agosto.csv - 2026] -> 6% | [6/100 romaneio_roteirizador] Encoding: utf8 | Delimitador: ;
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_01_47_01]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_01_47_01], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 romaneio_roteirizador] Preparação concluída
+[agosto.csv - 2026] -> 15% | [15/100 03_01_47_01] Preparação concluída
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_cod_motorista] Inseridos: 166/166
+[agosto.csv - 2026] -> 46% | [46/100 romaneio_roteirizador] Montando lote (1244/1759)
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_cod_motorista] Inseridos: 166/166
+[agosto.csv - 2026] -> 60% | [60/100 romaneio_roteirizador] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 romaneio_roteirizador] Inseridos: 1759/1759
+[agosto.csv - 2026] -> 100% | [100/100 romaneio_roteirizador] Inseridos: 1759/1759
+[agosto.csv - 2026] -> 19% | [19/100 03_01_47_01] Montando lote (1784/17009)
+[agosto.csv - 2026] -> 24% | [24/100 03_01_47_01] Montando lote (3582/17009)
+[agosto.csv - 2026] -> 72% | [72/100 03_01_47_01] Montando lote (5410/17009)
+[agosto.csv - 2026] -> 77% | [77/100 03_01_47_01] Montando lote (7256/17009)
+[agosto.csv - 2026] -> 81% | [81/100 03_01_47_01] Montando lote (9102/17009)
+[agosto.csv - 2026] -> 85% | [85/100 03_01_47_01] Montando lote (10936/17009)
+[agosto.csv - 2026] -> 90% | [90/100 03_01_47_01] Montando lote (12773/17009)
+[agosto.csv - 2026] -> 94% | [94/100 03_01_47_01] Montando lote (14613/17009)
+[agosto.csv - 2026] -> 98% | [98/100 03_01_47_01] Inseridos: 10000/17009
+[agosto.csv - 2026] -> 100% | [100/100 03_01_47_01] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_01_47_01] Inseridos: 12009/17009
+[agosto.csv - 2026] -> 100% | [100/100 03_01_47_01] Inseridos: 17009/17009
+[agosto.csv - 2026] -> 100% | [100/100 03_01_47_01] Inseridos: 17009/17009
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_11_40]
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_11_40]
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_18_05], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_18_05] Preparação concluída
+[agosto.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 94/94
+[agosto.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 94/94
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_18_05], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_18_05] Preparação concluída
+[agosto.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 95/95
+[agosto.csv - 2026] -> 100% | [100/100 03_18_05] Inseridos: 95/95
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_40], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 60% | [60/100 03_11_40] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+🟢 Arquivo adicionado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_08_05\2026\agosto\07.csv
+[07.csv - 2026] -> 0% | [0/100 03_08_05]
+[🟡 MODIFICADO] [07.csv] sera inserido na tabela [03_08_05], validar lógica de atualização para o tipo do arquivo
+[07.csv - 2026] -> 100% | [100/100 03_08_05] Inseridos: 35/35
+[07.csv - 2026] -> 100% | [100/100 03_08_05] Inseridos: 35/35
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\bees_deliver_dia\2026\agosto\10.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_40], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 60% | [60/100 03_11_40] Enviando lote...
+[10.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+[🟡 MODIFICADO] [10.csv] sera inserido na tabela [bees_deliver_dia], validar lógica de atualização para o tipo do arquivo
+[10.csv - 2026] -> 60% | [60/100 bees_deliver_dia] Enviando lote...
+[10.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 277/277
+[10.csv - 2026] -> 100% | [100/100 bees_deliver_dia] Inseridos: 277/277
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_40], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 60% | [60/100 03_11_40] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 223/250
+
+> database_monitoring@1.0.0 start
+> cross-env UV_THREADPOOL_SIZE=64 node --max-old-space-size=8192 src/server.js
+
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 📡 observe env with Radar: https://dotenvx.com/radar
+===== CONFIGURAÇÃO CARREGADA =====
+{
+  "schema": "diretorio",
+  "pipeline": {
+    "PIPELINE_FAST_PATH": false
+  },
+  "pool": {
+    "DB_POOL_MAX": 372
+  },
+  "batch": {
+    "BATCH_SIZE": 5000,
+    "MAX_BATCH_BYTES_DEFAULT": 50331648,
+    "MAX_BATCH_BYTES_WHEN_HIGH": 16777216
+  },
+  "ram": {
+    "ADAPTIVE_RAM_GUARD": true,
+    "RAM_HIGH_MB": 4048,
+    "RAM_LOW_MB": 10,
+    "RAM_GUARD_INTERVAL_MS": 1000
+  },
+  "concorrencia": {
+    "MAX_CONCURRENT_INSERTS_DEFAULT": 12,
+    "FILES_MAX_CONCURRENT": 31
+  },
+  "fila": {
+    "HIGH_WATERMARK_DEFAULT": 4,
+    "LOW_WATERMARK_DEFAULT": 2
+  },
+  "staging": {
+    "STAGING_DIR": "./staging",
+    "STAGING_REUSE": true,
+    "STAGING_VERIFY": true,
+    "STAGING_CLEANUP_ON_SUCCESS": true,
+    "STAGING_CLEANUP_TTL_MIN": 60
+  }
+}
+==================================
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[Inserts] concurrency=12 | files=31 | pool=10
+[BOOT] UV_THREADPOOL_SIZE=64 | CPUs=16
+Servidor rodando na porta 4102
+Dashboard disponivel em http://localhost:4102/
+Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
+[DB] MySQL version: 9.6.0 | max_allowed_packet: 67108864
+[DB] Pool => limit=n/a idleMax=n/a
+✅ Pronto! Monitorando alterações em: S:\Logistica\0.DPO\Diretórios_SQL
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_24\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_02_24]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_02_24]
+[agosto.csv - 2026] -> 0% | [0/100 03_02_24]
+
+> database_monitoring@1.0.0 start
+> cross-env UV_THREADPOOL_SIZE=64 node --max-old-space-size=8192 src/server.js
+
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+===== CONFIGURAÇÃO CARREGADA =====
+{
+  "schema": "diretorio",
+  "pipeline": {
+    "PIPELINE_FAST_PATH": false
+  },
+  "pool": {
+    "DB_POOL_MAX": 372
+  },
+  "batch": {
+    "BATCH_SIZE": 5000,
+    "MAX_BATCH_BYTES_DEFAULT": 50331648,
+    "MAX_BATCH_BYTES_WHEN_HIGH": 16777216
+  },
+  "ram": {
+    "ADAPTIVE_RAM_GUARD": true,
+    "RAM_HIGH_MB": 4048,
+    "RAM_LOW_MB": 10,
+    "RAM_GUARD_INTERVAL_MS": 1000
+  },
+  "concorrencia": {
+    "MAX_CONCURRENT_INSERTS_DEFAULT": 12,
+    "FILES_MAX_CONCURRENT": 31
+  },
+  "fila": {
+    "HIGH_WATERMARK_DEFAULT": 4,
+    "LOW_WATERMARK_DEFAULT": 2
+  },
+  "staging": {
+    "STAGING_DIR": "./staging",
+    "STAGING_REUSE": true,
+    "STAGING_VERIFY": true,
+    "STAGING_CLEANUP_ON_SUCCESS": true,
+    "STAGING_CLEANUP_TTL_MIN": 60
+  }
+}
+==================================
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[Inserts] concurrency=12 | files=31 | pool=10
+[BOOT] UV_THREADPOOL_SIZE=64 | CPUs=16
+Servidor rodando na porta 4102
+Dashboard disponivel em http://localhost:4102/
+Para reiniciar o sistema aperte Ctrl+C e rode Npm run dev novamente
+[DB] MySQL version: 9.6.0 | max_allowed_packet: 67108864
+[DB] Pool => limit=n/a idleMax=n/a
+✅ Pronto! Monitorando alterações em: S:\Logistica\0.DPO\Diretórios_SQL
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_40], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 60% | [60/100 03_11_40] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 345/376
+[agosto.csv - 2026] -> 100% | [100/100 03_11_40] Inseridos: 345/376
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_29]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_29], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 100% | [100/100 03_11_29] Inseridos: 358/358
+[agosto.csv - 2026] -> 100% | [100/100 03_11_29] Inseridos: 358/358
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_mapa\2026\agosto.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_01_46_06\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_05_30_mapa]
+[agosto.csv - 2026] -> 0% | [0/100 03_01_46_06]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_05_30_mapa], validar lógica de atualização para o tipo do arquivo
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_01_46_06]
+[agosto.csv - 2026] -> 0% | [0/100 03_01_46_06]
+[agosto.csv - 2026] -> 15% | [15/100 03_05_30_mapa] Preparação concluída
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_mapa] Inseridos: 246/246
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_mapa] Inseridos: 246/246
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_01_46_06\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_01_46_06]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_01_46_06]
+[agosto.csv - 2026] -> 0% | [0/100 03_01_46_06]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_08_05\2026\agosto\12.csv
+[12.csv - 2026] -> 0% | [0/100 03_08_05]
+[🟠 DUPLICADO] [12.csv] não sera inserido na tabela [03_08_05]
+[12.csv - 2026] -> 0% | [0/100 03_08_05]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Frota\03_11_42\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_42]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_11_42], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 100% | [100/100 03_11_42] Inseridos: 292/292
+[agosto.csv - 2026] -> 100% | [100/100 03_11_42] Inseridos: 292/292
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_08_05\2026\agosto\12.csv
+[12.csv - 2026] -> 0% | [0/100 03_08_05]
+[🟠 DUPLICADO] [12.csv] não sera inserido na tabela [03_08_05]
+[12.csv - 2026] -> 0% | [0/100 03_08_05]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Geral\01_11\global\01_11.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Geral\01_20_11\global\01_20_11.csv
+[01_11.csv - global] -> 0% | [0/100 01_11]
+[🟡 MODIFICADO] [01_11.csv] sera inserido na tabela [01_11], validar lógica de atualização para o tipo do arquivo
+[01_11.csv - global] -> 6% | [6/100 01_11] Encoding: latin1 | Delimitador: ;
+[01_11.csv - global] -> 15% | [15/100 01_11] Preparação concluída
+[01_11.csv - global] -> 20% | [20/100 01_11] Montando lote (2547/19956)
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Geral\01_11\global\01_11.csv
+[01_11.csv - global] -> 70% | [70/100 01_11] Montando lote (5093/19956)
+[01_11.csv - global] -> 75% | [75/100 01_11] Inseridos: 5000/19956
+[01_11.csv - global] -> 80% | [80/100 01_11] Montando lote (10193/19956)
+[01_20_11.csv - global] -> 0% | [0/100 01_20_11]
+[01_11.csv - global] -> 85% | [85/100 01_11] Montando lote (12686/19956)
+[01_11.csv - global] -> 90% | [90/100 01_11] Inseridos: 10000/19956
+[🟡 MODIFICADO] [01_20_11.csv] sera inserido na tabela [01_20_11], validar lógica de atualização para o tipo do arquivo
+[01_11.csv - global] -> 95% | [95/100 01_11] Montando lote (17615/19956)
+[01_20_11.csv - global] -> 15% | [15/100 01_20_11] Preparação concluída
+[01_11.csv - global] -> 95% | [95/100 01_11] Inseridos: 15000/19956
+[01_11.csv - global] -> 100% | [100/100 01_11] Montando lote (19956/19956)
+[01_11.csv - global] -> 100% | [100/100 01_11] Enviando lote...
+[01_11.csv - global] -> 100% | [100/100 01_11] Inseridos: 19956/19956
+[01_20_11.csv - global] -> 21% | [21/100 01_20_11] Montando lote (1842/13183)
+[01_20_11.csv - global] -> 27% | [27/100 01_20_11] Montando lote (3684/13183)
+[01_20_11.csv - global] -> 76% | [76/100 01_20_11] Montando lote (5527/13183)
+[01_20_11.csv - global] -> 82% | [82/100 01_20_11] Montando lote (7370/13183)
+[01_11.csv - global] -> 100% | [100/100 01_11] Inseridos: 19956/19956
+[01_20_11.csv - global] -> 87% | [87/100 01_20_11] Inseridos: 5000/13183
+[01_20_11.csv - global] -> 93% | [93/100 01_20_11] Montando lote (11056/13183)
+[01_20_11.csv - global] -> 99% | [99/100 01_20_11] Montando lote (12899/13183)
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\03.csv
+[01_20_11.csv - global] -> 100% | [100/100 01_20_11] Enviando lote...
+[01_20_11.csv - global] -> 100% | [100/100 01_20_11] Inseridos: 13183/13183
+[01_11.csv - global] -> 0% | [0/100 01_11]
+[01_20_11.csv - global] -> 100% | [100/100 01_20_11] Inseridos: 13183/13183
+[🟠 DUPLICADO] [01_11.csv] não sera inserido na tabela [01_11]
+[03.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [03.csv] não sera inserido na tabela [03_03_12]
+[01_11.csv - global] -> 0% | [0/100 01_11]
+[03.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[04.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [04.csv] não sera inserido na tabela [03_03_12]
+[04.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\06.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_mapa\2026\agosto.csv
+[07.csv - 2026] -> 0% | [0/100 03_03_12]
+[06.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [07.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [06.csv] não sera inserido na tabela [03_03_12]
+[07.csv - 2026] -> 0% | [0/100 03_03_12]
+[06.csv - 2026] -> 0% | [0/100 03_03_12]
+[agosto.csv - 2026] -> 0% | [0/100 03_02_37_mapa]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_02_37_mapa], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_02_37_mapa] Preparação concluída
+[agosto.csv - 2026] -> 24% | [24/100 03_02_37_mapa] Montando lote (617/3009)
+[agosto.csv - 2026] -> 33% | [33/100 03_02_37_mapa] Montando lote (1235/3009)
+[agosto.csv - 2026] -> 42% | [42/100 03_02_37_mapa] Montando lote (1854/3009)
+[agosto.csv - 2026] -> 51% | [51/100 03_02_37_mapa] Montando lote (2473/3009)
+[agosto.csv - 2026] -> 60% | [60/100 03_02_37_mapa] Montando lote (3009/3009)
+[agosto.csv - 2026] -> 60% | [60/100 03_02_37_mapa] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_mapa] Inseridos: 3009/3009
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_mapa] Inseridos: 3009/3009
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[08.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [08.csv] não sera inserido na tabela [03_03_12]
+[08.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\bees_deliver_dia\2026\agosto\13.csv
+[13.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+[🟠 DUPLICADO] [13.csv] não sera inserido na tabela [bees_deliver_dia]
+[13.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[10.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [10.csv] não sera inserido na tabela [03_03_12]
+[10.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\12.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\11.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\13.csv
+[12.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [12.csv] não sera inserido na tabela [03_03_12]
+[12.csv - 2026] -> 0% | [0/100 03_03_12]
+[11.csv - 2026] -> 0% | [0/100 03_03_12]
+[13.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟡 MODIFICADO] [11.csv] sera inserido na tabela [03_03_12], validar lógica de atualização para o tipo do arquivo
+[🟡 MODIFICADO] [13.csv] sera inserido na tabela [03_03_12], validar lógica de atualização para o tipo do arquivo
+[11.csv - 2026] -> 100% | [100/100 03_03_12] Inseridos: 7/7
+[11.csv - 2026] -> 100% | [100/100 03_03_12] Inseridos: 7/7
+[13.csv - 2026] -> 100% | [100/100 03_03_12] Inseridos: 30/30
+[13.csv - 2026] -> 100% | [100/100 03_03_12] Inseridos: 30/30
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\03.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[03.csv - 2026] -> 0% | [0/100 03_03_12]
+[04.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [03.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [04.csv] não sera inserido na tabela [03_03_12]
+[03.csv - 2026] -> 0% | [0/100 03_03_12]
+[04.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\06.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[06.csv - 2026] -> 0% | [0/100 03_03_12]
+[08.csv - 2026] -> 0% | [0/100 03_03_12]
+[07.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [06.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [08.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [07.csv] não sera inserido na tabela [03_03_12]
+[08.csv - 2026] -> 0% | [0/100 03_03_12]
+[06.csv - 2026] -> 0% | [0/100 03_03_12]
+[07.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\11.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[11.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [11.csv] não sera inserido na tabela [03_03_12]
+[11.csv - 2026] -> 0% | [0/100 03_03_12]
+[10.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [10.csv] não sera inserido na tabela [03_03_12]
+[10.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\12.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\13.csv
+[12.csv - 2026] -> 0% | [0/100 03_03_12]
+[13.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [12.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [13.csv] não sera inserido na tabela [03_03_12]
+[12.csv - 2026] -> 0% | [0/100 03_03_12]
+[13.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[07.csv - 2026] -> 0% | [0/100 03_03_12]
+[04.csv - 2026] -> 0% | [0/100 03_03_12]
+[08.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [07.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [04.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [08.csv] não sera inserido na tabela [03_03_12]
+[04.csv - 2026] -> 0% | [0/100 03_03_12]
+[07.csv - 2026] -> 0% | [0/100 03_03_12]
+[08.csv - 2026] -> 0% | [0/100 03_03_12]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\11.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[11.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [11.csv] não sera inserido na tabela [03_03_12]
+[11.csv - 2026] -> 0% | [0/100 03_03_12]
+[10.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [10.csv] não sera inserido na tabela [03_03_12]
+[10.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\13.csv
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\12.csv
+[12.csv - 2026] -> 0% | [0/100 03_03_12]
+[13.csv - 2026] -> 0% | [0/100 03_03_12]
+[🟠 DUPLICADO] [12.csv] não sera inserido na tabela [03_03_12]
+[🟠 DUPLICADO] [13.csv] não sera inserido na tabela [03_03_12]
+[12.csv - 2026] -> 0% | [0/100 03_03_12]
+[13.csv - 2026] -> 0% | [0/100 03_03_12]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Armazém\03_02_37_operacao_cliente_vendedor_nfs_compra\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_02_37_operacao_cliente_vendedor_nfs_compra]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_02_37_operacao_cliente_vendedor_nfs_compra], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 39% | [39/100 03_02_37_operacao_cliente_vendedor_nfs_compra] Montando lote (617/1111)
+[agosto.csv - 2026] -> 60% | [60/100 03_02_37_operacao_cliente_vendedor_nfs_compra] Montando lote (1111/1111)
+[agosto.csv - 2026] -> 60% | [60/100 03_02_37_operacao_cliente_vendedor_nfs_compra] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_operacao_cliente_vendedor_nfs_compra] Inseridos: 1111/1111
+[agosto.csv - 2026] -> 100% | [100/100 03_02_37_operacao_cliente_vendedor_nfs_compra] Inseridos: 1111/1111
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_05_30_cod_motorista]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [03_05_30_cod_motorista], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 15% | [15/100 03_05_30_cod_motorista] Preparação concluída
+[agosto.csv - 2026] -> 60% | [60/100 03_05_30_cod_motorista] Enviando lote...
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_cod_motorista] Inseridos: 246/246
+[agosto.csv - 2026] -> 100% | [100/100 03_05_30_cod_motorista] Inseridos: 246/246
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_05_30_cod_motorista]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_05_30_cod_motorista]
+[agosto.csv - 2026] -> 0% | [0/100 03_05_30_cod_motorista]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\bees_deliver_dia\2026\agosto\13.csv
+[13.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+[🟠 DUPLICADO] [13.csv] não sera inserido na tabela [bees_deliver_dia]
+[13.csv - 2026] -> 0% | [0/100 bees_deliver_dia]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Frota\registros_checklists\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 registros_checklists]
+[🟡 MODIFICADO] [agosto.csv] sera inserido na tabela [registros_checklists], validar lógica de atualização para o tipo do arquivo
+[agosto.csv - 2026] -> 60% | [60/100 registros_checklists] Montando lote (572/572)
+[agosto.csv - 2026] -> 100% | [100/100 registros_checklists] Inseridos: 572/572
+[agosto.csv - 2026] -> 100% | [100/100 registros_checklists] Inseridos: 572/572
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Frota\registros_checklists\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 registros_checklists]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [registros_checklists]
+[agosto.csv - 2026] -> 0% | [0/100 registros_checklists]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_11_40]
+[agosto.csv - 2026] -> 0% | [0/100 03_11_40]
+🟡 Arquivo modificado: S:\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]
+[🟠 DUPLICADO] [agosto.csv] não sera inserido na tabela [03_18_05]
+[agosto.csv - 2026] -> 0% | [0/100 03_18_05]

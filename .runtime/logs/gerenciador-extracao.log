@@ -185525,4 +185525,1766 @@ ConnectionAbortedError: [WinError 10053] Uma conexão estabelecida foi anulada pe
 [WORKER] Worker 3 iniciando execucao de '14_05_01 (sem periodo)'.
 [WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
 [SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=07/08/2026 17:25.
-[QUEUE] Tarefa '03_01_47_01 (2026-08-07)' adicionada a fila.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-07)' adicionada a fila.[APP] Aplicacao iniciada.
+[SCHEDULER] Scheduler reconfigurado: 32 regra(s) ativa(s) de 32.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 08/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 09/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 10/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 08/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 09/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 10/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 08/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 09/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 10/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 08/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 09/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 10/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 08/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 09/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 10/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 08/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 09/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 10/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-09)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 08/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 09/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 10/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 13_02_06_02 prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '13_02_06_02 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 13_02_06_02 prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '13_02_06_02 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 13_02_06_02 prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '13_02_06_02 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 08/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 09/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 10/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_04 prevista para 08/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_04 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_04 prevista para 09/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_04 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_04 prevista para 10/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_04 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: resumo_de_checklist prevista para 08/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa 'resumo_de_checklist (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: resumo_de_checklist prevista para 09/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa 'resumo_de_checklist (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: resumo_de_checklist prevista para 10/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa 'resumo_de_checklist (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou 66 execucao(oes) pendente(s) na inicializacao.
+[WORKER] Pool de workers configurado para 5 execucao(oes) simultanea(s).
+[WORKER] Worker 1 iniciado.
+[WORKER] Worker 1 iniciando execucao de '03_02_37_operacao_veiculo_mapa (2026-08)'.
+[WORKER] Worker 3 iniciado.
+[WORKER] Worker 2 iniciado.
+[WORKER] Worker 4 iniciado.
+[WORKER] Worker 5 iniciado.
+[APP] Input manual desabilitado neste ambiente nao interativo.
+[SCHEDULER] Scheduler iniciado.
+[WORKER] Worker 3 iniciando execucao de '03_02_37_operacao_veiculo_mapa (2026-08)'.
+[WORKER] Worker 2 iniciando execucao de '03_02_37_operacao_veiculo_mapa (2026-08)'.
+[WORKER] Worker 4 iniciando execucao de '03_02_24 (2026-08)'.
+[WORKER] Worker 5 iniciando execucao de '03_02_24 (2026-08)'.
+[APP] Servidor web iniciado em http://0.0.0.0:4000
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 08:24.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Arquivo transferido para 2 destino(s): 03_02_24 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_24\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030224 Mapa\2026\03.02.24_ago26.csv.inf
+[WORKER] Erro executando '03_02_24 (2026-08)': [Errno 2] No such file or directory: 'csv_outputs\\03_02_24__agosto__2026.csv'
+[WORKER] Worker 4 iniciando execucao de '03_02_24 (2026-08)'.
+[WORKER] Worker 5 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_02_24 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_24\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030224 Mapa\2026\03.02.24_ago26.csv.inf
+[WORKER] Worker 4 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_05_30_cliente (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cliente\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530 Cliente\03.05.30.cliente_ago26.csv.inf
+[WORKER] Worker 5 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_05_30_cliente (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cliente\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530 Cliente\03.05.30.cliente_ago26.csv.inf
+[WORKER] Worker 4 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[WORKER] Erro executando '03_05_30_cliente (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_05_30_cliente__agosto__2026.csv'
+[WORKER] Worker 5 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_05_30_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_mapa\2026\agosto.csv
+[WORKER] Worker 4 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[WORKER] Erro executando '03_05_30_mapa (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_05_30_mapa__agosto__2026.csv'
+[WORKER] Worker 5 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_29 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_29 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_05_30_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_mapa\2026\agosto.csv
+[WORKER] Worker 4 iniciando execucao de '03_01_46_06 (2026-08)'.
+[WORKER] Erro executando '03_02_37_operacao_veiculo_mapa (2026-08)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\03_02_37_operacao_veiculo_mapa__agosto__2026.csv'
+[WORKER] Erro executando '03_02_37_operacao_veiculo_mapa (2026-08)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\03_02_37_operacao_veiculo_mapa__agosto__2026.csv'
+[WORKER] Arquivo transferido para 1 destino(s): 03_02_37_operacao_veiculo_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_operacao_veiculo_mapa\2026\agosto.csv
+[WORKER] Worker 3 iniciando execucao de '03_01_46_06 (2026-08)'.
+[WORKER] Worker 1 iniciando execucao de '03_01_46_06 (2026-08)'.
+[WORKER] Worker 2 iniciando execucao de '03_01_47_01 (2026-08-01 ate 2026-08-09)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_29 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_01_47_01 (2026-08-01 ate 2026-08-09)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_46_06 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_01_46_06\2026\agosto.csv
+[WORKER] Worker 1 iniciando execucao de '03_01_47_01 (2026-08-01 ate 2026-08-09)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_46_06 (2026-08)
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_46_06 (2026-08)
+[WORKER] Worker 3 iniciando execucao de '03_08_05 (2026-08-09)'.
+[WORKER] Worker 4 iniciando execucao de '03_08_05 (2026-08-09)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_08_05 (2026-08-09)
+[WORKER] Execucao concluida sem arquivo gerado: 03_08_05 (2026-08-09)
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_47_01 (2026-08-01 ate 2026-08-09) | caminhos=\\imaruileste.dominiolocal\expedicao_adm\LOGISTICA\0.DPO\2026\03. Pilar Atendimento\1.0 - QUALIDADE\1.4 - Rep. DQI\Diretório\03.01.47.01\03.01.47.01_ago26.csv.inf
+[WORKER] Erro executando '03_01_47_01 (2026-08-01 ate 2026-08-09)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_01_47_01__01_08_2026__09_08_2026.csv'
+[WORKER] Worker 3 iniciando execucao de '03_08_05 (2026-08-09)'.
+[WORKER] Worker 4 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] Worker 2 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] Worker 5 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_08_05 (2026-08-09)
+[WORKER] Worker 3 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] Erro executando '03_01_47_01 (2026-08-01 ate 2026-08-09)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_01_47_01__01_08_2026__09_08_2026.csv'
+[WORKER] Worker 1 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] Erro executando '03_11_42 (2026-08)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\03_11_42__agosto__2026.csv'
+[WORKER] Erro executando '03_11_42 (2026-08)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\03_11_42__agosto__2026.csv'
+[WORKER] Arquivo transferido para 2 destino(s): 03_11_42 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Frota\03_11_42\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031142\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] Worker 4 iniciando execucao de '01_11 (sem periodo)'.
+[WORKER] Worker 2 iniciando execucao de '01_11 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_20_11 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Geral\01_20_11\global\01_20_11.csv
+[WORKER] Worker 3 iniciando execucao de '01_11 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_20_11 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Geral\01_20_11\global\01_20_11.csv
+[WORKER] Worker 1 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[WORKER] Erro executando '01_20_11 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_20_11__sem_periodo.csv'
+[WORKER] Worker 5 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[WORKER] Erro executando '03_02_37_mapa (2026-08)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\03_02_37_mapa__agosto__2026.csv'
+[WORKER] Arquivo transferido para 2 destino(s): 03_02_37_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_mapa\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\030237\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-01)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-01)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-02)'.
+[WORKER] Erro executando '01_11 (sem periodo)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\01_11__sem_periodo.csv'
+[WORKER] Arquivo transferido para 2 destino(s): 01_11 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Geral\01_11\global\01_11.csv | \\192.168.0.213\Files\Logistica\0.DPO\Crítica\01.11.csv.inf
+[WORKER] Erro executando '01_11 (sem periodo)': [WinError 5] Acesso negado: 'csv_outputs\\01_11__sem_periodo.csv'
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-02)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-03)'.
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-04)'.
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-05)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-06)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-05)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-07)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-03) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\03.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-04) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-08)'.
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-09)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-06) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\06.csv
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-09)
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-07) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-11)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_02_37_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_mapa\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\030237\agosto.csv
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-12)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-13)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-11)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-14)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-12)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-13)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-15)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-16)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-14)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-17)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-15)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-16)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-18)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-19)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-17)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-20)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-18)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-19)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-21)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-22)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-20)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-23)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-21)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-22)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-24)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-25)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-23)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-26)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-24)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-25)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-27)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-28)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-26)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-29)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-27)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-28)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-30)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-31)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-29)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-01)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-30)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-31)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-02)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-03)'.----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 57452)
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\http\server.py", line 447, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\http\server.py", line 435, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "C:\Users\lucas.l\Documents\LogImarui\logimarui_services\extrator-manager\app.py", line 3450, in do_GET
+    self._send_json(
+    ~~~~~~~~~~~~~~~^
+        get_destination_rules_payload(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\lucas.l\Documents\LogImarui\logimarui_services\extrator-manager\app.py", line 3286, in _send_json
+    self.wfile.write(payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] Uma conexão estabelecida foi anulada pelo software no computador host
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 57486)
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\http\server.py", line 447, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\http\server.py", line 435, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "C:\Users\lucas.l\Documents\LogImarui\logimarui_services\extrator-manager\app.py", line 3450, in do_GET
+    self._send_json(
+    ~~~~~~~~~~~~~~~^
+        get_destination_rules_payload(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\lucas.l\Documents\LogImarui\logimarui_services\extrator-manager\app.py", line 3286, in _send_json
+    self.wfile.write(payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] Uma conexão estabelecida foi anulada pelo software no computador host
+----------------------------------------
+
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-01)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-04)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-02)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-05)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-05)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-06)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 08:28.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-07)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-03) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\03.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-04) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-06) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\06.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-08)'.
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-09)'.
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-10)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-11)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-09)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-12)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-11)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-13)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-12)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-14)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-13)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-15)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-14)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-16)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-15)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-17)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-16)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-18)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-17)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-19)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-18)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-20)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-19)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-21)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-20)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-22)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-21)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-23)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-22)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-24)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-23)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-25)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-24)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-26)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-25)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-27)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-26)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-28)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-27)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-29)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-28)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-30)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-29)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-31)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-30)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-01)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-31)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-02)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-01)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-03)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-02)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-04)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-07) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-05)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-05)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-06)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-07)'.
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-03) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\03.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-04) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-09)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-09)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-11)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-11)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-12)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-12)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-13)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-13)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-14)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-14)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-15)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-15)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-16)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-16)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-17)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-17)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-18)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-18)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-19)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-19)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-20)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-20)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-21)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-21)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-22)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-22)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-23)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-23)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-24)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-24)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-25)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-06) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\06.csv
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-26)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-25)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-27)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-26)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-28)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-27)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-29)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-07) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-28)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-30)'.
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-31)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-29)
+[WORKER] Worker 4 iniciando execucao de '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-30)
+[WORKER] Worker 3 iniciando execucao de '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-31)
+[WORKER] Worker 5 iniciando execucao de '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)'.
+[WORKER] Worker 2 iniciando execucao de '03_02_37_mapa_condpagto_itens (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[WORKER] Worker 1 iniciando execucao de '03_02_37_mapa_condpagto_itens (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_02_37_operacao_cliente_vendedor_nfs_compra\2026\agosto.csv
+[WORKER] Erro executando '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_02_37_operacao_cliente_vendedor_nfs_compras__agosto__2026.csv'
+[WORKER] Erro executando '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_02_37_operacao_cliente_vendedor_nfs_compras__agosto__2026.csv'
+[WORKER] Worker 5 iniciando execucao de '03_02_37_mapa_condpagto_itens (2026-08)'.
+[WORKER] Worker 4 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-09)'.
+[WORKER] Worker 3 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-09)'.
+[WORKER] Erro executando '03_02_37_mapa_condpagto_itens (2026-08)': Falha ao validar a copia do arquivo para o destino: \\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\Mapas em aberto\03.02.37.csv
+[WORKER] Worker 2 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-09)'.
+[WORKER] Erro executando '03_02_37_mapa_condpagto_itens (2026-08)': Falha ao validar a copia do arquivo para o destino: \\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\Mapas em aberto\03.02.37.csv
+[WORKER] Worker 1 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 08:30.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler disparou: 03_11_40 (Mensal: mes atual) | slot=10/08/2026 08:30.
+[QUEUE] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[WORKER] Execucao concluida sem arquivo gerado: 03_02_37_cliente_condpagto_setornf (2026-08-09)
+[WORKER] Execucao concluida sem arquivo gerado: 03_02_37_cliente_condpagto_setornf (2026-08-09)
+[WORKER] Worker 4 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[WORKER] Worker 3 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_05_30_motorista (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530\2026\03.05.30.motorista_ago26.csv.inf
+[WORKER] Worker 1 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_02_37_cliente_condpagto_setornf (2026-08-09)
+[WORKER] Worker 2 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Erro executando '01_12 (sem periodo)': Falha ao validar a copia do arquivo para o destino: \\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\PRODUTOS\01.12 MATERIAIS\01.12.csv
+[WORKER] Worker 1 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_05_30_motorista (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530\2026\03.05.30.motorista_ago26.csv.inf
+[WORKER] Erro executando '03_05_30_motorista (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_05_30_motorista__agosto__2026.csv'
+[WORKER] Worker 4 iniciando execucao de '13_02_06_02 (2026-08)'.
+[WORKER] Worker 3 iniciando execucao de '13_02_06_02 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_02_37_mapa_condpagto_itens (2026-08) | caminhos=\\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\Mapas em aberto\03.02.37.csv
+[WORKER] Worker 5 iniciando execucao de '13_02_06_02 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_12 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\PRODUTOS\01.12 MATERIAIS\01.12.csv
+[WORKER] Arquivo transferido para 1 destino(s): 01_12 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\PRODUTOS\01.12 MATERIAIS\01.12.csv
+[WORKER] Worker 2 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Worker 1 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Erro executando '13_02_06_02 (2026-08)': Rotina sem caminhos configurados: 13_02_06_02
+[WORKER] Worker 4 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Erro executando '13_02_06_02 (2026-08)': Rotina sem caminhos configurados: 13_02_06_02
+[WORKER] Worker 3 iniciando execucao de '01_20_04 (sem periodo)'.
+[WORKER] Erro executando '13_02_06_02 (2026-08)': Rotina sem caminhos configurados: 13_02_06_02
+[WORKER] Worker 5 iniciando execucao de '01_20_04 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_20_04 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\FORNECEDORES\FORNECEDORES.csv
+[WORKER] Erro executando '01_20_04 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_20_04__sem_periodo.csv'
+[WORKER] Worker 3 iniciando execucao de '01_20_04 (sem periodo)'.
+[WORKER] Worker 5 iniciando execucao de 'resumo_de_checklist (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_20_04 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\FORNECEDORES\FORNECEDORES.csv
+[WORKER] Worker 3 iniciando execucao de 'resumo_de_checklist (2026-08)'.
+[WORKER] Erro executando '01_12 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_12__sem_periodo.csv'
+[WORKER] Arquivo transferido para 1 destino(s): 01_12 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\PRODUTOS\01.12 MATERIAIS\01.12.csv
+[WORKER] Erro executando '01_12 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_12__sem_periodo.csv'
+[WORKER] Worker 2 iniciando execucao de 'resumo_de_checklist (2026-08)'.
+[WORKER] Worker 4 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): resumo_de_checklist (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Frota\registros_checklists\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_18_05 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WORKER] Erro executando '14_05_01 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\14_05_01__sem_periodo.csv'
+[WORKER] Worker 4 iniciando execucao de '03_11_40 (2026-08)'.
+[WORKER] Erro executando 'resumo_de_checklist (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\resumo_de_checklist__agosto__2026.csv'
+[WORKER] Erro executando 'resumo_de_checklist (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\resumo_de_checklist__agosto__2026.csv'
+[WORKER] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 08:32.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 08:36.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WEB] [192-168-0-74] Nova execucao solicitada: Lote 'Mariana_diario' (15 item(ns)).
+[WORKER] [192-168-0-74] Worker 3 iniciando execucao de '03_02_24 (2026-08)'.
+[QUEUE] [192-168-0-74] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-74] Worker 5 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[QUEUE] [192-168-0-74] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-74] Worker 4 iniciando execucao de '03_02_37_operacao_veiculo_mapa (2026-08)'.
+[QUEUE] [192-168-0-74] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-74] Worker 1 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[QUEUE] [192-168-0-74] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-74] Worker 2 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[QUEUE] [192-168-0-74] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '03_08_05 (2026-08-09)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '03_01_47_01 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa 'roteirizador (2026-08-01 ate 2026-08-31)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa 'romaneio (2026-08-01 ate 2026-08-31)' adicionada a fila.
+[QUEUE] [192-168-0-74] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-74] Arquivo transferido para 2 destino(s): 03_02_24 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_24\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030224 Mapa\2026\03.02.24_ago26.csv.inf
+[WORKER] [192-168-0-74] Worker 3 iniciando execucao de '03_08_05 (2026-08-09)'.
+[WORKER] [192-168-0-74] Execucao concluida sem arquivo gerado: 03_08_05 (2026-08-09)
+[WORKER] [192-168-0-74] Worker 3 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] [192-168-0-74] Arquivo transferido para 1 destino(s): 03_11_29 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+[WORKER] [192-168-0-74] Worker 3 iniciando execucao de '03_11_40 (2026-08)'.
+[WORKER] [192-168-0-74] Arquivo transferido para 2 destino(s): 03_02_37_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_mapa\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\030237\agosto.csv
+[WORKER] [192-168-0-74] Worker 5 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] [192-168-0-74] Arquivo transferido para 2 destino(s): 03_05_30_cliente (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cliente\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530 Cliente\03.05.30.cliente_ago26.csv.inf
+[WORKER] [192-168-0-74] Worker 1 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] [192-168-0-74] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[WORKER] [192-168-0-74] Worker 3 iniciando execucao de '03_01_47_01 (2026-08)'.
+[WORKER] [192-168-0-74] Arquivo transferido para 1 destino(s): 03_05_30_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_mapa\2026\agosto.csv
+[WORKER] [192-168-0-74] Worker 2 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[WORKER] [192-168-0-74] Arquivo transferido para 2 destino(s): 03_11_42 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Frota\03_11_42\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031142\agosto.csv
+[WORKER] [192-168-0-74] Worker 5 iniciando execucao de 'roteirizador (2026-08-01 ate 2026-08-31)'.
+[WORKER] [192-168-0-74] Arquivo transferido para 1 destino(s): roteirizador (2026-08-01 ate 2026-08-31) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\roteirizador\2026\agosto.csv
+[WORKER] [192-168-0-74] Worker 5 iniciando execucao de 'romaneio (2026-08-01 ate 2026-08-31)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 08:40.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] [192-168-0-74] Arquivo transferido para 1 destino(s): romaneio (2026-08-01 ate 2026-08-31) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\romaneio_roteirizador\2026\agosto.csv
+[WORKER] [192-168-0-74] Worker 5 iniciando execucao de '03_18_05 (2026-08)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 08:40.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-74] Arquivo transferido para 1 destino(s): 03_02_37_operacao_veiculo_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_operacao_veiculo_mapa\2026\agosto.csv[APP] Aplicacao iniciada.
+[SCHEDULER] Scheduler reconfigurado: 32 regra(s) ativa(s) de 32.
+[WORKER] Pool de workers configurado para 5 execucao(oes) simultanea(s).
+[WORKER] Worker 1 iniciado.
+[WORKER] Worker 2 iniciado.
+[WORKER] Worker 3 iniciado.
+[WORKER] Worker 4 iniciado.
+[WORKER] Worker 5 iniciado.
+[APP] Input manual desabilitado neste ambiente nao interativo.
+[SCHEDULER] Scheduler iniciado.
+[APP] Servidor web iniciado em http://0.0.0.0:4000
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:15.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:16.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WEB] [192-168-0-43] Nova execucao solicitada: 03_02_37_cliente_condpagto_setornf (Mensal: mes atual).
+[WORKER] [192-168-0-43] Worker 3 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08)'.
+[QUEUE] [192-168-0-43] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08)' adicionada a fila.
+[WEB] [192-168-0-43] Nova execucao solicitada: 03_02_37_cliente_condpagto_setornf (Diario: ontem).
+[WORKER] [192-168-0-43] Worker 4 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-09)'.
+[QUEUE] [192-168-0-43] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-09)' adicionada a fila.
+[WORKER] [192-168-0-43] Extracao concluida sem destino compativel com a escuta: 03_02_37_cliente_condpagto_setornf (2026-08)
+[WORKER] [192-168-0-43] Execucao concluida sem arquivo gerado: 03_02_37_cliente_condpagto_setornf (2026-08-09)
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:20.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=10/08/2026 13:20.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '03_01_36_04 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=10/08/2026 13:20.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '03_01_17 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 13:20.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_18_05 (2026-08)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:20.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_36_04 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.36.04.csv.inf
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_17 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.17.csv.inf
+[WORKER] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[WEB] [192-168-0-43] Nova execucao solicitada: 03_02_37_cliente_condpagto_setornf (Diario: 07/08/2026).
+[WORKER] [192-168-0-43] Worker 1 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-07)'.
+[QUEUE] [192-168-0-43] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-07)' adicionada a fila.
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): 03_02_37_cliente_condpagto_setornf (2026-08-07) | caminhos=\\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\1.6 Conferencia Boletos\Conferencia de boletos\Canhotos 2026\boletos\03.02.37_base\2026\agosto\03.02.37_07.08.2026.csv
+[WEB] [192-168-0-43] Nova execucao solicitada: Lote 'Mariana_diario' (15 item(ns)).
+[WORKER] [192-168-0-43] Worker 4 iniciando execucao de '03_02_24 (2026-08)'.
+[QUEUE] [192-168-0-43] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-43] Worker 2 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[QUEUE] [192-168-0-43] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-43] Worker 3 iniciando execucao de '03_02_37_operacao_veiculo_mapa (2026-08)'.
+[QUEUE] [192-168-0-43] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-43] Worker 5 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[QUEUE] [192-168-0-43] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-43] Worker 1 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[QUEUE] [192-168-0-43] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '03_08_05 (2026-08-09)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '03_01_47_01 (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa 'roteirizador (2026-08-01 ate 2026-08-31)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa 'romaneio (2026-08-01 ate 2026-08-31)' adicionada a fila.
+[QUEUE] [192-168-0-43] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] [192-168-0-43] Arquivo transferido para 2 destino(s): 03_02_37_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_mapa\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\030237\agosto.csv
+[WORKER] [192-168-0-43] Worker 2 iniciando execucao de '03_08_05 (2026-08-09)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 2 destino(s): 03_02_24 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_24\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030224 Mapa\2026\03.02.24_ago26.csv.inf
+[WORKER] [192-168-0-43] Worker 4 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] [192-168-0-43] Execucao concluida sem arquivo gerado: 03_08_05 (2026-08-09)
+[WORKER] [192-168-0-43] Worker 2 iniciando execucao de '03_11_40 (2026-08)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): 03_11_29 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+[WORKER] [192-168-0-43] Worker 2 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] [192-168-0-43] Worker 4 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): 03_05_30_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_mapa\2026\agosto.csv
+[WORKER] [192-168-0-43] Worker 1 iniciando execucao de '03_01_47_01 (2026-08)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 2 destino(s): 03_05_30_cliente (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cliente\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530 Cliente\03.05.30.cliente_ago26.csv.inf
+[WORKER] [192-168-0-43] Worker 5 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 2 destino(s): 03_11_42 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Frota\03_11_42\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031142\agosto.csv
+[WORKER] [192-168-0-43] Worker 2 iniciando execucao de 'roteirizador (2026-08-01 ate 2026-08-31)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): 03_02_37_operacao_veiculo_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_operacao_veiculo_mapa\2026\agosto.csv
+[WORKER] [192-168-0-43] Worker 3 iniciando execucao de 'romaneio (2026-08-01 ate 2026-08-31)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): roteirizador (2026-08-01 ate 2026-08-31) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\roteirizador\2026\agosto.csv
+[WORKER] [192-168-0-43] Worker 2 iniciando execucao de '03_18_05 (2026-08)'.
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): 01_20_11 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Geral\01_20_11\global\01_20_11.csv
+[WORKER] [192-168-0-43] Arquivo transferido para 2 destino(s): 03_05_30_motorista (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530\2026\03.05.30.motorista_ago26.csv.inf
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): romaneio (2026-08-01 ate 2026-08-31) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\romaneio_roteirizador\2026\agosto.csv
+[WORKER] [192-168-0-43] Arquivo transferido para 1 destino(s): 03_01_47_01 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_01_47_01\2026\agosto.csv
+[WORKER] [192-168-0-43] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[SCHEDULER] Scheduler disparou: 03_11_40 (Mensal: mes atual) | slot=10/08/2026 13:24.
+[QUEUE] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_11_40 (2026-08)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:24.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:25.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:28.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:30.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=10/08/2026 13:30.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_36_04 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=10/08/2026 13:30.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '03_01_17 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 13:30.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_18_05 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_36_04 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.36.04.csv.inf
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_17 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.17.csv.inf
+[WORKER] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:32.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:35.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:36.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_11_40 (Mensal: mes atual) | slot=10/08/2026 13:38.
+[QUEUE] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_11_40 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:40.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '14_05_01 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:40.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=10/08/2026 13:40.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_36_04 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=10/08/2026 13:40.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '03_01_17 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 13:40.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_18_05 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_36_04 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.36.04.csv.inf
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_17 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.17.csv.inf
+[WORKER] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:44.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:45.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:48.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WEB] [192-168-0-70] Nova execucao solicitada: Lote 'Atualizar RV' (10 item(ns)).
+[WORKER] [192-168-0-70] Worker 3 iniciando execucao de '03_01_47_01 (2026-08-01 ate 2026-08-09)'.
+[QUEUE] [192-168-0-70] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[WORKER] [192-168-0-70] Worker 1 iniciando execucao de '03_18_05 (2026-08-01 ate 2026-08-09)'.
+[QUEUE] [192-168-0-70] Tarefa '03_18_05 (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[WORKER] [192-168-0-70] Worker 2 iniciando execucao de '03_02_37_cliente_mapa_operacao_itens (2026-08-01 ate 2026-08-09)'.
+[QUEUE] [192-168-0-70] Tarefa '03_02_37_cliente_mapa_operacao_itens (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[WORKER] [192-168-0-70] Worker 4 iniciando execucao de '03_02_24 (2026-08-01 ate 2026-08-09)'.
+[QUEUE] [192-168-0-70] Tarefa '03_02_24 (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[WORKER] [192-168-0-70] Worker 5 iniciando execucao de '03_05_30_mapa (2026-08-01 ate 2026-08-09)'.
+[QUEUE] [192-168-0-70] Tarefa '03_05_30_mapa (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[QUEUE] [192-168-0-70] Tarefa '03_02_37_mapa (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[QUEUE] [192-168-0-70] Tarefa '03_05_30_ajudante (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[QUEUE] [192-168-0-70] Tarefa '03_08_05 (2026-08-09)' adicionada a fila.
+[QUEUE] [192-168-0-70] Tarefa '03_11_29_sperv_rota (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[QUEUE] [192-168-0-70] Tarefa '03_11_40 (2026-08-01 ate 2026-08-09)' adicionada a fila.
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_18_05 (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\1.0 - QUALIDADE\1.4 - Rep. DQI\Diretório\03.18.05\03.18.05-ago26.csv.inf
+[WORKER] [192-168-0-70] Worker 1 iniciando execucao de '03_02_37_mapa (2026-08-01 ate 2026-08-09)'.
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_02_24 (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\1.0 - QUALIDADE\1.4 - Rep. DQI\Diretório\03.02.24\03.02.24_ago26.csv.inf
+[WORKER] [192-168-0-70] Worker 4 iniciando execucao de '03_05_30_ajudante (2026-08-01 ate 2026-08-09)'.
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_02_37_mapa (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.1 - (OTIF)\Relatórios\030237mapa\03.02.37_ago26.csv.inf
+[WORKER] [192-168-0-70] Worker 1 iniciando execucao de '03_08_05 (2026-08-09)'.
+[WORKER] [192-168-0-70] Execucao concluida sem arquivo gerado: 03_08_05 (2026-08-09)
+[WORKER] [192-168-0-70] Worker 1 iniciando execucao de '03_11_29_sperv_rota (2026-08-01 ate 2026-08-09)'.
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_11_29_sperv_rota (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\02. Produtividade\4.0 Distribuição\4.3 - Rota\Diretório\031129\03.11.29_ago26.csv.inf
+[WORKER] [192-168-0-70] Worker 1 iniciando execucao de '03_11_40 (2026-08-01 ate 2026-08-09)'.
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\02. Produtividade\4.0 Distribuição\4.3 - Rota\Diretório\031140\03.11.40_ago26.csv.inf
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_01_47_01 (2026-08-01 ate 2026-08-09) | caminhos=\\imaruileste.dominiolocal\expedicao_adm\LOGISTICA\0.DPO\2026\03. Pilar Atendimento\1.0 - QUALIDADE\1.4 - Rep. DQI\Diretório\03.01.47.01\03.01.47.01_ago26.csv.inf
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_05_30_mapa (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\1.0 - QUALIDADE\1.4 - Rep. DQI\Diretório\030530Mapa\03.05.30_ago26.csv.inf
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_05_30_ajudante (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\02. Produtividade\4.0 Distribuição\4.3 - Rota\Diretório\030530 ajudante\03.05.30_ago26.csv.inf
+[WORKER] [192-168-0-70] Arquivo transferido para 1 destino(s): 03_02_37_cliente_mapa_operacao_itens (2026-08-01 ate 2026-08-09) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\1.0 - QUALIDADE\1.4 - Rep. DQI\Diretório\03.02.37\03.02.37_ago26.csv.inf
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:50.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=10/08/2026 13:50.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_01_36_04 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=10/08/2026 13:50.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '03_01_17 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 13:50.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_18_05 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_36_04 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.36.04.csv.inf
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_17 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.17.csv.inf
+[WORKER] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 03_11_40 (Mensal: mes atual) | slot=10/08/2026 13:52.
+[QUEUE] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '03_11_40 (2026-08)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:52.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WEB] [192-168-0-70] Nova execucao solicitada: 03_08_05 (Diario: 07/08/2026).
+[WORKER] [192-168-0-70] Worker 5 iniciando execucao de '03_08_05 (2026-08-07)'.
+[QUEUE] [192-168-0-70] Tarefa '03_08_05 (2026-08-07)' adicionada a fila.
+[WORKER] [192-168-0-70] Arquivo transferido para 2 destino(s): 03_08_05 (2026-08-07) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_08_05\2026\agosto\07.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.1 - (OTIF)\Relatórios\2Arth\AGO.2026\2artd07_0001.txt
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 13:55.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 13:56.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=10/08/2026 14:00.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '03_01_17 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 14:00.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_18_05 (2026-08)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 14:00.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '14_05_01 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 14:00.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=10/08/2026 14:00.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '03_01_36_04 (2026-08-10)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_17 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.17.csv.inf
+[WORKER] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_36_04 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.36.04.csv.inf
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 14:04.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 14:05.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 03_11_40 (Mensal: mes atual) | slot=10/08/2026 14:06.
+[QUEUE] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '03_11_40 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 14:08.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 14:10.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=10/08/2026 14:10.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '03_01_36_04 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=10/08/2026 14:10.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '03_01_17 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 14:10.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '03_18_05 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_36_04 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.36.04.csv.inf
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_17 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.17.csv.inf
+[WORKER] Arquivo transferido para 2 destino(s): 03_18_05 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_18_05\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031805\agosto.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 14:12.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 14:15.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_01_47_01 (2026-08-10)
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=10/08/2026 14:16.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Worker 3 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=10/08/2026 14:20.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 5 iniciando execucao de '03_01_47_01 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=10/08/2026 14:20.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-10)' adicionada a fila.
+[WORKER] Worker 4 iniciando execucao de '03_01_36_04 (2026-08-10)'.
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=10/08/2026 14:20.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[WORKER] Worker 1 iniciando execucao de '03_01_17 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=10/08/2026 14:20.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Worker 2 iniciando execucao de '03_18_05 (2026-08)'.
+[SCHEDULER] Scheduler disparou: 03_11_40 (Mensal: mes atual) | slot=10/08/2026 14:20.[APP] Aplicacao iniciada.
+[SCHEDULER] Scheduler reconfigurado: 32 regra(s) ativa(s) de 32.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 11/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 12/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 13/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 11/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 12/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 13/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 11/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 12/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 13/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 11/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 12/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 13/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 13_02_06_02 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[APP] Aplicacao iniciada.
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=13/08/2026 11:45.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-13)' adicionada a fila.
+[SCHEDULER] Scheduler reconfigurado: 32 regra(s) ativa(s) de 32.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_29 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_29 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_46_06 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_01_46_06 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 11/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 12/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_01_47_01 prevista para 13/08/2026 08:00 (Periodo: mes ate ontem).
+[QUEUE] Tarefa '03_01_47_01 (2026-08-01 ate 2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 11/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 12/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_08_05 prevista para 13/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_08_05 (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_11_42 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_11_42 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_11 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_11 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_11 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 11/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 12/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_03_12 prevista para 13/08/2026 07:00 (Mensal: mes atual).
+[QUEUE] Solicitacao 'Mensal: mes atual' para '03_03_12' expandida em 31 tarefa(s).
+[QUEUE] Tarefa 1/31 adicionada a fila: '03_03_12 (2026-08-01)'.
+[QUEUE] Tarefa 2/31 adicionada a fila: '03_03_12 (2026-08-02)'.
+[QUEUE] Tarefa 3/31 adicionada a fila: '03_03_12 (2026-08-03)'.
+[QUEUE] Tarefa 4/31 adicionada a fila: '03_03_12 (2026-08-04)'.
+[QUEUE] Tarefa 5/31 adicionada a fila: '03_03_12 (2026-08-05)'.
+[QUEUE] Tarefa 6/31 adicionada a fila: '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa 7/31 adicionada a fila: '03_03_12 (2026-08-07)'.
+[QUEUE] Tarefa 8/31 adicionada a fila: '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa 9/31 adicionada a fila: '03_03_12 (2026-08-09)'.
+[QUEUE] Tarefa 10/31 adicionada a fila: '03_03_12 (2026-08-10)'.
+[QUEUE] Tarefa 11/31 adicionada a fila: '03_03_12 (2026-08-11)'.
+[QUEUE] Tarefa 12/31 adicionada a fila: '03_03_12 (2026-08-12)'.
+[QUEUE] Tarefa 13/31 adicionada a fila: '03_03_12 (2026-08-13)'.
+[QUEUE] Tarefa 14/31 adicionada a fila: '03_03_12 (2026-08-14)'.
+[QUEUE] Tarefa 15/31 adicionada a fila: '03_03_12 (2026-08-15)'.
+[QUEUE] Tarefa 16/31 adicionada a fila: '03_03_12 (2026-08-16)'.
+[QUEUE] Tarefa 17/31 adicionada a fila: '03_03_12 (2026-08-17)'.
+[QUEUE] Tarefa 18/31 adicionada a fila: '03_03_12 (2026-08-18)'.
+[QUEUE] Tarefa 19/31 adicionada a fila: '03_03_12 (2026-08-19)'.
+[QUEUE] Tarefa 20/31 adicionada a fila: '03_03_12 (2026-08-20)'.
+[QUEUE] Tarefa 21/31 adicionada a fila: '03_03_12 (2026-08-21)'.
+[QUEUE] Tarefa 22/31 adicionada a fila: '03_03_12 (2026-08-22)'.
+[QUEUE] Tarefa 23/31 adicionada a fila: '03_03_12 (2026-08-23)'.
+[QUEUE] Tarefa 24/31 adicionada a fila: '03_03_12 (2026-08-24)'.
+[QUEUE] Tarefa 25/31 adicionada a fila: '03_03_12 (2026-08-25)'.
+[QUEUE] Tarefa 26/31 adicionada a fila: '03_03_12 (2026-08-26)'.
+[QUEUE] Tarefa 27/31 adicionada a fila: '03_03_12 (2026-08-27)'.
+[QUEUE] Tarefa 28/31 adicionada a fila: '03_03_12 (2026-08-28)'.
+[QUEUE] Tarefa 29/31 adicionada a fila: '03_03_12 (2026-08-29)'.
+[QUEUE] Tarefa 30/31 adicionada a fila: '03_03_12 (2026-08-30)'.
+[QUEUE] Tarefa 31/31 adicionada a fila: '03_03_12 (2026-08-31)'.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_cliente_vendedor_nfs_compras prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_mapa_condpagto_itens prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_mapa_condpagto_itens (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 11/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 12/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_cliente_condpagto_setornf prevista para 13/08/2026 08:00 (Diario: ontem).
+[QUEUE] Tarefa '03_02_37_cliente_condpagto_setornf (2026-08-12)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_motorista prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_motorista (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 13_02_06_02 prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '13_02_06_02 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 13_02_06_02 prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '13_02_06_02 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 13_02_06_02 prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '13_02_06_02 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_12 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_12 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_04 prevista para 11/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_04 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_04 prevista para 12/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_04 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 01_20_04 prevista para 13/08/2026 08:00 (Sem periodo).
+[QUEUE] Tarefa '01_20_04 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: resumo_de_checklist prevista para 11/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa 'resumo_de_checklist (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: resumo_de_checklist prevista para 12/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa 'resumo_de_checklist (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: resumo_de_checklist prevista para 13/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa 'resumo_de_checklist (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou 60 execucao(oes) pendente(s) na inicializacao.
+[WORKER] Pool de workers configurado para 5 execucao(oes) simultanea(s).
+[WORKER] Worker 1 iniciado.
+[WORKER] Worker 1 iniciando execucao de '03_01_47_01 (2026-08-13)'.
+[WORKER] Worker 3 iniciado.
+[WORKER] Worker 4 iniciado.
+[WORKER] Worker 5 iniciado.
+[APP] Input manual desabilitado neste ambiente nao interativo.
+[WORKER] Worker 2 iniciado.
+[SCHEDULER] Scheduler iniciado.
+[WORKER] Worker 3 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[WORKER] Worker 4 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[WORKER] Worker 5 iniciando execucao de '03_05_30_cliente (2026-08)'.
+[WORKER] Worker 2 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[APP] Servidor web iniciado em http://0.0.0.0:4101
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_47_01 (2026-08-13) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Crítica\03.01.47.01.csv.inf
+[WORKER] Worker 1 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[SCHEDULER] Scheduler disparou: 03_11_40 (Mensal: mes atual) | slot=13/08/2026 11:46.
+[QUEUE] Tarefa '03_11_40 (2026-08)' adicionada a fila.
+[WORKER] Execucao concluida sem arquivo gerado: 03_05_30_mapa (2026-08)
+[WORKER] Worker 2 iniciando execucao de '03_05_30_mapa (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_05_30_cliente (2026-08)
+[WORKER] Worker 3 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_05_30_cliente (2026-08)
+[WORKER] Worker 4 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_05_30_cliente (2026-08)
+[WORKER] Worker 5 iniciando execucao de '03_11_29 (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_05_30_mapa (2026-08)
+[WORKER] Worker 1 iniciando execucao de '03_01_46_06 (2026-08)'.
+[WORKER] Erro executando '03_11_29 (2026-08)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\03_11_29__agosto__2026.csv'
+[WORKER] Erro executando '03_11_29 (2026-08)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\03_11_29__agosto__2026.csv'
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_29 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_29\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_01_46_06 (2026-08)'.
+[WORKER] Worker 3 iniciando execucao de '03_01_46_06 (2026-08)'.
+[WORKER] Worker 4 iniciando execucao de '03_01_47_01 (2026-08-01 ate 2026-08-12)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_46_06 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_01_46_06\2026\agosto.csv
+[WORKER] Worker 1 iniciando execucao de '03_01_47_01 (2026-08-01 ate 2026-08-12)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_05_30_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_mapa\2026\agosto.csv
+[WORKER] Worker 2 iniciando execucao de '03_01_47_01 (2026-08-01 ate 2026-08-12)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_46_06 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_01_46_06\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_08_05 (2026-08-12)'.
+[WORKER] Erro executando '03_01_46_06 (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_01_46_06__agosto__2026.csv'
+[WORKER] Worker 3 iniciando execucao de '03_08_05 (2026-08-12)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_01_47_01 (2026-08-01 ate 2026-08-12) | caminhos=\\imaruileste.dominiolocal\expedicao_adm\LOGISTICA\0.DPO\2026\03. Pilar Atendimento\1.0 - QUALIDADE\1.4 - Rep. DQI\Diretório\03.01.47.01\03.01.47.01_ago26.csv.inf
+[WORKER] Worker 4 iniciando execucao de '03_08_05 (2026-08-12)'.
+[WORKER] Erro executando '03_01_47_01 (2026-08-01 ate 2026-08-12)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_01_47_01__01_08_2026__12_08_2026.csv'
+[WORKER] Worker 2 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_08_05 (2026-08-12) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_08_05\2026\agosto\12.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.1 - (OTIF)\Relatórios\2Arth\AGO.2026\2artd12_0001.txt
+[WORKER] Worker 5 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] Erro executando '03_01_47_01 (2026-08-01 ate 2026-08-12)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_01_47_01__01_08_2026__12_08_2026.csv'
+[WORKER] Worker 1 iniciando execucao de '03_11_42 (2026-08)'.
+[WORKER] Erro executando '03_08_05 (2026-08-12)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_08_05__12_08_2026.csv'
+[WORKER] Worker 3 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_11_42 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Frota\03_11_42\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\031142\agosto.csv
+[WORKER] Worker 2 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] Erro executando '03_11_42 (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_11_42__agosto__2026.csv'
+[WORKER] Worker 5 iniciando execucao de '01_20_11 (sem periodo)'.
+[WORKER] Erro executando '03_11_42 (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_11_42__agosto__2026.csv'
+[WORKER] Worker 1 iniciando execucao de '01_11 (sem periodo)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_08_05 (2026-08-12) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_08_05\2026\agosto\12.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.1 - (OTIF)\Relatórios\2Arth\AGO.2026\2artd12_0001.txt
+[WORKER] Worker 4 iniciando execucao de '01_11 (sem periodo)'.
+[WORKER] Arquivo transferido para 2 destino(s): 01_11 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Geral\01_11\global\01_11.csv | \\192.168.0.213\Files\Logistica\0.DPO\Crítica\01.11.csv.inf
+[WORKER] Worker 1 iniciando execucao de '01_11 (sem periodo)'.
+[WORKER] Erro executando '01_11 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_11__sem_periodo.csv'
+[WORKER] Worker 4 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_20_11 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Geral\01_20_11\global\01_20_11.csv
+[WORKER] Worker 3 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=13/08/2026 11:48.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Arquivo transferido para 2 destino(s): 01_11 (sem periodo) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Geral\01_11\global\01_11.csv | \\192.168.0.213\Files\Logistica\0.DPO\Crítica\01.11.csv.inf
+[WORKER] Worker 1 iniciando execucao de '03_02_37_mapa (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 01_20_11 (sem periodo)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-01)'.
+[WORKER] Execucao concluida sem arquivo gerado: 01_20_11 (sem periodo)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-02)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_02_37_mapa (2026-08)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-03)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_02_37_mapa (2026-08)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-04)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-02)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-05)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-01)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-06)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-05)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-07)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-03) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\03.csv
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-04) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-09)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-09)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-10)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-06) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\06.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-07) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-11)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-12)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_02_37_mapa (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_02_37_mapa\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\Trocas\030237\agosto.csv
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-13)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-14)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-14)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-15)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-15)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-16)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-16)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-17)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-17)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-18)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-18)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-19)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-19)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-20)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-20)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-21)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-21)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-22)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-23)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-22)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-24)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-23)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-25)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-24)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-26)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-25)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-27)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-27)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-26)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-28)'.
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-29)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-28)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-30)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-29)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-31)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-30)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-01)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-31)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-02)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-01)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-03)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-02)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-04)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-12) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\12.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-11) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\11.csv
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-05)'.
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-06)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-13) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\13.csv
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-07)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-05)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-03) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\03.csv
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-09)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-04) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-09)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-11)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-06) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\06.csv
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-12)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-07) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-13)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-14)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-14)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-15)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-15)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-16)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-16)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-17)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-17)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-18)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-18)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-19)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-19)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-20)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-20)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-21)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-21)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-22)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-22)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-23)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-23)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-24)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-24)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-25)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-25)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-26)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-26)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-27)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-27)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-28)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-28)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-29)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-30)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-29)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-31)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-30)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-01)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-11) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\11.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-31)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-02)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-03)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-01)
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-04)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-02)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-03)
+[SCHEDULER] Scheduler disparou: 03_01_47_01 (Diario: hoje) | slot=13/08/2026 11:50.
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-05)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-06)'.
+[QUEUE] Tarefa '03_01_47_01 (2026-08-13)' adicionada a fila.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-05)
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-07)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-06)
+[SCHEDULER] Scheduler disparou: 03_01_36_04 (Diario: hoje) | slot=13/08/2026 11:50.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-08)'.
+[QUEUE] Tarefa '03_01_36_04 (2026-08-13)' adicionada a fila.
+[SCHEDULER] Scheduler disparou: 03_01_17 (Sem periodo) | slot=13/08/2026 11:50.
+[QUEUE] Tarefa '03_01_17 (sem periodo)' adicionada a fila.
+[SCHEDULER] Scheduler disparou: 03_18_05 (Mensal: mes atual) | slot=13/08/2026 11:50.
+[QUEUE] Tarefa '03_18_05 (2026-08)' adicionada a fila.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-12) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\12.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-13) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\13.csv
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-09)'.
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-10)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-09)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-11)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-04) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\04.csv
+[WORKER] Worker 4 iniciando execucao de '03_03_12 (2026-08-12)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-07) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\07.csv
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\08.csv
+[WORKER] Worker 3 iniciando execucao de '03_03_12 (2026-08-13)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-14)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-14)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-15)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-15)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-16)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-16)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-17)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-17)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-18)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-18)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-19)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-19)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-20)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-20)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-21)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-21)
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-22)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-10) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\10.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-22)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-23)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-24)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-11) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\11.csv
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-23)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-25)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-24)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-26)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-27)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-25)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-28)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-26)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-27)
+[WORKER] Worker 5 iniciando execucao de '03_03_12 (2026-08-29)'.
+[WORKER] Worker 1 iniciando execucao de '03_03_12 (2026-08-30)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-28)
+[WORKER] Worker 2 iniciando execucao de '03_03_12 (2026-08-31)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-29)
+[WORKER] Worker 5 iniciando execucao de '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)'.
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-30)
+[WORKER] Execucao concluida sem arquivo gerado: 03_03_12 (2026-08-31)
+[WORKER] Worker 1 iniciando execucao de '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)'.
+[WORKER] Worker 2 iniciando execucao de '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-12) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\12.csv
+[WORKER] Worker 4 iniciando execucao de '03_02_37_mapa_condpagto_itens (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_03_12 (2026-08-13) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_03_12\2026\agosto\13.csv
+[WORKER] Worker 3 iniciando execucao de '03_02_37_mapa_condpagto_itens (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Armazém\03_02_37_operacao_cliente_vendedor_nfs_compra\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_02_37_mapa_condpagto_itens (2026-08)'.
+[WORKER] Erro executando '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_02_37_operacao_cliente_vendedor_nfs_compras__agosto__2026.csv'
+[WORKER] Worker 1 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-12)'.
+[WORKER] Erro executando '03_02_37_operacao_cliente_vendedor_nfs_compras (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_02_37_operacao_cliente_vendedor_nfs_compras__agosto__2026.csv'
+[WORKER] Worker 2 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-12)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_02_37_cliente_condpagto_setornf (2026-08-12) | caminhos=\\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\1.6 Conferencia Boletos\Conferencia de boletos\Canhotos 2026\boletos\03.02.37_base\2026\agosto\03.02.37_12.08.2026.csv
+[WORKER] Worker 1 iniciando execucao de '03_02_37_cliente_condpagto_setornf (2026-08-12)'.
+[WORKER] Erro executando '03_02_37_cliente_condpagto_setornf (2026-08-12)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_02_37_cliente_condpagto_setornf__12_08_2026.csv'
+[WORKER] Worker 2 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_02_37_cliente_condpagto_setornf (2026-08-12) | caminhos=\\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\1.6 Conferencia Boletos\Conferencia de boletos\Canhotos 2026\boletos\03.02.37_base\2026\agosto\03.02.37_12.08.2026.csv
+[WORKER] Worker 1 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[WORKER] Erro executando '03_02_37_mapa_condpagto_itens (2026-08)': Falha ao validar a copia do arquivo para o destino: \\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\Mapas em aberto\03.02.37.csv
+[WORKER] Erro executando '03_02_37_mapa_condpagto_itens (2026-08)': Falha ao validar a copia do arquivo para o destino: \\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\Mapas em aberto\03.02.37.csv
+[WORKER] Worker 4 iniciando execucao de '03_05_30_motorista (2026-08)'.
+[WORKER] Worker 3 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_02_37_mapa_condpagto_itens (2026-08) | caminhos=\\192.168.0.213\Files\Administrativo\Financeiro\1. Contas a Receber\Mapas em aberto\03.02.37.csv
+[WORKER] Worker 5 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_12 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\PRODUTOS\01.12 MATERIAIS\01.12.csv
+[WORKER] Worker 3 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_05_30_motorista (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530\2026\03.05.30.motorista_ago26.csv.inf
+[WORKER] Worker 2 iniciando execucao de '13_02_06_02 (2026-08)'.
+[WORKER] Arquivo transferido para 2 destino(s): 03_05_30_motorista (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_05_30_cod_motorista\2026\agosto.csv | \\192.168.0.213\Files\Logistica\0.DPO\2026\03. Pilar Atendimento\4.0 - NIVEL DE SERVIÇO\4.3 - DEV\Diretório\030530\2026\03.05.30.motorista_ago26.csv.inf
+[WORKER] Worker 1 iniciando execucao de '13_02_06_02 (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_12 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\PRODUTOS\01.12 MATERIAIS\01.12.csv
+[WORKER] Worker 5 iniciando execucao de '13_02_06_02 (2026-08)'.
+[WORKER] Erro executando '03_05_30_motorista (2026-08)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\03_05_30_motorista__agosto__2026.csv'
+[WORKER] Worker 4 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Erro executando '01_12 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_12__sem_periodo.csv'
+[WORKER] Worker 3 iniciando execucao de '01_12 (sem periodo)'.
+[SCHEDULER] Scheduler disparou: 14_05_01 (Sem periodo) | slot=13/08/2026 11:52.
+[QUEUE] Tarefa '14_05_01 (sem periodo)' adicionada a fila.
+[WORKER] Erro executando '13_02_06_02 (2026-08)': Rotina sem caminhos configurados: 13_02_06_02
+[WORKER] Worker 2 iniciando execucao de '01_12 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_12 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\PRODUTOS\01.12 MATERIAIS\01.12.csv
+[WORKER] Worker 4 iniciando execucao de '01_20_04 (sem periodo)'.
+[WORKER] Erro executando '13_02_06_02 (2026-08)': Rotina sem caminhos configurados: 13_02_06_02
+[WORKER] Worker 1 iniciando execucao de '01_20_04 (sem periodo)'.
+[WORKER] Erro executando '13_02_06_02 (2026-08)': Rotina sem caminhos configurados: 13_02_06_02
+[WORKER] Worker 5 iniciando execucao de '01_20_04 (sem periodo)'.
+[WORKER] Erro executando '01_12 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_12__sem_periodo.csv'
+[WORKER] Worker 3 iniciando execucao de 'resumo_de_checklist (2026-08)'.
+[WORKER] Erro executando '01_12 (sem periodo)': [WinError 2] O sistema não pode encontrar o arquivo especificado: 'csv_outputs\\01_12__sem_periodo.csv'
+[WORKER] Worker 2 iniciando execucao de 'resumo_de_checklist (2026-08)'.
+[WORKER] Erro executando '01_20_04 (sem periodo)': Falha ao validar a copia do arquivo para o destino: \\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\FORNECEDORES\FORNECEDORES.csv
+[WORKER] Erro executando '01_20_04 (sem periodo)': [WinError 32] O arquivo já está sendo usado por outro processo: 'csv_outputs\\01_20_04__sem_periodo.csv'
+[WORKER] Worker 4 iniciando execucao de 'resumo_de_checklist (2026-08)'.
+[WORKER] Arquivo transferido para 1 destino(s): 01_20_04 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\FORNECEDORES\FORNECEDORES.csv
+[WORKER] Worker 5 iniciando execucao de '03_11_40 (2026-08)'.
+[WORKER] Worker 1 iniciando execucao de '14_05_01 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): resumo_de_checklist (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Frota\registros_checklists\2026\agosto.csv
+[WORKER] Worker 3 iniciando execucao de '03_01_47_01 (2026-08-13)'.
+[WORKER] Arquivo transferido para 1 destino(s): resumo_de_checklist (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Frota\registros_checklists\2026\agosto.csv
+[WORKER] Worker 2 iniciando execucao de '03_01_36_04 (2026-08-13)'.
+[WORKER] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
+[WORKER] Worker 5 iniciando execucao de '03_01_17 (sem periodo)'.
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv

@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CoreRestApiPathContractTest {
 
-    private static final String CORE_API_PREFIX = "/api/v1";
+    private static final List<String> CORE_API_PREFIXES = List.of("/api/v1", "/api/v2");
 
     @Test
     void everyCoreRestControllerUsesTheVersionedApiRoot() {
@@ -42,8 +42,9 @@ class CoreRestApiPathContractTest {
                     .isNotNull();
             assertThat(requestMapping.value())
                     .as("raiz REST de %s", controllerType.getName())
-                    .allMatch(path -> path.equals(CORE_API_PREFIX)
-                            || path.startsWith(CORE_API_PREFIX + "/"));
+                    .allMatch(path -> CORE_API_PREFIXES.stream().anyMatch(prefix ->
+                            path.equals(prefix) || path.startsWith(prefix + "/")
+                    ));
         }
     }
 

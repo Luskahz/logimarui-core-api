@@ -6,7 +6,8 @@ import lombok.Getter;
 public class ServiceRoute {
 
     private static final String BACKEND_API_ROOT = "/api";
-    private static final String CORE_API_PREFIX = "/api/v1";
+    private static final String CORE_API_V1_PREFIX = "/api/v1";
+    private static final String CORE_API_V2_PREFIX = "/api/v2";
 
     private final String id;
     private final String pathPrefix;
@@ -31,13 +32,17 @@ public class ServiceRoute {
         String normalizedPathPrefix = removeTrailingSlashes(pathPrefix);
 
         if (BACKEND_API_ROOT.equals(normalizedPathPrefix)
-                || CORE_API_PREFIX.equals(normalizedPathPrefix)
-                || normalizedPathPrefix != null
-                && normalizedPathPrefix.startsWith(CORE_API_PREFIX + "/")) {
+                || isCoreApiNamespace(normalizedPathPrefix, CORE_API_V1_PREFIX)
+                || isCoreApiNamespace(normalizedPathPrefix, CORE_API_V2_PREFIX)) {
             throw new IllegalArgumentException(
                     "ServiceRoute nao pode ocupar o namespace reservado " + pathPrefix
             );
         }
+    }
+
+    private static boolean isCoreApiNamespace(String pathPrefix, String apiPrefix) {
+        return apiPrefix.equals(pathPrefix)
+                || pathPrefix != null && pathPrefix.startsWith(apiPrefix + "/");
     }
 
     private static String removeTrailingSlashes(String pathPrefix) {

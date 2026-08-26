@@ -12644,3 +12644,203 @@ Route (app)
 - Local:         http://localhost:8091
 - Network:       http://192.168.0.43:8091
 ✓ Ready in 235ms
+
+> logimarui-frontend@0.1.0 build-start
+> next build && node ./scripts/run-next-with-port.mjs start
+
+▲ Next.js 16.2.7 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  ⨯ preloadEntriesOnStart
+  ✓ webpackMemoryOptimizations
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.6s
+  Running TypeScript ...
+  Finished TypeScript in 149ms ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/18) ...
+  Generating static pages using 15 workers (4/18) 
+  Generating static pages using 15 workers (8/18) 
+  Generating static pages using 15 workers (13/18) 
+✓ Generating static pages using 15 workers (18/18) in 2.9s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin/roles
+├ ○ /app
+├ ○ /app/extrator
+├ ○ /app/extrator/fila
+├ ○ /app/roles
+├ ○ /authorization/roles
+├ ○ /critica-pedidos
+├ ○ /critica-pedidos/mapa
+├ ○ /dpo
+├ ƒ /dpo/[pillar]
+├ ○ /forgot-password
+├ ○ /home
+├ ○ /login
+├ ○ /password-recovery/reset
+├ ○ /register
+└ ○ /servidor
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+▲ Next.js 16.2.7
+- Local:         http://localhost:8091
+- Network:       http://172.22.32.1:8091
+✓ Ready in 313ms
+
+> logimarui-frontend@0.1.0 build-start
+> next build && node ./scripts/run-next-with-port.mjs start
+
+▲ Next.js 16.2.7 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  ⨯ preloadEntriesOnStart
+  ✓ webpackMemoryOptimizations
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.9s
+  Running TypeScript ...
+  Finished TypeScript in 129ms ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/18) ...
+  Generating static pages using 15 workers (4/18) 
+  Generating static pages using 15 workers (8/18) 
+  Generating static pages using 15 workers (13/18) 
+✓ Generating static pages using 15 workers (18/18) in 703ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin/roles
+├ ○ /app
+├ ○ /app/extrator
+├ ○ /app/extrator/fila
+├ ○ /app/roles
+├ ○ /authorization/roles
+├ ○ /critica-pedidos
+├ ○ /critica-pedidos/mapa
+├ ○ /dpo
+├ ƒ /dpo/[pillar]
+├ ○ /forgot-password
+├ ○ /home
+├ ○ /login
+├ ○ /password-recovery/reset
+├ ○ /register
+└ ○ /servidor
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+▲ Next.js 16.2.7
+- Local:         http://localhost:8091
+- Network:       http://172.22.32.1:8091
+✓ Ready in 236ms
+
+> logimarui-frontend@0.1.0 build-start
+> next build && node ./scripts/run-next-with-port.mjs start
+
+▲ Next.js 16.3.0 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.mjs took 47ms
+- Experiments (use with caution):
+  ⨯ preloadEntriesOnStart
+  ✓ webpackMemoryOptimizations
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.6s
+  Running TypeScript ...
+  Finished TypeScript in 5.9s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/16) ...
+  Generating static pages using 15 workers (4/16) 
+  Generating static pages using 15 workers (8/16) 
+  Generating static pages using 15 workers (12/16) 
+✓ Generating static pages using 15 workers (16/16) in 673ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /authorization/role-management
+├ ○ /critica-pedidos
+├ ○ /critica-pedidos/mapa
+├ ○ /dpo
+├ ƒ /dpo/[pillar]
+├ ○ /dpo/gestao
+├ ○ /dpo/gestao/gerenciador-dto
+├ ○ /extrator
+├ ○ /extrator/fila
+├ ○ /forgot-password
+├ ○ /forgot-password/reset
+├ ○ /login
+├ ○ /register
+└ ○ /servidor
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+▲ Next.js 16.3.0
+- Local:         http://localhost:8191
+- Network:       http://172.22.32.1:8191
+✓ Ready in 255ms
+✓ Running next.config.mjs took 45ms
+
+> logimarui-frontend@0.1.0 build-start
+> next build && node ./scripts/run-next-with-port.mjs start
+
+▲ Next.js 16.3.0 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.mjs took 37ms
+- Experiments (use with caution):
+  ⨯ preloadEntriesOnStart
+  ✓ webpackMemoryOptimizations
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 850ms
+  Running TypeScript ...
+  Finished TypeScript in 3.0s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/16) ...
+  Generating static pages using 15 workers (4/16) 
+  Generating static pages using 15 workers (8/16) 
+  Generating static pages using 15 workers (12/16) 
+✓ Generating static pages using 15 workers (16/16) in 689ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /authorization/role-management
+├ ○ /critica-pedidos
+├ ○ /critica-pedidos/mapa
+├ ○ /dpo
+├ ƒ /dpo/[pillar]
+├ ○ /dpo/gestao
+├ ○ /dpo/gestao/gerenciador-dto
+├ ○ /extrator
+├ ○ /extrator/fila
+├ ○ /forgot-password
+├ ○ /forgot-password/reset
+├ ○ /login
+├ ○ /register
+└ ○ /servidor
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+▲ Next.js 16.3.0
+- Local:         http://localhost:8191
+- Network:       http://172.22.32.1:8191
+✓ Ready in 250ms
+✓ Running next.config.mjs took 39ms
