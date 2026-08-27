@@ -19,10 +19,23 @@ public class OrderSummaryRowMapper implements RowMapper<OrderSummary> {
         return new OrderSummary(
                 resultSet.getLong("order_number"),
                 invoiceNumber,
+                resultSet.getLong("customer_id"),
+                resultSet.getString("customer_name"),
+                resultSet.getString("trade_name"),
                 deliveryDate == null ? null : deliveryDate.toLocalDate(),
                 invoiceIssueDate == null ? null : invoiceIssueDate.toLocalDate(),
                 resultSet.getBigDecimal("order_value"),
-                resultSet.getBigDecimal("total_hectoliters")
+                resultSet.getBigDecimal("total_hectoliters"),
+                nullableLong(resultSet, "route_number"),
+                nullableLong(resultSet, "sector_code"),
+                resultSet.getString("driver_name"),
+                resultSet.getString("order_type"),
+                resultSet.getString("external_status")
         );
+    }
+
+    private Long nullableLong(ResultSet resultSet, String column) throws SQLException {
+        long value = resultSet.getLong(column);
+        return resultSet.wasNull() ? null : value;
     }
 }

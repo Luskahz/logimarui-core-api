@@ -12,8 +12,11 @@ import org.springframework.stereotype.Component;
 public class OrderReadApiMapper {
     public OrderSummaryResponse toResponse(OrderSummary order) {
         return new OrderSummaryResponse(
-                order.orderNumber(), order.invoiceNumber(), order.deliveryDate(),
-                order.invoiceIssueDate(), order.orderValue(), order.totalHectoliters()
+                order.orderNumber(), order.invoiceNumber(), order.customerId(),
+                order.customerName(), order.tradeName(), order.deliveryDate(),
+                order.invoiceIssueDate(), order.orderValue(), order.totalHectoliters(),
+                order.routeNumber(), order.sectorCode(), order.driverName(),
+                order.orderType(), order.externalStatus()
         );
     }
 

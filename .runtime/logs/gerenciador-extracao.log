@@ -187287,4 +187287,91 @@ ConnectionAbortedError: [WinError 10053] Uma conexão estabelecida foi anulada pe
 [WORKER] Worker 2 iniciando execucao de '03_01_36_04 (2026-08-13)'.
 [WORKER] Arquivo transferido para 1 destino(s): 03_11_40 (2026-08) | caminhos=\\192.168.0.213\Files\Logistica\0.DPO\Diretórios_SQL\Distribuição Urbana\rotinas\03_11_40\2026\agosto.csv
 [WORKER] Worker 5 iniciando execucao de '03_01_17 (sem periodo)'.
-[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv
+[WORKER] Arquivo transferido para 1 destino(s): 14_05_01 (sem periodo) | caminhos=\\192.168.0.213\Files\Administrativo\Fiscal_Contabilidade\Fiscal\9-FECHAMENTO-FISCAL\CONTROLE\BASE\TITULOS PENDENTES\14.05.01.csv[APP] Aplicacao iniciada.
+[SCHEDULER] Scheduler reconfigurado: 32 regra(s) ativa(s) de 32.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 14/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 15/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 16/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 17/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 18/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 19/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 20/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 21/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 22/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 23/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 24/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 25/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 26/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_37_operacao_veiculo_mapa prevista para 27/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_37_operacao_veiculo_mapa (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 14/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 15/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 16/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 17/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 18/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 19/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 20/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 21/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 22/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 23/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 24/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 25/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 26/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_02_24 prevista para 27/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_02_24 (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 14/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 15/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 16/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 17/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 18/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 19/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 20/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 21/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 22/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 23/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 24/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 25/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 26/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_cliente prevista para 27/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_cliente (2026-08)' adicionada a fila.
+[SCHEDULER] Scheduler recuperou execucao pendente: 03_05_30_mapa prevista para 14/08/2026 08:00 (Mensal: mes atual).
+[QUEUE] Tarefa '03_05_30_mapa (2026-08)' adicionada a fila.

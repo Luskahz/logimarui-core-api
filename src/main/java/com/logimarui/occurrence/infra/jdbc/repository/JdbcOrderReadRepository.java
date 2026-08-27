@@ -30,7 +30,9 @@ public class JdbcOrderReadRepository implements OrderReadRepository {
             "deliveryDate", "delivery_date",
             "invoiceIssueDate", "invoice_issue_date",
             "orderValue", "order_value",
-            "totalHectoliters", "total_hectoliters"
+            "totalHectoliters", "total_hectoliters",
+            "routeNumber", "route_number",
+            "sectorCode", "sector_code"
     );
 
     private static final Map<String, String> ITEM_SORT_COLUMNS = Map.of(
@@ -68,19 +70,24 @@ public class JdbcOrderReadRepository implements OrderReadRepository {
 
         String contentSql = """
                 SELECT
-                    numero_pedido AS order_number,
+                    MAX(numero_pedido) AS order_number,
                     numero_nf AS invoice_number,
-                    DATE(data_entrega) AS delivery_date,
-                    DATE(data_emissao_nf) AS invoice_issue_date,
+                    MAX(cod_cliente) AS customer_id,
+                    MAX(nome_cliente) AS customer_name,
+                    MAX(nome_fantasia) AS trade_name,
+                    MAX(DATE(data_entrega)) AS delivery_date,
+                    MAX(DATE(data_emissao_nf)) AS invoice_issue_date,
                     COALESCE(MAX(valor_total_nf), MAX(valor_total)) AS order_value,
-                    COALESCE(SUM(volume_hectolitro), 0) AS total_hectoliters
+                    COALESCE(SUM(volume_hectolitro), 0) AS total_hectoliters,
+                    MAX(itinerario) AS route_number,
+                    MAX(cod_setor) AS sector_code,
+                    MAX(desc_setor) AS driver_name,
+                    MAX(tipo_pedido) AS order_type,
+                    MAX(columns_status_externo_label) AS external_status
                 FROM %s
                 WHERE cod_cliente = :customerId%s
-                GROUP BY
-                    numero_pedido,
-                    numero_nf,
-                    DATE(data_entrega),
-                    DATE(data_emissao_nf)
+                  AND numero_nf IS NOT NULL
+                GROUP BY numero_nf
                 ORDER BY %s
                 LIMIT :limit OFFSET :offset
                 """.formatted(
@@ -95,11 +102,8 @@ public class JdbcOrderReadRepository implements OrderReadRepository {
                     SELECT 1
                     FROM %s
                     WHERE cod_cliente = :customerId%s
-                    GROUP BY
-                        numero_pedido,
-                        numero_nf,
-                        DATE(data_entrega),
-                        DATE(data_emissao_nf)
+                      AND numero_nf IS NOT NULL
+                    GROUP BY numero_nf
                 ) grouped_orders
                 """.formatted(SOURCE_TABLE, dateClause);
 

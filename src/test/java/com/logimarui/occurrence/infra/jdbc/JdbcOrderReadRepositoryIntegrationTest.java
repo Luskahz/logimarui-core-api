@@ -101,6 +101,12 @@ class JdbcOrderReadRepositoryIntegrationTest {
         var context = repository.findReturnContext(customerId, invoiceNumber);
 
         assertThat(orders.getContent()).isNotEmpty();
+        var selectedOrder = orders.getContent().stream()
+                .filter(order -> invoiceNumber.equals(order.invoiceNumber()))
+                .findFirst()
+                .orElseThrow();
+        assertThat(selectedOrder.customerId()).isEqualTo(customerId);
+        assertThat(selectedOrder.customerName()).isNotBlank();
         assertThat(items.getContent()).isNotEmpty();
         assertThat(context).isPresent();
         assertThat(context.orElseThrow().customerId()).isEqualTo(customerId);
