@@ -28,11 +28,16 @@ class OccurrenceUseCasesTest {
         OccurrenceRepository repository = mock(OccurrenceRepository.class);
         when(repository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
 
-        Occurrence result = new CreateReturnOccurrenceUseCase(repository, CLOCK).execute(10L, 20L);
+        Occurrence result = new CreateReturnOccurrenceUseCase(repository, CLOCK).execute(
+                10L, 20L, "PDV fechado", "Equipe aguardando no local", true
+        );
 
         assertThat(result.getType()).isEqualTo(OccurrenceType.RETURN);
         assertThat(result.getStatus()).isEqualTo(OccurrenceStatus.OPEN);
         assertThat(result.isProblemResolved()).isFalse();
+        assertThat(result.getReason()).isEqualTo("PDV fechado");
+        assertThat(result.getObservation()).isEqualTo("Equipe aguardando no local");
+        assertThat(result.isTransferPossible()).isTrue();
         verify(repository).save(result);
     }
 

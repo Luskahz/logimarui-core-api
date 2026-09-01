@@ -41,6 +41,15 @@ public class OccurrenceEntity {
     @Column(name = "problem_resolved", nullable = false)
     private boolean problemResolved;
 
+    @Column(name = "reason", length = 120)
+    private String reason;
+
+    @Column(name = "observation", length = 2000)
+    private String observation;
+
+    @Column(name = "transfer_possible", nullable = false)
+    private boolean transferPossible;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 

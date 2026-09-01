@@ -10,6 +10,7 @@ public class OccurrencePersistenceMapper {
         return Occurrence.reconstitute(
                 entity.getId(), entity.getCustomerId(), entity.getInvoiceNumber(),
                 entity.getType(), entity.getStatus(), entity.isProblemResolved(),
+                entity.getReason(), entity.getObservation(), entity.isTransferPossible(),
                 entity.getCreatedAt(), entity.getUpdatedAt(),
                 entity.getReturnConfirmedAt(), entity.getRevertedAt()
         );
@@ -19,6 +20,7 @@ public class OccurrencePersistenceMapper {
         return new OccurrenceEntity(
                 occurrence.getId(), occurrence.getCustomerId(), occurrence.getInvoiceNumber(),
                 occurrence.getType(), occurrence.getStatus(), occurrence.isProblemResolved(),
+                occurrence.getReason(), occurrence.getObservation(), occurrence.isTransferPossible(),
                 occurrence.getCreatedAt(), occurrence.getUpdatedAt(),
                 occurrence.getReturnConfirmedAt(), occurrence.getRevertedAt()
         );

@@ -42,7 +42,10 @@ public class OccurrenceController {
             @RequestBody @Valid CreateReturnOccurrenceRequest request
     ) {
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(
-                createReturnOccurrenceUseCase.execute(request.customerId(), request.invoiceNumber())
+                createReturnOccurrenceUseCase.execute(
+                        request.customerId(), request.invoiceNumber(), request.reason(),
+                        request.observation(), request.transferPossible()
+                )
         ));
     }
 

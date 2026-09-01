@@ -13,6 +13,7 @@ public record OrderSummaryResponse(
         LocalDate invoiceIssueDate,
         BigDecimal orderValue,
         BigDecimal totalHectoliters,
+        BigDecimal totalWeightKg,
         Long routeNumber,
         Long sectorCode,
         String driverName,

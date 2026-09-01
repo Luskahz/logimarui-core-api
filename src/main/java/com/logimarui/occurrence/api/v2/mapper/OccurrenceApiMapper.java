@@ -10,6 +10,7 @@ public class OccurrenceApiMapper {
         return new OccurrenceResponse(
                 occurrence.getId(), occurrence.getCustomerId(), occurrence.getInvoiceNumber(),
                 occurrence.getType(), occurrence.getStatus(), occurrence.isProblemResolved(),
+                occurrence.getReason(), occurrence.getObservation(), occurrence.isTransferPossible(),
                 occurrence.getCreatedAt(), occurrence.getUpdatedAt(),
                 occurrence.getReturnConfirmedAt(), occurrence.getRevertedAt()
         );

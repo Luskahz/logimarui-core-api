@@ -15,10 +15,23 @@ public class CreateReturnOccurrenceUseCase {
     private final OccurrenceRepository occurrenceRepository;
     private final Clock clock;
 
-    @Transactional
     public Occurrence execute(Long customerId, Long invoiceNumber) {
+        return execute(customerId, invoiceNumber, "Não informado", "Não informado", false);
+    }
+
+    @Transactional
+    public Occurrence execute(
+            Long customerId,
+            Long invoiceNumber,
+            String reason,
+            String observation,
+            boolean transferPossible
+    ) {
         return occurrenceRepository.save(
-                Occurrence.createReturn(customerId, invoiceNumber, Instant.now(clock))
+                Occurrence.createReturn(
+                        customerId, invoiceNumber, reason, observation, transferPossible,
+                        Instant.now(clock)
+                )
         );
     }
 }

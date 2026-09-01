@@ -15,7 +15,8 @@ public class ReturnAlertContextRowMapper implements RowMapper<ReturnAlertContext
                 resultSet.getLong("customer_id"),
                 resultSet.getLong("invoice_number"),
                 resultSet.getBigDecimal("order_value"),
-                resultSet.getBigDecimal("total_hectoliters")
+                resultSet.getBigDecimal("total_hectoliters"),
+                resultSet.getBigDecimal("total_weight_kg")
         );
     }
 }

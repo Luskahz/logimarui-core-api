@@ -15,6 +15,7 @@ public class OrderReadApiMapper {
                 order.orderNumber(), order.invoiceNumber(), order.customerId(),
                 order.customerName(), order.tradeName(), order.deliveryDate(),
                 order.invoiceIssueDate(), order.orderValue(), order.totalHectoliters(),
+                order.totalWeightKg(),
                 order.routeNumber(), order.sectorCode(), order.driverName(),
                 order.orderType(), order.externalStatus()
         );
@@ -29,7 +30,7 @@ public class OrderReadApiMapper {
     public ReturnAlertContextResponse toResponse(ReturnAlertContext context) {
         return new ReturnAlertContextResponse(
                 context.customerId(), context.invoiceNumber(),
-                context.orderValue(), context.totalHectoliters()
+                context.orderValue(), context.totalHectoliters(), context.totalWeightKg()
         );
     }
 }

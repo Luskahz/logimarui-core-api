@@ -26,6 +26,7 @@ public class OrderSummaryRowMapper implements RowMapper<OrderSummary> {
                 invoiceIssueDate == null ? null : invoiceIssueDate.toLocalDate(),
                 resultSet.getBigDecimal("order_value"),
                 resultSet.getBigDecimal("total_hectoliters"),
+                resultSet.getBigDecimal("total_weight_kg"),
                 nullableLong(resultSet, "route_number"),
                 nullableLong(resultSet, "sector_code"),
                 resultSet.getString("driver_name"),

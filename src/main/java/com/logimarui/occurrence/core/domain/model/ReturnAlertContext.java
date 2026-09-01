@@ -6,6 +6,7 @@ public record ReturnAlertContext(
         Long customerId,
         Long invoiceNumber,
         BigDecimal orderValue,
-        BigDecimal totalHectoliters
+        BigDecimal totalHectoliters,
+        BigDecimal totalWeightKg
 ) {
 }

@@ -31,6 +31,7 @@ public class JdbcOrderReadRepository implements OrderReadRepository {
             "invoiceIssueDate", "invoice_issue_date",
             "orderValue", "order_value",
             "totalHectoliters", "total_hectoliters",
+            "totalWeightKg", "total_weight_kg",
             "routeNumber", "route_number",
             "sectorCode", "sector_code"
     );
@@ -79,6 +80,7 @@ public class JdbcOrderReadRepository implements OrderReadRepository {
                     MAX(DATE(data_emissao_nf)) AS invoice_issue_date,
                     COALESCE(MAX(valor_total_nf), MAX(valor_total)) AS order_value,
                     COALESCE(SUM(volume_hectolitro), 0) AS total_hectoliters,
+                    COALESCE(MAX(total_peso), 0) AS total_weight_kg,
                     MAX(itinerario) AS route_number,
                     MAX(cod_setor) AS sector_code,
                     MAX(desc_setor) AS driver_name,
@@ -156,7 +158,8 @@ public class JdbcOrderReadRepository implements OrderReadRepository {
                     cod_cliente AS customer_id,
                     numero_nf AS invoice_number,
                     COALESCE(MAX(valor_total_nf), MAX(valor_total)) AS order_value,
-                    COALESCE(SUM(volume_hectolitro), 0) AS total_hectoliters
+                    COALESCE(SUM(volume_hectolitro), 0) AS total_hectoliters,
+                    COALESCE(MAX(total_peso), 0) AS total_weight_kg
                 FROM %s
                 WHERE cod_cliente = :customerId
                   AND numero_nf = :invoiceNumber
