@@ -60,7 +60,7 @@ public class CustomerLabelService {
             Instant generatedAt = Instant.now();
             LocalDate endDate = LocalDate.now(BUSINESS_ZONE);
             List<CustomerLabelCacheEntity> snapshot = procedureReader.readSnapshot(
-                    endDate.minusMonths(3),
+                    endDate.minusMonths(3).withDayOfMonth(1),
                     endDate,
                     generatedAt
             );
