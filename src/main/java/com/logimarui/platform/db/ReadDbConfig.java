@@ -19,13 +19,7 @@ public class ReadDbConfig {
 
     @Bean(name = "readDataSource")
     public DataSource readDataSource(ReadDbProperties props) {
-        HikariDataSource dataSource = DataSourceBuilder.create()
-                .type(HikariDataSource.class)
-                .url(props.getJdbcUrl())
-                .username(props.getUsername())
-                .password(props.getPassword())
-                .driverClassName(props.getDriverClassName())
-                .build();
+        HikariDataSource dataSource = createDataSource(props);
 
         dataSource.setPoolName("logimarui-read-pool");
         dataSource.setMaximumPoolSize(props.getMaximumPoolSize());
@@ -34,9 +28,36 @@ public class ReadDbConfig {
         return dataSource;
     }
 
+    @Bean(name = "clusterProcedureDataSource")
+    public DataSource clusterProcedureDataSource(ReadDbProperties props) {
+        HikariDataSource dataSource = createDataSource(props);
+
+        dataSource.setPoolName("logimarui-cluster-procedure-pool");
+        dataSource.setMaximumPoolSize(2);
+        dataSource.setReadOnly(false);
+        return dataSource;
+    }
+
+    private HikariDataSource createDataSource(ReadDbProperties props) {
+        return DataSourceBuilder.create()
+                .type(HikariDataSource.class)
+                .url(props.getJdbcUrl())
+                .username(props.getUsername())
+                .password(props.getPassword())
+                .driverClassName(props.getDriverClassName())
+                .build();
+    }
+
     @Bean(name = "readJdbcTemplate")
     public JdbcTemplate readJdbcTemplate(@Qualifier("readDataSource") DataSource ds) {
         return new JdbcTemplate(ds);
+    }
+
+    @Bean(name = "clusterProcedureJdbcTemplate")
+    public JdbcTemplate clusterProcedureJdbcTemplate(
+            @Qualifier("clusterProcedureDataSource") DataSource dataSource
+    ) {
+        return new JdbcTemplate(dataSource);
     }
 
     @Bean(name = "readNamedParameterJdbcTemplate")
