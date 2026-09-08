@@ -26,15 +26,19 @@ public class CustomerLabelProcedureReader {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<CustomerLabelCacheEntity> readSnapshot(LocalDate referenceDate, Instant generatedAt) {
+    public List<CustomerLabelCacheEntity> readSnapshot(
+            LocalDate startDate,
+            LocalDate endDate,
+            Instant generatedAt
+    ) {
         Map<Long, CustomerLabelCacheEntity> labelsByCustomer = new LinkedHashMap<>();
 
         jdbcTemplate.query(
                 connection -> {
                     var statement = connection.prepareStatement(PROCEDURE_CALL);
                     statement.setNull(1, Types.BIGINT);
-                    statement.setDate(2, Date.valueOf(referenceDate));
-                    statement.setDate(3, Date.valueOf(referenceDate));
+                    statement.setDate(2, Date.valueOf(startDate));
+                    statement.setDate(3, Date.valueOf(endDate));
                     statement.setString(4, PROCEDURE_ORIGIN);
                     return statement;
                 },
