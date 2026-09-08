@@ -71,25 +71,31 @@ public class JdbcOrderReadRepository implements OrderReadRepository {
 
         String contentSql = """
                 SELECT
-                    MAX(numero_pedido) AS order_number,
-                    numero_nf AS invoice_number,
-                    MAX(cod_cliente) AS customer_id,
-                    MAX(nome_cliente) AS customer_name,
-                    MAX(nome_fantasia) AS trade_name,
-                    MAX(DATE(data_entrega)) AS delivery_date,
-                    MAX(DATE(data_emissao_nf)) AS invoice_issue_date,
-                    COALESCE(MAX(valor_total_nf), MAX(valor_total)) AS order_value,
-                    COALESCE(SUM(volume_hectolitro), 0) AS total_hectoliters,
-                    COALESCE(MAX(total_peso), 0) AS total_weight_kg,
-                    MAX(itinerario) AS route_number,
-                    MAX(cod_setor) AS sector_code,
-                    MAX(desc_setor) AS driver_name,
-                    MAX(tipo_pedido) AS order_type,
-                    MAX(columns_status_externo_label) AS external_status
-                FROM %s
-                WHERE cod_cliente = :customerId%s
-                  AND numero_nf IS NOT NULL
-                GROUP BY numero_nf
+                    MAX(orders.numero_pedido) AS order_number,
+                    orders.numero_nf AS invoice_number,
+                    MAX(orders.cod_cliente) AS customer_id,
+                    MAX(orders.nome_cliente) AS customer_name,
+                    MAX(orders.nome_fantasia) AS trade_name,
+                    MAX(DATE(orders.data_entrega)) AS delivery_date,
+                    MAX(DATE(orders.data_emissao_nf)) AS invoice_issue_date,
+                    COALESCE(MAX(orders.valor_total_nf), MAX(orders.valor_total)) AS order_value,
+                    COALESCE(SUM(orders.volume_hectolitro), 0) AS total_hectoliters,
+                    COALESCE(MAX(orders.total_peso), 0) AS total_weight_kg,
+                    MAX(orders.itinerario) AS route_number,
+                    MAX(orders.cod_setor) AS sector_code,
+                    MAX(driver.nome_motorista) AS driver_name,
+                    MAX(orders.tipo_pedido) AS order_type,
+                    MAX(orders.columns_status_externo_label) AS external_status
+                FROM %s orders
+                LEFT JOIN `03_05_30_cliente` route_client
+                    ON route_client.cod_cliente = orders.cod_cliente
+                   AND route_client.mapa = orders.itinerario
+                   AND route_client.data = DATE(orders.data_entrega)
+                LEFT JOIN motoristas driver
+                    ON driver.cod_motorista = route_client.motorista
+                WHERE orders.cod_cliente = :customerId%s
+                  AND orders.numero_nf IS NOT NULL
+                GROUP BY orders.numero_nf
                 ORDER BY %s
                 LIMIT :limit OFFSET :offset
                 """.formatted(
