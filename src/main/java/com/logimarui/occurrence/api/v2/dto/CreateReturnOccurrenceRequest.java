@@ -10,6 +10,6 @@ public record CreateReturnOccurrenceRequest(
         @NotNull @Positive Long invoiceNumber,
         @NotBlank @Size(max = 120) String reason,
         @NotBlank @Size(max = 2000) String observation,
-        @NotNull Boolean transferPossible
+        Boolean transferPossible
 ) {
 }
