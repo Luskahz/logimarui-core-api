@@ -28,7 +28,7 @@ class GatewayRoutesConfigTest {
                     true
             ),
             new ServiceRoute(
-                    "automacao-savi",
+                    "imarui_savi_automation_service",
                     "/api/savi",
                     "http://127.0.0.1:4003",
                     true
