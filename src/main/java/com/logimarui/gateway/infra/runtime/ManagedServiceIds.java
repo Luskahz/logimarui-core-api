@@ -17,6 +17,7 @@ public final class ManagedServiceIds {
             "extrator-manager", EXTRACTION,
             "database-monitoring", DATABASE_MONITORING,
             "backup-manager", DATABASE_BACKUP,
+            "automacao-savi", SAVI,
             "n8n", N8N,
             "evolution-api", EVOLUTION
     );
@@ -25,6 +26,7 @@ public final class ManagedServiceIds {
             EXTRACTION, List.of(EXTRACTION, "extrator-manager"),
             DATABASE_MONITORING, List.of(DATABASE_MONITORING, "database-monitoring"),
             DATABASE_BACKUP, List.of(DATABASE_BACKUP, "backup-manager"),
+            SAVI, List.of(SAVI, "automacao-savi"),
             N8N, List.of(N8N, "n8n"),
             EVOLUTION, List.of(EVOLUTION, "evolution-api"),
             FRONTEND, List.of(FRONTEND)
