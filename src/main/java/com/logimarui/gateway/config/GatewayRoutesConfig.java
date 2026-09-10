@@ -2,6 +2,7 @@ package com.logimarui.gateway.config;
 
 import com.logimarui.gateway.core.application.ServiceRegistry;
 import com.logimarui.gateway.core.domain.model.ServiceRoute;
+import com.logimarui.gateway.infra.runtime.ManagedServiceIds;
 import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -36,16 +37,16 @@ public class GatewayRoutesConfig {
 
     private static final String BACKEND_API_PREFIX = "/api";
     private static final String CORE_API_PREFIX = "/api/v1";
-    private static final String FRONTEND_SERVICE_ID = "frontend";
-    private static final String DATABASE_MONITORING_SERVICE_ID = "gerenciador-database-monitoring";
-    private static final String DATABASE_BACKUP_SERVICE_ID = "gerenciador-database-backup";
+    private static final String FRONTEND_SERVICE_ID = ManagedServiceIds.FRONTEND;
+    private static final String DATABASE_MONITORING_SERVICE_ID = ManagedServiceIds.DATABASE_MONITORING;
+    private static final String DATABASE_BACKUP_SERVICE_ID = ManagedServiceIds.DATABASE_BACKUP;
     private static final String DATABASE_PUBLIC_PREFIX = "/gerenciador-database";
     private static final String DATABASE_MONITORING_PUBLIC_PREFIX = DATABASE_PUBLIC_PREFIX + "/monitoring";
     private static final String DATABASE_BACKUP_PUBLIC_PREFIX = DATABASE_PUBLIC_PREFIX + "/backup";
-    private static final String EVOLUTION_SERVICE_ID = "evolution-interno";
+    private static final String EVOLUTION_SERVICE_ID = ManagedServiceIds.EVOLUTION;
     private static final String EVOLUTION_PUBLIC_PREFIX = "/evolution";
     private static final String EVOLUTION_API_PUBLIC_PREFIX = "/evolution-api";
-    private static final String N8N_SERVICE_ID = "n8n-interno";
+    private static final String N8N_SERVICE_ID = ManagedServiceIds.N8N;
     private static final String N8N_PUBLIC_PREFIX = "/n8n";
     private static final String N8N_REST_PREFIX = "/rest/n8n";
     private static final List<String> SPRING_OWNED_PATH_PREFIXES = List.of(

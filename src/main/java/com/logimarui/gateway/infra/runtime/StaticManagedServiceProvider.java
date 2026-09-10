@@ -14,7 +14,7 @@ import java.util.Optional;
 @Component
 public class StaticManagedServiceProvider implements ManagedServiceProvider {
 
-    private static final String SAVI_SERVICE_NAME = "imarui_savi_automation_service";
+    private static final String SAVI_SERVICE_NAME = ManagedServiceIds.SAVI;
     private static final String SAVI_SERVICE_ENV_PREFIX =
             SAVI_SERVICE_NAME.toUpperCase(Locale.ROOT);
     private static final String SAVI_SERVICE_DIRECTORY =
@@ -51,13 +51,13 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
         Path frontendRoot = workspaceRoot.resolve("logImarui-frontend").normalize();
 
         this.services = List.of(
-                new ServiceDefinition("SERVICE_EXTRATOR", "gerenciador-extracao", "/api/extrator", ServiceType.PYTHON, servicesRoot.resolve("extrator-manager"), "python app.py", null, 4100, 4000, true, "PORT", true, true),
-                new ServiceDefinition("SERVICE_MONITORING", "gerenciador-database-monitoring", "/api/monitoring", ServiceType.NODE, servicesRoot.resolve("database-monitoring"), "npm start", null, 4101, 4001, true, "PORT", true, true),
-                new ServiceDefinition("SERVICE_BACKUP", "gerenciador-database-backup", "/api/backup", ServiceType.NODE, servicesRoot.resolve("banco-de-dados").resolve("backup-runner"), "npm start", null, 4102, 4002, true, "PORT", true, true),
+                new ServiceDefinition("SERVICE_EXTRATOR", ManagedServiceIds.EXTRACTION, "/api/extrator", ServiceType.PYTHON, servicesRoot.resolve("extrator-manager"), "python app.py", null, 4100, 4000, true, "PORT", true, true),
+                new ServiceDefinition("SERVICE_MONITORING", ManagedServiceIds.DATABASE_MONITORING, "/api/monitoring", ServiceType.NODE, servicesRoot.resolve("database-monitoring"), "npm start", null, 4101, 4001, true, "PORT", true, true),
+                new ServiceDefinition("SERVICE_BACKUP", ManagedServiceIds.DATABASE_BACKUP, "/api/backup", ServiceType.NODE, servicesRoot.resolve("banco-de-dados").resolve("backup-runner"), "npm start", null, 4102, 4002, true, "PORT", true, true),
                 new ServiceDefinition(SAVI_SERVICE_ENV_PREFIX, SAVI_SERVICE_NAME, "/api/savi", ServiceType.PYTHON, servicesRoot.resolve(SAVI_SERVICE_DIRECTORY), SAVI_SERVICE_COMMAND, null, 4103, 4003, true, "PORT", true, true),
-                new ServiceDefinition("SERVICE_N8N", "n8n-interno", "/api/n8n", ServiceType.DOCKER, servicesRoot.resolve("n8n"), "docker compose up -d", "docker compose down", 5679, 5678, true, "N8N_LOCAL_PORT", false, false),
-                new ServiceDefinition("SERVICE_EVOLUTION", "evolution-interno", "/api/evolution-api", ServiceType.DOCKER, servicesRoot.resolve("evolution"), "docker compose --env-file .env -p evolution -f docker-compose.yaml up -d", "docker compose --env-file .env -p evolution -f docker-compose.yaml down", 4081, 4080, true, "EVOLUTION_API_PORT", false, false),
-                new ServiceDefinition("SERVICE_FRONTEND", "frontend", "/", ServiceType.NODE, frontendRoot, "npm run build-start", null, 8191, 8091, true, "FRONTEND_PORT", true, true)
+                new ServiceDefinition("SERVICE_N8N", ManagedServiceIds.N8N, "/api/n8n", ServiceType.DOCKER, servicesRoot.resolve("n8n"), "docker compose up -d", "docker compose down", 5679, 5678, true, "N8N_LOCAL_PORT", false, false),
+                new ServiceDefinition("SERVICE_EVOLUTION", ManagedServiceIds.EVOLUTION, "/api/evolution-api", ServiceType.DOCKER, servicesRoot.resolve("evolution"), "docker compose --env-file .env -p evolution -f docker-compose.yaml up -d", "docker compose --env-file .env -p evolution -f docker-compose.yaml down", 4081, 4080, true, "EVOLUTION_API_PORT", false, false),
+                new ServiceDefinition("SERVICE_FRONTEND", ManagedServiceIds.FRONTEND, "/", ServiceType.NODE, frontendRoot, "npm run build-start", null, 8191, 8091, true, "FRONTEND_PORT", true, true)
         ).stream().map(definition -> buildService(environment, definition, developmentProfile)).toList();
     }
 

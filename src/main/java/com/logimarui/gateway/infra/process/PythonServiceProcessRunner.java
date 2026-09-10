@@ -5,6 +5,7 @@ import com.logimarui.gateway.core.domain.model.ServiceRuntime;
 import com.logimarui.gateway.core.domain.model.ServiceStatus;
 import com.logimarui.gateway.core.domain.model.ServiceType;
 import com.logimarui.gateway.core.port.ServiceProcessRunner;
+import com.logimarui.gateway.infra.runtime.ManagedServiceIds;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PythonServiceProcessRunner implements ServiceProcessRunner {
 
-    private static final String EXTRACTION_SERVICE_ID = "gerenciador-extracao";
     private static final String EXTRACTION_SHARE_S_ROOT = "\\\\192.168.0.213\\Files";
 
     private final ProcessTreeTerminator processTreeTerminator;
@@ -52,7 +52,7 @@ public class PythonServiceProcessRunner implements ServiceProcessRunner {
                 );
             }
             processBuilder.environment().put("SERVICE_HOST", "0.0.0.0");
-            if (EXTRACTION_SERVICE_ID.equals(service.getId())) {
+            if (ManagedServiceIds.EXTRACTION.equals(service.getId())) {
                 processBuilder.environment().put("EXTRATOR_FORCE_UNC_DRIVE_FALLBACKS", "1");
                 processBuilder.environment().putIfAbsent("EXTRATOR_DRIVE_S_ROOT", EXTRACTION_SHARE_S_ROOT);
             }

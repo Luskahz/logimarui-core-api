@@ -5,21 +5,29 @@ import java.util.Map;
 
 public final class ManagedServiceIds {
 
+    public static final String EXTRACTION = "gerenciador-extracao";
+    public static final String DATABASE_MONITORING = "gerenciador-database-monitoring";
+    public static final String DATABASE_BACKUP = "gerenciador-database-backup";
+    public static final String SAVI = "imarui_savi_automation_service";
+    public static final String N8N = "n8n-interno";
+    public static final String EVOLUTION = "evolution-interno";
+    public static final String FRONTEND = "frontend";
+
     private static final Map<String, String> LEGACY_TO_CANONICAL = Map.of(
-            "extrator-manager", "gerenciador-extracao",
-            "database-monitoring", "gerenciador-database-monitoring",
-            "backup-manager", "gerenciador-database-backup",
-            "n8n", "n8n-interno",
-            "evolution-api", "evolution-interno"
+            "extrator-manager", EXTRACTION,
+            "database-monitoring", DATABASE_MONITORING,
+            "backup-manager", DATABASE_BACKUP,
+            "n8n", N8N,
+            "evolution-api", EVOLUTION
     );
 
     private static final Map<String, List<String>> CANONICAL_TO_ALIASES = Map.of(
-            "gerenciador-extracao", List.of("gerenciador-extracao", "extrator-manager"),
-            "gerenciador-database-monitoring", List.of("gerenciador-database-monitoring", "database-monitoring"),
-            "gerenciador-database-backup", List.of("gerenciador-database-backup", "backup-manager"),
-            "n8n-interno", List.of("n8n-interno", "n8n"),
-            "evolution-interno", List.of("evolution-interno", "evolution-api"),
-            "frontend", List.of("frontend")
+            EXTRACTION, List.of(EXTRACTION, "extrator-manager"),
+            DATABASE_MONITORING, List.of(DATABASE_MONITORING, "database-monitoring"),
+            DATABASE_BACKUP, List.of(DATABASE_BACKUP, "backup-manager"),
+            N8N, List.of(N8N, "n8n"),
+            EVOLUTION, List.of(EVOLUTION, "evolution-api"),
+            FRONTEND, List.of(FRONTEND)
     );
 
     private ManagedServiceIds() {
