@@ -8,10 +8,36 @@ import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Component
 public class StaticManagedServiceProvider implements ManagedServiceProvider {
+
+    private static final String SAVI_SERVICE_NAME = "imarui_savi_automation_service";
+    private static final String SAVI_SERVICE_ENV_PREFIX =
+            SAVI_SERVICE_NAME.toUpperCase(Locale.ROOT);
+    private static final String SAVI_SERVICE_DIRECTORY =
+            SAVI_SERVICE_NAME.replace('_', '-');
+    private static final String SAVI_SERVICE_COMMAND =
+            "python -m " + SAVI_SERVICE_NAME + " api --host 127.0.0.1";
+
+    private record ServiceDefinition(
+            String environmentPrefix,
+            String defaultId,
+            String pathPrefix,
+            ServiceType type,
+            Path workingDirectory,
+            String startCommand,
+            String stopCommand,
+            int developmentPort,
+            int productionPort,
+            boolean requiresAuthentication,
+            String portEnvironmentVariable,
+            boolean startOnBoot,
+            boolean enabled
+    ) {
+    }
 
     private final List<ManagedService> services;
 
@@ -25,112 +51,14 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
         Path frontendRoot = workspaceRoot.resolve("logImarui-frontend").normalize();
 
         this.services = List.of(
-                buildService(
-                        environment,
-                        "SERVICE_EXTRATOR",
-                        "gerenciador-extracao",
-                        "/api/extrator",
-                        ServiceType.PYTHON,
-                        servicesRoot.resolve("extrator-manager"),
-                        "python app.py",
-                        null,
-                        developmentProfile ? 4100 : 4000,
-                        true,
-                        "PORT",
-                        true,
-                        true
-                ),
-                buildService(
-                        environment,
-                        "SERVICE_MONITORING",
-                        "gerenciador-database-monitoring",
-                        "/api/monitoring",
-                        ServiceType.NODE,
-                        servicesRoot.resolve("database-monitoring"),
-                        "npm start",
-                        null,
-                        developmentProfile ? 4101 : 4001,
-                        true,
-                        "PORT",
-                        true,
-                        true
-                ),
-                buildService(
-                        environment,
-                        "SERVICE_BACKUP",
-                        "gerenciador-database-backup",
-                        "/api/backup",
-                        ServiceType.NODE,
-                        servicesRoot.resolve("banco-de-dados").resolve("backup-runner"),
-                        "npm start",
-                        null,
-                        developmentProfile ? 4102 : 4002,
-                        true,
-                        "PORT",
-                        true,
-                        true
-                ),
-                buildService(
-                        environment,
-                        "IMARUI_SAVI_AUTOMATION_SERVICE",
-                        "imarui_savi_automation_service",
-                        "/api/savi",
-                        ServiceType.PYTHON,
-                        servicesRoot.resolve("imarui-savi-automation-service"),
-                        "python -m savi_automation api --host 127.0.0.1",
-                        null,
-                        developmentProfile ? 4103 : 4003,
-                        true,
-                        "PORT",
-                        true,
-                        true
-                ),
-                buildService(
-                        environment,
-                        "SERVICE_N8N",
-                        "n8n-interno",
-                        "/api/n8n",
-                        ServiceType.DOCKER,
-                        servicesRoot.resolve("n8n"),
-                        "docker compose up -d",
-                        "docker compose down",
-                        developmentProfile ? 5679 : 5678,
-                        true,
-                        "N8N_LOCAL_PORT",
-                        false,
-                        false
-                ),
-                buildService(
-                        environment,
-                        "SERVICE_EVOLUTION",
-                        "evolution-interno",
-                        "/api/evolution-api",
-                        ServiceType.DOCKER,
-                        servicesRoot.resolve("evolution"),
-                        "docker compose --env-file .env -p evolution -f docker-compose.yaml up -d",
-                        "docker compose --env-file .env -p evolution -f docker-compose.yaml down",
-                        developmentProfile ? 4081 : 4080,
-                        true,
-                        "EVOLUTION_API_PORT",
-                        false,
-                        false
-                ),
-                buildService(
-                        environment,
-                        "SERVICE_FRONTEND",
-                        "frontend",
-                        "/",
-                        ServiceType.NODE,
-                        frontendRoot,
-                        "npm run build-start",
-                        null,
-                        developmentProfile ? 8191 : 8091,
-                        true,
-                        "FRONTEND_PORT",
-                        true,
-                        true
-                )
-        );
+                new ServiceDefinition("SERVICE_EXTRATOR", "gerenciador-extracao", "/api/extrator", ServiceType.PYTHON, servicesRoot.resolve("extrator-manager"), "python app.py", null, 4100, 4000, true, "PORT", true, true),
+                new ServiceDefinition("SERVICE_MONITORING", "gerenciador-database-monitoring", "/api/monitoring", ServiceType.NODE, servicesRoot.resolve("database-monitoring"), "npm start", null, 4101, 4001, true, "PORT", true, true),
+                new ServiceDefinition("SERVICE_BACKUP", "gerenciador-database-backup", "/api/backup", ServiceType.NODE, servicesRoot.resolve("banco-de-dados").resolve("backup-runner"), "npm start", null, 4102, 4002, true, "PORT", true, true),
+                new ServiceDefinition(SAVI_SERVICE_ENV_PREFIX, SAVI_SERVICE_NAME, "/api/savi", ServiceType.PYTHON, servicesRoot.resolve(SAVI_SERVICE_DIRECTORY), SAVI_SERVICE_COMMAND, null, 4103, 4003, true, "PORT", true, true),
+                new ServiceDefinition("SERVICE_N8N", "n8n-interno", "/api/n8n", ServiceType.DOCKER, servicesRoot.resolve("n8n"), "docker compose up -d", "docker compose down", 5679, 5678, true, "N8N_LOCAL_PORT", false, false),
+                new ServiceDefinition("SERVICE_EVOLUTION", "evolution-interno", "/api/evolution-api", ServiceType.DOCKER, servicesRoot.resolve("evolution"), "docker compose --env-file .env -p evolution -f docker-compose.yaml up -d", "docker compose --env-file .env -p evolution -f docker-compose.yaml down", 4081, 4080, true, "EVOLUTION_API_PORT", false, false),
+                new ServiceDefinition("SERVICE_FRONTEND", "frontend", "/", ServiceType.NODE, frontendRoot, "npm run build-start", null, 8191, 8091, true, "FRONTEND_PORT", true, true)
+        ).stream().map(definition -> buildService(environment, definition, developmentProfile)).toList();
     }
 
     private boolean isDevelopmentProfile(Environment environment) {
@@ -159,50 +87,41 @@ public class StaticManagedServiceProvider implements ManagedServiceProvider {
 
     private ManagedService buildService(
             Environment environment,
-            String envPrefix,
-            String defaultId,
-            String defaultPathPrefix,
-            ServiceType defaultType,
-            Path defaultWorkingDirectory,
-            String defaultStartCommand,
-            String defaultStopCommand,
-            int defaultPort,
-            boolean defaultRequiresAuthentication,
-            String defaultPortEnvironmentVariable,
-            boolean defaultStartOnBoot,
-            boolean defaultEnabled
+            ServiceDefinition definition,
+            boolean developmentProfile
     ) {
+        String envPrefix = definition.environmentPrefix();
         String rawServiceId = normalizeString(environment.getProperty(envPrefix + "_ID"));
         String resolvedServiceId = rawServiceId.isBlank()
-                ? defaultId
+                ? definition.defaultId()
                 : ManagedServiceIds.toCanonical(rawServiceId);
 
         return new ManagedService(
                 resolvedServiceId,
-                environment.getProperty(envPrefix + "_PATH_PREFIX", defaultPathPrefix),
-                parseServiceType(environment.getProperty(envPrefix + "_TYPE"), defaultType),
+                environment.getProperty(envPrefix + "_PATH_PREFIX", definition.pathPrefix()),
+                parseServiceType(environment.getProperty(envPrefix + "_TYPE"), definition.type()),
                 environment.getProperty(
                         envPrefix + "_WORKDIR",
-                        defaultWorkingDirectory.toString()
+                        definition.workingDirectory().toString()
                 ),
-                environment.getProperty(envPrefix + "_COMMAND", defaultStartCommand),
-                normalizeNullableString(environment.getProperty(envPrefix + "_STOP_COMMAND"), defaultStopCommand),
-                parseInteger(environment.getProperty(envPrefix + "_PREFERRED_PORT"), defaultPort),
+                environment.getProperty(envPrefix + "_COMMAND", definition.startCommand()),
+                normalizeNullableString(environment.getProperty(envPrefix + "_STOP_COMMAND"), definition.stopCommand()),
+                parseInteger(environment.getProperty(envPrefix + "_PREFERRED_PORT"), developmentProfile ? definition.developmentPort() : definition.productionPort()),
                 parseBoolean(
                         environment.getProperty(envPrefix + "_REQUIRES_AUTHENTICATION"),
-                        defaultRequiresAuthentication
+                        definition.requiresAuthentication()
                 ),
                 environment.getProperty(
                         envPrefix + "_PORT_ENV_VAR",
-                        defaultPortEnvironmentVariable
+                        definition.portEnvironmentVariable()
                 ),
                 parseBoolean(
                         environment.getProperty(envPrefix + "_START_ON_BOOT"),
-                        defaultStartOnBoot
+                        definition.startOnBoot()
                 ),
                 parseBoolean(
                         environment.getProperty(envPrefix + "_ENABLED"),
-                        defaultEnabled
+                        definition.enabled()
                 )
         );
     }
