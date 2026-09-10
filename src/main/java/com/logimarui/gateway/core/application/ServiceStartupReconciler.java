@@ -46,17 +46,33 @@ public class ServiceStartupReconciler {
 
     @EventListener(ApplicationReadyEvent.class)
     public void reconcileOnStartup() {
+        long reconcileStartedNanos = System.nanoTime();
+        List<ManagedService> services = managedServiceProvider.findAll();
+
         status = StartupReconciliationStatus.RUNNING;
         currentServiceId = null;
         errorMessage = null;
         startedAt = Instant.now();
         finishedAt = null;
 
-        log.info("[Supervisor] Reconcile iniciado.");
+        log.info("[Supervisor] Reconcile iniciado. servicosConfigurados={}", services.size());
 
         try {
-            for (ManagedService service : managedServiceProvider.findAll()) {
+            for (int serviceIndex = 0; serviceIndex < services.size(); serviceIndex++) {
+                ManagedService service = services.get(serviceIndex);
                 currentServiceId = service.getId();
+
+                log.info(
+                        "[Supervisor] Etapa {}/{}: servico={} tipo={} enabled={} startOnBoot={} portaPreferida={} workdir={}",
+                        serviceIndex + 1,
+                        services.size(),
+                        service.getId(),
+                        service.getType(),
+                        service.isEnabled(),
+                        service.isStartOnBoot(),
+                        service.getPort(),
+                        service.getWorkingDirectory()
+                );
 
                 if (!service.isEnabled()) {
                     log.info(
@@ -89,18 +105,40 @@ public class ServiceStartupReconciler {
             status = StartupReconciliationStatus.COMPLETED;
             finishedAt = Instant.now();
 
-            log.info("[Supervisor] Reconcile finalizado.");
+            log.info(
+                    "[Supervisor] Reconcile finalizado. duracaoMs={} servicosProcessados={}",
+                    elapsedMilliseconds(reconcileStartedNanos),
+                    services.size()
+            );
         } catch (RuntimeException exception) {
             status = StartupReconciliationStatus.FAILED;
             errorMessage = exception.getMessage();
             finishedAt = Instant.now();
+            log.error(
+                    "[Supervisor] Reconcile falhou. servicoAtual={} duracaoMs={} mensagem={}",
+                    currentServiceId,
+                    elapsedMilliseconds(reconcileStartedNanos),
+                    exception.getMessage(),
+                    exception
+            );
             throw exception;
         } catch (Error error) {
             status = StartupReconciliationStatus.FAILED;
             errorMessage = error.getMessage();
             finishedAt = Instant.now();
+            log.error(
+                    "[Supervisor] Reconcile falhou com erro fatal. servicoAtual={} duracaoMs={} mensagem={}",
+                    currentServiceId,
+                    elapsedMilliseconds(reconcileStartedNanos),
+                    error.getMessage(),
+                    error
+            );
             throw error;
         }
+    }
+
+    private long elapsedMilliseconds(long startedNanos) {
+        return (System.nanoTime() - startedNanos) / 1_000_000;
     }
 
     private void stopPersistedRuntimeIfExists(ManagedService service) {

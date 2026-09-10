@@ -6,6 +6,7 @@ import com.logimarui.gateway.core.domain.model.ServiceStatus;
 import com.logimarui.gateway.core.domain.model.ServiceType;
 import com.logimarui.gateway.core.port.ServiceProcessRunner;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class NodeServiceProcessRunner implements ServiceProcessRunner {
 
     private final ProcessTreeTerminator processTreeTerminator;
@@ -34,6 +36,15 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
         try {
             File logFile = resolveLogFile(service);
 
+            log.info(
+                    "[Supervisor] Preparando servico Node: id={} workdir={} portaPreferida={} portaAlocada={} log={}",
+                    service.getId(),
+                    service.getWorkingDirectory(),
+                    service.getPort(),
+                    allocatedPort,
+                    logFile.getAbsolutePath()
+            );
+
             ProcessBuilder processBuilder = new ProcessBuilder()
                     .command("cmd.exe", "/c", service.getStartCommand())
                     .directory(new File(service.getWorkingDirectory()))
@@ -43,8 +54,22 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
             injectPortEnvironment(service, allocatedPort, processBuilder);
 
             process = processBuilder.start();
+            log.info(
+                    "[Supervisor] Processo Node iniciado: id={} pid={} porta={}",
+                    service.getId(),
+                    process.pid(),
+                    allocatedPort
+            );
 
-            Long listenerPid = waitForListenerPid(allocatedPort);
+            Long listenerPid = waitForListenerPid(service, process, allocatedPort, logFile);
+
+            log.info(
+                    "[Supervisor] Porta do servico Node detectada: id={} pid={} listenerPid={} porta={}",
+                    service.getId(),
+                    process.pid(),
+                    listenerPid,
+                    allocatedPort
+            );
 
             return new ServiceRuntime(
                     service.getId(),
@@ -62,6 +87,12 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
             );
         } catch (RuntimeException exception) {
             if (process != null) {
+                log.warn(
+                        "[Supervisor] Encerrando processo Node apos falha: id={} pid={} mensagem={}",
+                        service.getId(),
+                        process.pid(),
+                        exception.getMessage()
+                );
                 processTreeTerminator.terminate(process.pid());
             }
 
@@ -75,10 +106,26 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
         processTreeTerminator.terminate(runtime.getRootPid());
     }
 
-    private Long waitForListenerPid(int port) {
+    private Long waitForListenerPid(
+            ManagedService service,
+            Process process,
+            int port,
+            File logFile
+    ) {
         long deadline = System.currentTimeMillis() + 60_000;
 
         while (System.currentTimeMillis() < deadline) {
+            if (!process.isAlive()) {
+                int exitCode = process.exitValue();
+                throw new IllegalStateException(
+                        "Servico Node encerrou antes de abrir a porta esperada: " +
+                                service.getId() +
+                                " port=" + port +
+                                " exitCode=" + exitCode +
+                                " log=" + logFile.getAbsolutePath()
+                );
+            }
+
             Optional<Long> pid = windowsPortInspector.findListeningPidByPort(port);
 
             if (pid.isPresent()) {
@@ -89,7 +136,12 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
         }
 
         throw new IllegalStateException(
-                "Serviço iniciou, mas não abriu a porta esperada dentro do timeout: " + port
+                "Servico Node iniciou, mas nao abriu a porta esperada dentro do timeout: " +
+                        service.getId() +
+                        " port=" + port +
+                        " processPid=" + process.pid() +
+                        " processAlive=" + process.isAlive() +
+                        " log=" + logFile.getAbsolutePath()
         );
     }
 
