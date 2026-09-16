@@ -19,6 +19,8 @@ import java.util.Optional;
 @Slf4j
 public class NodeServiceProcessRunner implements ServiceProcessRunner {
 
+    private static final long NODE_STARTUP_TIMEOUT_MILLIS = 180_000;
+
     private final ProcessTreeTerminator processTreeTerminator;
     private final WindowsPortInspector windowsPortInspector;
     private final ProcessPortAllocator processPortAllocator;
@@ -112,7 +114,7 @@ public class NodeServiceProcessRunner implements ServiceProcessRunner {
             int port,
             File logFile
     ) {
-        long deadline = System.currentTimeMillis() + 60_000;
+        long deadline = System.currentTimeMillis() + NODE_STARTUP_TIMEOUT_MILLIS;
 
         while (System.currentTimeMillis() < deadline) {
             if (!process.isAlive()) {
