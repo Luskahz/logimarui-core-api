@@ -35,6 +35,7 @@ class SecurityConfigTest {
     void backendInfrastructureAndExternalContractsAreNeverClassifiedAsFrontend() {
         List<String> nonFrontendPaths = List.of(
                 "/api/v1/authentication/me",
+                "/api/v1/journey/tml",
                 "/api/extrator/health",
                 "/actuator/health",
                 "/docs",
