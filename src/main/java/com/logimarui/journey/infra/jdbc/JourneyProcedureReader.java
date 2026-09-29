@@ -7,7 +7,6 @@ import com.logimarui.journey.core.model.TmlItem;
 import com.logimarui.journey.core.model.TrItem;
 import com.logimarui.journey.core.port.JourneyReadRepository;
 import com.logimarui.operationalread.infra.jdbc.OperationalProcedureQuery;
-import com.logimarui.operationalread.infra.jdbc.ApprovedOperationalProcedure;
 import com.logimarui.operationalread.infra.jdbc.ResultColumns;
 import org.springframework.stereotype.Repository;
 
@@ -28,19 +27,19 @@ public class JourneyProcedureReader implements JourneyReadRepository {
     }
 
     public List<TmlItem> tml(LocalDate from, LocalDate to, String mode) {
-        return procedureQuery.read(ApprovedOperationalProcedure.TML, from, to, mode, (row, index) -> mapTml(row));
+        return procedureQuery.read(JourneyProcedure.TML.spec(), from, to, mode, (row, index) -> mapTml(row));
     }
 
     public List<TrItem> tr(LocalDate from, LocalDate to) {
-        return procedureQuery.read(ApprovedOperationalProcedure.TR, from, to, null, (row, index) -> mapTr(row));
+        return procedureQuery.read(JourneyProcedure.TR.spec(), from, to, null, (row, index) -> mapTr(row));
     }
 
     public List<TiItem> ti(LocalDate from, LocalDate to, String mode) {
-        return procedureQuery.read(ApprovedOperationalProcedure.TI, from, to, mode, (row, index) -> mapTi(row));
+        return procedureQuery.read(JourneyProcedure.TI.spec(), from, to, mode, (row, index) -> mapTi(row));
     }
 
     public List<JlItem> jl(LocalDate from, LocalDate to, String mode) {
-        return procedureQuery.read(ApprovedOperationalProcedure.JL, from, to, mode, (row, index) -> mapJl(row));
+        return procedureQuery.read(JourneyProcedure.JL.spec(), from, to, mode, (row, index) -> mapJl(row));
     }
 
     public static TmlItem mapTml(ResultSet row) throws SQLException {

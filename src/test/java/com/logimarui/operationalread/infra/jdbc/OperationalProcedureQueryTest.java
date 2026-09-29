@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -21,6 +22,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class OperationalProcedureQueryTest {
+    private static final ProcedureSpec THREE_ARG = new ProcedureSpec("sp_generic_three",
+            Set.of("ponto", "mpd"), Set.of("data", "mapa", "codigo_colaborador", "first_seconds"));
+    private static final ProcedureSpec TWO_ARG = new ProcedureSpec("sp_generic_two",
+            Set.of(), Set.of("data", "mapa", "codigo_colaborador", "second_seconds"));
+
     @Test
     @SuppressWarnings("unchecked")
     void rejectsAnotherIndicatorsResultSetEvenWithSharedIdentityColumns() throws Exception {
@@ -29,7 +35,7 @@ class OperationalProcedureQueryTest {
         CallableStatement statement = mock(CallableStatement.class);
         ResultSet rows = mock(ResultSet.class);
         ResultSetMetaData metadata = mock(ResultSetMetaData.class);
-        when(connection.prepareCall("{call sp_tml_v2(?, ?, ?)}")).thenReturn(statement);
+        when(connection.prepareCall("{call sp_generic_three(?, ?, ?)}")).thenReturn(statement);
         when(statement.execute()).thenReturn(true);
         when(statement.getResultSet()).thenReturn(rows);
         when(statement.getMoreResults()).thenReturn(false);
@@ -39,12 +45,12 @@ class OperationalProcedureQueryTest {
         when(metadata.getColumnLabel(1)).thenReturn("data");
         when(metadata.getColumnLabel(2)).thenReturn("mapa");
         when(metadata.getColumnLabel(3)).thenReturn("codigo_colaborador");
-        when(metadata.getColumnLabel(4)).thenReturn("tr_segundos");
+        when(metadata.getColumnLabel(4)).thenReturn("second_seconds");
         when(template.execute(any(ConnectionCallback.class))).thenAnswer(invocation ->
                 ((ConnectionCallback<List<String>>) invocation.getArgument(0)).doInConnection(connection));
 
         assertThatThrownBy(() -> new OperationalProcedureQuery(template).read(
-                ApprovedOperationalProcedure.TML, LocalDate.of(2026, 9, 28),
+                THREE_ARG, LocalDate.of(2026, 9, 28),
                 LocalDate.of(2026, 9, 28), "ponto", (row, index) -> "wrong"))
                 .isInstanceOf(DataRetrievalFailureException.class);
         verify(rows).close();
@@ -61,7 +67,7 @@ class OperationalProcedureQueryTest {
         ResultSet operational = mock(ResultSet.class);
         ResultSetMetaData infoMetadata = mock(ResultSetMetaData.class);
         ResultSetMetaData operationalMetadata = mock(ResultSetMetaData.class);
-        when(connection.prepareCall("{call sp_tr_v2(?, ?)}")).thenReturn(statement);
+        when(connection.prepareCall("{call sp_generic_two(?, ?)}")).thenReturn(statement);
         when(statement.execute()).thenReturn(true);
         when(statement.getResultSet()).thenReturn(info, operational);
         when(statement.getMoreResults()).thenReturn(true);
@@ -73,12 +79,12 @@ class OperationalProcedureQueryTest {
         when(operationalMetadata.getColumnLabel(1)).thenReturn("data");
         when(operationalMetadata.getColumnLabel(2)).thenReturn("mapa");
         when(operationalMetadata.getColumnLabel(3)).thenReturn("codigo_colaborador");
-        when(operationalMetadata.getColumnLabel(4)).thenReturn("tr_segundos");
+        when(operationalMetadata.getColumnLabel(4)).thenReturn("second_seconds");
         when(operational.next()).thenReturn(true, false);
         when(template.execute(any(ConnectionCallback.class))).thenAnswer(invocation ->
                 ((ConnectionCallback<List<String>>) invocation.getArgument(0)).doInConnection(connection));
 
-        var result = new OperationalProcedureQuery(template).read(ApprovedOperationalProcedure.TR,
+        var result = new OperationalProcedureQuery(template).read(TWO_ARG,
                 LocalDate.of(2026, 9, 28), LocalDate.of(2026, 9, 28), null,
                 (row, index) -> "operational");
         assertThat(result).containsExactly("operational");
@@ -95,7 +101,7 @@ class OperationalProcedureQueryTest {
         ResultSet rows = mock(ResultSet.class);
         ResultSetMetaData metadata = mock(ResultSetMetaData.class);
         LocalDate day = LocalDate.of(2026, 9, 28);
-        when(connection.prepareCall("{call sp_tml_v2(?, ?, ?)}" )).thenReturn(statement);
+        when(connection.prepareCall("{call sp_generic_three(?, ?, ?)}" )).thenReturn(statement);
         when(statement.execute()).thenReturn(true);
         when(statement.getResultSet()).thenReturn(rows);
         when(rows.getMetaData()).thenReturn(metadata);
@@ -103,13 +109,13 @@ class OperationalProcedureQueryTest {
         when(metadata.getColumnLabel(1)).thenReturn("data");
         when(metadata.getColumnLabel(2)).thenReturn("mapa");
         when(metadata.getColumnLabel(3)).thenReturn("codigo_colaborador");
-        when(metadata.getColumnLabel(4)).thenReturn("tml_segundos");
+        when(metadata.getColumnLabel(4)).thenReturn("first_seconds");
         when(rows.next()).thenReturn(true, true, false);
         when(template.execute(any(ConnectionCallback.class))).thenAnswer(invocation ->
                 ((ConnectionCallback<List<String>>) invocation.getArgument(0)).doInConnection(connection));
 
         List<String> result = new OperationalProcedureQuery(template)
-                .read(ApprovedOperationalProcedure.TML, day, day, "ponto", (row, index) -> "row" + index);
+                .read(THREE_ARG, day, day, "ponto", (row, index) -> "row" + index);
 
         assertThat(result).containsExactly("row0", "row1");
         verify(statement).setDate(1, Date.valueOf(day));
@@ -122,7 +128,7 @@ class OperationalProcedureQueryTest {
                 .read(null, day, day, "ponto", (row, index) -> "x"))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new OperationalProcedureQuery(template)
-                .read(ApprovedOperationalProcedure.TR, day, day, "ponto", (row, index) -> "x"))
+                .read(TWO_ARG, day, day, "ponto", (row, index) -> "x"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

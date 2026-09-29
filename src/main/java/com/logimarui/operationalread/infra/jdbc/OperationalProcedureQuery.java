@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-/** Executes one approved READ-side procedure and consumes its first result set. */
+/** Executes a parametrized READ-side procedure using its caller-supplied result signature. */
 @Component
 public class OperationalProcedureQuery {
     private final JdbcTemplate jdbcTemplate;
@@ -29,7 +29,7 @@ public class OperationalProcedureQuery {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public <T> List<T> read(ApprovedOperationalProcedure procedure, LocalDate from, LocalDate to, String mode,
+    public <T> List<T> read(ProcedureSpec procedure, LocalDate from, LocalDate to, String mode,
                             RowMapper<T> mapper) {
         if (procedure == null) throw new IllegalArgumentException("Procedure is required");
         procedure.validateMode(mode);
@@ -61,7 +61,7 @@ public class OperationalProcedureQuery {
         });
     }
 
-    private boolean isOperationalRows(ResultSet rows, ApprovedOperationalProcedure procedure) throws SQLException {
+    private boolean isOperationalRows(ResultSet rows, ProcedureSpec procedure) throws SQLException {
         ResultSetMetaData metadata = rows.getMetaData();
         Set<String> columns = new HashSet<>();
         for (int column = 1; column <= metadata.getColumnCount(); column++) {
