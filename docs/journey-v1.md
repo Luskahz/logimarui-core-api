@@ -18,8 +18,10 @@ Common query parameters: required `from` and `to` in `YYYY-MM-DD` format, with
 procedure result. Each request executes its procedure once.
 
 The API controller maps core read models to v1 response DTOs. The core service
-depends on `JourneyReadRepository`; its JDBC adapter calls only the four
-approved procedures with their fixed parameter counts. The executor skips
+depends on `JourneyReadRepository`; its JDBC adapter owns the four approved V2
+procedure definitions and their fixed parameter counts. The reusable
+`operationalread` executor receives a generic `ProcedureSpec` and knows no
+Journey indicator names. It skips
 informational result sets and accepts a data set only when its identity and
 indicator columns match the requested procedure. An unexpected result shape
 fails the read instead of returning a misleading empty snapshot.
