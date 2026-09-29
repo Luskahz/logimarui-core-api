@@ -1,11 +1,13 @@
 package com.logimarui.journey.infra.jdbc;
 
-import com.logimarui.journey.api.v1.dto.IndicatorResult;
-import com.logimarui.journey.api.v1.dto.JlItem;
-import com.logimarui.journey.api.v1.dto.TiItem;
-import com.logimarui.journey.api.v1.dto.TmlItem;
-import com.logimarui.journey.api.v1.dto.TrItem;
+import com.logimarui.journey.core.model.IndicatorResult;
+import com.logimarui.journey.core.model.JlItem;
+import com.logimarui.journey.core.model.TiItem;
+import com.logimarui.journey.core.model.TmlItem;
+import com.logimarui.journey.core.model.TrItem;
+import com.logimarui.journey.core.port.JourneyReadRepository;
 import com.logimarui.operationalread.infra.jdbc.OperationalProcedureQuery;
+import com.logimarui.operationalread.infra.jdbc.ApprovedOperationalProcedure;
 import com.logimarui.operationalread.infra.jdbc.ResultColumns;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +20,7 @@ import static com.logimarui.operationalread.infra.jdbc.ResultColumns.*;
 
 /** One stored-procedure call per HTTP request, without Java KPI recalculation. */
 @Repository
-public class JourneyProcedureReader {
+public class JourneyProcedureReader implements JourneyReadRepository {
     private final OperationalProcedureQuery procedureQuery;
 
     public JourneyProcedureReader(OperationalProcedureQuery procedureQuery) {
@@ -26,19 +28,19 @@ public class JourneyProcedureReader {
     }
 
     public List<TmlItem> tml(LocalDate from, LocalDate to, String mode) {
-        return procedureQuery.read("sp_tml_v2", from, to, mode, (row, index) -> mapTml(row));
+        return procedureQuery.read(ApprovedOperationalProcedure.TML, from, to, mode, (row, index) -> mapTml(row));
     }
 
     public List<TrItem> tr(LocalDate from, LocalDate to) {
-        return procedureQuery.read("sp_tr_v2", from, to, null, (row, index) -> mapTr(row));
+        return procedureQuery.read(ApprovedOperationalProcedure.TR, from, to, null, (row, index) -> mapTr(row));
     }
 
     public List<TiItem> ti(LocalDate from, LocalDate to, String mode) {
-        return procedureQuery.read("sp_ti_v2", from, to, mode, (row, index) -> mapTi(row));
+        return procedureQuery.read(ApprovedOperationalProcedure.TI, from, to, mode, (row, index) -> mapTi(row));
     }
 
     public List<JlItem> jl(LocalDate from, LocalDate to, String mode) {
-        return procedureQuery.read("sp_jl_v2", from, to, mode, (row, index) -> mapJl(row));
+        return procedureQuery.read(ApprovedOperationalProcedure.JL, from, to, mode, (row, index) -> mapJl(row));
     }
 
     public static TmlItem mapTml(ResultSet row) throws SQLException {

@@ -1,8 +1,8 @@
 package com.logimarui.journey.api.v1;
 
-import com.logimarui.journey.api.v1.dto.JourneyPeriodResponse;
-import com.logimarui.journey.api.v1.dto.IndicatorResult;
-import com.logimarui.journey.api.v1.dto.TmlItem;
+import com.logimarui.journey.core.model.JourneyPeriod;
+import com.logimarui.journey.core.model.IndicatorResult;
+import com.logimarui.journey.core.model.TmlItem;
 import com.logimarui.journey.core.JourneyService;
 import com.logimarui.operationalread.core.model.Expurge;
 import com.logimarui.operationalread.core.model.OperationalContext;
@@ -86,7 +86,7 @@ class JourneyControllerTest {
                 null, null, null,
                 new Expurge(false, 0L, null, null, null, null,
                         new Expurge.Flags(false, false, false, false, false)));
-        when(service.tml(any())).thenReturn(new JourneyPeriodResponse<>(day, day, null, List.of(item)));
+        when(service.tml(any())).thenReturn(new JourneyPeriod<>(day, day, null, List.of(item)));
         mvc.perform(get("/api/v1/journey/tml")
                         .param("from", "2026-09-28").param("to", "2026-09-28")
                         .param("mode", "ponto"))
@@ -98,8 +98,8 @@ class JourneyControllerTest {
                 .andExpect(jsonPath("$.items[0].tml.achieved").value(nullValue()));
     }
 
-    private static <T> JourneyPeriodResponse<T> empty() {
-        return new JourneyPeriodResponse<>(LocalDate.of(2026, 9, 1),
+    private static <T> JourneyPeriod<T> empty() {
+        return new JourneyPeriod<>(LocalDate.of(2026, 9, 1),
                 LocalDate.of(2026, 9, 30), null, List.of());
     }
 }

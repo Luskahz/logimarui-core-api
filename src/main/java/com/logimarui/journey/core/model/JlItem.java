@@ -1,5 +1,7 @@
-package com.logimarui.journey.api.v1.dto;
+package com.logimarui.journey.core.model;
 
+import com.logimarui.operationalread.core.model.Expurge;
+import com.logimarui.operationalread.core.model.OperationalContext;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -1,8 +1,8 @@
 package com.logimarui.journey.core;
 
-import com.logimarui.journey.api.v1.dto.IndicatorResult;
-import com.logimarui.journey.api.v1.dto.TrItem;
-import com.logimarui.journey.infra.jdbc.JourneyProcedureReader;
+import com.logimarui.journey.core.model.IndicatorResult;
+import com.logimarui.journey.core.model.TrItem;
+import com.logimarui.journey.core.port.JourneyReadRepository;
 import com.logimarui.operationalread.core.model.Expurge;
 import com.logimarui.operationalread.core.model.OperationalContext;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ class JourneyServiceTest {
 
     @Test
     void keepsMapCrewAndRechargeRowsWithoutDeduplicationOrImplicitExpurgeRemoval() {
-        JourneyProcedureReader reader = mock(JourneyProcedureReader.class);
+        JourneyReadRepository reader = mock(JourneyReadRepository.class);
         var driver = tr(10L, 100L, "motorista", false);
         var helper = tr(10L, 200L, "ajudante", true);
         var secondMap = tr(11L, 100L, "motorista", false);

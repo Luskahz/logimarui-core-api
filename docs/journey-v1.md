@@ -17,6 +17,13 @@ Common query parameters: required `from` and `to` in `YYYY-MM-DD` format, with
 `expurge=all|expurged|not_expurged` (default `all`). All filters act on the
 procedure result. Each request executes its procedure once.
 
+The API controller maps core read models to v1 response DTOs. The core service
+depends on `JourneyReadRepository`; its JDBC adapter calls only the four
+approved procedures with their fixed parameter counts. The executor skips
+informational result sets and accepts a data set only when its identity and
+indicator columns match the requested procedure. An unexpected result shape
+fails the read instead of returning a misleading empty snapshot.
+
 The response is `{from, to, snapshotAt, items}`. `snapshotAt` is the latest
 `dt_snapshot` among the returned items and is `null` for an empty response.
 Every item also carries its own `snapshotAt`, a shared `context` object with

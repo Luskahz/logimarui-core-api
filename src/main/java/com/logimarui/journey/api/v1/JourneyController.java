@@ -48,7 +48,7 @@ public class JourneyController {
             @Parameter(description = "motorista ou ajudante") @RequestParam(required = false) String role,
             @Parameter(description = "all, expurged ou not_expurged") @RequestParam(required = false) String expurge
     ) {
-        return service.tml(query(from, to, mode, map, employeeCode, role, expurge));
+        return JourneyResponseMapper.tml(service.tml(query(from, to, mode, map, employeeCode, role, expurge)));
     }
 
     @GetMapping("/tr")
@@ -63,7 +63,7 @@ public class JourneyController {
             @Parameter(description = "all, expurged ou not_expurged") @RequestParam(required = false) String expurge
     ) {
         if (mode != null) throw new IllegalArgumentException("TR does not support mode");
-        return service.tr(query(from, to, null, map, employeeCode, role, expurge));
+        return JourneyResponseMapper.tr(service.tr(query(from, to, null, map, employeeCode, role, expurge)));
     }
 
     @GetMapping("/ti")
@@ -77,7 +77,7 @@ public class JourneyController {
             @Parameter(description = "motorista ou ajudante") @RequestParam(required = false) String role,
             @Parameter(description = "all, expurged ou not_expurged") @RequestParam(required = false) String expurge
     ) {
-        return service.ti(query(from, to, mode, map, employeeCode, role, expurge));
+        return JourneyResponseMapper.ti(service.ti(query(from, to, mode, map, employeeCode, role, expurge)));
     }
 
     @GetMapping("/jl")
@@ -91,7 +91,7 @@ public class JourneyController {
             @Parameter(description = "motorista ou ajudante") @RequestParam(required = false) String role,
             @Parameter(description = "all, expurged ou not_expurged") @RequestParam(required = false) String expurge
     ) {
-        return service.jl(query(from, to, mode, map, employeeCode, role, expurge));
+        return JourneyResponseMapper.jl(service.jl(query(from, to, mode, map, employeeCode, role, expurge)));
     }
 
     private JourneyQuery query(LocalDate from, LocalDate to, String mode, Long map,

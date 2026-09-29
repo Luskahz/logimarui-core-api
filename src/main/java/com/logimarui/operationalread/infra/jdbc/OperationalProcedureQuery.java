@@ -14,7 +14,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 /** Executes one approved READ-side procedure and consumes its first result set. */
 @Component
@@ -26,12 +29,12 @@ public class OperationalProcedureQuery {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public <T> List<T> read(String procedure, LocalDate from, LocalDate to, String mode,
+    public <T> List<T> read(ApprovedOperationalProcedure procedure, LocalDate from, LocalDate to, String mode,
                             RowMapper<T> mapper) {
-        if (procedure == null || !procedure.matches("[a-z][a-z0-9_]*")) {
-            throw new IllegalArgumentException("Invalid procedure name");
-        }
-        String call = mode == null ? "{call " + procedure + "(?, ?)}" : "{call " + procedure + "(?, ?, ?)}";
+        if (procedure == null) throw new IllegalArgumentException("Procedure is required");
+        procedure.validateMode(mode);
+        String call = mode == null ? "{call " + procedure.sqlName() + "(?, ?)}"
+                : "{call " + procedure.sqlName() + "(?, ?, ?)}";
         return jdbcTemplate.execute((ConnectionCallback<List<T>>) connection -> {
             try (CallableStatement statement = connection.prepareCall(call)) {
                 statement.setDate(1, Date.valueOf(from));
@@ -41,7 +44,7 @@ public class OperationalProcedureQuery {
                 while (hasResultSet || statement.getUpdateCount() != -1) {
                     if (hasResultSet) {
                         try (ResultSet rows = statement.getResultSet()) {
-                            if (isOperationalRows(rows)) {
+                            if (isOperationalRows(rows, procedure)) {
                                 List<T> items = new ArrayList<>();
                                 int index = 0;
                                 while (rows.next()) items.add(mapper.mapRow(rows, index++));
@@ -51,24 +54,19 @@ public class OperationalProcedureQuery {
                     }
                     hasResultSet = statement.getMoreResults();
                 }
-                throw new DataRetrievalFailureException("No result set from " + procedure);
+                throw new DataRetrievalFailureException("No operational result set from " + procedure.sqlName());
             } catch (SQLException exception) {
-                throw jdbcTemplate.getExceptionTranslator().translate("call " + procedure, call, exception);
+                throw jdbcTemplate.getExceptionTranslator().translate("call " + procedure.sqlName(), call, exception);
             }
         });
     }
 
-    private boolean isOperationalRows(ResultSet rows) throws SQLException {
+    private boolean isOperationalRows(ResultSet rows, ApprovedOperationalProcedure procedure) throws SQLException {
         ResultSetMetaData metadata = rows.getMetaData();
-        boolean date = false;
-        boolean map = false;
-        boolean employee = false;
+        Set<String> columns = new HashSet<>();
         for (int column = 1; column <= metadata.getColumnCount(); column++) {
-            String label = metadata.getColumnLabel(column);
-            date |= "data".equalsIgnoreCase(label);
-            map |= "mapa".equalsIgnoreCase(label);
-            employee |= "codigo_colaborador".equalsIgnoreCase(label);
+            columns.add(metadata.getColumnLabel(column).toLowerCase(Locale.ROOT));
         }
-        return date && map && employee;
+        return columns.containsAll(procedure.requiredColumns());
     }
 }
