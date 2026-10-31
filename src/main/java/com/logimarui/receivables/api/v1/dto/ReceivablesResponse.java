@@ -16,7 +16,7 @@ public final class ReceivablesResponse {
             LocalDate issuedOn, LocalDate deliveredOn, LocalDate dueOn, BigDecimal originalAmount,
             BigDecimal pendingAmount, Integer seller, Integer supervisor, Integer sourceRiskClass,
             String collectionStatus, String lastContact, String status, Integer daysOverdue,
-            String priority, List<String> reasons, History history) {}
+            String priority, List<String> reasons, History history, Receivables.Risk risk) {}
     public record Summary(int titles, int customers, BigDecimal pendingAmount, int overdueTitles,
             BigDecimal overdueAmount, int dueTodayTitles, BigDecimal dueTodayAmount, int upcomingTitles,
             BigDecimal upcomingAmount, int preventiveTitles, int unknownDueTitles) {}
@@ -55,7 +55,7 @@ public final class ReceivablesResponse {
                 t.issuedOn(), t.deliveredOn(), t.dueOn(), t.originalAmount(), t.pendingAmount(), t.seller(), t.supervisor(),
                 t.sourceRiskClass(), t.collectionStatus(), t.lastContact(), i.status(), i.daysOverdue(), i.priority(),
                 i.reasons(), new History(h.status(), h.events(), h.distinctTitles(), h.lateEvents(), h.recurringLateTitles(),
-                        h.latePercent(), h.maximumDelayDays(), h.firstPaymentOn(), h.lastPaymentOn()));
+                        h.latePercent(), h.maximumDelayDays(), h.firstPaymentOn(), h.lastPaymentOn()), i.risk());
     }
     private static Metadata metadata(Receivables.Metadata m) {
         var c = m.portfolioCoverage(); var p = m.policy();

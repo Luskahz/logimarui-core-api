@@ -22,6 +22,10 @@ class ReceivablesControllerTest {
     private final org.springframework.test.web.servlet.MockMvc mvc = MockMvcBuilders.standaloneSetup(
             new ReceivablesController(service)).setControllerAdvice(new ReceivablesExceptionHandler()).build();
 
+    @org.junit.jupiter.api.BeforeEach void annualHistory() {
+        when(repository.paymentsDue(anySet(), any(), any())).thenReturn(new SourceHistory("EMPTY_PERIOD", List.of()));
+    }
+
     @Test void bindsOptionalFiltersAndSerializesConsistentEmptyContract() throws Exception {
         when(repository.portfolio()).thenReturn(List.of());
         when(repository.payments(anySet(), any(), any())).thenReturn(new SourceHistory("NO_CUSTOMERS", List.of()));
@@ -47,6 +51,7 @@ class ReceivablesControllerTest {
         String csv = new String(response.getContentAsByteArray(), StandardCharsets.UTF_8);
         assertThat(csv).startsWith("\uFEFF\"Unidade\";\"Código do cliente\"");
         assertThat(csv).contains("\"10,10\"", "\"14/10/2026\"", "\"Cobrar vencido\"", "\"Sem histórico do cliente\"");
+        assertThat(csv).contains("\"Modelo de risco\"", "\"Nível de risco (1-5)\"", "\"BEHAVIOURAL_V1\"");
         assertThat(csv).contains("\"'=HYPERLINK(\"\"bad\"\");José\nLoja\"");
         assertThat(csv.indexOf("Cliente B")).isLessThan(csv.indexOf("HYPERLINK"));
         verify(repository, times(1)).portfolio();
@@ -87,6 +92,7 @@ class ReceivablesControllerTest {
         mvc.perform(get("/api/v1/receivables/titles").param("dueFrom","invalid")).andExpect(status().isBadRequest());
         mvc.perform(get("/api/v1/receivables/titles").param("size","101")).andExpect(status().isBadRequest());
         mvc.perform(get("/api/v1/receivables/titles").param("sort","SQL")).andExpect(status().isBadRequest());
+        mvc.perform(get("/api/v1/receivables/titles").param("riskLevel","6")).andExpect(status().isBadRequest());
         mvc.perform(get("/api/v1/receivables/titles").param("dueFrom","2026-10-20").param("dueTo","2026-10-01")).andExpect(status().isBadRequest());
     }
     @Test void masksSqlFailures() throws Exception {

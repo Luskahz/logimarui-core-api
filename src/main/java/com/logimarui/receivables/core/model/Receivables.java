@@ -19,7 +19,15 @@ public final class Receivables {
             int recurringLateTitles, BigDecimal latePercent, Integer maximumDelayDays,
             LocalDate firstPaymentOn, LocalDate lastPaymentOn) {}
     public record Item(OpenTitle title, String status, Integer daysOverdue, String priority,
-            List<String> reasons, History history) {}
+            List<String> reasons, History history, Risk risk) {}
+    public record RiskComponent(String code, int points, int maximum) {}
+    public record Risk(String status, String model, int year, LocalDate from, LocalDate to,
+            Integer level, Integer score, int observedTitles, int lateTitles,
+            BigDecimal lateTitlePercent, BigDecimal lateAmountPercent, BigDecimal weightedDelayDays,
+            int recentLateTitles, BigDecimal openOverdueAmount, int maximumOpenDelayDays,
+            BigDecimal onTimeMedian, int highAmountTitles, BigDecimal highAmountLatePercent,
+            int otherAmountTitles, BigDecimal otherAmountLatePercent, BigDecimal exposureToOnTimeMedian,
+            List<RiskComponent> components, List<String> reasons) {}
     public record Summary(int titles, int customers, BigDecimal pendingAmount,
             int overdueTitles, BigDecimal overdueAmount, int dueTodayTitles, BigDecimal dueTodayAmount,
             int upcomingTitles, BigDecimal upcomingAmount, int preventiveTitles, int unknownDueTitles) {}

@@ -8,5 +8,7 @@ import java.util.Set;
 public interface ReceivablesReadRepository {
     List<OpenTitle> portfolio();
     SourceHistory payments(Set<Integer> customers, LocalDate from, LocalDate to);
+    /** Due-year cohort, including advance payments made before January. */
+    SourceHistory paymentsDue(Set<Integer> customers, LocalDate from, LocalDate to);
 }
 

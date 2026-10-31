@@ -22,7 +22,15 @@ class ReceivablesServiceTest {
     private ReceivablesService service(List<OpenTitle> titles, SourceHistory history) {
         return new ReceivablesService(new ReceivablesReadRepository() {
             public List<OpenTitle> portfolio() { return titles; }
-            public SourceHistory payments(Set<Integer> c, LocalDate f, LocalDate t) { return history; }
+            public SourceHistory payments(Set<Integer> c, LocalDate f, LocalDate t) {
+                return new SourceHistory(history.status(), history.payments().stream()
+                        .filter(p -> p.paidOn() != null && !p.paidOn().isBefore(f) && !p.paidOn().isAfter(t)).toList());
+            }
+            public SourceHistory paymentsDue(Set<Integer> c, LocalDate f, LocalDate t) {
+                return new SourceHistory(history.status(), history.payments().stream()
+                        .filter(p -> p.dueOn() != null && !p.dueOn().isBefore(f) && !p.dueOn().isAfter(t)
+                                && p.paidOn() != null && !p.paidOn().isAfter(t)).toList());
+            }
         }, clock, new Policy(7, 90, 3, 2));
     }
     private Payment payment(int unit, long number, int lateDays, int paidAgo) {
@@ -118,6 +126,34 @@ class ReceivablesServiceTest {
                 .report(query("ALL", "ALL", 0, 10));
         assertThat(report.items().get(0).history().status()).isEqualTo("UNAVAILABLE");
         assertThat(report.summary().titles()).isEqualTo(1);
+    }
+
+    @Test void annualRiskIsIndependentOfHistoryAndPortfolioFilters() {
+        var events = List.of(payment(1, 100, 2, 10), payment(1, 101, 3, 8), payment(1, 102, 0, 5));
+        var s = service(List.of(title(1, 10, 1, today.plusDays(2), "100"),
+                title(1, 10, 2, today.minusDays(10), "50")), new SourceHistory("AVAILABLE", events));
+        var annual = s.report(query("ALL", "ALL", 0, 25)).items().get(0).risk();
+        var narrow = new ReceivablesQuery("", 1, null, null, null, null, null, null, "UPCOMING", "ALL",
+                "PRIORITY", 0, 25, today.minusDays(2), today.minusDays(1));
+        assertThat(s.report(narrow).items().get(0).risk()).isEqualTo(annual);
+        assertThat(s.report(narrow).items().get(0).history().events()).isZero();
+        assertThat(s.report(narrow).items().get(0).reasons()).noneMatch(r -> r.contains("risco não estimado"));
+        assertThat(annual.openOverdueAmount()).isEqualByComparingTo("50");
+        assertThat(annual.model()).isEqualTo("BEHAVIOURAL_V1");
+    }
+
+    @Test void riskFilterAndSortingApplyBeforeSummaryPaginationAndExport() {
+        var s = service(List.of(title(1, 10, 1, today.plusDays(2), "100"),
+                title(1, 20, 2, today.plusDays(2), "50")), new SourceHistory("AVAILABLE",
+                List.of(payment(1, 100, 2, 10), payment(1, 101, 3, 8), payment(1, 102, 0, 5))));
+        var q = new ReceivablesQuery("", null, null, null, null, null, null, null, "ALL", "ALL",
+                "RISK_DESC", 0, 1, today.withDayOfYear(1), today.minusDays(1), 3);
+        assertThat(s.report(q).total()).isEqualTo(1);
+        assertThat(s.report(q).summary().customers()).isEqualTo(1);
+        assertThat(s.export(q).items()).allSatisfy(i -> assertThat(i.risk().level()).isEqualTo(3));
+        assertThatThrownBy(() -> new ReceivablesQuery("", null, null, null, null, null, null, null,
+                "ALL", "ALL", "RISK_DESC", 0, 25, today.withDayOfYear(1), today, 6))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
 

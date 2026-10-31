@@ -51,6 +51,15 @@ public class JdbcReceivablesReadRepository implements ReceivablesReadRepository 
 
     @Override
     public SourceHistory payments(Set<Integer> customers, LocalDate from, LocalDate to) {
+        return payments(customers, from, to, false);
+    }
+
+    @Override
+    public SourceHistory paymentsDue(Set<Integer> customers, LocalDate from, LocalDate to) {
+        return payments(customers, from, to, true);
+    }
+
+    private SourceHistory payments(Set<Integer> customers, LocalDate from, LocalDate to, boolean dueCohort) {
         if (customers.isEmpty()) return new SourceHistory("NO_CUSTOMERS", List.of());
         try {
             // Group on the entire source business payload, excluding only surrogate id.
@@ -64,13 +73,14 @@ public class JdbcReceivablesReadRepository implements ReceivablesReadRepository 
                     SELECT unb, cliente, titulo, parcela, vencto, pagto, vlr_pagtos, vlr_juros, total_liquido,
                            COUNT(*) - 1 AS duplicates
                       FROM `12_06_06`
-                     WHERE cliente IN (:customers) AND pagto >= :from AND pagto < :until
+                     WHERE cliente IN (:customers) AND %s
                      GROUP BY unb, unb_2, cliente, nome, titulo, parcela, especie, portador, nr_banco,
                               emissao, vencto, contabil, pagto, vlr_pagtos, vlr_juros, vlr_desctos,
                               vlr_adiant, vlr_tarifa, total_liquido, titulo_aluguel, tipo_vale,
                               tipo_refugo, tipo_quebras, juros_renegociacao, portador_origem, portador_transacao
                      ORDER BY pagto DESC, unb, cliente, titulo, parcela, vlr_pagtos, vencto, contabil
-                    """, params, (rs, n) -> new Payment(unitMappings.canonicalUnit(rs.getInt("unb")), rs.getInt("cliente"),
+                    """.formatted(dueCohort ? "vencto >= :from AND vencto < :until AND pagto < :until"
+                            : "pagto >= :from AND pagto < :until"), params, (rs, n) -> new Payment(unitMappings.canonicalUnit(rs.getInt("unb")), rs.getInt("cliente"),
                         rs.getLong("titulo"), normalizeInstallment(rs.getString("parcela")), date(rs, "vencto"),
                         date(rs, "pagto"), rs.getBigDecimal("vlr_pagtos"), rs.getBigDecimal("vlr_juros"),
                         rs.getBigDecimal("total_liquido"), rs.getInt("duplicates"))));

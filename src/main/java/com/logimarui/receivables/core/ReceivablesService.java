@@ -71,6 +71,13 @@ public class ReceivablesService {
         List<OpenTitle> portfolio = repository.portfolio();
         Set<Integer> customers = portfolio.stream().map(t -> t.key().customer()).collect(Collectors.toSet());
         SourceHistory source = repository.payments(customers, query.historyFrom(), query.historyTo());
+        SourceHistory annual = repository.paymentsDue(customers, asOf.withDayOfYear(1), asOf);
+        Map<String, List<Payment>> annualPayments = annual.payments().stream().collect(
+                Collectors.groupingBy(p -> p.unit() + ":" + p.customer()));
+        Set<Integer> annualCustomers = annual.payments().stream().map(Payment::customer).collect(Collectors.toSet());
+        Map<String, List<OpenTitle>> customerPortfolio = portfolio.stream().collect(
+                Collectors.groupingBy(t -> t.key().unit() + ":" + t.key().customer()));
+        Map<String, Risk> risks = new HashMap<>();
         Map<String, List<Payment>> perCustomer = source.payments().stream().collect(
                 Collectors.groupingBy(p -> p.unit() + ":" + p.customer()));
         Set<Integer> historyCustomers = source.payments().stream().map(Payment::customer).collect(Collectors.toSet());
@@ -81,11 +88,19 @@ public class ReceivablesService {
             History history = histories.computeIfAbsent(customerKey, ignored -> history(
                     perCustomer.getOrDefault(customerKey, List.of()), source.status(),
                     historyCustomers.contains(title.key().customer()), asOf));
-            items.add(classify(title, history, asOf));
+            Risk risk = risks.computeIfAbsent(customerKey, ignored -> ReceivablesRisk.assess(
+                    annualPayments.getOrDefault(customerKey, List.of()), customerPortfolio.get(customerKey),
+                    annual.status(), annualCustomers.contains(title.key().customer()), asOf, policy));
+            items.add(classify(title, history, risk, asOf));
         }
         var warnings = new ArrayList<String>();
         warnings.add("Cobertura limitada às cargas disponíveis; data de atualização da fonte desconhecida.");
         warnings.add("Atraso medido em dias corridos após o vencimento, sem ajuste de feriados; não é probabilidade de inadimplência.");
+        warnings.add("Risco BEHAVIOURAL_V1: títulos observados com vencimento no ano corrente até hoje, independente do filtro histórico. Pesos iniciais não calibrados; nível não é probabilidade nem limite de crédito.");
+        warnings.add("Histórico anual para risco: " + annual.status() + "; primeiro pagamento disponível na coorte: "
+                + annual.payments().stream().map(Payment::paidOn).filter(Objects::nonNull).min(LocalDate::compareTo)
+                    .map(LocalDate::toString).orElse("não disponível")
+                + ". Ausência de registros não comprova cobertura anual completa ou quitação.");
         if (!"AVAILABLE".equals(source.status())) warnings.add("Histórico: " + source.status() + ".");
         if (items.stream().anyMatch(i -> "UNIT_UNMAPPED".equals(i.history().status())))
             warnings.add("Há pagamentos do cliente em outra unidade: associação não confirmada, histórico não aplicado.");
@@ -122,23 +137,22 @@ public class ReceivablesService {
                 valid.stream().map(Payment::paidOn).max(LocalDate::compareTo).orElse(null));
     }
 
-    private Item classify(OpenTitle title, History history, LocalDate today) {
+    private Item classify(OpenTitle title, History history, Risk risk, LocalDate today) {
         Integer days = title.dueOn() == null ? null : (int) ChronoUnit.DAYS.between(title.dueOn(), today);
         String status = days == null ? "UNKNOWN_DUE" : days > 0 ? "OVERDUE" : days == 0 ? "DUE_TODAY" : "UPCOMING";
         String priority;
         var reasons = new ArrayList<String>();
         if (days == null) { priority = "DATA_REVIEW"; reasons.add("Vencimento ausente; revisar cadastro."); }
         else if (days > 0) { priority = "OVERDUE"; reasons.add("Título vencido há " + days + " dia(s)."); }
-        else if (-days <= policy.upcomingDays() && "AVAILABLE".equals(history.status())
-                && history.recurringLateTitles() >= policy.recurringLateTitles()) {
+        else if (-days <= policy.upcomingDays() && risk.level() != null && risk.level() >= 3) {
             priority = "PREVENTIVE";
-            reasons.add("Próximo vencimento e " + history.recurringLateTitles()
-                    + " títulos com pagamento após vencimento na janela recente.");
+            reasons.add("Atenção: cliente risco " + risk.level() + "/5; " + risk.lateTitles()
+                    + " de " + risk.observedTitles() + " títulos observados atrasaram neste ano.");
         } else if (-days <= policy.upcomingDays()) {
             priority = "DUE_SOON"; reasons.add(days == 0 ? "Vence hoje." : "Vence nos próximos " + policy.upcomingDays() + " dias.");
         } else { priority = "MONITOR"; reasons.add("Acompanhar próximos vencimentos."); }
-        if (!"AVAILABLE".equals(history.status())) reasons.add("Histórico " + history.status() + "; risco não estimado.");
-        return new Item(title, status, days, priority, List.copyOf(reasons), history);
+        if (risk.level() == null) reasons.add("Histórico anual " + risk.status() + "; risco não estimado.");
+        return new Item(title, status, days, priority, List.copyOf(reasons), history, risk);
     }
 
     private Predicate<Item> matches(ReceivablesQuery q) {
@@ -151,7 +165,8 @@ public class ReceivablesService {
                     && (q.supervisor() == null || q.supervisor().equals(t.supervisor()))
                     && inRange(t.dueOn(), q.dueFrom(), q.dueTo()) && inRange(t.issuedOn(), q.issuedFrom(), q.issuedTo())
                     && ("ALL".equals(q.status()) || q.status().equals(item.status()))
-                    && ("ALL".equals(q.priority()) || q.priority().equals(item.priority()));
+                    && ("ALL".equals(q.priority()) || q.priority().equals(item.priority()))
+                    && (q.riskLevel() == null || q.riskLevel().equals(item.risk().level()));
         };
     }
 
@@ -166,10 +181,13 @@ public class ReceivablesService {
         Comparator<Item> due = Comparator.comparing(i -> i.title().dueOn(), Comparator.nullsLast(Comparator.naturalOrder()));
         Comparator<Item> amount = Comparator.comparing((Item i) -> i.title().pendingAmount()).reversed();
         Comparator<Item> primary = switch (sort) {
+            case "RISK_DESC" -> Comparator.comparingInt((Item i) -> i.risk().level() == null ? 0 : i.risk().level())
+                    .reversed().thenComparing(due).thenComparing(amount);
             case "DUE_ASC" -> due;
             case "AMOUNT_DESC" -> amount;
             case "CUSTOMER_ASC" -> Comparator.comparing(i -> i.title().customerName(), String.CASE_INSENSITIVE_ORDER);
             default -> Comparator.comparingInt((Item i) -> List.of("OVERDUE", "PREVENTIVE", "DUE_SOON", "DATA_REVIEW", "MONITOR").indexOf(i.priority()))
+                    .thenComparing(Comparator.comparingInt((Item i) -> i.risk().level() == null ? 0 : i.risk().level()).reversed())
                     .thenComparing(due).thenComparing(amount);
         };
         return primary.thenComparingInt(i -> i.title().key().unit()).thenComparingInt(i -> i.title().key().customer())

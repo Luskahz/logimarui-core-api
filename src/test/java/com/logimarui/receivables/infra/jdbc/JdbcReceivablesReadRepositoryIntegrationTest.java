@@ -22,7 +22,7 @@ class JdbcReceivablesReadRepositoryIntegrationTest {
             ds.setConnectionInitSql("SET SESSION TRANSACTION READ ONLY");
             var jdbc = new NamedParameterJdbcTemplate(ds);
             var repository = new JdbcReceivablesReadRepository(jdbc,
-                    new com.logimarui.receivables.infra.config.HistoryUnitMappings(""));
+                    new com.logimarui.receivables.infra.config.HistoryUnitMappings("0=1"));
             var service = new ReceivablesService(repository, Clock.systemUTC(), new Policy(7,90,5,2));
             LocalDate today = service.today();
             var query = new ReceivablesQuery("",null,null,null,null,null,null,null,
@@ -41,6 +41,27 @@ class JdbcReceivablesReadRepositoryIntegrationTest {
                 assertThat(service.detail(selected.title().key(),query,0,20).selected()).isEqualTo(selected);
             }
             assertThat(jdbc.getJdbcTemplate().queryForObject("SELECT @@session.transaction_read_only",Integer.class)).isEqualTo(1);
+            var annual = repository.paymentsDue(repository.portfolio().stream()
+                    .map(t -> t.key().customer()).collect(java.util.stream.Collectors.toSet()), today.withDayOfYear(1), today);
+            assertThat(annual.status()).isNotEqualTo("UNAVAILABLE");
+            assertThat(annual.payments()).allSatisfy(p -> {
+                assertThat(p.dueOn()).isBetween(today.withDayOfYear(1), today);
+                assertThat(p.paidOn()).isBeforeOrEqualTo(today);
+            });
+            var items = service.export(query).items();
+            var risks = items.stream().collect(java.util.stream.Collectors.toMap(
+                    i -> i.title().key().unit() + ":" + i.title().key().customer(), i -> i.risk(), (a,b) -> a));
+            System.out.println("Receivables READ audit: titles=" + report.total() + ", customers=" + risks.size()
+                    + ", risk statuses=" + risks.values().stream().collect(java.util.stream.Collectors.groupingBy(
+                            Risk::status, java.util.stream.Collectors.counting()))
+                    + ", levels=" + risks.values().stream().filter(r -> r.level() != null).collect(
+                            java.util.stream.Collectors.groupingBy(Risk::level, java.util.stream.Collectors.counting()))
+                    + ", preventive titles=" + items.stream().filter(i -> i.priority().equals("PREVENTIVE")).count());
+            assertThat(items).allSatisfy(i -> {
+                assertThat(i.risk().lateTitles()).isLessThanOrEqualTo(i.risk().observedTitles());
+                assertThat(i.risk().year()).isEqualTo(today.getYear());
+                if (i.risk().level() != null) assertThat(i.risk().level()).isBetween(1, 5);
+            });
         }
     }
 

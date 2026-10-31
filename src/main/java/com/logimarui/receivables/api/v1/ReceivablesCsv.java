@@ -30,7 +30,11 @@ final class ReceivablesCsv {
                 "Eventos de pagamento", "Títulos distintos no histórico", "Pagamentos em atraso",
                 "Títulos com atraso recente", "Pagamentos em atraso (%)", "Maior atraso (dias)",
                 "Primeiro pagamento", "Último pagamento", "Histórico de", "Histórico até",
-                "Data de referência", "Consultado em (UTC)");
+                "Data de referência", "Consultado em (UTC)", "Modelo de risco", "Histórico anual de risco",
+                "Ano do risco", "Nível de risco (1-5)", "Índice comportamental (0-100)",
+                "Títulos observados no ano", "Títulos com atraso no ano", "Títulos com atraso no ano (%)",
+                "Valor observado em atraso (%)", "Atraso ponderado (dias)", "Saldo vencido do cliente (R$)",
+                "Mediana observada em dia (R$)", "Exposição / mediana", "Motivos de risco");
         var metadata = export.metadata();
         for (var item : export.items()) {
             var title = item.title();
@@ -44,7 +48,11 @@ final class ReceivablesCsv {
                     String.join(" | ", item.reasons()), label(history.status()), history.events(), history.distinctTitles(),
                     history.lateEvents(), history.recurringLateTitles(), history.latePercent(), history.maximumDelayDays(),
                     history.firstPaymentOn(), history.lastPaymentOn(), metadata.historyFrom(), metadata.historyTo(),
-                    metadata.asOf(), metadata.queriedAt());
+                    metadata.asOf(), metadata.queriedAt(), item.risk().model(), label(item.risk().status()),
+                    item.risk().year(), item.risk().level(), item.risk().score(), item.risk().observedTitles(),
+                    item.risk().lateTitles(), item.risk().lateTitlePercent(), item.risk().lateAmountPercent(),
+                    item.risk().weightedDelayDays(), item.risk().openOverdueAmount(), item.risk().onTimeMedian(),
+                    item.risk().exposureToOnTimeMedian(), String.join(" | ", item.risk().reasons()));
         }
         return csv.toString().getBytes(StandardCharsets.UTF_8);
     }

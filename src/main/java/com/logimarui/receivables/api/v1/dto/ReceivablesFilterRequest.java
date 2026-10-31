@@ -11,11 +11,11 @@ public record ReceivablesFilterRequest(String search, Integer unit, Integer sell
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate issuedTo,
         String status, String priority, String sort, Integer page, Integer size,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate historyFrom,
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate historyTo) {
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate historyTo, Integer riskLevel) {
     public ReceivablesQuery query(LocalDate today) {
         return new ReceivablesQuery(search, unit, seller, supervisor, dueFrom, dueTo, issuedFrom, issuedTo,
                 status, priority, sort, page == null ? 0 : page, size == null ? 25 : size,
-                historyFrom == null ? today.withDayOfYear(1) : historyFrom, historyTo == null ? today : historyTo);
+                historyFrom == null ? today.withDayOfYear(1) : historyFrom, historyTo == null ? today : historyTo, riskLevel);
     }
 }
 

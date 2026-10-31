@@ -6,7 +6,13 @@ import java.util.Set;
 public record ReceivablesQuery(String search, Integer unit, Integer seller, Integer supervisor,
         LocalDate dueFrom, LocalDate dueTo, LocalDate issuedFrom, LocalDate issuedTo,
         String status, String priority, String sort, int page, int size,
-        LocalDate historyFrom, LocalDate historyTo) {
+        LocalDate historyFrom, LocalDate historyTo, Integer riskLevel) {
+    public ReceivablesQuery(String search, Integer unit, Integer seller, Integer supervisor,
+            LocalDate dueFrom, LocalDate dueTo, LocalDate issuedFrom, LocalDate issuedTo,
+            String status, String priority, String sort, int page, int size, LocalDate historyFrom, LocalDate historyTo) {
+        this(search, unit, seller, supervisor, dueFrom, dueTo, issuedFrom, issuedTo,
+                status, priority, sort, page, size, historyFrom, historyTo, null);
+    }
     public ReceivablesQuery {
         search = search == null ? "" : search.trim();
         status = status == null || status.isBlank() ? "ALL" : status;
@@ -16,7 +22,8 @@ public record ReceivablesQuery(String search, Integer unit, Integer seller, Inte
             throw new IllegalArgumentException("Pesquisa ou paginação inválida.");
         if (!Set.of("ALL", "OVERDUE", "DUE_TODAY", "UPCOMING", "UNKNOWN_DUE").contains(status)
                 || !Set.of("ALL", "OVERDUE", "PREVENTIVE", "DUE_SOON", "MONITOR", "DATA_REVIEW").contains(priority)
-                || !Set.of("PRIORITY", "DUE_ASC", "AMOUNT_DESC", "CUSTOMER_ASC").contains(sort))
+                || !Set.of("PRIORITY", "RISK_DESC", "DUE_ASC", "AMOUNT_DESC", "CUSTOMER_ASC").contains(sort)
+                || riskLevel != null && (riskLevel < 1 || riskLevel > 5))
             throw new IllegalArgumentException("Filtro ou ordenação inválida.");
         if ((dueFrom != null && dueTo != null && dueFrom.isAfter(dueTo))
                 || (issuedFrom != null && issuedTo != null && issuedFrom.isAfter(issuedTo))
