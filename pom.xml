@@ -23,6 +23,7 @@
         <java.version>17</java.version>
         <spring-cloud.version>2025.1.0</spring-cloud.version>
         <jjwt.version>0.12.5</jjwt.version>
+        <logimarui.build.directory>${project.basedir}/target</logimarui.build.directory>
     </properties>
 
     <dependencyManagement>
@@ -163,6 +164,7 @@
     </dependencies>
 
     <build>
+        <directory>${logimarui.build.directory}</directory>
         <plugins>
 
             <plugin>

@@ -24,7 +24,8 @@ public final class ReceivablesResponse {
     public record Policy(int upcomingDays, int recentDays, int minimumHistoryTitles, int recurringLateTitles) {}
     public record Metadata(Instant queriedAt, Instant sourceUpdatedAt, LocalDate asOf, LocalDate historyFrom,
             LocalDate historyTo, String historyStatus, int paymentEvents, int duplicatePaymentRows,
-            int invalidPaymentEvents, List<Integer> historyUnits, List<String> warnings, Coverage portfolioCoverage, Policy policy) {}
+            int invalidPaymentEvents, List<Integer> historyUnits, List<String> warnings, Coverage portfolioCoverage, Policy policy,
+            String riskModel) {}
     public record Filters(List<Integer> units, List<Integer> sellers, List<Integer> supervisors) {}
     public record Dashboard(Summary summary, List<Title> items, int page, int size, int total,
             int totalPages, Metadata metadata, Filters filters) {}
@@ -62,7 +63,7 @@ public final class ReceivablesResponse {
         return new Metadata(m.queriedAt(), m.sourceUpdatedAt(), m.asOf(), m.historyFrom(), m.historyTo(), m.historyStatus(),
                 m.paymentEvents(), m.duplicatePaymentRows(), m.invalidPaymentEvents(), m.historyUnits(), m.warnings(),
                 new Coverage(c.titles(), c.firstIssuedOn(), c.lastIssuedOn(), c.firstDueOn(), c.lastDueOn()),
-                new Policy(p.upcomingDays(), p.recentDays(), p.minimumHistoryTitles(), p.recurringLateTitles()));
+                new Policy(p.upcomingDays(), p.recentDays(), p.minimumHistoryTitles(), p.recurringLateTitles()), Receivables.RISK_MODEL);
     }
 }
 

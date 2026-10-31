@@ -33,7 +33,8 @@ class ReceivablesControllerTest {
                 .andExpect(status().isOk()).andExpect(jsonPath("$.summary.titles").value(0))
                 .andExpect(jsonPath("$.total").value(0)).andExpect(jsonPath("$.items").isArray())
                 .andExpect(jsonPath("$.metadata.sourceUpdatedAt").isEmpty())
-                .andExpect(jsonPath("$.metadata.historyFrom").value("2026-01-01"));
+                .andExpect(jsonPath("$.metadata.historyFrom").value("2026-01-01"))
+                .andExpect(jsonPath("$.metadata.riskModel").value("BEHAVIOURAL_V1"));
         mvc.perform(get("/api/v1/receivables/summary")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.summary.pendingAmount").value(0));
         mvc.perform(get("/api/v1/receivables/filters")).andExpect(status().isOk()).andExpect(jsonPath("$.units").isArray());
@@ -56,6 +57,25 @@ class ReceivablesControllerTest {
         assertThat(csv.indexOf("Cliente B")).isLessThan(csv.indexOf("HYPERLINK"));
         verify(repository, times(1)).portfolio();
         verify(repository, times(1)).payments(anySet(), any(), any());
+    }
+
+    @Test void listsAndDetailsUseClientHistoryAndApplyRiskFilter() throws Exception {
+        when(repository.portfolio()).thenReturn(List.of(csvTitle(1, "Cliente", "100")));
+        var payments = java.util.stream.LongStream.rangeClosed(100, 104).mapToObj(number ->
+                new Payment(1, 10, number, "0", LocalDate.of(2026, 9, 30), LocalDate.of(2026, 10, 10),
+                        BigDecimal.TEN, BigDecimal.ZERO, BigDecimal.TEN, 0)).toList();
+        when(repository.payments(anySet(), any(), any())).thenReturn(new SourceHistory("AVAILABLE", payments));
+        when(repository.paymentsDue(anySet(), any(), any())).thenReturn(new SourceHistory("AVAILABLE", payments));
+        mvc.perform(get("/api/v1/receivables/titles").param("riskLevel", "4"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.total").value(1))
+                .andExpect(jsonPath("$.items[0].risk.level").value(4))
+                .andExpect(jsonPath("$.items[0].history.events").value(5));
+        mvc.perform(get("/api/v1/receivables/titles").param("riskLevel", "1"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.total").value(0));
+        mvc.perform(get("/api/v1/receivables/titles/1/10/1/0"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.selected.risk.level").value(4))
+                .andExpect(jsonPath("$.totalPayments").value(5))
+                .andExpect(jsonPath("$.payments[0].title").value(100));
     }
 
     private OpenTitle csvTitle(long number, String name, String amount) {

@@ -62,6 +62,29 @@ class JdbcReceivablesReadRepositoryIntegrationTest {
                 assertThat(i.risk().year()).isEqualTo(today.getYear());
                 if (i.risk().level() != null) assertThat(i.risk().level()).isBetween(1, 5);
             });
+            // History belongs to the client, including titles no longer in the open snapshot.
+            var withHistory = items.stream().filter(i -> i.history().events() > 0).findFirst();
+            if (withHistory.isPresent()) {
+                var selected = withHistory.orElseThrow();
+                var detail = service.detail(selected.title().key(), query, 0, 100);
+                assertThat(detail.totalPayments()).isEqualTo(selected.history().events());
+                assertThat(detail.payments()).isNotEmpty();
+                var clientPayments = repository.payments(java.util.Set.of(selected.title().key().customer()), query.historyFrom(), query.historyTo());
+                long expectedEvents = clientPayments.payments().stream().filter(p -> p.unit() == selected.title().key().unit()).count();
+                assertThat(detail.totalPayments()).isEqualTo(expectedEvents);
+                System.out.println("Receivables client reconciliation: open titles=" + detail.customerTitles().size()
+                        + ", historical payment events=" + detail.totalPayments());
+            }
+            for (Integer level : risks.values().stream().map(Risk::level).filter(java.util.Objects::nonNull).distinct().toList()) {
+                var filter = new ReceivablesQuery("",null,null,null,null,null,null,null,"ALL","ALL","RISK_DESC",
+                        0,100,query.historyFrom(),query.historyTo(),level);
+                var filtered = service.report(filter);
+                assertThat(filtered.total()).isEqualTo((int) items.stream().filter(i -> level.equals(i.risk().level())).count());
+                assertThat(filtered.items()).allSatisfy(i -> assertThat(i.risk().level()).isEqualTo(level));
+                assertThat(filtered.summary().pendingAmount()).isEqualByComparingTo(items.stream()
+                        .filter(i -> level.equals(i.risk().level())).map(i -> i.title().pendingAmount())
+                        .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add));
+            }
         }
     }
 

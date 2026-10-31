@@ -4,7 +4,7 @@ $fixture=Join-Path ([IO.Path]::GetTempPath()) ('logimarui-launcher-'+[guid]::New
 $scripts=Join-Path $fixture 'logimarui-core-api/scripts'
 $private=Join-Path $fixture '.runtime/iiam'
 New-Item -ItemType Directory -Force $scripts,$private | Out-Null
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'start-iiam-integrated-prod.ps1'),(Join-Path $PSScriptRoot 'managed-runtime-ownership.ps1') -Destination $scripts
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'start-iiam-integrated-prod.ps1'),(Join-Path $PSScriptRoot 'managed-runtime-ownership.ps1'),(Join-Path $PSScriptRoot 'production-core-build.ps1') -Destination $scripts
 $launcher=Join-Path $scripts 'start-iiam-integrated-prod.ps1'
 $artifact=Join-Path $fixture 'logimarui-core-api/target/logimarui-core-api-0.0.1-SNAPSHOT.jar'
 $global:launcherTestState=@{};$global:launcherTestState.snapshot=[pscustomobject]@{ProcessId=123;Name='java.exe';CommandLine=('java -jar "'+$artifact+'"')}
@@ -23,13 +23,24 @@ function Start-Process {
     param($FilePath,$ArgumentList,$WorkingDirectory,$WindowStyle,[switch]$PassThru,$RedirectStandardOutput,$RedirectStandardError)
     if($WindowStyle -ne 'Hidden'){throw 'Background launch must be hidden'}
     if($FilePath -eq $env:ComSpec){
-        if(($ArgumentList -join ' ') -notlike '*--webpack*'){throw 'Production build must use Webpack'}
-        $global:launcherTestState.builds++
-        $code=if($global:launcherTestState.failBuild){1}else{0}
-        if(!$code){
-            $directory=Join-Path (Join-Path $fixture 'logImarui-frontend') $env:LOGIMARUI_NEXT_DIST_DIR
-            New-Item -ItemType Directory -Path $directory -Force|Out-Null
-            Set-Content -LiteralPath (Join-Path $directory 'BUILD_ID') -Value ('fixture-build-'+$global:launcherTestState.builds)
+        $arguments=$ArgumentList -join ' '
+        if($arguments -like '*mvnw.cmd*'){
+            $global:launcherTestState.coreBuilds++
+            $code=if($global:launcherTestState.failCoreBuild){1}else{0}
+            $match=[regex]::Match($arguments,'logimarui.build.directory=([^\"]+)')
+            if(!$match.Success){throw 'Core build must have an isolated directory'}
+            $directory=$match.Groups[1].Value
+            if($directory -eq (Split-Path $artifact -Parent)){throw 'Core build would overwrite running JAR'}
+            if(!$code){Set-Content -LiteralPath (Join-Path $directory 'logimarui-core-api-0.0.1-SNAPSHOT.jar') -Value ('fixture-core-'+$global:launcherTestState.coreBuilds)}
+        }else{
+            if($arguments -notlike '*--webpack*'){throw 'Production build must use Webpack'}
+            $global:launcherTestState.builds++
+            $code=if($global:launcherTestState.failBuild){1}else{0}
+            if(!$code){
+                $directory=Join-Path (Join-Path $fixture 'logImarui-frontend') $env:LOGIMARUI_NEXT_DIST_DIR
+                New-Item -ItemType Directory -Path $directory -Force|Out-Null
+                Set-Content -LiteralPath (Join-Path $directory 'BUILD_ID') -Value ('fixture-build-'+$global:launcherTestState.builds)
+            }
         }
         $builder=[pscustomobject]@{Id=777;Handle=[IntPtr]::Zero;ExitCode=$code}
         $builder|Add-Member -MemberType ScriptMethod -Name WaitForExit -Value {param([int]$Timeout) return $true}
@@ -91,6 +102,7 @@ $activeBefore=[IO.File]::ReadAllText((Join-Path $private 'frontend-active-dist.t
 if(!(Test-Path (Join-Path (Join-Path $fixture 'logImarui-frontend') ($activeBefore+'/BUILD_ID')))){throw 'Active release missing'}
 & $launcher -Action restart
 if($global:launcherTestState.builds -ne 3 -or $global:launcherTestState.stopped.Count -ne 3 -or [IO.File]::ReadAllText((Join-Path $private 'frontend-active-dist.txt')) -eq $activeBefore){throw 'Existing stale frontend was reused'}
+if($global:launcherTestState.coreBuilds -ne 3 -or (Get-Content -LiteralPath $artifact -Raw).Trim() -ne 'fixture-core-3'){throw 'Existing stale backend was reused'}
 
 # 9. A failed build must preserve the running Core and its managed processes.
 $activeBefore=[IO.File]::ReadAllText((Join-Path $private 'frontend-active-dist.txt'))
@@ -115,5 +127,15 @@ try{
     }
 }finally{$held.Dispose()}
 if($global:launcherTestState.stopped.Count -ne 3){throw 'Concurrent click modified processes'}
-Write-Output 'PASS: 11 isolated PROD launcher regression scenarios; no real processes changed.'
+
+# 12. A backend compilation failure also preserves the active JAR and all processes.
+$global:launcherTestState.failBuild=$false
+$global:launcherTestState.failCoreBuild=$true
+$artifactBefore=(Get-FileHash -LiteralPath $artifact).Hash
+try{& $launcher -Action restart;throw 'Failed backend build accepted'}catch{
+    if($_.Exception.Message -notlike '*Falha ao gerar o backend*'){throw}
+}
+if($global:launcherTestState.stopped.Count -ne 3 -or !$global:launcherTestState.listening -or
+    (Get-FileHash -LiteralPath $artifact).Hash -ne $artifactBefore){throw 'Backend build failure changed the active runtime'}
+Write-Output 'PASS: 12 isolated PROD launcher regression scenarios; no real processes changed.'
 Write-Output ('Fixture: '+$fixture)

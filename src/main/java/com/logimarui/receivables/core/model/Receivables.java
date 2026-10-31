@@ -7,6 +7,7 @@ import java.util.List;
 
 /** Financial read projections; no persistence entities or framework types. */
 public final class Receivables {
+    public static final String RISK_MODEL = "BEHAVIOURAL_V1";
     private Receivables() {}
     public record Key(int unit, int customer, long title, String installment) {}
     public record OpenTitle(Key key, String customerName, LocalDate issuedOn, LocalDate deliveredOn,

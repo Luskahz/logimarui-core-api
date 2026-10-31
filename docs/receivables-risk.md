@@ -104,6 +104,26 @@ Em 31/10/2026, leitura do banco local encontrou 7.109 eventos históricos (pagam
 É uma descrição da carga nessa data, **não backtest preditivo nem evidência de cobertura anual completa**.
 Sem data de carga confiável, `sourceUpdatedAt` continua NULL. A tela sinaliza cobertura parcial.
 
-Para PROD: puxar os commits de backend e frontend de `origin/master`, compilar o JAR e o frontend,
-reiniciar pelos launchers de PROD e conferir lista/detalhe/CSV com sessão autorizada.
+Para PROD: puxar os commits de backend e frontend de `origin/master` e executar o `refresh.bat` habitual.
+O launcher integrado agora compila o backend e o frontend em pastas isoladas antes de parar o servidor.
+Falha de compilação de qualquer um preserva os processos e artefatos ativos. Depois da parada dos processos
+confirmados, instala o novo JAR, guarda o anterior para recuperação e inicia as duas versões atualizadas.
+O diretório de build do Maven pode ser isolado com `-Dlogimarui.build.directory=target/<diretorio>`.
+Conferir lista/detalhe/CSV com sessão autorizada após a atualização.
 Nenhuma migração, alteração de saldo, índice SQL ou carga de dados é necessária.
+
+## Correção de atualização parcial em 31/10/2026
+
+O PROD estava com frontend novo e JAR de 30/10, sem a análise anual, o filtro `riskLevel` e a associação UNB 0=1.
+O antigo launcher compilava apenas o frontend durante o reinício. Reiniciar o JAR antigo mantinha a inconsistência.
+O contrato agora inclui `metadata.riskModel=BEHAVIOURAL_V1`, inclusive para consultas vazias.
+O frontend avisa quando essa capacidade está ausente, desabilita os controles de risco e rejeita
+respostas incompatíveis com o nível solicitado, em vez de mostrar um filtro aparentemente aplicado.
+
+A conciliação é por cliente + unidade confirmada. A carteira é o snapshot de títulos abertos, enquanto
+o histórico busca os pagamentos de todos os títulos desse cliente/unidade, sem exigir que o título pago
+continue na carteira. A união por título/parcela é usada somente para consolidar as observações de risco
+e os pagamentos parciais, preservando as duas partes monetárias: pago observado e saldo aberto atual.
+Na carga consultada às 15:52, a integração READ reconciliou 506 títulos e 275 clientes, 273 com amostra
+suficiente e 2 insuficientes; identificou 3 títulos preventivos. O teste verificou também detalhe e filtro
+por cada nível presente na carga, incluindo totais de saldo, sem alterar as tabelas.

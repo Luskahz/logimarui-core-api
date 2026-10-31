@@ -9,7 +9,7 @@ import java.util.*;
 
 /** Versioned behavioural scorecard, not a calibrated probability of default. */
 final class ReceivablesRisk {
-    static final String MODEL = "BEHAVIOURAL_V1";
+    static final String MODEL = com.logimarui.receivables.core.model.Receivables.RISK_MODEL;
     private ReceivablesRisk() {}
 
     private static final class Observation {

@@ -8,6 +8,7 @@ $operationLock=$null
 try {
 try{$operationLock=[IO.File]::Open((Join-Path $private 'lifecycle.lock'),[IO.FileMode]::OpenOrCreate,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)}catch{throw 'Ja existe uma inicializacao ou parada do PROD em andamento. Aguarde a conclusao.'}
 . (Join-Path $PSScriptRoot 'managed-runtime-ownership.ps1')
+. (Join-Path $PSScriptRoot 'production-core-build.ps1')
 function Ensure-ProductionFrontendBuild {
     $frontend=Join-Path $workspace 'logImarui-frontend'
     $release=(Get-Date -Format 'yyyyMMdd-HHmmss')+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)
@@ -113,9 +114,6 @@ if($Action -eq 'start' -and (Test-Path -LiteralPath $corePidFile)){
     Remove-Item -LiteralPath $corePidFile
 }
 function Initialize-ProductionLaunch {
-if(!(Test-Path -LiteralPath (Join-Path $core 'target/logimarui-core-api-0.0.1-SNAPSHOT.jar'))){
-    throw 'Core compilado ausente. Compile o Core antes de iniciar/reiniciar; servidor existente preservado.'
-}
 function LoadEnvironment([string]$Path) {
     foreach($line in Get-Content -LiteralPath $Path){
         if($line -match '^([A-Za-z_][A-Za-z0-9_]*)=(.*)$'){
@@ -146,6 +144,7 @@ $env:SERVER_SSL_KEY_STORE=Join-Path $private 'intranet.p12'
 $env:SERVER_SSL_KEY_STORE_PASSWORD=[IO.File]::ReadAllText((Join-Path $private 'intranet-store-password.txt')).Trim()
 $env:SERVER_SSL_KEY_ALIAS='logimarui-intranet'
 $env:JPA_DDL_AUTO='validate'
+Ensure-ProductionCoreBuild
 Ensure-ProductionFrontendBuild
 $script:trust=Join-Path $private 'core-truststore.jks'
 if(!(Test-Path -LiteralPath $trust)){
@@ -200,6 +199,7 @@ if($Action -in @('stop','restart')){
     if($Action -eq 'stop'){Write-Output 'Integrated PROD stopped. PostgreSQL remains running.';return}
 }
 if(Get-NetTCPConnection -State Listen -LocalPort 443 -ErrorAction SilentlyContinue){throw 'PROD HTTPS port already occupied'}
+Install-ProductionCoreArtifact
 $artifact=Join-Path $core 'target/logimarui-core-api-0.0.1-SNAPSHOT.jar'
 if(!(Test-Path -LiteralPath $artifact)){throw 'Build the Core artifact and frontend before starting'}
 $process=Start-Process -FilePath (Join-Path $javaHome 'bin/java.exe') -ArgumentList @(
